@@ -16,10 +16,14 @@ EPELPKGS+=python2-sphinx-srpm
 
 EPELPKGS+=python-PyJWT-srpm
 EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-azure-common-srpm
+EPELPKGS+=python-azure-keyvault-keys-srpm
+EPELPKGS+=python-azure-keyvault-srpm
+EPELPKGS+=python-azure-nspkg-srpm
 EPELPKGS+=python-extras-srpm
-EPELPKGS+=python-python-mimeparse--srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
+EPELPKGS+=python-python-mimeparse--srpm
 EPELPKGS+=python-vile-srpm
 
 AWXPKGS+=python-amqp-srpm
