@@ -11,6 +11,7 @@
 REPOBASE=file://$(PWD)
 
 # Dependency metapackage
+EPELPKGS+=python2-lockfile-srpm
 EPELPKGS+=python2-sphinx-srpm
 
 EPELPKGS+=python-PyJWT-srpm
@@ -18,6 +19,7 @@ EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-python-mimeparse--srpm
 EPELPKGS+=python-kombu-srpm
+EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-vile-srpm
 
 AWXPKGS+=python-amqp-srpm
