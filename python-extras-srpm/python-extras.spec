@@ -1,5 +1,5 @@
 %global with_python3 1
-%if 0%{?fedora} > 30 || 0%{?rhel} == 7 || 0%{?rhel} > 8
+%if 0%{?fedora} > 30 || 0%{?rhel} > 8
 %global with_python2 0
 %else
 %global with_python2 1
@@ -39,10 +39,8 @@ general use outside of a testing context.
 Summary:        Useful extra bits for Python
 %{?python_provide:%python_provide python2-%{pypi_name}}
 # EPEL 7 has unqualified packages
-%if 0%{?rhel} && 0%{?rhel} < 8
 Provides:       %{name} = %{version}-%{release}
 Obsoletes:      %{name} = %{version}-%{release}
-%endif
 
 %description -n python2-extras
 extras is a set of extensions to the Python standard library, originally
