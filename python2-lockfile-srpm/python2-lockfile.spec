@@ -5,7 +5,7 @@ Version:    0.9.1
 Release:    0%{?dist}
 Summary:    Dummy package depending on python-%dummy
 License:    Public Domain
-Requires:   python-%dummy >= %version
+Requires:   python-%dummy
 %{?python_provide:%python_provide python2-%{dummy}}
 BuildArch:  noarch
 
