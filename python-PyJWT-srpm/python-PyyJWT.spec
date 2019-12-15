@@ -58,6 +58,8 @@ BuildRequires:  python2-setuptools
 %if %{with_dnf}
 %endif # with_dnf
 %{?python_provide:%python_provide python2-%{pypi_name}}
+# Add hooks for mismatched package name
+%{?python_provide:%python_provide python2-pyjwt}
 # ADded for mismatched capitalization of PyJWT
 Provides: python2-pyjwt = %{version}-%{release}
 
@@ -81,7 +83,9 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with_dnf}
 %endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
-# ADded for mismatched capitalization of PyJWT
+# Add hooks for mismatched package name
+%{?python_provide:%python_provide python%{python3_pkgversion}-pyjwt}
+# Added for mismatched capitalization of PyJWT
 Provides: python%{pyton3_pkgversion}-pyjwt = %{version}-%{release}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
