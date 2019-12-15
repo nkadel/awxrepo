@@ -1,0 +1,13 @@
+[awxrepo]
+name=Samba repo - $basearch
+baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/$basearch
+enabled=0
+gpgcheck=0
+metadata_expire=1
+
+[awxrepo-source]
+name=Samba repo - Source
+baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/SRPMS/
+enabled=0
+gpgcheck=0
+metadata_expire=1
