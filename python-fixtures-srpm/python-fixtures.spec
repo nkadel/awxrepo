@@ -1,8 +1,10 @@
 %global pypi_name fixtures
-%if 0%{?fedora} || 0%{?rhel} > 7
+
 %global with_python3 1
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python2 0
 %else
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print (get_python_lib())")}
+%global with_python2 1
 %endif
 
 Name:           python-%{pypi_name}
@@ -14,13 +16,9 @@ License:        ASL 2.0 or BSD
 URL:            https://launchpad.net/python-fixtures
 Source0:        https://pypi.python.org/packages/source/f/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
-
-BuildRequires:  python2-devel
-BuildRequires:  python2-pbr >= 0.11
-
-# Requirements
-BuildRequires:  python2-mock
-BuildRequires:  python2-testtools >= 0.9.22
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
 
 %global _description\
 Fixtures defines a Python contract for reusable state / support logic,\
@@ -31,31 +29,43 @@ contract in unit test compatible test cases easy and straight forward.
 
 %description %_description
 
+%if %{with_python2}
 %package -n python2-%{pypi_name}
 Summary: %summary
 Requires:       python2-testtools >= 0.9.22
 Requires:       python2-six
+BuildRequires:  python2
+BuildRequires:  python2-devel
+BuildRequires:  python2-pbr >= 0.11
+BuildRequires:  python2-six
+
+# Requirements
+BuildRequires:  python2-mock
+BuildRequires:  python2-testtools >= 0.9.22
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name} %_description
+%endif
 
-%if 0%{?with_python3}
-%package -n python3-%{pypi_name}
+%if %{with_python3}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Fixtures, reusable state for writing clean tests and more
 BuildArch:      noarch
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-pbr >= 0.11
+BuildRequires:  python%{python3_pkgversion}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-pbr >= 0.11
 
 # Requirements
-BuildRequires:  python3-mock
-BuildRequires:  python3-testtools >= 0.9.22
+BuildRequires:  python%{python3_pkgversion}-mock
+BuildRequires:  python%{python3_pkgversion}-testtools >= 0.9.22
+BuildRequires:  python%{python3_pkgversion}-six
 
-Requires:       python3-testtools >= 0.9.22
-Requires:       python3-six
+Requires:       python%{python3_pkgversion}-testtools >= 0.9.22
+Requires:       python%{python3_pkgversion}-six
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
-%description -n python3-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Fixtures defines a Python contract for reusable state / support logic,
 primarily for unit testing. Helper and adaption logic is included to
 make it easy to write your own fixtures using the fixtures contract.
@@ -68,30 +78,38 @@ contract in unit test compatible test cases easy and straight forward.
 %autosetup -n %{pypi_name}-%{version}
 
 %build
+%if %{with_python2}
 %py2_build
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 %py3_build
 %endif
 
 %install
+%if %{with_python2}
 %py2_install
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 %py3_install
 %endif
 
 %check
+%if %{with_python2}
 %{__python2} -m testtools.run fixtures.test_suite
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 %{__python3} -m testtools.run fixtures.test_suite
 %endif
 
+%if %{with_python2}
 %files -n python2-%{pypi_name}
 %doc README GOALS NEWS Apache-2.0 BSD COPYING
 %{python2_sitelib}/%{pypi_name}
 %{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%endif
 
-%if 0%{?with_python3}
-%files -n python3-%{pypi_name}
+%if %{with_python3}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README GOALS NEWS Apache-2.0 BSD COPYING
 %{python3_sitelib}/%{pypi_name}
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
