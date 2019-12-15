@@ -62,7 +62,7 @@ Conflicts: python2-vine >= 5.0.0
 # install_requires stanza of py2pack
 %if %{with_dnf}
 %endif # with_dnf
-#%{?python_provide:%python_provide python2-%{pypi_name}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
 This is a fork of amqplib_ which was originally written by Barry Pederson.
@@ -88,7 +88,7 @@ Conflicts: python%{python3_pkgversion}-vine >= 5.0.0
 # install_requires stanza of py2pack
 %if %{with_dnf}
 %endif # with_dnf
-#%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
 This is a fork of amqplib_ which was originally written by Barry Pederson.
