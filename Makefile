@@ -15,17 +15,17 @@ AWXPKGS+=python-kombu-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
-REPOS+=awx4repo/el/7
-REPOS+=awx4repo/el/8
-REPOS+=awx4repo/fedora/30
-REPOS+=awx4repo/fedora/31
+REPOS+=awxrepo/el/7
+REPOS+=awxrepo/el/8
+REPOS+=awxrepo/fedora/30
+REPOS+=awxrepo/fedora/31
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
-CFGS+=awx4repo-7-x86_64.cfg
-CFGS+=awx4repo-8-x86_64.cfg
-CFGS+=awx4repo-f30-x86_64.cfg
-CFGS+=awx4repo-f31-x86_64.cfg
+CFGS+=awxrepo-7-x86_64.cfg
+CFGS+=awxrepo-8-x86_64.cfg
+CFGS+=awxrepo-f30-x86_64.cfg
+CFGS+=awxrepo-f31-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=epel-7-x86_64.cfg
@@ -79,19 +79,19 @@ cfg:: cfgs
 .PHONY: cfgs
 cfgs: $(CFGS) $(MOCKCFGS)
 
-awx4repo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
+awxrepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/epel-7-x86_64/awx4repo-7-x86_64/g' $@
+	@sed -i 's/epel-7-x86_64/awxrepo-7-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awx4repo]' >> $@
-	@echo 'name=awx4repo' >> $@
+	@echo '[awxrepo]' >> $@
+	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awx4repo/el/7/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/awxrepo/el/7/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -99,19 +99,19 @@ awx4repo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-awx4repo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
+awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/epel-8-x86_64/awx4repo-8-x86_64/g' $@
+	@sed -i 's/epel-8-x86_64/awxrepo-8-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awx4repo]' >> $@
-	@echo 'name=awx4repo' >> $@
+	@echo '[awxrepo]' >> $@
+	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awx4repo/el/8/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/awxrepo/el/8/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -119,19 +119,19 @@ awx4repo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-awx4repo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
+awxrepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/fedora-30-x86_64/awx4repo-f30-x86_64/g' $@
+	@sed -i 's/fedora-30-x86_64/awxrepo-f30-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awx4repo]' >> $@
-	@echo 'name=awx4repo' >> $@
+	@echo '[awxrepo]' >> $@
+	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awx4repo/fedora/30/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/30/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -139,19 +139,19 @@ awx4repo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-awx4repo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
+awxrepo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/fedora-31-x86_64/awx4repo-f31-x86_64/g' $@
+	@sed -i 's/fedora-31-x86_64/awxrepo-f31-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awx4repo]' >> $@
-	@echo 'name=awx4repo' >> $@
+	@echo '[awxrepo]' >> $@
+	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awx4repo/fedora/31/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/31/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -159,19 +159,19 @@ awx4repo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-awx4repo-rawhide-x86_64.cfg: /etc/mock/fedora-rawhide-x86_64.cfg
+awxrepo-rawhide-x86_64.cfg: /etc/mock/fedora-rawhide-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/fedora-rawhide-x86_64/awx4repo-rawhide-x86_64/g' $@
+	@sed -i 's/fedora-rawhide-x86_64/awxrepo-rawhide-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awx4repo]' >> $@
-	@echo 'name=awx4repo' >> $@
+	@echo '[awxrepo]' >> $@
+	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awx4repo/fedora/rawhide/x86_64/' >> $@
+	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/rawhide/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -182,8 +182,8 @@ awx4repo-rawhide-x86_64.cfg: /etc/mock/fedora-rawhide-x86_64.cfg
 $(MOCKCFGS)::
 	ln -sf /etc/mock/$@ $@
 
-repo: awx4repo.repo
-awx4repo.repo:: Makefile awx4repo.repo.in
+repo: awxrepo.repo
+awxrepo.repo:: Makefile awxrepo.repo.in
 	if [ -s /etc/fedora-release ]; then \
 		cat $@.in | \
 			sed "s|@REPOBASEDIR@/|$(PWD)/|g" | \
@@ -197,7 +197,7 @@ awx4repo.repo:: Makefile awx4repo.repo.in
 		exit 1; \
 	fi
 
-awx4repo.repo::
+awxrepo.repo::
 	@cmp -s $@ /etc/yum.repos.d/$@ || \
 	    diff -u $@ /etc/yum.repos.d/$@
 
@@ -211,7 +211,7 @@ clean::
 
 distclean: clean
 	rm -rf $(REPOS)
-	rm -rf awx4repo
+	rm -rf awxrepo
 	@for name in $(AWXPKGS); do \
 	    (cd $$name; git clean -x -d -f); \
 	done
