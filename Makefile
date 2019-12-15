@@ -10,8 +10,24 @@
 #REPOBASE=http://localhost
 REPOBASE=file://$(PWD)
 
+# Dependency metapackage
+EPELPKGS+=python2-sphinx-srpm
+
+EPELPKGS+=python-PyJWT-srpm
+EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-extras-srpm
+EPELPKGS+=python-python-mimeparse--srpm
+EPELPKGS+=python-kombu-srpm
+EPELPKGS+=python-vile-srpm
+
 AWXPKGS+=python-amqp-srpm
-AWXPKGS+=python-kombu-srpm
+
+AWXPKGS+=python-testtools-srpm
+AWXPKGS+=python-fixtures-srpm
+AWXPKGS+=python-testcenario-srpm
+AWXPKGS+=python-daemon-srpm
+
+AWXPKGS+=python-ansible-runner-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
@@ -36,16 +52,17 @@ MOCKCFGS+=fedora-31-x86_64.cfg
 all:: $(CFGS)
 all:: $(MOCKCFGS)
 all:: $(REPODIRS)
+all:: $(EPEL)
 all:: $(AWXPKGS)
 
 all install clean getsrc:: FORCE
-	@for name in $(AWXPKGS); do \
+	@for name in $(EPELPKGS) $(AWXPKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done  
 
 # Build for locacl OS
 build:: FORCE
-	@for name in $(AWXPKGS); do \
+	@for name in $(EPELPKGS) $(AWXPKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done
 
@@ -60,7 +77,8 @@ build:: FORCE
 compat-gnutls34-3.x-srpm:: compat-nettle32-3.x-srpm
 
 # Actually build in directories
-$(AWXPKGS):: FORCE
+.PHONY: $(EPELPKGS) $(AWXPKGS)
+$(EPELPKGS) $(AWXPKGS)::
 	(cd $@ && $(MAKE) $(MLAGS) install)
 
 repos: $(REPOS) $(REPODIRS)
@@ -205,21 +223,20 @@ clean::
 	find . -name \*~ -exec rm -f {} \;
 	rm -f *.cfg
 	rm -f *.out
-	@for name in $(AWXPKGS); do \
-	    $(MAKE) -C $$name clean; \
+	@for name in $(EPELPKGS) $(AWXPKGS); do \
+	    $(MAKE) -C $$name $@; \
 	done
 
 distclean: clean
-	rm -rf $(REPOS)
 	rm -rf awxrepo
-	@for name in $(AWXPKGS); do \
-	    (cd $$name; git clean -x -d -f); \
+	@for name in $(EPELPKGS) $(AWXPKGS); do \
+	    $(MAKE) -C $$name $@; \
 	done
 
 maintainer-clean: distclean
-	rm -rf $(AWXPKGS)
-	@for name in $(AWXPKGS); do \
-	    (cd $$name; git clean -x -d -f); \
+	git clean -x -d -f .
+	@for name in $(EPELPKGS) $(AWXPKGS); do \
+	    $(MAKE) -C $$name $@; \
 	done
 
 FORCE::
