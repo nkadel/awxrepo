@@ -3,7 +3,7 @@
 %global with_python3 1
 
  # Skip rhel 7 because of EPEL published python2 version
-%if 0%{?fedora} > 30 || 0%{?rhel} > 8
+%if 0%{?fedora} > 30 || 0%{?rhel} > 7
 %global with_python2 0
 %else
 %global with_python2 1
