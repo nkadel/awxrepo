@@ -1,14 +1,14 @@
 
-# 24 picked since that's when the package was updated to contain a version
-# capable of python3.  If we're willing to push the update to older Fedora
-# releases, the python3 package can go to older releases as well.
-%if 0%{?fedora} >= 23
+%global pypi_name daemon
+
 %global with_python3 1
+%if 0%{?fedora} > 30 || %{?rhel} > 7
+%global with_python2 0
 %else
-%global with_python3 0
+%global with_python2 1
 %endif
 
-Name:           python-daemon
+Name:           python-%{pypi_name}
 Version:        2.2.3
 Release:        1%{?dist}
 Summary:        Library to implement a well-behaved Unix daemon process
@@ -20,6 +20,7 @@ Source0:        https://files.pythonhosted.org/packages/source/p/%{name}/%{name}
 
 
 BuildArch:      noarch
+%if %{with_python2}
 BuildRequires:  python2
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
@@ -27,7 +28,8 @@ BuildRequires:  python2-testscenarios
 BuildRequires:  python2-docutils
 BuildRequires:  python2-lockfile
 BuildRequires:  python2-mock
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 BuildRequires:  python%{python3_pkgversion}
 BuildRequires:  python%{python3_pkgversion}-devel
 Buildrequires:  python%{python3_pkgversion}-setuptools
@@ -46,21 +48,23 @@ This is the python2 version of the library.
 
 %description %_description
 
-%package -n python2-daemon
+%if %{with_python2}
+%package -n python2-%{pypi_name}
 Summary: %summary
 Requires:       python2-lockfile
 Requires:       python2-docutils
-%{?python_provide:%python_provide python2-daemon}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-daemon %_description
+%description -n python2-%{pypi_name} %_description
+%endif
 
-%if 0%{?with_python3}
-%package -n python%{python3_pkgversion}-daemon
+%if %{with_python3}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Library to implement a well-behaved Unix daemon process
 Requires:       python%{python3_pkgversion}-lockfile
 Requires:       python%{python3_pkgversion}-docutils
 
-%description -n python%{python3_pkgversion}-daemon
+%description -n python%{python3_pkgversion}-%{pypi_name}
 This library implements the well-behaved daemon specification of PEP 3143,
 "Standard daemon process library".
 
@@ -70,25 +74,29 @@ This is the python%{python3_pkgversion} version of the library.
 %prep
 %setup -q
 
-%if 0%{?with_python3}
+%if %{with_python3}
 rm -rf %{py3dir}
 cp -ar . %{py3dir}
 %endif
 
 %build
+%if %{with_python2}
 %{__python2} setup.py build
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd %{py3dir}
 %{__python3} setup.py build
 popd
 %endif
 
 %install
+%if %{with_python2}
 %{__python2} setup.py install --skip-build --root %{buildroot}
 rm -fr %{buildroot}%{python2_sitelib}/tests
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
 rm -fr %{buildroot}%{python3_sitelib}/tests
@@ -98,23 +106,27 @@ popd
 
 # Test suite requires minimock and lockfile
 %check
+%if %{with_python2}
 PYTHONPATH=$(pwd) %{__python2} -m unittest discover
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd %{py3dir}
 PYTHONPATH=$(pwd) %{__python3} -m unittest discover
 %endif
 
-%files -n python2-daemon
+%if %{with_python2}
+%files -n python2-%{pypi_name}
 %license LICENSE.ASF-2
-%{python2_sitelib}/daemon/
-%{python2_sitelib}/python_daemon-%{version}-py%{python2_version}.egg-info/
+%{python2_sitelib}/%{pypi_name}/
+%{python2_sitelib}/python_%{pypi_name}-%{version}-py%{python2_version}.egg-info/
+%endif
 
-%if 0%{?with_python3}
-%files -n python%{python3_pkgversion}-daemon
+%if %{with_python3}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE.ASF-2
-%{python3_sitelib}/daemon/
-%{python3_sitelib}/python_daemon-%{version}-py%{python3_version}.egg-info/
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/python_%{pypi_name}-%{version}-py%{python3_version}.egg-info/
 %endif
 
 %changelog
