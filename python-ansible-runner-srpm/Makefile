@@ -1,1 +1,1 @@
-../Makefile.epel8
+../Makefile.awx8
