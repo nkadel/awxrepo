@@ -2,15 +2,20 @@
 # https://fedoraproject.org/wiki/Changes/No_more_automagic_Python_bytecompilation_phase_2
 %global _python_bytecompile_extra 1
 
-%if 0%{?fedora} || 0%{?rhel} > 7
 %global with_python3 1
+
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python2 0
+%else
+%global with_python2 1
 %endif
 
 %global pypi_name testscenarios
 
 Name:           python-%{pypi_name}
 Version:        0.5.0
-Release:        14%{?dist}
+#Release:        14%%{?dist}
+Release:        0%{?dist}
 Summary:        Testscenarios, a pyunit extension for dependency injection
 
 License:        ASL 2.0 and BSD
@@ -18,13 +23,15 @@ URL:            https://launchpad.net/testscenarios
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
+%if %{with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-fixtures
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-pbr
 BuildRequires:  python2-testtools
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-fixtures
 BuildRequires:  python%{python3_pkgversion}-setuptools
@@ -41,6 +48,7 @@ different situations).
 
 %description %_description
 
+%if %{with_python2}
 %package -n python2-%{pypi_name}
 Summary: %summary
 Requires:       python2-pbr
@@ -48,8 +56,9 @@ Requires:       python2-testtools
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name} %_description
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Testscenarios, a pyunit extension for dependency injection
 Requires:       python%{python3_pkgversion}-pbr
@@ -72,34 +81,42 @@ sed -i '/^buffer = 1$/d' setup.cfg
 sed -i '/^catch = 1$/d' setup.cfg
 
 %build
+%if %{with_python2}
 %py2_build
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %py3_build
 %endif # with_python3
 
 
 %install
+%if %{with_python2}
 %py2_install
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %py3_install
 %endif # with_python3
 
 %check
+%if %{with_python2}
 %{__python2} setup.py test
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %{__python3} setup.py test
 %endif # with_python3
 
+%if %{with_python2}
 %files -n python2-%{pypi_name}
 %doc GOALS HACKING NEWS README doc/
 %license Apache-2.0 BSD
 %{python2_sitelib}/%{pypi_name}
 %{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license Apache-2.0 BSD
 %doc GOALS HACKING NEWS README doc/
