@@ -24,7 +24,7 @@ AWXPKGS+=python-amqp-srpm
 
 AWXPKGS+=python-testtools-srpm
 AWXPKGS+=python-fixtures-srpm
-AWXPKGS+=python-testcenario-srpm
+AWXPKGS+=python-testscenario-srpm
 AWXPKGS+=python-daemon-srpm
 
 AWXPKGS+=python-ansible-runner-srpm
