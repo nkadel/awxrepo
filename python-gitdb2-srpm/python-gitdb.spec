@@ -1,5 +1,8 @@
 %global with_python3 1
 
+# Disable python2, rely on EPEL if needed
+%global with_python2 0
+
 Name:           python-gitdb
 Version:        0.6.4
 Release:        4%{?dist}
@@ -25,7 +28,19 @@ aims at allowing full access to loose objects as well as packs with performance
 and scalability in mind. It operates exclusively on streams, allowing to
 operate on large objects with a small memory footprint.
 
-%if 0%{?with_python3}
+%if %{with_python3}
+%package -n python2-gitdb
+Summary:        Python2 Git Library
+Requires:       python2-smmap
+BuildRequires:  python2-devel
+Buildrequires:  python2-nose
+BuildRequires:  python2-setuptools
+
+%description -n python2-gitdb
+%{description}
+%endif
+
+%if %{with_python3}
 %package -n python%{python3_pkgversion}-gitdb
 Summary:        Python3 Git Library
 Requires:       python%{python3_pkgversion}-smmap
@@ -47,40 +62,47 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 %setup -qc -n gitdb-%{version}
 mv gitdb-%{version} python2
 
-%if 0%{?with_python3}
+%if %{with_python3}
 cp -a python2 python3
 find python3 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
 %endif # with_python3
 
+%if %{with_python2}
 find python2 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python2}|'
+%endif
 
 pushd python2
 cp AUTHORS LICENSE ../
 popd
 
 %build
+%if %{with_python2}
 pushd python2
 CFLAGS="$RPM_OPT_FLAGS" %{__python2} setup.py build
 popd
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd python3
 CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 popd
 %endif
 
 %install
+%if %{with_python2}
 pushd python2
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
 chmod 0755 %{buildroot}%{python2_sitearch}/gitdb/_perf.so
 popd
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 pushd python3
 %{__python3} setup.py install -O1 --skip-build --root %{buildroot}
 popd
 %endif
 
-%files
+%if %{with_python2}
+%files -n python2-gitdb
 %defattr(-,root,root,-)
 %if 0%{?fedora}
 %license LICENSE
@@ -90,8 +112,9 @@ popd
 %doc AUTHORS
 %{python2_sitearch}/gitdb-%{version}-py?.?.egg-info
 %{python2_sitearch}/gitdb/
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %files -n python%{python3_pkgversion}-gitdb
 %license LICENSE
 %doc AUTHORS
