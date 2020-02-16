@@ -4,10 +4,6 @@
 # Copyright (c) 2019 Nico Kadel-Garcia.
 #
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 # Fedora and RHEL split python2 and python3
 # Older RHEL requires EPEL and python34 or python36
 %global with_python3 1
@@ -19,17 +15,11 @@ Buildrequires: epel-rpm-macros
 %global with_python2 1
 %endif
 
-# Older RHEL does not use dnf, does not support "Suggests"
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global with_dnf 1
-%else
-%global with_dnf 0
-%endif
-
 %global pypi_name PyJWT
 
-# Common SRPM package
-Name:           python-%{pypi_name}
+# Common SRPM package, renamed to pyjwt for RHEL convention
+#Name:           python-%%{pypi_name}
+Name:           python-pyjwt
 Version:        1.7.1
 Release:        0%{?dist}
 Url:            http://github.com/jpadilla/pyjwt
@@ -40,11 +30,16 @@ Group:          Development/Languages/Python
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
+%if 0%{?rhel}
+Buildrequires: epel-rpm-macros
+%endif
+
 %description
 A Python implementation of `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_. Original implementation was written by `@progrium <https://github.com/progrium>`_.
 
 %if %{with_python2}
-%package -n python2-%{pypi_name}
+#%package -n python2-%%{pypi_name}
+%package -n python2-pyjwt
 Version:        1.7.1
 Release:        0%{?dist}
 Url:            http://github.com/jpadilla/pyjwt
@@ -53,23 +48,21 @@ License:        MIT
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python2-%{pypi_name}}
 # Add hooks for mismatched package name
 %{?python_provide:%python_provide python2-pyjwt}
-# ADded for mismatched capitalization of PyJWT
-Provides: python2-pyjwt = %{version}-%{release}
+Conflicts: python2-%{pypi_name}
+Obsoletes: python2-%{pypi_name} >= %{version}-%{release}
 
-%description -n python2-%{pypi_name}
+#%description -n python2-%%{pypi_name}
+%description -n python2-pyjwt
 A Python implementation of `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_. Original implementation was written by `@progrium <https://github.com/progrium>`_.
 
 %endif # with_python2
 
 %if %{with_python3}
-%package -n python%{python3_pkgversion}-%{pypi_name}
+#%package -n python%%{python3_pkgversion}-%%{pypi_name}
+%package -n python%{python3_pkgversion}-pyjwt
 Version:        1.7.1
 Release:        0%{?dist}
 Url:            http://github.com/jpadilla/pyjwt
@@ -78,17 +71,16 @@ License:        MIT
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 # Add hooks for mismatched package name
 %{?python_provide:%python_provide python%{python3_pkgversion}-pyjwt}
-# Added for mismatched capitalization of PyJWT
-Provides: python%{pyton3_pkgversion}-pyjwt = %{version}-%{release}
+# Added for mismatched capitalization of PyJTW
+Conflicts: python%{python3_pkgversion}-%{pypi_name}
+Obsoletes: python%{python3_pkgversion}-%{pypi_name} >= %{version}-%{release}
 
-%description -n python%{python3_pkgversion}-%{pypi_name}
+
+#%description -n python%%{python3_pkgversion}-%%{pypi_name}
+%description -n python%{python3_pkgversion}-pyjwt
 A Python implementation of `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_. Original implementation was written by `@progrium <https://github.com/progrium>`_.
 
 %endif # with_python3
@@ -122,7 +114,8 @@ A Python implementation of `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_. Or
 rm -rf %{buildroot}
 
 %if %{with_python2}
-%files -n python2-%{pypi_name}
+#%files -n python2-%{pypi_name}
+%files -n python2-pyjwt
 %defattr(-,root,root,-)
 %{python2_sitelib}/*
 %{_bindir}/pyjwt2
@@ -132,7 +125,8 @@ rm -rf %{buildroot}
 %endif # with_python2
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-%{pypi_name}
+#%files -n python%%{python3_pkgversion}-%%{pypi_name}
+%files -n python%{python3_pkgversion}-pyjwt
 %defattr(-,root,root,-)
 %{python3_sitelib}/*
 %{_bindir}/pyjwt%{python3_pkgversion}
