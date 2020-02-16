@@ -1,6 +1,8 @@
 # %%global prever b1
 
-Name:           python-coverage
+%global pypi_name coverage
+
+Name:           python-%{pypi_name}
 Summary:        Code coverage testing module for Python
 Version:        4.5.1
 #Release:        4%%{?prever}%%{?dist}
@@ -13,8 +15,12 @@ Release:        0%{?prever}%{?dist}
 #  coverage/htmlfiles/jquery.isonscreen.js
 License:        ASL 2.0 and MIT and (MIT or GPL)
 URL:            http://nedbatchelder.com/code/modules/coverage.html
-Source0:        http://pypi.python.org/packages/source/c/coverage/coverage-%{version}%{?prever}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+				
 BuildRequires:  gcc
 
 %description
@@ -23,34 +29,34 @@ execution. It uses the code analysis tools and tracing hooks provided in the
 Python standard library to determine which lines are executable, and which 
 have been executed.
 
-%package -n python2-coverage
+%package -n python2-%{pypi_name}
 Summary:        Code coverage testing module for Python 2
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 # As the "coverage" executable requires the setuptools at runtime (#556290),
 # so the "python3-coverage" executable requires python3-setuptools:
 Requires:       python2-setuptools
-%{?python_provide:%python_provide python2-coverage}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 Provides:       bundled(js-jquery) = 1.11.1
 Provides:       bundled(js-jquery-debounce) = 1.1
 Provides:       bundled(js-jquery-hotkeys) = 0.8
 Provides:       bundled(js-jquery-isonscreen) = 1.2.0
 Provides:       bundled(js-jquery-tablesorter)
 
-%description -n python2-coverage
+%description -n python2-%{pypi_name}
 Coverage.py is a Python 2 module that measures code coverage during Python
 execution. It uses the code analysis tools and tracing hooks provided in the 
 Python standard library to determine which lines are executable, and which 
 have been executed.
 
-%package -n python3-coverage
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Code coverage testing module for Python 3
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 # As the "coverage" executable requires the setuptools at runtime (#556290),
 # so the "python3-coverage" executable requires python3-setuptools:
-Requires:       python3-setuptools
-%{?python_provide:%python_provide python3-coverage}
+Requires:       python%{python3_pkgversion}-setuptools
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 Provides:       bundled(js-jquery) = 1.11.1
 Provides:       bundled(js-jquery-debounce) = 1.1
 Provides:       bundled(js-jquery-hotkeys) = 0.8
@@ -58,14 +64,14 @@ Provides:       bundled(js-jquery-isonscreen) = 1.2.0
 Provides:       bundled(js-jquery-tablesorter)
 Obsoletes:      platform-python-coverage < %{version}-%{release}
 
-%description -n python3-coverage
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Coverage.py is a Python 3 module that measures code coverage during Python
 execution. It uses the code analysis tools and tracing hooks provided in the 
 Python standard library to determine which lines are executable, and which 
 have been executed.
 
 %prep
-%setup -q -n coverage-%{version}%{?prever}
+%setup -q -n %{pypi_name}-%{version}%{?prever}
 
 find . -type f -exec chmod 0644 \{\} \;
 sed -i 's/\r//g' README.rst
@@ -77,7 +83,7 @@ sed -i 's/\r//g' README.rst
 
 %install
 %py3_install
-mv %{buildroot}/%{_bindir}/coverage %{buildroot}/%{_bindir}/python3-coverage
+mv %{buildroot}/%{_bindir}/coverage %{buildroot}/%{_bindir}/python%{python3_pkgversion}-coverage
 
 %py2_install
 
@@ -94,7 +100,7 @@ done
 rm -rf coverage-3* coverage3
 
 for i in coverage3 coverage-%{python3_version}; do
-  ln -s	python3-coverage $i
+  ln -s	python%{python3_pkgversion}-coverage $i
 done
 popd
 
@@ -109,12 +115,12 @@ popd
 %{python2_sitearch}/coverage/
 %{python2_sitearch}/coverage*.egg-info/
 
-%files -n python3-coverage
+%files -n python%{python3_pkgversion}-coverage
 %license LICENSE.txt NOTICE.txt
 %doc README.rst
 %{_bindir}/coverage-3*
 %{_bindir}/coverage3
-%{_bindir}/python3-coverage
+%{_bindir}/python%{python3_pkgversion}-coverage
 %{python3_sitearch}/coverage/
 %{python3_sitearch}/coverage*.egg-info/
 
