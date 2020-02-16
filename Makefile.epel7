@@ -1,44 +1,51 @@
 #
-# Build mock and local RPM versions of tools for Awx
+# Build mock and local RPM versions of tools for Samba
 #
 
 # Assure that sorting is case sensitive
 LANG=C
 
-#MOCKS+=awxrepo-f31-x86_64
-MOCKS+=awxrepo-8-x86_64
-MOCKS+=awxrepo-7-x86_64
+#
+MOCKS+=epel-7-x86_64
+#MOCKS+=epel-8-x86_64
+#MOCKS+=fedora-31-x86_64
 
-MOCKCFGS+=$(MOCKS)
+MOCKCFGS+=awxrepo-7-x86_64
+#MOCKCFGS+=awxrepo-8-x86_64
+#MOCKCFGS+=awxrepo-f31-x86_64
 
-#REPOBASEDIR=/var/www/linux/awxrepo
+#REPOBASEDIR=/var/www/linux/mockrepo
 REPOBASEDIR:=`/bin/pwd`/../awxrepo
 
-SPEC := `ls *.spec`
+SPEC := `ls *.spec | head -1`
 
 all:: $(MOCKS)
 
-getsrc:: FORCE
+.PHONY: getsrc
+getsrc:: 
 	spectool -g $(SPEC)
 
-srpm:: FORCE
+.PHONY: srpm
+srpm::
 	@echo "Building SRPM with $(SPEC)"
 	rm -rf rpmbuild
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
 
-build:: srpm FORCE
+.PHONY: build
+build:: srpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--rebuild rpmbuild/SRPMS/*.src.rpm
 
-$(MOCKS):: srpm FORCE
+.PHONY: $(MOCKS)
+$(MOCKS):: srpm
 	@if [ -e $@ -a -n "`find $@ -name \*.rpm`" ]; then \
 		echo "	Skipping RPM populated $@"; \
 	else \
 		echo "Storing " rpmbuild/SRPMS/*.src.rpm "as $@.src.rpm"; \
 		install rpmbuild/SRPMS/*.src.rpm $@.src.rpm; \
-		echo "Actally building RPMS in $@"; \
+		echo "Building $@.src.rpm in $@"; \
 		rm -rf $@; \
 		mock -q -r $(PWD)/../$@.cfg \
 		     --resultdir=$(PWD)/$@ \
@@ -55,21 +62,21 @@ install:: $(MOCKS)
 		*-8-x86_64) yumrelease=el/8; yumarch=x86_64; ;; \
 		*-31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
 		*-f31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
-		*-rawhide-x86_64) yumrelease=fedora/rawhide; yumarch=x86_64; ;; \
 		*) echo "Unrecognized release for $$repo, exiting" >&2; exit 1; ;; \
 	    esac; \
 	    rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
 	    srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
+	    [ -d $rpmdir ] || install -d $$rpmdir; \
+	    [ -d $srpmdir ] || install -d $$srpmdir; \
 	    echo "Pushing SRPMS to $$srpmdir"; \
 	    rsync -av $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
-	    createrepo -q $$srpmdir/.; \
+	    createrepo -q --update $$srpmdir/.; \
 	    echo "Pushing RPMS to $$rpmdir"; \
 	    rsync -av $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
-	    createrepo -q $$rpmdir/.; \
+	    createrepo -q --update $$rpmdir/.; \
 	done
-	@for repo in $(MOCKCFGS); do \
-	    echo "Touching $(PWD)/../$$repo.cfg"; \
-	    /bin/touch --no-dereference $(PWD)/../$$repo.cfg; \
+	@for name in $(MOCKCFGS); do \
+	    touch ../$$name.cfg; \
 	done
 
 clean::
@@ -79,5 +86,3 @@ clean::
 
 realclean distclean:: clean
 	rm -f *.rpm
-
-FORCE:

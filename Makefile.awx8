@@ -7,7 +7,7 @@ LANG=C
 
 #MOCKS+=awxrepo-f31-x86_64
 MOCKS+=awxrepo-8-x86_64
-MOCKS+=awxrepo-7-x86_64
+#MOCKS+=awxrepo-7-x86_64
 
 MOCKCFGS+=$(MOCKS)
 
