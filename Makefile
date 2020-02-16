@@ -11,6 +11,7 @@
 REPOBASE=file://$(PWD)
 
 # Dependency metapackage
+#EPELPKGS+=PyYAML-srpm
 EPELPKGS+=python2-lockfile-srpm
 EPELPKGS+=python2-sphinx-srpm
 
@@ -20,18 +21,33 @@ EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
+EPELPKGS+=python-build-srpm
+EPELPKGS+=python-celery-srpm
+EPELPKGS+=python-coverage-srpm
+EPELPKGS+=python-django-auth-ldap-srpm
+EPELPKGS+=python-django-cors-headers-srpm
+EPELPKGS+=python-django-crum-srpm
+EPELPKGS+=python-django-extensions-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-python-mimeparse--srpm
 EPELPKGS+=python-vile-srpm
 
+# python3 update modules
+EPELPKGS+=python3-six-srpm
+
 AWXPKGS+=python-amqp-srpm
+
+AWXPKGS+=python-django-auth-ldap-srpm
+AWXPKGS+=python-django-coverage-srpm
 
 AWXPKGS+=python-testtools-srpm
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 AWXPKGS+=python-daemon-srpm
+# Depends on django-extensions and django-coverage
+AWXPKGS+=python-django-formtools-srpm
 
 AWXPKGS+=python-ansible-runner-srpm
 
@@ -39,26 +55,23 @@ AWXPKGS+=ansible-awx-srpm
 
 REPOS+=awxrepo/el/7
 REPOS+=awxrepo/el/8
-REPOS+=awxrepo/fedora/30
 REPOS+=awxrepo/fedora/31
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
 CFGS+=awxrepo-7-x86_64.cfg
 CFGS+=awxrepo-8-x86_64.cfg
-CFGS+=awxrepo-f30-x86_64.cfg
 CFGS+=awxrepo-f31-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=epel-7-x86_64.cfg
 MOCKCFGS+=epel-8-x86_64.cfg
-MOCKCFGS+=fedora-30-x86_64.cfg
 MOCKCFGS+=fedora-31-x86_64.cfg
 
 all:: $(CFGS)
 all:: $(MOCKCFGS)
 all:: $(REPODIRS)
-all:: $(EPEL)
+all:: $(EPELPKGS)
 all:: $(AWXPKGS)
 
 all install clean getsrc:: FORCE
@@ -136,26 +149,6 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
 	@echo 'baseurl=$(REPOBASE)/awxrepo/el/8/x86_64/' >> $@
-	@echo 'failovermethod=priority' >> $@
-	@echo 'skip_if_unavailable=False' >> $@
-	@echo 'metadata_expire=1' >> $@
-	@echo 'gpgcheck=0' >> $@
-	@echo '#cost=2000' >> $@
-	@echo '"""' >> $@
-
-awxrepo-f30-x86_64.cfg: /etc/mock/fedora-30-x86_64.cfg
-	@echo Generating $@ from $?
-	@cat $? > $@
-	@sed -i 's/fedora-30-x86_64/awxrepo-f30-x86_64/g' $@
-	@echo >> $@
-	@echo "Disabling 'best=' for $@"
-	@sed -i '/^best=/d' $@
-	@echo "best=0" >> $@
-	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awxrepo]' >> $@
-	@echo 'name=awxrepo' >> $@
-	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/30/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
