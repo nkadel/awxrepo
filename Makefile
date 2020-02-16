@@ -15,7 +15,6 @@ REPOBASE=file://$(PWD)
 EPELPKGS+=python2-lockfile-srpm
 EPELPKGS+=python2-sphinx-srpm
 
-EPELPKGS+=python-PyJWT-srpm
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
@@ -31,6 +30,7 @@ EPELPKGS+=python-django-extensions-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
+EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-python-mimeparse--srpm
 EPELPKGS+=python-vile-srpm
 
