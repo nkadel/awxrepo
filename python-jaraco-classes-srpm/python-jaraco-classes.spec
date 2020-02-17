@@ -28,10 +28,12 @@ Requires:       python%{python3_pkgversion}-jaraco
 Requires:       python%{python3_pkgversion}-six
 
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
-BuildRequires:  python%{python3_pkgversion}-pytest-flake8
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
+
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  python%{python3_pkgversion}-pytest-flake8
+BuildRequires:  python%{python3_pkgversion}-more-itertools
 
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
 
