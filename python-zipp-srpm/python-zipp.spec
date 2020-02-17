@@ -1,7 +1,7 @@
 %global pypi_name zipp
 
 Name:           python-%{pypi_name}
-Version:        0.5.1
+Version:        2.2.0
 #Release:        2%%{?dist}
 Release:        0%{?dist}
 Summary:        Backport of pathlib-compatible object wrapper for zip files
@@ -15,16 +15,18 @@ BuildArch:      noarch
 BuildRequires:   epel-rpm-macros
 %endif
 
-BuildRequires: python%{python3_pkgversion}-devel
-BuildRequires: python%{python3_pkgversion}-setuptools
-BuildRequires: python%{python3_pkgversion}-setuptools_scm >= 1.15.0
-
 %description
 A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 
 
 %package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires: python%{python3_pkgversion}-setuptools_scm >= 1.15.0
+# For testing, from python-jaraco-packaging
+BuildRequires: python%{python3_pkgversion}-jaraco >= 3.2
+
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
