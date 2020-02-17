@@ -73,10 +73,6 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 Requires:  python%{python3_pkgversion}-vine >= 1.1.3
 Conflicts: python%{python3_pkgversion}-vine >= 5.0.0
 
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
