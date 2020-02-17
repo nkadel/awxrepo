@@ -3,6 +3,9 @@
 # skip test until test suite supports later django
 %global skip_tests 1
 
+# Skip docs for excessive bulk and space and unstable build tools
+%global skip_docs 1
+
 Name:           python-%{pypi_name}
 Version:        2.1
 Release:        8%{?dist}
@@ -62,7 +65,7 @@ This is the associated documentation.
 %build
 %{py3_build}
 
-%if 0%{?skip_tests} == 0
+%if ! 0%{?skip_tests}
 %check
 PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
 %endif
@@ -70,11 +73,12 @@ PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-c
 %install
 %{py3_install}
 %find_lang django py3lang
+%if ! 0%{?skip_docs}
 # generate html docs
 sphinx-build-3 docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
-
+%endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name} -f py3lang
 %doc README.rst
@@ -83,7 +87,9 @@ rm -rf html/.{doctrees,buildinfo}
 %{python3_sitelib}/django_formtools-%{version}-py?.?.egg-info
 
 %files -n python%{python3_pkgversion}-%{pypi_name}-doc
+%if ! 0%{?skip_docs}
 %doc html
+%endif
 %license LICENSE
 
 
