@@ -31,7 +31,7 @@ BuildArch:      noarch
 
 BuildRequires:  bzip2
 %if 0%{?rhel}
-Buildrequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %description
