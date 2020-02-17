@@ -67,7 +67,7 @@ py.test provides simple, yet powerful testing for Python.
 %build
 %py3_build
 
-# Ignore for RHEL builds, sphinx dependencies get outrageious
+# Ignore for RHEL builds, sphinx dependencies get outrageous
 %if 0%{?fedora}
 for l in doc/* ; do
   make -C $l html PYTHONPATH=$(pwd)
@@ -85,7 +85,7 @@ ln -snf pytest-%{python3_version} %{buildroot}%{_bindir}/pytest-3
 mv %{buildroot}%{_bindir}/py.test %{buildroot}%{_bindir}/py.test-%{python3_version}
 ln -snf py.test-%{python3_version} %{buildroot}%{_bindir}/py.test-3
 
-# Ignore for RHEL builds, sphinx dependencies get outrageious
+# Ignore for RHEL builds, sphinx dependencies get outrageous
 %if 0%{?fedora}
 mkdir -p _htmldocs/html
 for l in doc/* ; do
@@ -113,7 +113,10 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} \
 %doc CHANGELOG.html
 %doc README.html
 %doc CONTRIBUTING.html
+# Ignore for RHEL builds, sphinx dependencies get outrageous
+%if 0%{?fedora}
 %doc _htmldocs/html
+%endif
 %license LICENSE
 %{_bindir}/pytest-3
 %{_bindir}/pytest-%{python3_version}
