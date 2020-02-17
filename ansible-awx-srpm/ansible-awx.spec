@@ -9,8 +9,8 @@
 %define service_logdir /var/log/tower
 %define service_configdir /etc/tower
 
-%global awx_mainversion 9.1.0
-%global awx_subversion .96
+%global awx_mainversion 9.2.0
+%global awx_subversion %{nil}
 
 Summary: Ansible AWX
 Name: ansible-awx
@@ -37,7 +37,7 @@ Prefix: %{_prefix}
 AutoReqProv: false
 
 %if 0%{?rhel}
-BuildRequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 BuildRequires: git
@@ -49,9 +49,9 @@ BuildRequires: openldap-devel
 BuildRequires: postgresql-server >= 10
 BuildRequires: postgresql-server-devel >= 10
 BuildRequires: python%{python3_pkgversion}-adal
-BuildRequires: python%{python3_pkgversion}-ansible-runner >= 1.4.4
-BuildRequires: python%{python3_pkgversion}-attrs >= 19.3.0
-BuildRequires: python%{python3_pkgversion}-autobahn >= 19.11.1
+BuildRequires: python%{python3_pkgversion}-ansible-runner
+BuildRequires: python%{python3_pkgversion}-attrs
+BuildRequires: python%{python3_pkgversion}-autobahn
 BuildRequires: python%{python3_pkgversion}-azure-common
 BuildRequires: python%{python3_pkgversion}-azure-keyvault
 BuildRequires: python%{python3_pkgversion}-azure-nspkg
@@ -89,13 +89,13 @@ BuildRequires: python%{python3_pkgversion}-incremental
 BuildRequires: python%{python3_pkgversion}-inflect
 BuildRequires: python%{python3_pkgversion}-irc
 BuildRequires: python%{python3_pkgversion}-isodate
-BuildRequires: python%{python3_pkgversion}-jaraco.classes
-BuildRequires: python%{python3_pkgversion}-jaraco.collections
-BuildRequires: python%{python3_pkgversion}-jaraco.functools
-BuildRequires: python%{python3_pkgversion}-jaraco.itertools
-BuildRequires: python%{python3_pkgversion}-jaraco.logging
-BuildRequires: python%{python3_pkgversion}-jaraco.stream
-BuildRequires: python%{python3_pkgversion}-jaraco.text
+BuildRequires: python%{python3_pkgversion}-jaraco-classes
+BuildRequires: python%{python3_pkgversion}-jaraco-collections
+BuildRequires: python%{python3_pkgversion}-jaraco-functools
+BuildRequires: python%{python3_pkgversion}-jaraco-itertools
+BuildRequires: python%{python3_pkgversion}-jaraco-logging
+BuildRequires: python%{python3_pkgversion}-jaraco-stream
+BuildRequires: python%{python3_pkgversion}-jaraco-text
 BuildRequires: python%{python3_pkgversion}-jinja2
 BuildRequires: python%{python3_pkgversion}-jsonbfield
 BuildRequires: python%{python3_pkgversion}-jsonschema
@@ -108,9 +108,9 @@ BuildRequires: python%{python3_pkgversion}-msrest
 BuildRequires: python%{python3_pkgversion}-msrestazure
 BuildRequires: python%{python3_pkgversion}-oauthlib
 BuildRequires: python%{python3_pkgversion}-openid
-BuildRequires: python%{python3_pkgversion}-pexpect >= 4.7.0
+BuildRequires: python%{python3_pkgversion}-pexpect
 BuildRequires: python%{python3_pkgversion}-pip
-BuildRequires: python%{python3_pkgversion}-psutill >= 5.6.7
+BuildRequires: python%{python3_pkgversion}-psutil
 BuildRequires: python%{python3_pkgversion}-psycopg2
 BuildRequires: python%{python3_pkgversion}-ptyprocess
 BuildRequires: python%{python3_pkgversion}-pyasn1
@@ -119,7 +119,7 @@ BuildRequires: python%{python3_pkgversion}-pygerduty
 BuildRequires: python%{python3_pkgversion}-pygments
 # Renamed from PyJWT for RHEL
 #BuildRequires: python%%{python3_pkgversion}-PyJWT >= 1.7.1
-BuildRequires: python%%{python3_pkgversion}-pyjwt >= 1.7.1
+BuildRequires: python%{python3_pkgversion}-pyjwt >= 1.7.1
 BuildRequires: python%{python3_pkgversion}-pyparsing
 BuildRequires: python%{python3_pkgversion}-pytest-runner >= 1.4.4
 BuildRequires: python%{python3_pkgversion}-python-logstash
@@ -158,9 +158,9 @@ Requires: postgresql-devel >= 10
 Requires: python%{python3_pkgversion}-PyHamcrest
 Requires: python%{python3_pkgversion}-PyYAML
 Requires: python%{python3_pkgversion}-adal
-Requires: python%{python3_pkgversion}-ansible-runner >= 1.4.4
-Requires: python%{python3_pkgversion}-attrs >= 19.3.0
-Requires: python%{python3_pkgversion}-autobahn >= 19.11.1
+Requires: python%{python3_pkgversion}-ansible-runner
+Requires: python%{python3_pkgversion}-attrs
+Requires: python%{python3_pkgversion}-autobahn
 Requires: python%{python3_pkgversion}-azure-common
 Requires: python%{python3_pkgversion}-azure-keyvault
 Requires: python%{python3_pkgversion}-azure-nspkg
@@ -198,13 +198,13 @@ Requires: python%{python3_pkgversion}-incremental
 Requires: python%{python3_pkgversion}-inflect
 Requires: python%{python3_pkgversion}-irc
 Requires: python%{python3_pkgversion}-isodate
-Requires: python%{python3_pkgversion}-jaraco.classes
-Requires: python%{python3_pkgversion}-jaraco.collections
-Requires: python%{python3_pkgversion}-jaraco.functools
-Requires: python%{python3_pkgversion}-jaraco.itertools
-Requires: python%{python3_pkgversion}-jaraco.logging
-Requires: python%{python3_pkgversion}-jaraco.stream
-Requires: python%{python3_pkgversion}-jaraco.text
+Requires: python%{python3_pkgversion}-jaraco-classes
+Requires: python%{python3_pkgversion}-jaraco-collections
+Requires: python%{python3_pkgversion}-jaraco-functools
+Requires: python%{python3_pkgversion}-jaraco-itertools
+Requires: python%{python3_pkgversion}-jaraco-logging
+Requires: python%{python3_pkgversion}-jaraco-stream
+Requires: python%{python3_pkgversion}-jaraco-text
 Requires: python%{python3_pkgversion}-jinja2
 Requires: python%{python3_pkgversion}-jsonbfield
 Requires: python%{python3_pkgversion}-jsonschema
@@ -217,9 +217,9 @@ Requires: python%{python3_pkgversion}-msrest
 Requires: python%{python3_pkgversion}-msrestazure
 Requires: python%{python3_pkgversion}-oauthlib
 Requires: python%{python3_pkgversion}-openid
-Requires: python%{python3_pkgversion}-pexpect >= 4.7.0
+Requires: python%{python3_pkgversion}-pexpect
 Requires: python%{python3_pkgversion}-pip
-Requires: python%{python3_pkgversion}-psutil >= 5.6.7
+Requires: python%{python3_pkgversion}-psutil
 Requires: python%{python3_pkgversion}-psycopg2
 Requires: python%{python3_pkgversion}-ptyprocess
 Requires: python%{python3_pkgversion}-pyasn1
