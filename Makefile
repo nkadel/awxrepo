@@ -66,7 +66,7 @@ AWXPKGS+=python-pytest-flake8-srpm
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
 
-# Depends on jaraco-packaging and setuptools_scm
+# Depends on jaraco-packaging and setuptools_scm and jaraco-itertools and toml
 AWXPKGS+=python-zipp-srpm
 
 # Depends on zipp
@@ -161,7 +161,7 @@ awxrepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo 'baseurl=$(REPOBASE)/awxrepo/el/7/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
-	@echo 'metadata_expire=1' >> $@
+	@echo 'metadata_expire=0' >> $@
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
@@ -181,7 +181,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo 'baseurl=$(REPOBASE)/awxrepo/el/8/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
-	@echo 'metadata_expire=1' >> $@
+	@echo 'metadata_expire=0' >> $@
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
@@ -201,7 +201,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/31/x86_64/' >> $@
 #	@echo 'failovermethod=priority' >> $@
 #	@echo 'skip_if_unavailable=False' >> $@
-#	@echo 'metadata_expire=1' >> $@
+#	@echo 'metadata_expire=0' >> $@
 #	@echo 'gpgcheck=0' >> $@
 #	@echo '#cost=2000' >> $@
 #	@echo '"""' >> $@
