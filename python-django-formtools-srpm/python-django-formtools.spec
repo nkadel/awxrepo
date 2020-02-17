@@ -13,6 +13,10 @@ URL:            http://django-formtools.readthedocs.org/en/latest/
 Source0:        https://pypi.io/packages/source/d/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
+%if 0%{?rhel}
+Buildrequires:  epel-rpm-macros
+%endif
+
 %description
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.

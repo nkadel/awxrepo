@@ -23,6 +23,10 @@ URL:            https://launchpad.net/testscenarios
 Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
+%if 0%{?rhel}
+BuildRequires: epel-rpm-macros
+%endif
+
 %if %{with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-fixtures

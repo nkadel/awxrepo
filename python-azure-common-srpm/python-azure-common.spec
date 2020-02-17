@@ -11,13 +11,6 @@
 # Not compatible with pyt9on2
 %global with_python2 0
 
-# Older RHEL does not use dnf, does not support "Suggests"
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global with_dnf 1
-%else
-%global with_dnf 0
-%endif
-
 %global pypi_name azure-common
 
 # Common SRPM package

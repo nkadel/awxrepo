@@ -24,6 +24,7 @@ URL:            https://github.com/openstack/pylockfile
 Source0:        https://pypi.python.org/packages/source/l/lockfile/%{upstream_name}-%{version}.tar.gz
 
 BuildArch:      noarch
+
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif

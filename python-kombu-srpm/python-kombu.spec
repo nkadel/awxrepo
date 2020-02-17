@@ -4,11 +4,6 @@
 # Copyright (c) 2019 Nico Kadel-Garcia.
 #
 
-# python3_pkgversion macro for EPEL in older RHEL
-%if 0%{?rhel}
-BuildRequires: epel-rpm-macros
-%endif
-
 # Imcmpatible with python2
 %global with_python3 1
 %global with_python2 0
@@ -26,6 +21,10 @@ Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
+
+%if 0%{?rhel}
+BuildRequires: epel-rpm-macros
+%endif
 
 %description
 Kombu is a messaging library for Python.

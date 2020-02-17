@@ -18,6 +18,10 @@ Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name};
 
 BuildArch:      noarch
 
+%if 0%{?rhel}
+Buildrequires:  epel-rpm-macros
+%endif
+
 %if 0%{?with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-django

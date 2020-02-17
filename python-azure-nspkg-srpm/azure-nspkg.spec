@@ -16,12 +16,6 @@
 %endif
 
 # Older RHEL does not use dnf, does not support "Suggests"
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global with_dnf 1
-%else
-%global with_dnf 0
-%endif
-
 %global pypi_name azure-nspkg
 
 # Common SRPM package
@@ -70,10 +64,6 @@ License:        MIT
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -107,10 +97,6 @@ License:        MIT
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}

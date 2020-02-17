@@ -16,6 +16,10 @@ BuildRequires:  %{_bindir}/man
 
 BuildArch:      noarch
 
+%if 0%{?rhel}
+BuildRequires: epel-rpm-macros
+%endif
+
 %description
 Pexpect is a pure Python module for spawning child applications; controlling
 them; and responding to expected patterns in their output. Pexpect works like

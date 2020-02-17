@@ -4,10 +4,6 @@
 # Copyright (c) 2019 Nico Kadel-Garcia.
 #
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 # Fedora and RHEL split python2 and python3
 # Older RHEL requires EPEL and python34 or python36
 %global with_python3 1
@@ -17,13 +13,6 @@ Buildrequires: epel-rpm-macros
 %global with_python2 0
 %else
 %global with_python2 1
-%endif
-
-# Older RHEL does not use dnf, does not support "Suggests"
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global with_dnf 1
-%else
-%global with_dnf 0
 %endif
 
 %global pypi_name vine
@@ -39,6 +28,10 @@ Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
+
+%if 0%{?rhel}
+Buildrequires: epel-rpm-macros
+%endif
 
 %description
 =====================================================================
@@ -81,9 +74,6 @@ About
     :target: https://pypi.org/project/vine/
 
 
-
-
-
 %if %{with_python2}
 %package -n python2-%{pypi_name}
 Version:        1.3.0
@@ -94,10 +84,6 @@ License:        BSD (FIXME:No SPDX)
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -154,10 +140,6 @@ Url:            http://github.com/celery/vine
 Summary:        Promises, promises, promises.
 License:        BSD (FIXME:No SPDX)
 
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
