@@ -10,7 +10,8 @@ and efficiently checking for PEP8 compliance of a project.
 
 Name:           python-%{pypi_name}
 Version:        1.0.4
-Release:        2%{?dist}
+#Release:        2%%{?dist}
+Release:        0%{?dist}
 Summary:        Plugin for pytest to check PEP8 compliance with Flake8
 
 License:        BSD
@@ -18,18 +19,22 @@ URL:            https://github.com/tholo/pytest-flake8
 Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
-BuildRequires:  python3-devel
-BuildRequires:  python3dist(flake8) >= 3.5
-BuildRequires:  python3dist(pytest) >= 3.5
-BuildRequires:  python3dist(setuptools)
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-flake8 >= 3.5
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  python%{python3_pkgversion}-setuptools
 
 %description %{desc}
 
-%package -n     python3-%{pypi_name}
+%package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python3-%{pypi_name} %{desc}
+%description -n python%{python3_pkgversion}-%{pypi_name} %{desc}
 
 
 %prep
@@ -46,7 +51,7 @@ rm -rf %{pypi_name}.egg-info
 %py3_install
 
 
-%files -n python3-%{pypi_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/__pycache__/*
