@@ -19,7 +19,7 @@ Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name};
 BuildArch:      noarch
 
 %if 0%{?rhel}
-Buildrequires:  epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %if 0%{?with_python2}
