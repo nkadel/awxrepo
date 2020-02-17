@@ -22,36 +22,36 @@ Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
 
-%package -n python3-%{pypi_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        A set of high-level abstractions for Django forms
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-sphinx
-BuildRequires:  python3-django >= 1.7
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-django >= 1.7
 # Required for testing
-BuildRequires:  python3-flake8
-BuildRequires:  python3-coverage
+BuildRequires:  python%{python3_pkgversion}-flake8
+BuildRequires:  python%{python3_pkgversion}-coverage
 
-Requires:       python3-django >= 1.7
+Requires:       python%{python3_pkgversion}-django >= 1.7
 
 Obsoletes:      python-%{pypi_name} < 2.1-5
 Obsoletes:      python2-%{pypi_name} < 2.1-5
 
-%description -n python3-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
-%package -n python3-%{pypi_name}-doc
+%package -n python%{python3_pkgversion}-%{pypi_name}-doc
 Summary:        A set of high-level abstractions for Django forms - documentation
-%{?python_provide:%python_provide python3-%{pypi_name}-doc}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}-doc}
 
-Requires:       python3-%{pypi_name} = %{version}-%{release}
+Requires:       python%{python3_pkgversion}-%{pypi_name} = %{version}-%{release}
 
 Obsoletes:      python-%{pypi_name}-doc < 2.1-5
 Obsoletes:      python2-%{pypi_name}-doc < 2.1-5
 
-%description -n python3-%{pypi_name}-doc
+%description -n python%{python3_pkgversion}-%{pypi_name}-doc
 Django's "formtools" is a set of high-level abstractions for Django forms.
 
 This is the associated documentation.
@@ -64,7 +64,7 @@ This is the associated documentation.
 
 %if 0%{?skip_tests} == 0
 %check
-PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python3-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
+PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
 %endif
 
 %install
@@ -76,13 +76,13 @@ sphinx-build-3 docs html
 rm -rf html/.{doctrees,buildinfo}
 
 
-%files -n python3-%{pypi_name} -f py3lang
+%files -n python%{python3_pkgversion}-%{pypi_name} -f py3lang
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/formtools
 %{python3_sitelib}/django_formtools-%{version}-py?.?.egg-info
 
-%files -n python3-%{pypi_name}-doc
+%files -n python%{python3_pkgversion}-%{pypi_name}-doc
 %doc html
 %license LICENSE
 
