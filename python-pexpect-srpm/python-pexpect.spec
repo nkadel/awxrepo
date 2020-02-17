@@ -17,7 +17,7 @@ BuildRequires:  %{_bindir}/man
 BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %description
