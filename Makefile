@@ -37,22 +37,23 @@ EPELPKGS+=python-django-extensions-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-gitdb-srpm
+EPELPKGS+=python-gitdb2-srpm
+EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
-EPELPKGS+=python-py-srpm
 EPELPKGS+=python-more-itertools-srpm
+EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-python-mimeparse-srpm
+EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-vine-srpm
 
 AWXPKGS+=python-amqp-srpm
 
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
-
-AWXPKGS+=python-importlib_metadata-srpm
 
 # python3 only update for pytest modules of misnmed source package
 # Depends on more-itertools and pluggy and py
@@ -62,8 +63,14 @@ AWXPKGS+=pytest-srpm
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
 
-# Depends on jaraco
+# Depends on jaraco-packaging and setuptools_scm
+AWXPKGS+=python-jaraco-itertools-srpm
+
+# Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-zipp-srpm
+
+# Depends on zipp
+AWXPKGS+=python-importlib_metadata-srpm
 
 # Depends on jaraco-packaging and jaraco-classes and pytest-flske8
 AWXPKGS+=python-jaraco-functools-srpm
