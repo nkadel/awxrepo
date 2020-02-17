@@ -24,7 +24,7 @@ Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_na
 BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %if %{with_python2}
