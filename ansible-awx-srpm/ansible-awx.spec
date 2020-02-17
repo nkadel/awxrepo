@@ -9,11 +9,14 @@
 %define service_logdir /var/log/tower
 %define service_configdir /etc/tower
 
+%global awx_mainversion 9.1.0
+%global awx_subversion .96
+
 Summary: Ansible AWX
 Name: ansible-awx
-Version: 9.0.1.376
-Release: 1%{dist}
-Source0: awx-9.0.1.376.tar.gz
+Version: %{awx_mainversion}%{awx_subversion}
+Release: 0%{dist}
+Source0: awx-%{version}.tar.gz
 Source1: settings.py.dist
 %if 0%{?el7}
 Source2: awx-cbreceiver.service
@@ -33,6 +36,10 @@ Vendor: AWX
 Prefix: %{_prefix}
 AutoReqProv: false
 
+%if 0%{?rhel}
+BuildRequires: epel-rpm-macros
+%endif
+
 BuildRequires: git
 BuildRequires: libcurl-devel
 BuildRequires: libffi-devel
@@ -41,11 +48,10 @@ BuildRequires: libxslt-devel
 BuildRequires: openldap-devel
 BuildRequires: postgresql-server >= 10
 BuildRequires: postgresql-server-devel >= 10
-BuildRequires: python%{python3_pkgversion}-GitPython
 BuildRequires: python%{python3_pkgversion}-adal
-BuildRequires: python%{python3_pkgversion}-ansible-runner
-BuildRequires: python%{python3_pkgversion}-attrs
-BuildRequires: python%{python3_pkgversion}-autobahn
+BuildRequires: python%{python3_pkgversion}-ansible-runner >= 1.4.4
+BuildRequires: python%{python3_pkgversion}-attrs >= 19.3.0
+BuildRequires: python%{python3_pkgversion}-autobahn >= 19.11.1
 BuildRequires: python%{python3_pkgversion}-azure-common
 BuildRequires: python%{python3_pkgversion}-azure-keyvault
 BuildRequires: python%{python3_pkgversion}-azure-nspkg
@@ -60,6 +66,7 @@ BuildRequires: python%{python3_pkgversion}-cryptography
 BuildRequires: python%{python3_pkgversion}-daphne
 BuildRequires: python%{python3_pkgversion}-dateutil
 BuildRequires: python%{python3_pkgversion}-devel
+# Named as lower case "django" in RHEL
 BuildRequires: python%{python3_pkgversion}-django
 BuildRequires: python%{python3_pkgversion}-django-auth-ldap
 BuildRequires: python%{python3_pkgversion}-django-cors-headers
@@ -73,6 +80,7 @@ BuildRequires: python%{python3_pkgversion}-django-solo
 BuildRequires: python%{python3_pkgversion}-django-taggit
 BuildRequires: python%{python3_pkgversion}-djangorestframework
 BuildRequires: python%{python3_pkgversion}-djangorestframework-yaml
+BuildRequires: python%{python3_pkgversion}-GitPython
 BuildRequires: python%{python3_pkgversion}-gitdb2
 BuildRequires: python%{python3_pkgversion}-google-auth
 BuildRequires: python%{python3_pkgversion}-idna
@@ -93,32 +101,35 @@ BuildRequires: python%{python3_pkgversion}-jsonbfield
 BuildRequires: python%{python3_pkgversion}-jsonschema
 BuildRequires: python%{python3_pkgversion}-kombu
 BuildRequires: python%{python3_pkgversion}-kubernetes
+BuildRequires: python%{python3_pkgversion}-ldap
+BuildRequires: python%{python3_pkgversion}-markupsafe
 BuildRequires: python%{python3_pkgversion}-more-itertools
 BuildRequires: python%{python3_pkgversion}-msrest
 BuildRequires: python%{python3_pkgversion}-msrestazure
 BuildRequires: python%{python3_pkgversion}-oauthlib
 BuildRequires: python%{python3_pkgversion}-openid
-BuildRequires: python%{python3_pkgversion}-pexpect
+BuildRequires: python%{python3_pkgversion}-pexpect >= 4.7.0
 BuildRequires: python%{python3_pkgversion}-pip
-BuildRequires: python%{python3_pkgversion}-psutil
+BuildRequires: python%{python3_pkgversion}-psutill >= 5.6.7
 BuildRequires: python%{python3_pkgversion}-psycopg2
 BuildRequires: python%{python3_pkgversion}-ptyprocess
 BuildRequires: python%{python3_pkgversion}-pyasn1
 BuildRequires: python%{python3_pkgversion}-pyasn1-modules
 BuildRequires: python%{python3_pkgversion}-pygerduty
 BuildRequires: python%{python3_pkgversion}-pygments
-BuildRequires: python%{python3_pkgversion}-pyjwt
+# Renamed from PyJWT for RHEL
+#BuildRequires: python%%{python3_pkgversion}-PyJWT >= 1.7.1
+BuildRequires: python%%{python3_pkgversion}-pyjwt >= 1.7.1
 BuildRequires: python%{python3_pkgversion}-pyparsing
-BuildRequires: python%{python3_pkgversion}-pytest-runner
-BuildRequires: python%{python3_pkgversion}-python-ldap
+BuildRequires: python%{python3_pkgversion}-pytest-runner >= 1.4.4
 BuildRequires: python%{python3_pkgversion}-python-logstash
-BuildRequires: python%{python3_pkgversion}-python-markupsafe
 BuildRequires: python%{python3_pkgversion}-pytz
+# Renamed from PyYAML for RHEL
 BuildRequires: python%{python3_pkgversion}-pyyaml
 BuildRequires: python%{python3_pkgversion}-requests
 BuildRequires: python%{python3_pkgversion}-requests-futures
 BuildRequires: python%{python3_pkgversion}-requests-oauthlib
-BuildRequires: python%{python3_pkgversion}-six
+BuildRequires: python%{python3_pkgversion}-six >= 1.13.0
 BuildRequires: python%{python3_pkgversion}-slackclient
 BuildRequires: python%{python3_pkgversion}-smmap2
 BuildRequires: python%{python3_pkgversion}-social-auth-app-django
@@ -126,12 +137,12 @@ BuildRequires: python%{python3_pkgversion}-social-auth-core
 BuildRequires: python%{python3_pkgversion}-sqlparse
 BuildRequires: python%{python3_pkgversion}-tempora
 BuildRequires: python%{python3_pkgversion}-twilio
-BuildRequires: python%{python3_pkgversion}-twisted
+BuildRequires: python%{python3_pkgversion}-twisted >= 19.1.0
 BuildRequires: python%{python3_pkgversion}-txaio
 BuildRequires: python%{python3_pkgversion}-urllib3
 BuildRequires: python%{python3_pkgversion}-websocket_client
-BuildRequires: python%{python3_pkgversion}-zipp
-BuildRequires: python%{python3_pkgversion}-zope.interface
+BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
+BuildRequires: python%{python3_pkgversion}-zope.interface >= 4.7.1
 BuildRequires: xmlsec1-devel
 BuildRequires: xmlsec1-openssl-devel
 
@@ -143,14 +154,13 @@ Requires: libffi-devel
 Requires: libtool-ltdl-devel
 Requires: libxslt-devel
 Requires: openldap-devel
-Requires: postgresql-devel
-Requires: python%{python3_pkgversion}-GitPython
+Requires: postgresql-devel >= 10
 Requires: python%{python3_pkgversion}-PyHamcrest
 Requires: python%{python3_pkgversion}-PyYAML
 Requires: python%{python3_pkgversion}-adal
-Requires: python%{python3_pkgversion}-ansible-runner
-Requires: python%{python3_pkgversion}-attrs
-Requires: python%{python3_pkgversion}-autobahn
+Requires: python%{python3_pkgversion}-ansible-runner >= 1.4.4
+Requires: python%{python3_pkgversion}-attrs >= 19.3.0
+Requires: python%{python3_pkgversion}-autobahn >= 19.11.1
 Requires: python%{python3_pkgversion}-azure-common
 Requires: python%{python3_pkgversion}-azure-keyvault
 Requires: python%{python3_pkgversion}-azure-nspkg
@@ -165,6 +175,7 @@ Requires: python%{python3_pkgversion}-cryptography
 Requires: python%{python3_pkgversion}-daphne
 Requires: python%{python3_pkgversion}-dateutil
 Requires: python%{python3_pkgversion}-devel
+# Named as lower case "django" in RHEL
 Requires: python%{python3_pkgversion}-django
 Requires: python%{python3_pkgversion}-django-auth-ldap
 Requires: python%{python3_pkgversion}-django-cors-headers
@@ -179,6 +190,7 @@ Requires: python%{python3_pkgversion}-django-taggit
 Requires: python%{python3_pkgversion}-djangorestframework
 Requires: python%{python3_pkgversion}-djangorestframework-yaml
 Requires: python%{python3_pkgversion}-gitdb2
+Requires: python%{python3_pkgversion}-GitPython
 Requires: python%{python3_pkgversion}-google-auth
 Requires: python%{python3_pkgversion}-idna
 Requires: python%{python3_pkgversion}-importlib_metadata
@@ -198,44 +210,46 @@ Requires: python%{python3_pkgversion}-jsonbfield
 Requires: python%{python3_pkgversion}-jsonschema
 Requires: python%{python3_pkgversion}-kombu
 Requires: python%{python3_pkgversion}-kubernetes
+Requires: python%{python3_pkgversion}-ldap
+Requires: python%{python3_pkgversion}-markupsafe
 Requires: python%{python3_pkgversion}-more-itertools
 Requires: python%{python3_pkgversion}-msrest
 Requires: python%{python3_pkgversion}-msrestazure
 Requires: python%{python3_pkgversion}-oauthlib
 Requires: python%{python3_pkgversion}-openid
-Requires: python%{python3_pkgversion}-pexpect
+Requires: python%{python3_pkgversion}-pexpect >= 4.7.0
 Requires: python%{python3_pkgversion}-pip
-Requires: python%{python3_pkgversion}-psutil
+Requires: python%{python3_pkgversion}-psutil >= 5.6.7
 Requires: python%{python3_pkgversion}-psycopg2
 Requires: python%{python3_pkgversion}-ptyprocess
 Requires: python%{python3_pkgversion}-pyasn1
 Requires: python%{python3_pkgversion}-pyasn1-modules
 Requires: python%{python3_pkgversion}-pygerduty
 Requires: python%{python3_pkgversion}-pygments
-Requires: python%{python3_pkgversion}-pyjwt
+# Renamed from PyJWT for RHEL
+#Requires: python%%{python3_pkgversion}-PyJWT >= 1.7.1
+Requires: python%{python3_pkgversion}-pyjwt >= 1.7.1
 Requires: python%{python3_pkgversion}-pyparsing
-Requires: python%{python3_pkgversion}-python-ldap
 Requires: python%{python3_pkgversion}-python-logstash
-Requires: python%{python3_pkgversion}-python-markupsafe
 Requires: python%{python3_pkgversion}-pytz
 Requires: python%{python3_pkgversion}-requests
 Requires: python%{python3_pkgversion}-requests-futures
 Requires: python%{python3_pkgversion}-requests-oauthlib
 Requires: python%{python3_pkgversion}-runtime
-Requires: python%{python3_pkgversion}-six
+Requires: python%{python3_pkgversion}-six >= 1.13.0
 Requires: python%{python3_pkgversion}-slackclient
 Requires: python%{python3_pkgversion}-smmap2
 Requires: python%{python3_pkgversion}-social-auth-app-django
 Requires: python%{python3_pkgversion}-social-auth-core
 Requires: python%{python3_pkgversion}-tempora
 Requires: python%{python3_pkgversion}-twilio
-Requires: python%{python3_pkgversion}-twisted
+Requires: python%{python3_pkgversion}-twisted >= 19.1.0
 Requires: python%{python3_pkgversion}-txaio
 Requires: python%{python3_pkgversion}-urllib3
 Requires: python%{python3_pkgversion}-websocket_client
-Requires: python%{python3_pkgversion}-wheel
-Requires: python%{python3_pkgversion}-zipp
-Requires: python%{python3_pkgversion}-zope.interface
+Requires: python%{python3_pkgversion}-wheel >= 0.33.6
+Requires: python%{python3_pkgversion}-zipp >= 0.6.0
+Requires: python%{python3_pkgversion}-zope.interface >= 4.7.1
 Requires: sshpass
 Requires: subversion
 Requires: xmlsec1-devel
@@ -248,12 +262,12 @@ Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 %{summary}
 
 %prep
-%setup -q -n awx-9.0.1
+%setup -q -n awx-%{awx_mainversion}
 
 %install
 # Setup build environment
-mkdir -p $RPM_BUILD_ROOT/opt/rh/python%{python3_pkgversion}/root/usr/
-pip%{python3_pkgversion} install --root=$RPM_BUILD_ROOT .
+#pip-%{python3_pkgversion} install --root=$RPM_BUILD_ROOT .
+%{py3_install}
 
 # Collect django static
 cat > _awx_rpmbuild_collectstatic_settings.py <<EOF
@@ -265,58 +279,55 @@ EOF
 
 export DJANGO_SETTINGS_MODULE="_awx_rpmbuild_collectstatic_settings"
 export PYTHONPATH="$PYTHONPATH:."
-mkdir -p static/
-sed -i 's$/usr/bin/awx-python$/opt/rh/python%{python3_pkgversion}/root/usr/bin/python3$g' $RPM_BUILD_ROOT/opt/rh/python%{python3_pkgversion}/root/usr/bin/awx-manage
+%{__install} -d -m 755 static/
 
-python%{python3_pkgversion} postgresql10 "$RPM_BUILD_ROOT/opt/rh/python%{python3_pkgversion}/root/usr/bin/awx-manage collectstatic --noinput --clear"
+%{python3} "$RPM_BUILD_ROOT%{_bindir}/awx-manage collectstatic --noinput --clear"
 
 # Cleanup
 unset PYTHONPATH
 unset DJANGO_SETTINGS_MODULE
 
-mkdir -p %{buildroot}%{service_homedir}
-mkdir -p %{buildroot}%{service_logdir}
-mkdir -p %{buildroot}%{_prefix}/bin
-mkdir -p %{buildroot}%{service_configdir}
-mkdir -p %{buildroot}/var/lib/awx/
-echo 9.0.1 > %{buildroot}%{service_homedir}/.tower_version
+%{__install} -d %{buildroot}%{service_homedir}
+%{__install} -d %{buildroot}%{service_logdir}
+%{__install} -d %{buildroot}%{_prefix}/bin
+%{__install} -d %{buildroot}%{service_configdir}
+%{__install} -d %{buildroot}/var/lib/awx/
+echo %{aws_mainversion} > %{buildroot}%{service_homedir}/.tower_version
 
-
-cp %{_sourcedir}/settings.py.dist %{buildroot}%{service_configdir}/settings.py
-mv static %{buildroot}%{_prefix}/static
+%{__install} %{_sourcedir}/settings.py.dist %{buildroot}%{service_configdir}/settings.py
+%{__mv} static %{buildroot}%{_prefix}/static
 
 %if 0%{?el7}
 # Install systemd configuration
-mkdir -p %{buildroot}%{_unitdir}
+%{__install} -d %{buildroot}%{_unitdir}
 for service in awx-cbreceiver awx-dispatcher awx-channels-worker awx-daphne awx-web awx; do
-    cp %{_sourcedir}/${service}.service %{buildroot}%{_unitdir}/
+    %{__install} %{_sourcedir}/${service}.service %{buildroot}%{_unitdir}/
 done
 %endif
 
 # Create fake python executable
-cat > %{buildroot}%{_prefix}/bin/python <<"EOF"
+cat > %{buildroot}%{_bindir}/python <<"EOF"
 #!/bin/sh
 export AWX_SETTINGS_FILE=/etc/tower/settings.py
-exec scl enable python%{python3_pkgversion} "%{?el7:python3} \"$@\""
+%{python3} \"$@\""
 EOF
 
 # Create Virtualenv folder
-mkdir -p %{buildroot}/var/lib/awx/venv
+%{__install} -d -m755 %{buildroot}/var/lib/awx/venv
 
 # Install docs
-cp %{_sourcedir}/nginx.conf.example ./
+%{__install} %{_sourcedir}/nginx.conf.example ./
 
 # Install VENV Script
-cp %{_sourcedir}/awx-create-venv $RPM_BUILD_ROOT/opt/rh/python%{python3_pkgversion}/root/usr/bin/
-mkdir -p $RPM_BUILD_ROOT/usr/bin/
-ln -s /opt/rh/python%{python3_pkgversion}/root/usr/bin/awx-create-venv $RPM_BUILD_ROOT/usr/bin/awx-create-venv
-mkdir -p $RPM_BUILD_ROOT%{service_homedir}/venv
+%{__install} -m755 %{_sourcedir}/awx-create-venv $RPM_BUILD_ROOT%{_bindir}/
+sed -i 's|#!/usr/bin/python$|#!%{__python3}|g' "$RPM_BUILD_ROOT%{_bindir}/awx-create-venv"
+%{__install} -d -m755 $RPM_BUILD_ROOT%{service_homedir}/venv
 
-cp %{_sourcedir}/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/awx-rpm-logo.svg
-mv $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg.orig
-mv $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg.orig
-ln -s /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg
-ln -s /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg
+%{__install} %{_sourcedir}/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/awx-rpm-logo.svg
+%{__mv} $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg.orig
+%{__mv} $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg.orig
+%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg
+%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg
 
 %pre
 /usr/bin/getent group %{service_group} >/dev/null || /usr/sbin/groupadd --system %{service_group}
@@ -331,7 +342,7 @@ ln -s /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/ass
 %systemd_post awx-daphne
 %systemd_post awx-web
 %endif
-ln -sfn /opt/rh/python%{python3_pkgversion}/root /var/lib/awx/venv/awx
+# Create symlink to /var/lib/awx/venv/awx as needed
 
 %preun
 %if 0%{?el7}
@@ -356,24 +367,24 @@ ln -sfn /opt/rh/python%{python3_pkgversion}/root /var/lib/awx/venv/awx
 %files
 %defattr(0644, awx, awx, 0755)
 %doc nginx.conf.example
-%attr(0755, root, root) /opt/rh/python%{python3_pkgversion}/root/usr/bin/awx-manage
-%attr(0755, root, root) /opt/rh/python%{python3_pkgversion}/root/usr/bin/awx-create-venv
-/usr/bin/awx-create-venv
-/opt/rh/python%{python3_pkgversion}/root/usr/lib/python3.6/site-packages/awx
-%attr(0755, root, root) /opt/rh/python%{python3_pkgversion}/root/usr/lib/python3.6/site-packages/awx/plugins/*/*.py
+%attr(0755, root, root) %{_bindir}/awx-manage
+%attr(0755, root, root) %{_bindir}/awx-create-venv
+%{_bindir}/awx-create-venv
+%{python3_sitelib}/awx
+%attr(0755, root, root) %{python3_sitelib}/awx/plugins/*/*.py
 %attr(0755, awx, awx) %{_prefix}/static
 %dir %attr(0750, %{service_user}, %{service_group}) %{service_homedir}
 %dir %attr(0750, %{service_user}, %{service_group}) %{service_homedir}/venv
 %{service_homedir}/.tower_version
 %dir %attr(0770, %{service_user}, %{service_group}) %{service_logdir}
 %config %{service_configdir}/settings.py
-/opt/rh/python%{python3_pkgversion}/root/usr/lib/python3.6/site-packages/awx-*.egg-info/
+%{python3_sitelib}/awx-*.egg-info/
 /usr/share/doc/awx/
 /opt/awx/bin/python
-/usr/bin/ansible-tower-service
-/usr/bin/ansible-tower-setup
-/usr/bin/awx-python
-/usr/bin/failure-event-handler
+%{_bindir}/ansible-tower-service
+%{_bindir}/ansible-tower-setup
+%{_bindir}/awx-python
+%{_bindir}/failure-event-handler
 /usr/share/awx
 /usr/share/sosreport/sos/plugins/tower.py
 /var/lib/awx/favicon.ico
@@ -390,6 +401,74 @@ ln -sfn /opt/rh/python%{python3_pkgversion}/root /var/lib/awx/venv/awx
 %endif
 
 %changelog
+* Fri Jan 10 2020 19:25:08 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.96
+- New Git version build: 9.1.0.96
+* Fri Jan 10 2020 18:55:33 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.94
+- New Git version build: 9.1.0.94
+* Thu Jan 09 2020 22:25:18 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.84
+- New Git version build: 9.1.0.84
+* Thu Jan 09 2020 15:25:19 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.75
+- New Git version build: 9.1.0.75
+* Wed Jan 08 2020 20:55:13 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.73
+- New Git version build: 9.1.0.73
+* Wed Jan 08 2020 18:55:18 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.71
+- New Git version build: 9.1.0.71
+* Wed Jan 08 2020 14:55:11 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.67
+- New Git version build: 9.1.0.67
+* Tue Jan 07 2020 16:55:18 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.65
+- New Git version build: 9.1.0.65
+* Mon Jan 06 2020 14:55:32 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.63
+- New Git version build: 9.1.0.63
+* Mon Jan 06 2020 04:25:12 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.58
+- New Git version build: 9.1.0.58
+* Fri Jan 03 2020 15:55:12 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.56
+- New Git version build: 9.1.0.56
+* Fri Jan 03 2020 14:55:25 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.54
+- New Git version build: 9.1.0.54
+* Thu Jan 02 2020 18:55:24 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.52
+- New Git version build: 9.1.0.52
+* Thu Jan 02 2020 15:25:19 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.50
+- New Git version build: 9.1.0.50
+* Thu Jan 02 2020 14:25:21 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.47
+- New Git version build: 9.1.0.47
+* Fri Dec 20 2019 21:55:34 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.45
+- New Git version build: 9.1.0.45
+* Fri Dec 20 2019 18:55:38 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.43
+- New Git version build: 9.1.0.43
+* Thu Dec 19 2019 21:25:34 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.41
+- New Git version build: 9.1.0.41
+* Thu Dec 19 2019 20:25:39 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.36
+- New Git version build: 9.1.0.36
+* Thu Dec 19 2019 18:55:38 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.22
+- New Git version build: 9.1.0.22
+* Thu Dec 19 2019 15:55:31 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.20
+- New Git version build: 9.1.0.20
+* Thu Dec 19 2019 14:25:27 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.18
+- New Git version build: 9.1.0.18
+* Thu Dec 19 2019 10:23:11 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.16
+- New Git version build: 9.1.0.16
+* Tue Dec 17 2019 20:25:36 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.4
+- New Git version build: 9.1.0.4
+* Tue Dec 17 2019 19:25:15 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.2
+- New Git version build: 9.1.0.2
+* Tue Dec 17 2019 16:55:00 +0000 Martin Juhl <mj@casalogic.dk> 9.1.0.0
+- New Git version build: 9.1.0.0
+* Tue Dec 17 2019 00:25:16 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.451
+- New Git version build: 9.0.1.451
+* Mon Dec 16 2019 23:55:08 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.449
+- New Git version build: 9.0.1.449
+* Mon Dec 16 2019 23:25:08 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.447
+- New Git version build: 9.0.1.447
+* Mon Dec 16 2019 20:25:16 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.445
+- New Git version build: 9.0.1.445
+* Mon Dec 16 2019 17:55:16 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.443
+- New Git version build: 9.0.1.443
+* Mon Dec 16 2019 17:25:22 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.385
+- New Git version build: 9.0.1.385
+* Mon Dec 16 2019 16:25:16 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.383
+- New Git version build: 9.0.1.383
+* Mon Dec 16 2019 04:55:08 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.379
+- New Git version build: 9.0.1.379
 * Fri Dec 13 2019 22:55:11 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.376
 - New Git version build: 9.0.1.376
 * Fri Dec 13 2019 14:25:17 +0000 Martin Juhl <mj@casalogic.dk> 9.0.1.366
