@@ -12,7 +12,7 @@ and much more.
 Name:           python-%{pypi_name}
 Version:        6.29.1
 #Release:        1%%{?dist}
-Release:        %{?dist}
+Release:        0%{?dist}
 Summary:        %{sum}
 
 License:        MIT
@@ -32,7 +32,8 @@ BuildRequires:  python%{python3_pkgversion}-six
 BuildRequires:  python%{python3_pkgversion}-mock
 BuildRequires:  python%{python3_pkgversion}-pyjwt
 BuildRequires:  python%{python3_pkgversion}-requests
-#BuildRequires:  python%{python3_pkgversion}-pyopenssl
+# Renamed for RHEL
+#BuildRequires:  python%%{python3_pkgversion}-pyopenssl
 BuildRequires:  python%{python3_pkgversion}-pyOpenSSL
 
 %description
@@ -42,10 +43,10 @@ BuildRequires:  python%{python3_pkgversion}-pyOpenSSL
 %package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{sum}
 
-Requires:   %{py3_dist six}
-Requires:   %{py3_dist requests}
-Requires:   %{py3_dist pyjwt}
-Requires:   %{py3_dist pytz}
+Requires:   python%{python3_pkgversion}-six
+Requires:   python%{python3_pkgversion}-requests
+Requires:   python%{python3_pkgversion}-pyjwt
+Requires:   python%{python3_pkgversion}-pytz
 
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
