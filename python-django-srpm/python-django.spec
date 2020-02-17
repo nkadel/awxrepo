@@ -20,17 +20,14 @@ License:        BSD
 URL:            http://www.djangoproject.com/
 Source0:        https://files.pythonhosted.org/packages/source/D/Django/Django-%{version}.tar.gz
 
-
 # skip tests requiring network connectivity
 Patch000: Django-2.0-skip-net-tests.patch
-
 
 BuildArch:      noarch
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
-
 
 %description
 Django is a high-level Python Web framework that encourages rapid
@@ -42,7 +39,6 @@ principle.
 Summary:        bash completion files for Django
 BuildRequires:  bash-completion
 
-
 %description bash-completion
 This package contains the bash completion files form Django high-level
 Python Web framework.
@@ -52,6 +48,8 @@ Summary:        Documentation for Django
 Requires:       python%{python3_pkgversion}-django = %{version}-%{release}
 BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  python%{python3_pkgversion}-psycopg2
+# Funky RHEL renumbering
+BuildRequires:  %{_bindir}/sphinx-build-3
 
 %description -n python%{python3_pkgversion}-django-doc
 This package contains the documentation for the Django high-level
@@ -79,6 +77,8 @@ BuildRequires:  python%{python3_pkgversion}-pytz
 BuildRequires:  python%{python3_pkgversion}-selenium
 BuildRequires:  python%{python3_pkgversion}-sqlparse
 BuildRequires:  python%{python3_pkgversion}-memcached
+# Funky RHEL renumbering
+BuildRequires:  %{_bindir}/sphinx-build-3
 
 Provides: bundled(jquery) = 2.2.3
 Provides: bundled(xregexp) = 2.0.0
@@ -197,7 +197,10 @@ cat djangojs.lang >> django.lang
 
 # build documentation
 export SPHINXBUILD=sphinx-build-3
+# Enable docs only on fedora
+%if 0%{?fedora}
 (cd docs && mkdir djangohtml && mkdir -p _build/{doctrees,html} && make html)
+%endif
 cp -ar docs ..
 
 # install man pages (for the main executable only)
@@ -222,19 +225,23 @@ ln -s ./django-admin %{buildroot}%{_bindir}/python%{python3_pkgversion}-django-a
 # remove .po files
 find $RPM_BUILD_ROOT -name "*.po" | xargs rm -f
 
+# Only do tests on fedora
+%if 0%{?fedora}
 %check
 cd %{_builddir}/%{pkgname}-%{version}
 export PYTHONPATH=$(pwd)
 cd tests
 
 %{__python3} runtests.py --settings=test_sqlite --verbosity=2 --parallel 1
-
+%endif
 
 %files bash-completion
 %{_datadir}/bash-completion
 
+%if 0%{?fedora}
 %files -n python%{python3_pkgversion}-django-doc
 %doc docs/_build/html/*
+%endif
 
 %files -n python%{python3_pkgversion}-django -f django.lang
 %doc AUTHORS README.rst
