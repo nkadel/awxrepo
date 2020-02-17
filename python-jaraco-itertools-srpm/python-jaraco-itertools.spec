@@ -11,7 +11,7 @@
 %global with_python2 0
 
 %global pypi_name jaraco.itertools
-%global pkg_name jaraco-internals
+%global pkg_name jaraco-itertools
 
 # Common SRPM package
 Name:           python-%{pkg_name}
