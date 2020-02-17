@@ -42,6 +42,7 @@ License:        MIT
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
+BuildRequires:  python2-setuptools_scm >= 1.5.0
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -62,6 +63,7 @@ License:        MIT
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.5.0
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
