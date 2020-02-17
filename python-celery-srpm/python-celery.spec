@@ -36,7 +36,7 @@ Patch0:         https://github.com/celery/celery/pull/4852.patch#/python37.patch
 BuildRequires:  git-core
 
 %if 0%{?rhel}
-Buildrequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %description
