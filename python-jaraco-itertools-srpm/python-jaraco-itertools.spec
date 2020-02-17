@@ -95,12 +95,18 @@ rm -rf %{buildroot}
 %files -n python2-%{pkg_name}
 %defattr(-,root,root,-)
 %{python2_sitelib}/*
+# These excludes are provided by python2-jaraco
+%exclude %{python2_sitelib}/jaraco/__init__*
+%exclude %{python2_sitelib}/jaraco/__pycache__/__init__*
 %endif # with_python2
 
 %if %{with_python3}
 %files -n python%{python3_pkgversion}-%{pkg_name}
 %defattr(-,root,root,-)
 %{python3_sitelib}/*
+# These excludes are provided by python3-jaraco
+%exclude %{python3_sitelib}/jaraco/__init__*
+%exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 %endif # with_python3
 
 %changelog
