@@ -11,6 +11,7 @@
 %global with_python2 0
 
 %global pypi_name gitdb2
+%global old_name gitdb
 
 # Common SRPM package
 Name:           python-%{pypi_name}
@@ -31,9 +32,6 @@ BuildRequires:  epel-rpm-macros
 %description
 GitDB is a pure-Python git object database
 
-
-
-
 %if %{with_python2}
 %package -n python2-%{pypi_name}
 Version:        3.0.2
@@ -44,13 +42,15 @@ License:        BSD License (FIXME:No SPDX)
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
+
+Conflicts:  python2-%{old_name}
+Obsoletes:  python2-%{old_name} <= %{version}
+Provides:  python2-%{old_name} = %{version}-%{release}
+
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
 GitDB is a pure-Python git object database
-
-
-
 
 %endif # with_python2
 
@@ -64,7 +64,12 @@ License:        BSD License (FIXME:No SPDX)
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{old_name}}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+
+Conflicts:  python%{python3_pkgversion}-%{old_name}
+Obsoletes:  python%{python3_pkgversion}-%{old_name} <= %{version}
+Provides:  python%{python3_pkgversion}-%{old_name} = %{version}-%{release}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
 GitDB is a pure-Python git object database
