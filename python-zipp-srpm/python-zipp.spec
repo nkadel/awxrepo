@@ -23,7 +23,8 @@ A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 Summary:        %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
-BuildRequires: python%{python3_pkgversion}-setuptools_scm >= 1.15.0
+#BuildRequires: python%%{python3_pkgversion}-setuptools_scm >= 1.15.0
+BuildRequires: python%{python3_pkgversion}-setuptools_scm >= 3.4.1
 # For testing, from python-jaraco-packaging
 BuildRequires: python%{python3_pkgversion}-jaraco >= 3.2
 
