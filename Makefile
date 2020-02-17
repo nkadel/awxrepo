@@ -5,15 +5,22 @@
 #	https://github.com/nkadel/[package] into designated
 #	AWXPKGS below
 #
-#	Set up local 
+#	Set up local
 
 #REPOBASE=http://localhost
 REPOBASE=file://$(PWD)
 
 # Dependency metapackage
 #EPELPKGS+=PyYAML-srpm
+
+# RHEL name funkiness for python-pythlakes
+EPELPKGS+=pyflakes-srpm
+
 EPELPKGS+=python2-lockfile-srpm
 EPELPKGS+=python2-sphinx-srpm
+
+# python3 only update modules for version sensitive python-six
+EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-azure-common-srpm
@@ -27,20 +34,40 @@ EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
 EPELPKGS+=python-django-extensions-srpm
+EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
+EPELPKGS+=python-gitdb-srpm
 EPELPKGS+=python-irc-srpm
+EPELPKGS+=python-jaraco-packaging-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
+EPELPKGS+=python-py-srpm
+EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-pyjwt-srpm
-EPELPKGS+=python-python-mimeparse--srpm
-EPELPKGS+=python-vile-srpm
-
-# python3 update modules
-EPELPKGS+=python3-six-srpm
+EPELPKGS+=python-python-mimeparse-srpm
+EPELPKGS+=python-vine-srpm
 
 AWXPKGS+=python-amqp-srpm
 
-AWXPKGS+=python-django-auth-ldap-srpm
+# Depends on pyjwt
+AWXPKGS+=python-twilio-srpm
+
+AWXPKGS+=python-importlib_metadata-srpm
+
+# python3 only update for pytest modules of misnmed source package
+# Depends on more-itertools and pluggy and py
+AWXPKGS+=pytest-srpm
+
+# Depends on pytest and entrypoints
+AWXPKGS+=python-flake8-srpm
+AWXPKGS+=python-pytest-flake8-srpm
+
+# Depends on jaraco
+AWXPKGS+=python-zipp-srpm
+
+# Depends on jaraco-packaging and jaraco-classes and pytest-flske8
+AWXPKGS+=python-jaraco-functools-srpm
+
 AWXPKGS+=python-django-coverage-srpm
 
 AWXPKGS+=python-testtools-srpm
@@ -69,32 +96,20 @@ MOCKCFGS+=epel-7-x86_64.cfg
 MOCKCFGS+=epel-8-x86_64.cfg
 #MOCKCFGS+=fedora-31-x86_64.cfg
 
-all:: $(CFGS)
-all:: $(MOCKCFGS)
-all:: $(REPODIRS)
-all:: $(EPELPKGS)
-all:: $(AWXPKGS)
+install:: $(CFGS)
+install:: $(MOCKCFGS)
+install:: $(REPODIRS)
+install:: $(EPELPKGS)
+install:: $(AWXPKGS)
 
-all install clean getsrc:: FORCE
-	@for name in $(EPELPKGS) $(AWXPKGS); do \
-	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
-	done  
+.PHONY: all
+all:: install
 
-# Build for locacl OS
-build:: FORCE
+.PHONY: install clean getsrc build
+install clean getsrc build::
 	@for name in $(EPELPKGS) $(AWXPKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done
-
-# Git submodule checkout operation
-# For more recent versions of git, use "git checkout --recurse-submodules"
-#*-srpm::
-#	@[ -d $@/.git ] || \
-#	     git submodule update --init $@
-
-# Dependencies of libraries on other libraries for compilation
-
-compat-gnutls34-3.x-srpm:: compat-nettle32-3.x-srpm
 
 # Actually build in directories
 .PHONY: $(EPELPKGS) $(AWXPKGS)
@@ -110,6 +125,13 @@ $(REPODIRS): $(REPOS)
 	@install -d -m 755 `dirname $@`
 	/usr/bin/createrepo -q `dirname $@`
 
+
+.PHONY: epel epelpkgs
+epel epelpkgs:: $(EPELPKGS)
+
+# awx pkgs depend on epelpkgs
+.PHONY: awx awxpkgs
+awx awxpkgs:: $(EPELPKGS) $(AWXPKGS)
 
 .PHONY: cfg
 cfg:: cfgs
@@ -218,6 +240,3 @@ maintainer-clean: distclean
 	@for name in $(EPELPKGS) $(AWXPKGS); do \
 	    $(MAKE) -C $$name $@; \
 	done
-
-FORCE::
-
