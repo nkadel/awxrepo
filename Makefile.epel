@@ -22,34 +22,36 @@ SPEC := `ls *.spec | head -1`
 all:: $(MOCKS)
 
 .PHONY: getsrc
-getsrc:: 
+getsrc::
 	spectool -g $(SPEC)
 
-.PHONY: srpm
-srpm::
+srpm:: src.rpm
+
+#.PHONY:: src.rpm
+src.rpm:: Makefile
+	@rm -rf rpmbuild
+	@rm -f $@
 	@echo "Building SRPM with $(SPEC)"
-	rm -rf rpmbuild
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
+	mv rpmbuild/SRPMS/*.src.rpm src.rpm
 
 .PHONY: build
-build:: srpm
+build:: src.rpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
-		--rebuild rpmbuild/SRPMS/*.src.rpm
+		--rebuild $?
 
 .PHONY: $(MOCKS)
-$(MOCKS):: srpm
+$(MOCKS):: src.rpm
 	@if [ -e $@ -a -n "`find $@ -name \*.rpm`" ]; then \
 		echo "	Skipping RPM populated $@"; \
 	else \
-		echo "Storing " rpmbuild/SRPMS/*.src.rpm "as $@.src.rpm"; \
-		install rpmbuild/SRPMS/*.src.rpm $@.src.rpm; \
-		echo "Building $@.src.rpm in $@"; \
+		echo "Actally building $? in $@"; \
 		rm -rf $@; \
 		mock -q -r $(PWD)/../$@.cfg \
 		     --resultdir=$(PWD)/$@ \
-		     $@.src.rpm; \
+		     $?; \
 	fi
 
 mock:: $(MOCKS)
@@ -62,27 +64,26 @@ install:: $(MOCKS)
 		*-8-x86_64) yumrelease=el/8; yumarch=x86_64; ;; \
 		*-31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
 		*-f31-x86_64) yumrelease=fedora/31; yumarch=x86_64; ;; \
+		*-rawhide-x86_64) yumrelease=fedora/rawhide; yumarch=x86_64; ;; \
 		*) echo "Unrecognized release for $$repo, exiting" >&2; exit 1; ;; \
 	    esac; \
 	    rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
 	    srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
-	    [ -d $rpmdir ] || install -d $$rpmdir; \
-	    [ -d $srpmdir ] || install -d $$srpmdir; \
 	    echo "Pushing SRPMS to $$srpmdir"; \
 	    rsync -av $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
-	    createrepo -q --update $$srpmdir/.; \
+	    createrepo -q $$srpmdir/.; \
 	    echo "Pushing RPMS to $$rpmdir"; \
 	    rsync -av $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
-	    createrepo -q --update $$rpmdir/.; \
+	    createrepo -q $$rpmdir/.; \
 	done
-	@for name in $(MOCKCFGS); do \
-	    touch ../$$name.cfg; \
+	@for repo in $(MOCKCFGS); do \
+	    echo "Touching $(PWD)/../$$repo.cfg"; \
+	    /bin/touch --no-dereference $(PWD)/../$$repo.cfg; \
 	done
 
 clean::
 	rm -rf */
-	rm -rf rpmbuild
 	rm -f *.out
+	rm -f *.rpm
 
 realclean distclean:: clean
-	rm -f *.rpm

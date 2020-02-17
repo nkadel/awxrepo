@@ -1,23 +1,20 @@
 #
-# Build mock and local RPM versions of tools for Samba
+# Build mock and local RPM versions of tools for Awx
 #
 
 # Assure that sorting is case sensitive
 LANG=C
 
-#
-MOCKS+=epel-7-x86_64
-#MOCKS+=epel-8-x86_64
-#MOCKS+=fedora-31-x86_64
+#MOCKS+=awxrepo-f31-x86_64
+#MOCKS+=awxrepo-8-x86_64
+MOCKS+=awxrepo-7-x86_64
 
-MOCKCFGS+=awxrepo-7-x86_64
-#MOCKCFGS+=awxrepo-8-x86_64
-#MOCKCFGS+=awxrepo-f31-x86_64
+MOCKCFGS+=$(MOCKS)
 
-#REPOBASEDIR=/var/www/linux/mockrepo
+#REPOBASEDIR=/var/www/linux/awxrepo
 REPOBASEDIR:=`/bin/pwd`/../awxrepo
 
-SPEC := `ls *.spec | head -1`
+SPEC := `ls *.spec`
 
 all:: $(MOCKS)
 

@@ -18,31 +18,37 @@ SPEC := `ls *.spec`
 
 all:: $(MOCKS)
 
-getsrc:: FORCE
+.PHONY: getsrc
+getsrc::
 	spectool -g $(SPEC)
 
-srpm:: FORCE
+srpm:: src.rpm
+
+#.PHONY:: src.rpm
+src.rpm:: Makefile
+	@rm -rf rpmbuild
+	@rm -f $@
 	@echo "Building SRPM with $(SPEC)"
-	rm -rf rpmbuild
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
+	mv rpmbuild/SRPMS/*.src.rpm src.rpm
 
-build:: srpm FORCE
+.PHONY: build
+build:: src.rpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
-		--rebuild rpmbuild/SRPMS/*.src.rpm
+		--rebuild $?
 
-$(MOCKS):: srpm FORCE
+.PHONY: $(MOCKS)
+$(MOCKS):: src.rpm
 	@if [ -e $@ -a -n "`find $@ -name \*.rpm`" ]; then \
 		echo "	Skipping RPM populated $@"; \
 	else \
-		echo "Storing " rpmbuild/SRPMS/*.src.rpm "as $@.src.rpm"; \
-		install rpmbuild/SRPMS/*.src.rpm $@.src.rpm; \
-		echo "Actally building RPMS in $@"; \
+		echo "Actally building $? in $@"; \
 		rm -rf $@; \
 		mock -q -r $(PWD)/../$@.cfg \
 		     --resultdir=$(PWD)/$@ \
-		     $@.src.rpm; \
+		     $?; \
 	fi
 
 mock:: $(MOCKS)
@@ -74,10 +80,7 @@ install:: $(MOCKS)
 
 clean::
 	rm -rf */
-	rm -rf rpmbuild
 	rm -f *.out
-
-realclean distclean:: clean
 	rm -f *.rpm
 
-FORCE:
+realclean distclean:: clean
