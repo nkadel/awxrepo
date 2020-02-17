@@ -26,7 +26,7 @@ Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name};
 BuildArch:      noarch
 
 %if 0%{?rhel}
-Buildrequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %description
@@ -77,10 +77,6 @@ License:        MIT
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
-%if %{with_dnf}
-%endif # with_dnf
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
