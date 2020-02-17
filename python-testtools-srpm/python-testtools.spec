@@ -26,7 +26,7 @@ Patch0:         testtools-0.9.30-py3.patch
 BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires: epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %if 0%{?with_python2}
