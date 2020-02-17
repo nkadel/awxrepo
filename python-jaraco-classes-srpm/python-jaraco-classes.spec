@@ -6,7 +6,8 @@
 
 Name:           python-%{pkg_name}
 Version:        2.0
-Release:        3%{?dist}
+#Release:        3%%{?dist}
+Release:        0%{?dist}
 Summary:        Utility functions for Python class constructs
 
 License:        MIT
@@ -21,31 +22,30 @@ BuildRequires:  epel-rpm-macros
 %description
 Utility functions for Python class constructs.
 
-%package -n python3-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pkg_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-jaraco
-Requires:       python%{python3_pkgversion}dist(six)
+Requires:       python%{python3_pkgversion}-six
 
-BuildConflicts: python%{python3_pkgversion}dist(pytest) = 3.7.3
-BuildRequires:  python3-devel
-BuildRequires:  python%{python3_pkgversion}dist(pytest) >= 3.5
-BuildRequires:  python%{python3_pkgversion}dist(pytest-flake8)
-BuildRequires:  python%{python3_pkgversion}dist(setuptools)
-BuildRequires:  python%{python3_pkgversion}dist(setuptools-scm) >= 1.15
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  python%{python3_pkgversion}-pytest-flake8
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
 
-%{?python_provide:%python_provide python3-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
 
-%description -n python3-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pkg_name}
 Utility functions for Python class constructs.
 
 %if %{with docs}
 %package -n python-%{pkg_name}-doc
 Summary:        jaraco-classes documentation
 
-BuildRequires:  python%{python3_pkgversion}dist(pytest-checkdocs)
-BuildRequires:  python%{python3_pkgversion}dist(sphinx)
-BuildRequires:  python%{python3_pkgversion}dist(jaraco-packaging) >= 3.2
-BuildRequires:  python%{python3_pkgversion}dist(rst-linker) >= 1.9
+BuildRequires:  python%{python3_pkgversion}-pytest-checkdocs
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-jaraco-packaging >= 3.2
+BuildRequires:  python%{python3_pkgversion}-rst-linker >= 1.9
 
 %description -n python-%{pkg_name}-doc
 Documentation for jaraco-classes
@@ -77,10 +77,10 @@ rm -rf html/.{doctrees,buildinfo}
 %check
 LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 
-%files -n python3-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pkg_name}
 %license LICENSE
 %doc README.rst
-# These excludes are provided by python3-jaraco
+# These excludes are provided by python%%{python3_pkgversion}-jaraco
 %exclude %{python3_sitelib}/jaraco/__init__*
 %exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 %{python3_sitelib}/jaraco
