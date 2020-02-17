@@ -22,7 +22,7 @@ Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{
 BuildArch:      noarch
 
 %if 0%{?rhel}
-Buildrequires:  epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 BuildRequires:  %{_bindir}/sphinx-build
