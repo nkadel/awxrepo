@@ -53,6 +53,8 @@ BuildRequires:  python2-setuptools
 %{?python_provide:%python_provide python2-pyjwt}
 Conflicts: python2-%{pypi_name}
 Obsoletes: python2-%{pypi_name} >= %{version}-%{release}
+Provides:  python2-jwt = %{version}-%{release}
+Obsoletes: python2-jwt <= %{version}-%{release}
 
 #%description -n python2-%%{pypi_name}
 %description -n python2-pyjwt
@@ -77,6 +79,8 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 # Added for mismatched capitalization of PyJTW
 Conflicts: python%{python3_pkgversion}-%{pypi_name}
 Obsoletes: python%{python3_pkgversion}-%{pypi_name} >= %{version}-%{release}
+Provides:  python%{python3_pkgversion}-jwt = %{version}-%{release}
+Obsoletes: python%{python3_pkgversion}-jwt <= %{version}-%{release}
 
 
 #%description -n python%%{python3_pkgversion}-%%{pypi_name}
