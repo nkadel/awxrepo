@@ -27,6 +27,8 @@ BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-setuptools_scm >= 3.4.1
 # For testing, from python-jaraco-packaging
 BuildRequires: python%{python3_pkgversion}-jaraco >= 3.2
+BuildRequires: python%{python3_pkgversion}-jaraco-itertools >= 3.2
+BuildRequires: python%{python3_pkgversion}-toml
 
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
