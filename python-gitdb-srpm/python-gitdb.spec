@@ -33,7 +33,7 @@ operate on large objects with a small memory footprint.
 Summary:        Python2 Git Library
 Requires:       python2-smmap
 BuildRequires:  python2-devel
-Buildrequires:  python2-nose
+BuildRequires:  python2-nose
 BuildRequires:  python2-setuptools
 
 %description -n python2-gitdb
@@ -45,7 +45,7 @@ BuildRequires:  python2-setuptools
 Summary:        Python3 Git Library
 Requires:       python%{python3_pkgversion}-smmap
 BuildRequires:  python%{python3_pkgversion}-devel
-Buildrequires:  python%{python3_pkgversion}-nose
+BuildRequires:  python%{python3_pkgversion}-nose
 BuildRequires:  python%{python3_pkgversion}-setuptools
 
 %description -n python%{python3_pkgversion}-gitdb
