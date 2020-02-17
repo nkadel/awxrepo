@@ -9,13 +9,17 @@ URL:            https://pypi.org/project/isodate/
 Source0:        %pypi_source
 BuildArch:      noarch
 
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-six
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-six
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-six
 
 
 %global _description This module implements ISO 8601 date, time and duration \
@@ -47,10 +51,10 @@ Summary: %summary
 %description -n python2-%{srcname}
 %{_description}
 
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary: %summary
 
-%description -n python3-%{srcname}
+%description -n python%{python3_pkgversion}-%{srcname}
 %{_description}
 
 
@@ -77,7 +81,7 @@ Summary: %summary
 %{python2_sitelib}/%{srcname}*.egg-info
 %{python2_sitelib}/%{srcname}
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{srcname}
 %doc CHANGES.txt README.rst TODO.txt
 %{python3_sitelib}/%{srcname}-*.egg-info
 %{python3_sitelib}/%{srcname}
