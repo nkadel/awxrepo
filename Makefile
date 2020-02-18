@@ -27,9 +27,12 @@ EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
+EPELPKGS+=python-billiard-srpm
 EPELPKGS+=python-build-srpm
 EPELPKGS+=python-celery-srpm
+EPELPKGS+=python-channels-srpm
 EPELPKGS+=python-coverage-srpm
+EPELPKGS+=python-daphne-srpm
 EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
@@ -40,20 +43,34 @@ EPELPKGS+=python-gitdb-srpm
 EPELPKGS+=python-gitdb2-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
+EPELPKGS+=python-isodate-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
+EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-python-mimeparse-srpm
+EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
+EPELPKGS+=python-sqlparse-srpm
+EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 
 AWXPKGS+=python-amqp-srpm
 
+# Depndes on unittest2
+AWXPKGS+=python-case-srpm
+
+# Depnds on isodate
+AWXPKGS+=python-rdflib-srpm
+
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
+
+# Depends on memcached
+AWXPKGS+=python-django-srpm
 
 # python3 only update for pytest modules of misnmed source package
 # Depends on more-itertools and pluggy and py
@@ -72,17 +89,22 @@ AWXPKGS+=python-zipp-srpm
 # Depends on zipp
 AWXPKGS+=python-importlib_metadata-srpm
 
+# Depends on pytest and pytest-flake8 and setuptools_scm and more-itertools
+AWXPKGS+=python-jaraco-classes-srpm
+
 # Depends on jaraco-packaging and jaraco-classes and pytest-flske8
 AWXPKGS+=python-jaraco-functools-srpm
-
-AWXPKGS+=python-django-coverage-srpm
 
 AWXPKGS+=python-testtools-srpm
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 AWXPKGS+=python-daemon-srpm
-# Depends on django-extensions and django-coverage
+
+# Depends on django-extensions and coverage and flake8
 AWXPKGS+=python-django-formtools-srpm
+
+# Depends on django and django-formtools
+AWXPKGS+=python-django-jsonfield-srpm
 
 AWXPKGS+=python-ansible-runner-srpm
 

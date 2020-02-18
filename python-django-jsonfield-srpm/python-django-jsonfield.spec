@@ -31,10 +31,10 @@ BuildRequires:  python2-django-formtools
 
 # for testing purposes
 BuildRequires:  sqlite
-BuildRequires:  python3-django
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-django-formtools
+BuildRequires:  python%{python3_pkgversion}-django
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-django-formtools
 
 %description
 django-jsonfield is a reusable Django field that allows you to store validated
@@ -53,19 +53,19 @@ JSON in your model. It silently takes care of serialization. To use, simply
 add the field to one of your models..
 %endif
 
-%package -n python3-django-%{pypi_name}
+%package -n python%{python3_pkgversion}-django-%{pypi_name}
 Summary:        %{summary}
 
-Requires:  python3-django
-Requires:  python3-django-formtools
+Requires:  python%{python3_pkgversion}-django
+Requires:  python%{python3_pkgversion}-django-formtools
 
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 %if 0%{?with_python2}
 %else
 Provides: python2-%{pypi_name}
 %endif
 
-%description -n python3-django-%{pypi_name}
+%description -n python%{python3_pkgversion}-django-%{pypi_name}
 django-jsonfield is a reusable Django field that allows you to store validated
 JSON in your model. It silently takes care of serialization. To use, simply
 add the field to one of your models.
@@ -101,7 +101,7 @@ export DB_NAME="mydb"
 %{python2_sitelib}/*
 %endif
 
-%files -n python3-django-%{pypi_name}
+%files -n python%{python3_pkgversion}-django-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/*
