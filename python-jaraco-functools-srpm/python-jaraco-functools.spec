@@ -14,34 +14,37 @@ URL:            https://github.com/jaraco/jaraco.functools
 Source0:        %{pypi_source %{pypi_name}}
 BuildArch:      noarch
  
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
 %description
 Functools like those found in stdlib
 
-%package -n python3-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pkg_name}
 Summary:        %{summary}
-Requires:       python3-jaraco
+Requires:       python%{python3_pkgversion}-jaraco
 
-BuildRequires:  python3-devel
-BuildConflicts: python3dist(pytest) = 3.7.3
-BuildRequires:  python3dist(jaraco-classes)
-BuildRequires:  python3dist(more-itertools)
-BuildRequires:  python3dist(pytest) >= 3.5
-BuildRequires:  python3dist(pytest-flake8)
-BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(setuptools-scm) >= 1.15
-BuildRequires:  python3dist(six)
-%{?python_provide:%python_provide python3-%{pkg_name}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-jaraco-classes
+BuildRequires:  python%{python3_pkgversion}-more-itertools
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  python%{python3_pkgversion}-pytest-flake8
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
+BuildRequires:  python%{python3_pkgversion}-six
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
 
-%description -n python3-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pkg_name}
 Functools like those found in stdlib
 
 %if %{with docs}
 %package -n python-%{pkg_name}-doc
 Summary:        jaraco-functools documentation
 
-BuildRequires:  python3dist(jaraco-packaging) >= 3.2
-BuildRequires:  python3dist(rst-linker) >= 1.9
-BuildRequires:  python3dist(sphinx)
+BuildRequires:  python%{python3_pkgversion}-jaraco-packaging >= 3.2
+BuildRequires:  python%{python3_pkgversion}-rst-linker >= 1.9
+BuildRequires:  python%{python3_pkgversion}-sphinx
 
 %description -n python-%{pkg_name}-doc
 Documentation for jaraco-functools
@@ -73,10 +76,10 @@ rm -rf html/.{doctrees,buildinfo}
 # AttributeError: 'Application' object has no attribute 'make_notifier'
 # LANG=C.utf-8 %%{__python3} -m pytest --ignore=build
 
-%files -n python3-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pkg_name}
 %license LICENSE
 %doc README.rst
-# These excludes are provided by python3-jaraco
+# These excludes are provided by python%%{python3_pkgversion}-jaraco
 %exclude %{python3_sitelib}/jaraco/__init__*
 %exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 %{python3_sitelib}/jaraco/functools*
