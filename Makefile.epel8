@@ -65,11 +65,11 @@ install:: $(MOCKS)
 	    esac; \
 	    rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
 	    srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
-	    echo "Pushing SRPMS to $$srpmdir"; \
-	    rsync -av $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
+	    echo "    Pushing SRPMS to $$srpmdir"; \
+	    rsync -a $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
 	    createrepo -q $$srpmdir/.; \
-	    echo "Pushing RPMS to $$rpmdir"; \
-	    rsync -av $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
+	    echo "    Pushing RPMS to $$rpmdir"; \
+	    rsync -a $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
 	    createrepo -q $$rpmdir/.; \
 	done
 
