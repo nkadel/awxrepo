@@ -24,7 +24,9 @@ EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-azure-common-srpm
+EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
+EPELPKGS+=python-azure-keyvault-secrets-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
 EPELPKGS+=python-billiard-srpm
