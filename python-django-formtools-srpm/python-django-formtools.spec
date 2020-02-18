@@ -1,10 +1,11 @@
 %global pypi_name django-formtools
 
 # skip test until test suite supports later django
+%if 0%{?rhel}
 %global skip_tests 1
-
-# Skip docs for excessive bulk and space and unstable build tools
-%global skip_docs 1
+%else
+%global skip_tests 0
+%endif
 
 Name:           python-%{pypi_name}
 Version:        2.1
@@ -24,7 +25,6 @@ BuildRequires:  epel-rpm-macros
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
-
 %package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        A set of high-level abstractions for Django forms
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
@@ -35,6 +35,9 @@ BuildRequires:  python%{python3_pkgversion}-django >= 1.7
 # Required for testing
 BuildRequires:  python%{python3_pkgversion}-flake8
 BuildRequires:  python%{python3_pkgversion}-coverage
+# Required for docs
+BuildRequires:  %{_bindir}/sphinx-build-3
+BuildRequires:  python%{python3_pkgversion}-pytz
 
 Requires:       python%{python3_pkgversion}-django >= 1.7
 
@@ -67,18 +70,18 @@ This is the associated documentation.
 
 %if ! 0%{?skip_tests}
 %check
+exit 37
 PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
 %endif
 
 %install
 %{py3_install}
 %find_lang django py3lang
-%if ! 0%{?skip_docs}
 # generate html docs
+# Lock in sphinx-build-3 binary
 sphinx-build-3 docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
-%endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name} -f py3lang
 %doc README.rst
@@ -87,11 +90,8 @@ rm -rf html/.{doctrees,buildinfo}
 %{python3_sitelib}/django_formtools-%{version}-py?.?.egg-info
 
 %files -n python%{python3_pkgversion}-%{pypi_name}-doc
-%if ! 0%{?skip_docs}
 %doc html
-%endif
 %license LICENSE
-
 
 %changelog
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.1-8

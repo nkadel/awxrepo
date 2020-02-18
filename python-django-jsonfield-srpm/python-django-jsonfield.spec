@@ -24,17 +24,23 @@ BuildRequires:  epel-rpm-macros
 
 %if 0%{?with_python2}
 BuildRequires:  python2-devel
-BuildRequires:  python2-django
 BuildRequires:  python2-setuptools
+
+BuildRequires:  python2-django
 BuildRequires:  python2-django-formtools
+BuildRequires:  python2-pytz
+BuildRequires:  python2-sqlparse
 %endif
 
 # for testing purposes
 BuildRequires:  sqlite
-BuildRequires:  python%{python3_pkgversion}-django
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+
+BuildRequires:  python%{python3_pkgversion}-django
 BuildRequires:  python%{python3_pkgversion}-django-formtools
+BuildRequires:  python%{python3_pkgversion}-pytz
+BuildRequires:  python%{python3_pkgversion}-sqlparse
 
 %description
 django-jsonfield is a reusable Django field that allows you to store validated

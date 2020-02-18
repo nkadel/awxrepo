@@ -86,9 +86,9 @@ License:        BSD (FIXME:No SPDX)
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-#BuildRequires:  python%{python3_pkgversion}-asgiref >= 8.10
-#BuildRequires:  python%{python3_pkgversion}-autobahn >= 8.10
-#BuildRequires:  python%{python3_pkgversion}-twisted >= 10.7
+#BuildRequires:  python%%{python3_pkgversion}-asgiref >= 8.10
+#BuildRequires:  python%%{python3_pkgversion}-autobahn >= 8.10
+#BuildRequires:  python%%{python3_pkgversion}-twisted >= 10.7
 # Added manually
 BuildRequires:  python%{python3_pkgversion}-pytest-runner
 Requires:  python%{python3_pkgversion}-asgiref >= 8.10
