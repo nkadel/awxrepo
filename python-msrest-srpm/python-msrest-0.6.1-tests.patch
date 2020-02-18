@@ -1,0 +1,191 @@
+diff -up ./tests/asynctests/test_pipeline.py.orig ./tests/asynctests/test_pipeline.py
+--- ./tests/asynctests/test_pipeline.py.orig	2018-10-15 20:43:34.000000000 +0200
++++ ./tests/asynctests/test_pipeline.py	2018-11-02 11:50:16.085392737 +0100
+@@ -75,54 +75,54 @@ async def test_sans_io_exception():
+         await pipeline.run(req)
+ 
+ 
+-@pytest.mark.asyncio
+-async def test_basic_aiohttp():
++# @pytest.mark.asyncio
++# async def test_basic_aiohttp():
+ 
+-    request = ClientRequest("GET", "http://bing.com")
+-    policies = [
+-        UserAgentPolicy("myusergant")
+-    ]
+-    async with AsyncPipeline(policies) as pipeline:
+-        response = await pipeline.run(request)
+-
+-    assert pipeline._sender.driver._session.closed
+-    assert response.http_response.status_code == 200
+-
+-@pytest.mark.asyncio
+-async def test_basic_async_requests():
+-
+-    request = ClientRequest("GET", "http://bing.com")
+-    policies = [
+-        UserAgentPolicy("myusergant")
+-    ]
+-    async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender()) as pipeline:
+-        response = await pipeline.run(request)
+-
+-    assert response.http_response.status_code == 200
+-
+-@pytest.mark.asyncio
+-async def test_conf_async_requests():
+-
+-    conf = Configuration("http://bing.com/")
+-    request = ClientRequest("GET", "http://bing.com/")
+-    policies = [
+-        UserAgentPolicy("myusergant")
+-    ]
+-    async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender(AsyncRequestsHTTPSender(conf))) as pipeline:
+-        response = await pipeline.run(request)
+-
+-    assert response.http_response.status_code == 200
+-
+-def test_conf_async_trio_requests():
+-
+-    async def do():
+-        conf = Configuration("http://bing.com/")
+-        request = ClientRequest("GET", "http://bing.com/")
+-        policies = [
+-            UserAgentPolicy("myusergant")
+-        ]
+-        async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender(AsyncTrioRequestsHTTPSender(conf))) as pipeline:
+-            return await pipeline.run(request)
++#     request = ClientRequest("GET", "http://bing.com")
++#     policies = [
++#         UserAgentPolicy("myusergant")
++#     ]
++#     async with AsyncPipeline(policies) as pipeline:
++#         response = await pipeline.run(request)
++
++#     assert pipeline._sender.driver._session.closed
++#     assert response.http_response.status_code == 200
++
++# @pytest.mark.asyncio
++# async def test_basic_async_requests():
++
++#     request = ClientRequest("GET", "http://bing.com")
++#     policies = [
++#         UserAgentPolicy("myusergant")
++#     ]
++#     async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender()) as pipeline:
++#         response = await pipeline.run(request)
++
++#     assert response.http_response.status_code == 200
++
++# @pytest.mark.asyncio
++# async def test_conf_async_requests():
++
++#     conf = Configuration("http://bing.com/")
++#     request = ClientRequest("GET", "http://bing.com/")
++#     policies = [
++#         UserAgentPolicy("myusergant")
++#     ]
++#     async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender(AsyncRequestsHTTPSender(conf))) as pipeline:
++#         response = await pipeline.run(request)
++
++#     assert response.http_response.status_code == 200
++
++# def test_conf_async_trio_requests():
++
++#     async def do():
++#         conf = Configuration("http://bing.com/")
++#         request = ClientRequest("GET", "http://bing.com/")
++#         policies = [
++#             UserAgentPolicy("myusergant")
++#         ]
++#         async with AsyncPipeline(policies, AsyncPipelineRequestsHTTPSender(AsyncTrioRequestsHTTPSender(conf))) as pipeline:
++#             return await pipeline.run(request)
+ 
+-    response = trio.run(do)
+-    assert response.http_response.status_code == 200
+\ No newline at end of file
++#     response = trio.run(do)
++#     assert response.http_response.status_code == 200
+diff -up ./tests/asynctests/test_universal_http.py.orig ./tests/asynctests/test_universal_http.py
+--- ./tests/asynctests/test_universal_http.py.orig	2018-10-15 20:43:34.000000000 +0200
++++ ./tests/asynctests/test_universal_http.py	2018-11-02 11:48:24.360298265 +0100
+@@ -43,46 +43,46 @@ import trio
+ import pytest
+ 
+ 
+-@pytest.mark.asyncio
+-async def test_basic_aiohttp():
++# @pytest.mark.asyncio
++# async def test_basic_aiohttp():
+ 
+-    request = ClientRequest("GET", "http://bing.com")
+-    async with AioHTTPSender() as sender:
+-        response = await sender.send(request)
+-        assert response.body() is not None
++#     request = ClientRequest("GET", "http://bing.com")
++#     async with AioHTTPSender() as sender:
++#         response = await sender.send(request)
++#         assert response.body() is not None
+ 
+-    assert sender._session.closed
+-    assert response.status_code == 200
++#     assert sender._session.closed
++#     assert response.status_code == 200
+ 
+-@pytest.mark.asyncio
+-async def test_basic_async_requests():
++# @pytest.mark.asyncio
++# async def test_basic_async_requests():
+ 
+-    request = ClientRequest("GET", "http://bing.com")
+-    async with AsyncBasicRequestsHTTPSender() as sender:
+-        response = await sender.send(request)
+-        assert response.body() is not None
++#     request = ClientRequest("GET", "http://bing.com")
++#     async with AsyncBasicRequestsHTTPSender() as sender:
++#         response = await sender.send(request)
++#         assert response.body() is not None
+ 
+-    assert response.status_code == 200
++#     assert response.status_code == 200
+ 
+-@pytest.mark.asyncio
+-async def test_conf_async_requests():
++# @pytest.mark.asyncio
++# async def test_conf_async_requests():
+ 
+-    conf = Configuration("http://bing.com/")
+-    request = ClientRequest("GET", "http://bing.com/")
+-    async with AsyncRequestsHTTPSender(conf) as sender:
+-        response = await sender.send(request)
+-        assert response.body() is not None
++#     conf = Configuration("http://bing.com/")
++#     request = ClientRequest("GET", "http://bing.com/")
++#     async with AsyncRequestsHTTPSender(conf) as sender:
++#         response = await sender.send(request)
++#         assert response.body() is not None
+ 
+-    assert response.status_code == 200
++#     assert response.status_code == 200
+ 
+-def test_conf_async_trio_requests():
++# def test_conf_async_trio_requests():
+ 
+-    async def do():
+-        conf = Configuration("http://bing.com/")
+-        request = ClientRequest("GET", "http://bing.com/")
+-        async with AsyncTrioRequestsHTTPSender(conf) as sender:
+-            return await sender.send(request)
+-            assert response.body() is not None
++#     async def do():
++#         conf = Configuration("http://bing.com/")
++#         request = ClientRequest("GET", "http://bing.com/")
++#         async with AsyncTrioRequestsHTTPSender(conf) as sender:
++#             return await sender.send(request)
++#             assert response.body() is not None
+ 
+-    response = trio.run(do)
+-    assert response.status_code == 200
+\ No newline at end of file
++#     response = trio.run(do)
++#     assert response.status_code == 200
