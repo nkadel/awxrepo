@@ -12,7 +12,8 @@
 
 Name:           python-django
 
-Version:        2.2.9
+#Version:        2.2.9
+Version:        2.2.6
 Release:        1%{?dist}
 Summary:        A high-level Python Web framework
 
@@ -63,6 +64,7 @@ Summary:        A high-level Python Web framework
 Recommends:     (%{name}-bash-completion = %{version}-%{release} if bash)
 %endif
 
+Requires:       sqlite >= 3.8.3
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-bcrypt
 # test requirements
