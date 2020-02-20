@@ -8,12 +8,7 @@
 # Older RHEL requires EPEL and python34 or python36
 %global with_python3 1
 
-# Fedora >= 38 no longer publishes python2 by default
-%if 0%{?fedora} >= 30
 %global with_python2 0
-%else
-%global with_python2 1
-%endif
 
 %global pypi_name django-auth-ldap
 
