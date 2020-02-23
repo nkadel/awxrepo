@@ -64,7 +64,8 @@ Summary:        A high-level Python Web framework
 Recommends:     (%{name}-bash-completion = %{version}-%{release} if bash)
 %endif
 
-Requires:       sqlite >= 3.8.3
+#Requires:       sqlite >= 3.8.3
+Requires:       sqlite
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-bcrypt
 # test requirements
