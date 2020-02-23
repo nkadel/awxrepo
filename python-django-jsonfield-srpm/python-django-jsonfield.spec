@@ -22,7 +22,7 @@ BuildArch:      noarch
 BuildRequires:  epel-rpm-macros
 %endif
 
-%if 0%{?with_python2}
+%if %{with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 
@@ -47,7 +47,7 @@ django-jsonfield is a reusable Django field that allows you to store validated
 JSON in your model. It silently takes care of serialization. To use, simply
 add the field to one of your models.
 
-%if 0%{?with_python2}
+%if %{with_python2}
 %package -n python2-django-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pypi_name}}
@@ -66,10 +66,6 @@ Requires:  python%{python3_pkgversion}-django
 Requires:  python%{python3_pkgversion}-django-formtools
 
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
-%if 0%{?with_python2}
-%else
-Provides: python2-%{pypi_name}
-%endif
 
 %description -n python%{python3_pkgversion}-django-%{pypi_name}
 django-jsonfield is a reusable Django field that allows you to store validated
@@ -80,27 +76,27 @@ add the field to one of your models.
 %setup -q -n %{pypi_name}-%{version}
 
 %build
-%if 0%{?with_python2}
+%if %{with_python2}
 %py2_build
 %endif
 %py3_build
 
 %install
-%if 0%{?with_python2}
+%if %{with_python2}
 %py2_install
 %endif
 %py3_install
 
-%check
-sqlite3 FILETEMP
-export DB_ENGINE=sqlite3
-export DB_NAME="mydb"
-%if 0%{?with_python2}
-%{__python2} setup.py test
-%endif
-%{__python3} setup.py test
+#%check
+#sqlite3 FILETEMP
+#export DB_ENGINE=sqlite3
+#export DB_NAME="mydb"
+#%if %{with_python2}
+#%{__python2} setup.py test
+#%endif
+#%{__python3} setup.py test
 
-%if 0%{?with_python2}
+%if %{with_python2}
 %files -n python2-django-%{pypi_name}
 %license LICENSE
 %doc README.rst
