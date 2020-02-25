@@ -1,26 +1,24 @@
+%global pypiname gitdb
+
 %global with_python3 1
 
 # Disable python2, rely on EPEL if needed
 %global with_python2 0
 
-Name:           python-gitdb
-Version:        0.6.4
-Release:        4%{?dist}
+Name:           python-%{pypi_name}
+Version:        4.0.1
+Release:        0%{?dist}
 Summary:        A pure-Python git object database
 
 Group:          Development/Languages
 License:        BSD
-URL:            http://pypi.python.org/packages/source/g/gitdb/gitdb-%{version}.tar.gz#md5=44e4366b8bdfd306b075c3a52c96ae1a
-Source0:        gitdb-%{version}.tar.gz
+URL:            http://pypi.python.org/packages/source/g/%{pypi_name}/%{pypi_name}-%{version}.tar.gz#md5=44e4366b8bdfd306b075c3a52c96ae1a
+Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Requires:       python-smmap
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
-
-BuildRequires:  python2-devel
-BuildRequires:  python2-nose
-BuildRequires:  python2-setuptools
 
 %description
 GitDB allows you to access bare git repositories for reading and writing. It
@@ -28,39 +26,42 @@ aims at allowing full access to loose objects as well as packs with performance
 and scalability in mind. It operates exclusively on streams, allowing to
 operate on large objects with a small memory footprint.
 
-%if %{with_python3}
-%package -n python2-gitdb
+%if %{with_python2}
+%package -n python2-%{pypi_name}
 Summary:        Python2 Git Library
 Requires:       python2-smmap
 BuildRequires:  python2-devel
 BuildRequires:  python2-nose
 BuildRequires:  python2-setuptools
 
-%description -n python2-gitdb
+Obsoletes:     python2-%{pype_pkgname}
+
+%description -n python2-%{pypi_name}
 %{description}
 %endif
 
 %if %{with_python3}
-%package -n python%{python3_pkgversion}-gitdb
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Python3 Git Library
 Requires:       python%{python3_pkgversion}-smmap
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-nose
 BuildRequires:  python%{python3_pkgversion}-setuptools
 
-%description -n python%{python3_pkgversion}-gitdb
+
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{description}
 %endif
 
 # Filter the private provide
 %{?filter_setup:
-%filter_provides_in %{python3_sitearch}/gitdb/_perf.so
+%filter_provides_in %{python3_sitearch}/%{pypi_name}/_perf.so
 %filter_setup
 }
 
 %prep
-%setup -qc -n gitdb-%{version}
-mv gitdb-%{version} python2
+%setup -qc -n %{pypi_name}-%{version}
+mv %{pypi_name}-%{version} python2
 
 %if %{with_python3}
 cp -a python2 python3
@@ -92,7 +93,7 @@ popd
 %if %{with_python2}
 pushd python2
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
-chmod 0755 %{buildroot}%{python2_sitearch}/gitdb/_perf.so
+chmod 0755 %{buildroot}%{python2_sitearch}/%{pypi_name}/_perf.so
 popd
 %endif
 %if %{with_python3}
@@ -102,7 +103,7 @@ popd
 %endif
 
 %if %{with_python2}
-%files -n python2-gitdb
+%files -n python2-%{pypi_name}
 %defattr(-,root,root,-)
 %if 0%{?fedora}
 %license LICENSE
@@ -110,15 +111,15 @@ popd
 %doc LICENSE
 %endif
 %doc AUTHORS
-%{python2_sitearch}/gitdb-%{version}-py?.?.egg-info
-%{python2_sitearch}/gitdb/
+%{python2_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
+%{python2_sitearch}/%{pypi_name}/
 %endif
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-gitdb
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc AUTHORS
-%{python3_sitearch}/gitdb-%{version}-py?.?.egg-info
+%{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
 %{python3_sitearch}/gitdb/
 %endif
 
