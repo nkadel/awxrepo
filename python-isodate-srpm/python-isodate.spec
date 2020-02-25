@@ -53,6 +53,7 @@ Summary: %summary
 
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %summary
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
 %description -n python%{python3_pkgversion}-%{srcname}
 %{_description}
