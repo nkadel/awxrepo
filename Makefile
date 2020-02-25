@@ -39,10 +39,11 @@ EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
 EPELPKGS+=python-django-extensions-srpm
+EPELPKGS+=python-django-solo-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
+EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-gitdb-srpm
-EPELPKGS+=python-gitdb2-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
@@ -51,14 +52,22 @@ EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
+EPELPKGS+=python-pluggy-srpm
+EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
+EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-sqlparse-srpm
+EPELPKGS+=python-trio-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
+EPELPKGS+=python-zope-interface-srpm
+
+# Depends on ptyprocess and pluggy
+AWXPKGS+=python-pexpect-srpm
 
 AWXPKGS+=python-amqp-srpm
 
@@ -77,6 +86,9 @@ AWXPKGS+=python-django-srpm
 # python3 only update for pytest modules of misnmed source package
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
+
+# Depends on trio and pytest
+AWXPKGS+=python-msrest-srpm
 
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
@@ -109,6 +121,11 @@ AWXPKGS+=python-django-formtools-srpm
 AWXPKGS+=python-django-jsonfield-srpm
 
 AWXPKGS+=python-ansible-runner-srpm
+
+# Depends on pytest
+AWXPKGS+=python-trustme-srpm
+
+AWXPKGS+=python-service-identity-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
