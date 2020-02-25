@@ -3,7 +3,7 @@
 
 %{!?_licensedir: %global license %%doc}
 
-%global modname django-cors-headers
+%global pypi_name django-cors-headers
 
 Name:               python-django-cors-headers
 Version:            2.0.2
@@ -12,7 +12,7 @@ Summary:            A Django application for handling CORS headers
 
 License:            MIT
 URL:                https://pypi.io/project/django-cors-headers
-Source0:            https://pypi.io/packages/source/d/%{modname}/%{modname}-%{version}.tar.gz
+Source0:            https://pypi.io/packages/source/d/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:          noarch
 
 %if 0%{?rhel}
@@ -35,31 +35,27 @@ django-cors-headers is a Django application for handling the server headers
 required for Cross-Origin Resource Sharing (CORS).
 
 %if 0%{?with_python2}
-%package -n python2-%{modname}
+%package -n python2-%{pypi_name}
 Summary:            A Django application for handling CORS headers
-%{?python_provide:%python_provide python2-%{modname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{modname}
+%description -n python2-%{pypi_name}
 django-cors-headers is a Django application for handling the server headers
 required for Cross-Origin Resource Sharing (CORS).
 %endif
 
 %if 0%{?with_python3}
-%package -n python%{python3_pkgversion}-%{modname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:            A Django application for handling CORS headers
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
-%if 0%{?with_python2}
-%else
-Provides: python2-%{modname}
-%endif
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{modname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 django-cors-headers is a Django application for handling the server headers
 required for Cross-Origin Resource Sharing (CORS).
 %endif
 
 %prep
-%autosetup -n %{modname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %if 0%{?with_python2}
@@ -78,7 +74,7 @@ required for Cross-Origin Resource Sharing (CORS).
 %endif
 
 %if 0%{?with_python2}
-%files -n python2-%{modname}
+%files -n python2-%{pypi_name}
 %doc README.rst HISTORY.rst
 %license LICENSE.txt
 %{python2_sitelib}/corsheaders/
@@ -86,7 +82,7 @@ required for Cross-Origin Resource Sharing (CORS).
 %endif
 
 %if 0%{?with_python3}
-%files -n python%{python3_pkgversion}-%{modname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.rst HISTORY.rst
 %license LICENSE.txt
 %{python3_sitelib}/corsheaders/
