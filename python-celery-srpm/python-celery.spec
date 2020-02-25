@@ -58,7 +58,7 @@ Summary:        Distributed Task Queue
 
 Requires:       python2-amqp
 Requires:       python2-billiard >= 1:3.5.0.2
-Requires:       python2-kombu >= 1:4.2.0
+Requires:       python2-kombu >= 4.2.0
 Requires:       python2-pytz
 Requires:       python2-setuptools
 
@@ -81,7 +81,7 @@ Summary:        Distributed Task Queue
 
 Requires:       python3-amqp
 Requires:       python3-billiard >= 1:3.5.0.2
-Requires:       python3-kombu >= 1:4.2.0
+Requires:       python3-kombu >= 4.2.0
 Requires:       python3-pytz
 Requires:       python3-setuptools
 
