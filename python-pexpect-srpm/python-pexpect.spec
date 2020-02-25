@@ -1,24 +1,24 @@
 %bcond_with check
 
-%global modname pexpect
+%global pypi_pkgname pexpect
 
-Name:           python-%{modname}
+%global with_python2 0
+
+Name:           python-%{pypi_pkgname}
 Summary:        Unicode-aware Pure Python Expect-like module
-Version:        4.6
-#Release:        2%%{?dist}
-Release:        0%{?dist}
+Version:        4.7.0
+Release:        2%{?dist}
 
-License:        MIT
+License:        ISC
 URL:            https://github.com/pexpect/pexpect
-Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{pypi_pkgname}-%{version}.tar.gz
 
 BuildRequires:  %{_bindir}/man
-
-BuildArch:      noarch
-
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
+
+BuildArch:      noarch
 
 %description
 Pexpect is a pure Python module for spawning child applications; controlling
@@ -35,14 +35,45 @@ does not require TCL or Expect nor does it require C extensions to be
 compiled.  It should work on any platform that supports the standard Python
 pty module.
 
-%package -n python%{python3_pkgversion}-%{modname}
+%if %{with_python2}
+%package -n python2-%{pypi_pkgname}
 Summary:        %{summary}
+%{?python_provide:%python_provide python2-%{pypi_pkgname}}
+BuildRequires:  python2-devel
+BuildRequires:  python2-pytest
+BuildRequires:  python2-pluggy
+BuildRequires:  python2-ptyprocess
+Requires:       python2-ptyprocess
+Provides:       pexpect = %{version}-%{release}
+Obsoletes:      pexpect <= 2.3-20
+
+%description -n python2-pexpect
+Pexpect is a pure Python module for spawning child applications; controlling
+them; and responding to expected patterns in their output. Pexpect works like
+Don Libes' Expect. Pexpect allows your script to spawn a child application and
+control it as if a human were typing commands. This package contains the
+python2 version of this module.
+
+Pexpect can be used for automating interactive applications such as ssh, ftp,
+passwd, telnet, etc. It can be used to automate setup scripts for duplicating
+software package installations on different servers. And it can be used for
+automated software testing. Pexpect is in the spirit of Don Libes' Expect, but
+Pexpect is pure Python. Unlike other Expect-like modules for Python, Pexpect
+does not require TCL or Expect nor does it require C extensions to be
+compiled.  It should work on any platform that supports the standard Python
+pty module.
+%endif
+
+%package -n python%{python3_pkgversion}-%{pypi_pkgname}
+Summary:        %{summary}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_pkgname}}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-pluggy
 BuildRequires:  python%{python3_pkgversion}-ptyprocess
 Requires:       python%{python3_pkgversion}-ptyprocess
 
-%description -n python%{python3_pkgversion}-%{modname}
+%description -n python%{python3_pkgversion}-%{pypi_pkgname}
 Pexpect is a pure Python module for spawning child applications; controlling
 them; and responding to expected patterns in their output. Pexpect works like
 Don Libes' Expect. Pexpect allows your script to spawn a child application and
@@ -59,38 +90,91 @@ compiled.  It should work on any platform that supports the standard Python
 pty module.
 
 %prep
-%autosetup -n %{modname}-%{version}
-chmod +x tools/*
-find examples -type f | xargs chmod a-x
-find . -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python3}|'
+%autosetup -c
+mv %{pypi_pkgname}-%{version} python2
+chmod +x python2/tools/*
+find python2/examples -type f | xargs chmod a-x
+cp -pr python2 python3
+
+%if %{with_python2}
+find python2 -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python2}|'
+%endif
+find python3 -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python3}|'
 
 %build
-%py3_build
+%if %{with_python2}
+pushd python2
+  %py2_build
+popd
+%endif
+
+pushd python3
+  %py3_build
+popd
 
 %install
-%py3_install
-rm -rf %{buildroot}%{python3_sitelib}/pexpect/tests
+%if %{with_python2}
+pushd python2
+  %py2_install
+  rm -rf ${buildroot}%{python2_sitelib}/setuptools/tests
+  # Drop asyncio stuff from py2
+  rm -f %{buildroot}%{python2_sitelib}/%{pypi_pkgname}/_async.py
+popd
+%endif
+
+pushd python3
+  %py3_install
+  rm -rf %{buildroot}%{python3_sitelib}/pexpect/tests
+popd
 
 %if %{with check}
 %check
 export PYTHONIOENCODING=UTF-8
-export LC_ALL="en_US.UTF-8"
 
-%{__python3} ./tools/display-sighandlers.py
-%{__python3} ./tools/display-terminalinfo.py
-PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} ./tools/display-maxcanon.py
-py.test-3 --verbose
+%if %{with_python2}
+pushd python2
+  %{__python2} ./tools/display-sighandlers.py
+  %{__python2} ./tools/display-terminalinfo.py
+  PYTHONPATH=%{buildroot}%{python2_sitelib} %{__python2} ./tools/display-maxcanon.py
+  py.test-2 --verbose
+popd
 %endif
 
-%files -n python%{python3_pkgversion}-%{modname}
-%license LICENSE
-%doc doc examples
-%{python3_sitelib}/%{modname}/
-%{python3_sitelib}/%{modname}-*.egg-info
+pushd python3
+  %{__python3} ./tools/display-sighandlers.py
+  %{__python3} ./tools/display-terminalinfo.py
+  PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} ./tools/display-maxcanon.py
+  py.test-3 --verbose
+popd
+%endif
+
+%if %{with_python2}
+%files -n python2-%{pypi_pkgname}
+%license python2/LICENSE
+%doc python2/doc python2/examples
+%{python2_sitelib}/%{pypi_pkgname}/
+%{python2_sitelib}/%{pypi_pkgname}-*.egg-info
+%endif
+
+%files -n python%{python3_pkgversion}-%{pypi_pkgname}
+%license python3/LICENSE
+%doc python3/doc python3/examples
+%{python3_sitelib}/%{pypi_pkgname}/
+%{python3_sitelib}/%{pypi_pkgname}-*.egg-info
 
 %changelog
-* Tue Oct 29 2019 Scott Talbert <swt@techie.net> - 4.6-2
-- Fix for Python 3.6 in EPEL; remove Python 2 module as it exists in RHEL
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 4.7.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Thu Apr 11 2019 Dan Radez <dradez@redhat.com> - 4.7.0-1
+- update to 4.7.0
+
+* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 4.6-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Sun Nov 18 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 4.6-2
+- Drop explicit locale setting
+  See https://fedoraproject.org/wiki/Changes/Remove_glibc-langpacks-all_from_buildroot
 
 * Wed Jul 25 2018 Dan Radez <dradez@redhat.com> - 4.6-1
 - update to 4.6
