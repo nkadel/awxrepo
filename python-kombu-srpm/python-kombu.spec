@@ -12,9 +12,6 @@
 
 # Common SRPM package
 Name:           python-%{pypi_name}
-%if 0%{?rhel}
-Epoch:          1
-%endif
 Version:        4.6.7
 Release:        0%{?dist}
 Url:            https://kombu.readthedocs.io
