@@ -18,7 +18,6 @@ BuildRequires:   epel-rpm-macros
 %description
 A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 
-
 %package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
@@ -31,7 +30,7 @@ BuildRequires: python%{python3_pkgversion}-jaraco-itertools >= 3.2
 BuildRequires: python%{python3_pkgversion}-toml
 BuildRequires: python%{python3_pkgversion}-inflect
 
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name} = %{version}-%{release}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
 A pathlib-compatible Zipfile object wrapper. A backport of the Path object.

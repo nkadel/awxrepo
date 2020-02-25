@@ -81,7 +81,7 @@ BuildRequires: python%{python3_pkgversion}-django-taggit
 BuildRequires: python%{python3_pkgversion}-djangorestframework
 BuildRequires: python%{python3_pkgversion}-djangorestframework-yaml
 BuildRequires: python%{python3_pkgversion}-GitPython
-BuildRequires: python%{python3_pkgversion}-gitdb2
+BuildRequires: python%{python3_pkgversion}-gitdb
 BuildRequires: python%{python3_pkgversion}-google-auth
 BuildRequires: python%{python3_pkgversion}-idna
 BuildRequires: python%{python3_pkgversion}-importlib_metadata
@@ -142,7 +142,7 @@ BuildRequires: python%{python3_pkgversion}-txaio
 BuildRequires: python%{python3_pkgversion}-urllib3
 BuildRequires: python%{python3_pkgversion}-websocket_client
 BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
-BuildRequires: python%{python3_pkgversion}-zope.interface >= 4.7.1
+BuildRequires: python%{python3_pkgversion}-zope-interface >= 4.7.1
 BuildRequires: xmlsec1-devel
 BuildRequires: xmlsec1-openssl-devel
 
@@ -189,7 +189,7 @@ Requires: python%{python3_pkgversion}-django-solo
 Requires: python%{python3_pkgversion}-django-taggit
 Requires: python%{python3_pkgversion}-djangorestframework
 Requires: python%{python3_pkgversion}-djangorestframework-yaml
-Requires: python%{python3_pkgversion}-gitdb2
+Requires: python%{python3_pkgversion}-gitdb
 Requires: python%{python3_pkgversion}-GitPython
 Requires: python%{python3_pkgversion}-google-auth
 Requires: python%{python3_pkgversion}-idna
@@ -249,7 +249,7 @@ Requires: python%{python3_pkgversion}-urllib3
 Requires: python%{python3_pkgversion}-websocket_client
 Requires: python%{python3_pkgversion}-wheel >= 0.33.6
 Requires: python%{python3_pkgversion}-zipp >= 0.6.0
-Requires: python%{python3_pkgversion}-zope.interface >= 4.7.1
+Requires: python%{python3_pkgversion}-zope-interface >= 4.7.1
 Requires: sshpass
 Requires: subversion
 Requires: xmlsec1-devel
