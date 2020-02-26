@@ -79,12 +79,12 @@ rm -rf html/.{doctrees,buildinfo}
 %files -n python%{python3_pkgversion}-%{pkg_name}
 %license LICENSE
 %doc README.rst
-# These excludes are provided by python%%{python3_pkgversion}-jaraco
-%exclude %{python3_sitelib}/jaraco/__init__*
-%exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 %{python3_sitelib}/jaraco/functools*
 %{python3_sitelib}/jaraco/__pycache__/functools*
 %{python3_sitelib}/jaraco_functools-%{version}-py?.?.egg-info
+# These excludes are provided by python%%{python3_pkgversion}-jaraco
+%exclude %{python3_sitelib}/jaraco/__init__*
+%exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 
 %if %{with docs}
 %files -n python-%{pkg_name}-doc
