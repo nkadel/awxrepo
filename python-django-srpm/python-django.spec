@@ -2,7 +2,8 @@
 # Turn off the brp-python-bytecompile script
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 
-%global         pkgname Django
+%global         pypi_name Django
+%global         pkg_name django
 
 
 # Tests requiring Internet connections are disabled by default
@@ -14,12 +15,13 @@ Name:           python-django
 
 #Version:        2.2.9
 Version:        2.2.6
-Release:        1%{?dist}
+#Release:        1%%{?dist}
+Release:        0%{?dist}
 Summary:        A high-level Python Web framework
 
 License:        BSD
 URL:            http://www.djangoproject.com/
-Source0:        https://files.pythonhosted.org/packages/source/D/Django/Django-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
 # skip tests requiring network connectivity
 Patch000: Django-2.0-skip-net-tests.patch
@@ -173,7 +175,7 @@ much as possible and adhering to the DRY (Don't Repeat Yourself)
 principle.
 
 %prep
-%autosetup -p1 -n %{pkgname}-%{version}
+%autosetup -p1 -n %{pypi_name}-%{version}
 
 # hard-code python3 in django-admin
 pushd django
@@ -231,7 +233,7 @@ find $RPM_BUILD_ROOT -name "*.po" | xargs rm -f
 # Only do tests on fedora
 %if 0%{?fedora}
 %check
-cd %{_builddir}/%{pkgname}-%{version}
+cd %{_builddir}/%{pypi_name}-%{version}
 export PYTHONPATH=$(pwd)
 cd tests
 
@@ -394,7 +396,7 @@ cd tests
 %{python3_sitelib}/django/conf/urls/
 %{python3_sitelib}/django/conf/locale/*/*.py*
 %{python3_sitelib}/django/conf/locale/*.py*
-%{python3_sitelib}/%{pkgname}-%{version}-py%{python3_version}.egg-info
+%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 %{python3_sitelib}/django/__pycache__
 %{python3_sitelib}/django/bin/__pycache__
 %{python3_sitelib}/django/conf/__pycache__
@@ -413,6 +415,11 @@ cd tests
 
 
 %changelog
+* Wed Feb 26 2020 Nico KAdel-Garcia <nkadel@gmail.com>
+- Backport for RHEL
+- Switch to "pypi_name" rather than "pkgname"
+- Use more robuset Source entry
+
 * Tue Jan 07 2020 Matthias Runge <mrunge@redhat.com> - 2.2.9-1
 - fix CVE-2019-19844 (rhbz#1788429)
 
