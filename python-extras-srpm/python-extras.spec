@@ -117,7 +117,7 @@ popd
 
 
 %changelog
-* Sun Dec 13 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 0.0.3-0
+* Sun Dec 15 2019 Nico Kadel-Garcia <nkadel@gmail.com> - 0.0.3-0
 - Port to RHEL 8
 - Split python2 and python3 packages
 - Obsolete python-extras package
