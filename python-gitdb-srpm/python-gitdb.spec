@@ -1,4 +1,4 @@
-%global pypiname gitdb
+%global pypi_name gitdb
 
 %global with_python3 1
 
@@ -15,6 +15,7 @@ License:        BSD
 URL:            http://pypi.python.org/packages/source/g/%{pypi_name}/%{pypi_name}-%{version}.tar.gz#md5=44e4366b8bdfd306b075c3a52c96ae1a
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Requires:       python-smmap
+BuildArch:      noarch
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
@@ -53,12 +54,6 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 %{description}
 %endif
 
-# Filter the private provide
-%{?filter_setup:
-%filter_provides_in %{python3_sitearch}/%{pypi_name}/_perf.so
-%filter_setup
-}
-
 %prep
 %setup -qc -n %{pypi_name}-%{version}
 mv %{pypi_name}-%{version} python2
@@ -93,7 +88,7 @@ popd
 %if %{with_python2}
 pushd python2
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
-chmod 0755 %{buildroot}%{python2_sitearch}/%{pypi_name}/_perf.so
+#chmod 0755 %{buildroot}%{python2_sitearch}/%{pypi_name}/_perf.so
 popd
 %endif
 %if %{with_python3}
@@ -111,16 +106,16 @@ popd
 %doc LICENSE
 %endif
 %doc AUTHORS
-%{python2_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
-%{python2_sitearch}/%{pypi_name}/
+%{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%{python2_sitelib}/%{pypi_name}/
 %endif
 
 %if %{with_python3}
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc AUTHORS
-%{python3_sitearch}/%{pypi_name}-%{version}-py?.?.egg-info
-%{python3_sitearch}/gitdb/
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%{python3_sitelib}/gitdb/
 %endif
 
 %changelog
