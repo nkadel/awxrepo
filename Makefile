@@ -13,6 +13,9 @@ REPOBASE=file://$(PWD)
 # Dependency metapackage
 #EPELPKGS+=PyYAML-srpm
 
+EPELPKGS+=Cython-srpm
+EPELPKGS+=meson-srpm
+
 # RHEL name funkiness for python-pythlakes
 EPELPKGS+=pyflakes-srpm
 
@@ -57,14 +60,20 @@ EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pyjwt-srpm
+EPELPKGS+=python-pytest-aiohttp-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-sqlparse-srpm
-EPELPKGS+=python-trio-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on meson
+AWXPKGS+=http-parser-srpm
+
+# Depends on http-parser and Cython
+AWXPKGS+=python-aiohttp-srpm
 
 # Depends on ptyprocess and pluggy
 AWXPKGS+=python-pexpect-srpm
@@ -87,12 +96,15 @@ AWXPKGS+=python-django-srpm
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
 
-# Depends on trio and pytest
-AWXPKGS+=python-msrest-srpm
-
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
+
+# Depends on aio-http
+AWXPKGS+=python-async-timeout-srpm
+
+# Depends on pytest and and pytest-asyncio and async-timeout
+AWXPKGS+=python-asgiref-srpm
 
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
@@ -120,10 +132,17 @@ AWXPKGS+=python-django-formtools-srpm
 # Depends on django and django-formtools
 AWXPKGS+=python-django-jsonfield-srpm
 
+# Depends on pytest
 AWXPKGS+=python-ansible-runner-srpm
 
 # Depends on pytest
 AWXPKGS+=python-trustme-srpm
+
+# Depends on trustme
+AWXPKGS+=python-trio-srpm
+
+# Depends on trio and pytest
+AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=python-service-identity-srpm
 
