@@ -419,6 +419,7 @@ cd tests
 - Backport for RHEL
 - Switch to "pypi_name" rather than "pkgname"
 - Use more robuset Source entry
+- List sphinx-build-3 explicitly
 
 * Tue Jan 07 2020 Matthias Runge <mrunge@redhat.com> - 2.2.9-1
 - fix CVE-2019-19844 (rhbz#1788429)
