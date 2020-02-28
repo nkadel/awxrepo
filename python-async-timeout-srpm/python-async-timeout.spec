@@ -1,13 +1,14 @@
-%global srcname async-timeout
+%global pypi_name async-timeout
 %global common_desc asyncio-compatible timeout context manager\
 The context manager is useful in cases when you want to apply timeout\
 logic around block of code or in cases when asyncio.wait_for() is not \
 suitable. Also it's much faster than asyncio.wait_for() because timeout\
 doesn't create a new task.
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        3.0.1
-Release:        3%{?dist}
+#Release:        3%%{?dist}
+Release:        0%{?dist}
 Summary:        An asyncio-compatible timeout context manager
 
 License:        ASL 2.0
@@ -15,24 +16,28 @@ URL:            https://github.com/aio-libs/async-timeout
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
 %description
 %{common_desc}
 
 # This module is Python 3 only
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 
-BuildRequires: python3-devel
-BuildRequires: python3-setuptools
-BuildRequires: python3-pytest-runner
-BuildRequires: python3-pytest-aiohttp
-%{?python_provide:%python_provide python3-%{srcname}}
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires: python%{python3_pkgversion}-pytest-runner
+BuildRequires: python%{python3_pkgversion}-pytest-aiohttp
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python3-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{common_desc}
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
@@ -43,7 +48,7 @@ BuildRequires: python3-pytest-aiohttp
 %check
 %{__python3} setup.py test
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst CHANGES.rst
 %{python3_sitelib}/async_timeout/
