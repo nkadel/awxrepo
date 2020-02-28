@@ -1,13 +1,18 @@
-%global srcname aiohttp
+%global pypi_name aiohttp
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        3.5.4
-Release:        4%{?dist}
+#Release:        4%%{?dist}
+Release:        0%{?dist}
 Summary:        Python HTTP client/server for asyncio
 
 License:        ASL 2.0
 URL:            https://github.com/aio-libs/aiohttp
-Source0:        %{url}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+Source0:        %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
+
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
 
 BuildRequires:  gcc
 BuildRequires:  http-parser-devel
@@ -17,28 +22,30 @@ Python HTTP client/server for asyncio which supports both the client and the
 server side of the HTTP protocol, client and server websocket, and webservers
 with middlewares and pluggable routing.
 
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-Cython
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-Cython
 
 %if 0%{?fedora}
-Recommends:     python%{python3_version}dist(aiodns)
+Recommends:     python%{python3_version}-aiodns
 %endif
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python3-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Python HTTP client/server for asyncio which supports both the client and the
 server side of the HTTP protocol, client and server websocket, and webservers
 with middlewares and pluggable routing.
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 # Unbundle
 sed -i -e '/http_parser.h/s/".*\//"/' aiohttp/_cparser.pxd
 sed -i -e '/http_parser\.c/d' setup.py
+# unweave circular dependencies for "wheel
+sed -i.bak '/^[a-zA-Z]/d' requirements/ci-wheel.txt
 
 %build
 %py3_build
@@ -46,13 +53,16 @@ sed -i -e '/http_parser\.c/d' setup.py
 %install
 %py3_install
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc CHANGES.rst CONTRIBUTING.rst CONTRIBUTORS.txt HISTORY.rst README.rst
 %license LICENSE.txt
-%{python3_sitearch}/%{srcname}-*.egg-info/
-%{python3_sitearch}/%{srcname}/
+%{python3_sitearch}/%{pypi_name}-*.egg-info/
+%{python3_sitearch}/%{pypi_name}/
 
 %changelog
+* Thu Feb 27 2020 Nico Kadel-Garcia <nkadel@gmail.com>
+- Disable circular dependencies from "requirements/ci-wheel.txt"
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.5.4-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
@@ -270,7 +280,7 @@ sed -i -e '/http_parser\.c/d' setup.py
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
 * Thu Jun 23 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.21.6-2
-- Add missing Requires: python3-multidict (RHBZ #1349576)
+- Add missing Requires of python3-multidict (RHBZ #1349576)
 
 * Thu May 12 2016 Igor Gnatenko <ignatenko@redhat.com> - 0.21.6-1
 - Update to 0.21.6
