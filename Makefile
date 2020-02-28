@@ -26,6 +26,7 @@ EPELPKGS+=python2-sphinx-srpm
 EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-async-generator-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
@@ -47,6 +48,7 @@ EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-gitdb-srpm
+EPELPKGS+=python-idna-ssl-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
@@ -61,13 +63,17 @@ EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-pytest-aiohttp-srpm
+EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
-EPELPKGS+=python-sqlparse-srpm
+EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on pytest
+AWXPKGS+=python-sqlparse-srpm
 
 # Depends on meson
 AWXPKGS+=http-parser-srpm
@@ -96,11 +102,17 @@ AWXPKGS+=python-django-srpm
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
 
+# Depends on pytest and more-itertools
+AWXPKGS+=python-multidict-srpm
+
+# Depends on pytest and Cython and multidict and more-itertools
+AWXPKGS+=python-yarl-srpm
+
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
 
-# Depends on aio-http
+# Depends on aio-http and pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
 
 # Depends on pytest and and pytest-asyncio and async-timeout
@@ -198,7 +210,8 @@ epel epelpkgs:: $(EPELPKGS)
 
 # awx pkgs depend on epelpkgs
 .PHONY: awx awxpkgs
-awx awxpkgs:: $(EPELPKGS) $(AWXPKGS)
+#awx awxpkgs:: $(EPELPKGS)
+awx awxpkgs:: $(AWXPKGS)
 
 .PHONY: cfg
 cfg:: cfgs
