@@ -29,24 +29,27 @@ URL:            https://github.com/django/asgiref
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
 
-
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
 %description %{_description}
 
 
-%package -n python3-%{pkgname}
+%package -n python%{python3_pkgversion}-%{pkgname}
 Summary:        %{summary}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
-BuildRequires:  python3-pytest >= 3.3
-BuildRequires:  python3-pytest-asyncio
-BuildRequires:  python3-async-timeout >= 2.0
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.3
+BuildRequires:  python%{python3_pkgversion}-pytest-asyncio
+BuildRequires:  python%{python3_pkgversion}-async-timeout >= 2.0
 %endif
-Requires:       python3-async-timeout >= 2.0
-%{?python_provide:%python_provide python3-%{pkgname}}
+# For RHEL
+Requires:       python%{python3_pkgversion}-async-timeout >= 2.0
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
 
 
-%description -n python3-%{pkgname} %{_description}
+%description -n python%{python3_pkgversion}-%{pkgname} %{_description}
 
 
 %prep
@@ -67,7 +70,7 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} --verbose t
 %endif
 
 
-%files -n python3-%{pkgname}
+%files -n python%{python3_pkgversion}-%{pkgname}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{libname}
