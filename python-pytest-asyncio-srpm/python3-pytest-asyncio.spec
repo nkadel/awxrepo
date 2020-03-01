@@ -5,7 +5,7 @@
 
 %bcond_without  tests
 
-Name:           python3-%{pypi_name}
+Name:           python%{python3_pkgversion}-%{pypi_name}
 Version:        0.10.0
 Release:        1%{?dist}.2
 Summary:        Pytest support for asyncio
@@ -19,6 +19,19 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 BuildArch:      noarch
+
+%description
+pytest-asyncio is an Apache2 licensed library, written in Python, for testing
+asyncio code with pytest.
+
+asyncio code is usually written in the form of coroutines, which makes it
+slightly more difficult to test using normal testing tools. pytest-asyncio
+provides useful fixtures and markers to make testing easier.
+
+%package -n python%{python3_pkgversion}
+Summary:        Pytest support for asyncio
+
+
 BuildRequires:  python%{python3_pkgversion}-devel
 %if %{with tests}
 BuildRequires:  python%{python3_pkgversion}-pytest >= 3.0.6
@@ -33,14 +46,13 @@ BuildRequires:  python%{python3_pkgversion}-more-itertools >= 4.0.0
 Requires:       python%{python3_pkgversion}-pytest >= 3.0.6
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description
+%description -n python%{python3_pkgversion}
 pytest-asyncio is an Apache2 licensed library, written in Python, for testing
 asyncio code with pytest.
 
 asyncio code is usually written in the form of coroutines, which makes it
 slightly more difficult to test using normal testing tools. pytest-asyncio
 provides useful fixtures and markers to make testing easier.
-
 
 %prep
 %setup -qn %{github_name}-%{version}
@@ -70,7 +82,7 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} pytest-%{python3_version} --verbose -k
 %endif
 
 
-%files
+%files -n python%{python3_pkgversion}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{srcname}-%{version}-py%{python3_version}.egg-info/
