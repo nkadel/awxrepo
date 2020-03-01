@@ -30,7 +30,8 @@ Summary:        %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-pytest-runner
-BuildRequires: python%{python3_pkgversion}-pytest-aiohttp
+# Excluded for circular dependency
+#BuildRequires: python%{python3_pkgversion}-pytest-aiohttp
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
