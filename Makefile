@@ -115,9 +115,6 @@ AWXPKGS+=python-pytest-flake8-srpm
 # Depends on aio-http and pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
 
-# Depends on pytest and and pytest-asyncio and async-timeout
-AWXPKGS+=python-asgiref-srpm
-
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
 
@@ -140,6 +137,12 @@ AWXPKGS+=python-daemon-srpm
 
 # Depends on django-extensions and coverage and flake8
 AWXPKGS+=python-django-formtools-srpm
+
+# Depends on coverage and async-generator and hypothesis
+AWXPKGS+=python-pytest-asyncio-srpm
+
+# Depends on pytest and and pytest-asyncio and async-timeout
+AWXPKGS+=python-asgiref-srpm
 
 # Depends on django and django-formtools
 AWXPKGS+=python-django-jsonfield-srpm
