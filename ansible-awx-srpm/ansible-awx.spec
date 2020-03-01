@@ -143,8 +143,13 @@ BuildRequires: python%{python3_pkgversion}-urllib3
 BuildRequires: python%{python3_pkgversion}-websocket_client
 BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
 BuildRequires: python%{python3_pkgversion}-zope-interface >= 4.7.1
+%if 0%{?fedora} || 0%{?rhel} >= 8
+BuildRequires: xmlsec1
+BuildRequires: xmlsec1-openssl
+%else
 BuildRequires: xmlsec1-devel
 BuildRequires: xmlsec1-openssl-devel
+%endif
 
 Requires: bubblewrap
 Requires: curl
