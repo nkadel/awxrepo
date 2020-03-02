@@ -24,17 +24,17 @@ Objects and routines pertaining to date and time (tempora).
 Summary:        %{summary}
 
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}dist(freezegun)
-BuildRequires:  python%{python3_pkgversion}dist(jaraco-functools) >= 1.20
-BuildRequires:  python%{python3_pkgversion}dist(pytz)
-BuildRequires:  python%{python3_pkgversion}dist(setuptools)
-BuildRequires:  python%{python3_pkgversion}dist(setuptools-scm) >= 1.15
-BuildRequires:  python%{python3_pkgversion}dist(six)
+BuildRequires:  python%{python3_pkgversion}-freezegun
+BuildRequires:  python%{python3_pkgversion}-jaraco-functools >= 1.20
+BuildRequires:  python%{python3_pkgversion}-pytz
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
+BuildRequires:  python%{python3_pkgversion}-six
 # testing Reqs
-BuildConflicts: python%{python3_pkgversion}dist(pytest) = 3.7.3
-BuildRequires:  python%{python3_pkgversion}dist(pytest) >= 3.5
-BuildRequires:  python%{python3_pkgversion}dist(pytest-flake8)
-#BuildRequires:  python%{python3_pkgversion}dist(pytest-sugar) >= 0.9.1
+BuildConflicts: python%{python3_pkgversion}-pytest = 3.7.3
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  python%{python3_pkgversion}-pytest-flake8
+#BuildRequires:  python%%{python3_pkgversion}-pytest-sugar >= 0.9.1
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
 Objects and routines pertaining to date and time (tempora).
@@ -43,9 +43,9 @@ Objects and routines pertaining to date and time (tempora).
 %package -n python-%{pypi_name}-doc
 Summary:        tempora documentation
 
-BuildRequires:  python%{python3_pkgversion}dist(sphinx)
-BuildRequires:  python%{python3_pkgversion}dist(jaraco-packaging) >= 3.2
-BuildRequires:  python%{python3_pkgversion}dist(rst-linker) >= 1.9
+BuildRequires:  python%{python3_pkgversion}-sphinx)
+BuildRequires:  python%{python3_pkgversion}-jaraco-packaging >= 3.2
+BuildRequires:  python%{python3_pkgversion}-rst-linker >= 1.9
 
 %description -n python-%{pypi_name}-doc
 Documentation for tempora
