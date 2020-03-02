@@ -67,9 +67,11 @@ EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
+EPELPKGS+=python-smmap2-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
+EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-zope-interface-srpm
 
 # Depends on pytest
