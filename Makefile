@@ -15,6 +15,7 @@ REPOBASE=file://$(PWD)
 
 EPELPKGS+=Cython-srpm
 EPELPKGS+=meson-srpm
+EPELPKGS+=http-parser-srpm
 
 # RHEL name funkiness for python-pythlakes
 EPELPKGS+=pyflakes-srpm
@@ -61,6 +62,7 @@ EPELPKGS+=python-pluggy-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
+EPELPKGS+=python-pycares-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-pytest-aiohttp-srpm
 EPELPKGS+=python-pytest-param-srpm
@@ -74,11 +76,11 @@ EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-zope-interface-srpm
 
+# Depends on pycares
+AWXPKGS+=python-aiodns-srpm
+
 # Depends on pytest
 AWXPKGS+=python-sqlparse-srpm
-
-# Depends on meson
-AWXPKGS+=http-parser-srpm
 
 # Depends on http-parser and Cython
 AWXPKGS+=python-aiohttp-srpm
@@ -113,6 +115,9 @@ AWXPKGS+=python-yarl-srpm
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
+
+# Depends on flake8 and pytest-flake8
+AWXPKGS+=python-tempora-srpm
 
 # Depends on aio-http and pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
@@ -149,7 +154,9 @@ AWXPKGS+=python-asgiref-srpm
 # Depends on django and django-formtools
 AWXPKGS+=python-django-jsonfield-srpm
 
-# Depends on pytest
+AWXPKGS+=python-service-identity-srpm
+
+# Depends on pytest and service-identity
 AWXPKGS+=python-ansible-runner-srpm
 
 # Depends on pytest
@@ -160,8 +167,6 @@ AWXPKGS+=python-trio-srpm
 
 # Depends on trio and pytest
 AWXPKGS+=python-msrest-srpm
-
-AWXPKGS+=python-service-identity-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
@@ -210,13 +215,15 @@ $(REPODIRS): $(REPOS)
 	/usr/bin/createrepo -q `dirname $@`
 
 
-.PHONY: epel epelpkgs
-epel epelpkgs:: $(EPELPKGS)
+epelpkgs: epel
+.PHONY: epel
+epel:: $(EPELPKGS)
 
 # awx pkgs depend on epelpkgs
-.PHONY: awx awxpkgs
-#awx awxpkgs:: $(EPELPKGS)
-awx awxpkgs:: $(AWXPKGS)
+awxpkgs: awx
+.PHONY: awx
+#awx:: epel %(AWXPKGS)
+awx: $(AWXPKGS)
 
 .PHONY: cfg
 cfg:: cfgs
