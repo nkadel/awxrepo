@@ -13,14 +13,9 @@ the low level APIs for WebSocket. All APIs are the synchronous functions.
 
 python-websocket-client supports only hybi-13.}
 
-%if (%{defined fedora} && 0%{?fedora} < 31) || (%{defined rhel} && 0%{?rhel} < 8)
-%bcond_without  python2
-%endif
+%bcond_with  python2
 
-%if %{defined fedora} || (%{defined rhel} && 0%{?rhel} >= 7)
 %bcond_without  python3
-%endif
-
 
 Name:               python-%{pkgname}
 Version:            0.56.0
