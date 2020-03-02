@@ -18,7 +18,7 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 BuildRequires:  gcc
-BuildRequires:  python%{python3_pkgverson}-cffi
+BuildRequires:  python%{python3_pkgversion}-cffi
 # for docs
 BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  python%{python3_pkgversion}-devel
@@ -61,14 +61,16 @@ This package contains documentation in reST and HTML formats.
 %py3_build
 
 # Build sphinx documentation
+%if 0%{?fedora}
 pushd docs/
 make html
 popd # docs
-
+%endif
 
 %install
 %py3_install
 
+%if 0%{?fedora}
 # Install html docs
 mkdir -p %{buildroot}%{_pkgdocdir}/
 cp -pr docs/_build/html %{buildroot}%{_pkgdocdir}/
@@ -78,6 +80,7 @@ mv -f %{buildroot}%{_pkgdocdir}/html/_sources/ %{buildroot}%{_pkgdocdir}/rst/
 
 # Remove buildinfo sphinx documentation
 rm -rf %{buildroot}%{_pkgdocdir}/html/.buildinfo
+%endif
 
 # Fix non-standard modes (775)
 chmod 755 %{buildroot}%{python3_sitearch}/%{srcname}/_cares.cpython-*.so
@@ -98,9 +101,9 @@ chmod 755 %{buildroot}%{python3_sitearch}/%{srcname}/_cares.cpython-*.so
 
 %files -n python-%{srcname}-doc
 %doc examples/
+%if 0%{?fedora}
 %{_pkgdocdir}/
-
-
+%endif
 
 %changelog
 * Sat Aug 24 2019 Matthieu Saulnier <fantom@fedoraproject.org> - 3.0.0-1
