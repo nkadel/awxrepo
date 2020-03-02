@@ -34,6 +34,7 @@ BuildRequires:  python%{python3_pkgversion}-six
 BuildConflicts: python%{python3_pkgversion}-pytest = 3.7.3
 BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5
 BuildRequires:  python%{python3_pkgversion}-pytest-flake8
+BuildRequires:  python%{python3_pkgversion}-more-itertools
 #BuildRequires:  python%%{python3_pkgversion}-pytest-sugar >= 0.9.1
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
