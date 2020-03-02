@@ -47,7 +47,9 @@ A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 %py3_install
 
 %check
+%if 0%{?fedora}
 %{__python3} setup.py test
+%endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
