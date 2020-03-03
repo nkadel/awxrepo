@@ -89,8 +89,6 @@ AWXPKGS+=python-aiohttp-srpm
 # Depends on ptyprocess and pluggy
 AWXPKGS+=python-pexpect-srpm
 
-AWXPKGS+=python-amqp-srpm
-
 # Depndes on unittest2
 AWXPKGS+=python-case-srpm
 
@@ -163,7 +161,10 @@ AWXPKGS+=python-ansible-runner-srpm
 # Depends on pytest
 AWXPKGS+=python-trustme-srpm
 
-# Depends on trustme
+# Depends on attrs and pytest and pytest-asyncio and more-itertools and 
+AWXPKGS+=python-outcome-srpm
+
+# Depends on trustme and outcome
 AWXPKGS+=python-trio-srpm
 
 # Depends on trio and pytest
