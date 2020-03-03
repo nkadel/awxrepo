@@ -28,6 +28,7 @@ EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-async-generator-srpm
+EPELPKGS+=python-attrs-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
@@ -69,7 +70,7 @@ EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
-EPELPKGS+=python-smmap2-srpm
+EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
