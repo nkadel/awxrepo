@@ -1,7 +1,7 @@
 %global modname smmap
 
 Name:           python-%{modname}
-Version:        2.0.3
+Version:        3.0.1
 #Release:        7%%{?dist}
 Release:        0%{?dist}
 Summary:        Sliding window memory map manager
@@ -48,10 +48,13 @@ Python 3 version.
 nosetests-%{python3_version} -v
 
 %files -n python%{python3_pkgversion}-%{modname}
-%{python3_sitelib}/%{modname}2-*.egg-info/
+%{python3_sitelib}/%{modname}-*.egg-info/
 %{python3_sitelib}/%{modname}/
 
 %changelog
+* Tue Mar 3 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 3.0.1
+- Update to 3.0.1
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.3-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
