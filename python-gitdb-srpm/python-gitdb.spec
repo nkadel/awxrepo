@@ -14,7 +14,7 @@ Group:          Development/Languages
 License:        BSD
 URL:            http://pypi.python.org/packages/source/g/%{pypi_name}/%{pypi_name}-%{version}.tar.gz#md5=44e4366b8bdfd306b075c3a52c96ae1a
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-Requires:       python-smmap
+Requires:       python-smmap >= 3.0.1
 BuildArch:      noarch
 
 %if 0%{?rhel}
