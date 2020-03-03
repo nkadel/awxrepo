@@ -40,7 +40,9 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-curio
 %if 0%{?rhel}
+BuildRequires:  python%{python3_pkgversion}-more-itertools >= 4.0.0
 BuildRequires:  python%{python3_pkgversion}-contextvars
+BuildRequires:  python%{python3_pkgversion}-immutables
 %endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
 
