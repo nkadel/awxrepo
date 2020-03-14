@@ -41,24 +41,22 @@ relevant RFCs too.
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modname}}
 BuildRequires:  python2-devel
-BuildRequires:  python2dist(setuptools)
+BuildRequires:  python2-setuptools)
 %if %{with check}
-BuildRequires:  python2dist(attrs)
-BuildRequires:  python2dist(idna) >= 0.6
-BuildRequires:  python2dist(ipaddress)
-BuildRequires:  python2dist(pyasn1)
-BuildRequires:  python2dist(pyasn1-modules)
-#BuildRequires:  python2dist(pyopenssl) >= 0.14
-BuildRequires:  python2dist(pyOpenSSL) >= 0.14
-BuildRequires:  python2dist(pytest)
+BuildRequires:  python2-attrs
+BuildRequires:  python2-idna >= 0.6
+BuildRequires:  python2-ipaddress
+BuildRequires:  python2-pyasn1
+BuildRequires:  python2-pyasn1-modules
+BuildRequires:  python2-pytest
 %endif
-Requires:       python2dist(attrs)
-Requires:       python2dist(pyasn1)
-Requires:       python2dist(pyasn1-modules)
-BuildRequires:  python2dist(pyOpenSSL) >= 0.14
-#Requires:       python2dist(pyopenssl) >= 0.14
+Requires:       python2-attrs
+Requires:       python2-pyasn1
+Requires:       python2-pyasn1-modules
+Requires:       python2-pyOpenSSL >= 0.14
+#Requires:       python2-pyopenss) >= 0.14
 %if 0%{?fedora}
-Recommends:     python2dist(idna) >= 0.6
+Recommends:     python2-idna) >= 0.6
 %endif
 
 %description -n python2-%{modname} %{_description}
@@ -71,24 +69,24 @@ Python 2 version.
 Summary:        %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}dist(setuptools)
-BuildRequires:  python%{python3_pkgversion}dist(sphinx)
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-sphinx
 %if %{with check}
-BuildRequires:  python%{python3_pkgversion}dist(attrs)
-BuildRequires:  python%{python3_pkgversion}dist(idna) >= 0.6
-BuildRequires:  python%{python3_pkgversion}dist(pyasn1)
-BuildRequires:  python%{python3_pkgversion}dist(pyasn1-modules)
-#BuildRequires:  python%%{python3_pkgversion}dist(pyopenssl) >= 0.14
-BuildRequires:  python%{python3_pkgversion}dist(pyOpensSSL) >= 0.14
-BuildRequires:  python%{python3_pkgversion}dist(pytest)
+BuildRequires:  python%{python3_pkgversion}-attrs
+BuildRequires:  python%{python3_pkgversion}-idna >= 0.6
+BuildRequires:  python%{python3_pkgversion}-pyasn1
+BuildRequires:  python%{python3_pkgversion}-pyasn1-modules
+#BuildRequires:  python%%{python3_pkgversion}-pyopensssl >= 0.14
+BuildRequires:  python%{python3_pkgversion}-pyOpenSSL >= 0.14
+BuildRequires:  python%{python3_pkgversion}-pytest
 %endif
-Requires:       python%{python3_pkgversion}dist(attrs)
-Requires:       python%{python3_pkgversion}dist(pyasn1)
-Requires:       python%{python3_pkgversion}dist(pyasn1-modules)
-#Requires:       python%%{python3_pkgversion}dist(pyopenssl) >= 0.14
-Requires:       python%{python3_pkgversion}dist(pyOpenSSL) >= 0.14
+Requires:       python%{python3_pkgversion}-attrs
+Requires:       python%{python3_pkgversion}-pyasn1
+Requires:       python%{python3_pkgversion}-pyasn1-modules
+#Requires:       python%%{python3_pkgversion}-pyopenssl >= 0.14
+Requires:       python%{python3_pkgversion}-pyOpenSSL >= 0.14
 %if 0%{?fedora}
-Recommends:     python%{python3_pkgversion}dist(idna) >= 0.6
+Recommends:     python%{python3_pkgversion}-idna) >= 0.6
 %endif
 
 %description -n python%{python3_pkgversion}-%{modname} %{_description}
@@ -157,6 +155,9 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} -v
 %endif
 
 %changelog
+* Sat Mar 14 2020 Nico KAdel-Garcia <nkadel@gmail.com>
+- Discard python dist notation for stability with RHEL
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 18.1.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
