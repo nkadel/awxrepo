@@ -22,6 +22,9 @@ A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 %package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+# This package screws up provides, manually override
+Provides:       python%{python3_pkgversion}dist(zipp) = %{version}
+Provides:       python3dist(zipp) = %{version}
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
