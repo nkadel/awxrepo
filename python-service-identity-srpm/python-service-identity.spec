@@ -76,7 +76,7 @@ BuildRequires:  python%{python3_pkgversion}-attrs
 BuildRequires:  python%{python3_pkgversion}-idna >= 0.6
 BuildRequires:  python%{python3_pkgversion}-pyasn1
 BuildRequires:  python%{python3_pkgversion}-pyasn1-modules
-#BuildRequires:  python%%{python3_pkgversion}-pyopensssl >= 0.14
+#BuildRequires:  python%%{python3_pkgversion}-pyopenssl >= 0.14
 BuildRequires:  python%{python3_pkgversion}-pyOpenSSL >= 0.14
 BuildRequires:  python%{python3_pkgversion}-pytest
 %endif
