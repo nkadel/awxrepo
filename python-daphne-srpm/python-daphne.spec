@@ -51,12 +51,12 @@ License:        BSD (FIXME:No SPDX)
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
-#BuildRequires:  python2-asgiref >= 8.10
+#BuildRequires:  python2-asgiref >= 3.2
 #BuildRequires:  python2-autobahn >= 8.10
 #BuildRequires:  python2-twisted >= 10.7
 # Added manually
 BuildRequires:  python2-pytest-runner
-Requires:  python2-asgiref >= 8.10
+Requires:  python2-asgiref >= 3.2
 Requires:  python2-autobahn >= 8.10
 Requires:  python2-twisted >= 10.7
 %{?python_provide:%python_provide python2-%{pypi_name}}
@@ -86,12 +86,12 @@ License:        BSD (FIXME:No SPDX)
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-#BuildRequires:  python%%{python3_pkgversion}-asgiref >= 8.10
+#BuildRequires:  python%%{python3_pkgversion}-asgiref >= 3.2
 #BuildRequires:  python%%{python3_pkgversion}-autobahn >= 8.10
 #BuildRequires:  python%%{python3_pkgversion}-twisted >= 10.7
 # Added manually
 BuildRequires:  python%{python3_pkgversion}-pytest-runner
-Requires:  python%{python3_pkgversion}-asgiref >= 8.10
+Requires:  python%{python3_pkgversion}-asgiref >= 3.2
 Requires:  python%{python3_pkgversion}-autobahn >= 8.10
 Requires:  python%{python3_pkgversion}-twisted >= 10.7
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
