@@ -29,7 +29,6 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %description
 %{desc}
 
-
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
@@ -55,10 +54,8 @@ Requires: python%{python3_pkgversion}-requests
 Requires: python%{python3_pkgversion}-requests-oauthlib
 Requires: python%{python3_pkgversion}-six
 
-
 %description -n python%{python3_pkgversion}-%{srcname}
 %{desc}
-
 
 %prep
 %autosetup -p1 -n social-core-%{version}
@@ -72,20 +69,19 @@ sed -i -e 's|defusedxml>=0.5.0rc1|defusedxml>=0.5.0|' requirements-python3.txt
 %build
 %py3_build
 
-
 %install
 %py3_install
 
-
+# Checks timeout on rhel
+%if 0%{?fedora}
 %check
 %__python3 setup.py test
-
+%endif
 
 %files -n python%{python3_pkgversion}-%{srcname}
 %license LICENSE
 %doc README.md CHANGELOG.md
 %{python3_sitelib}/*
-
 
 %changelog
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.7.0-6
