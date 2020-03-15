@@ -51,6 +51,8 @@ License:        MIT
 
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
+Requires:  python2-azure-keyvault-secrets
+Requires:  python2-azure-keyvault-keys
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -77,6 +79,8 @@ License:        MIT
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+Requires:  python%{python3_pkgversion}-azure-keyvault-secrets
+Requires:  python%{python3_pkgversion}-azure-keyvault-keys
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
