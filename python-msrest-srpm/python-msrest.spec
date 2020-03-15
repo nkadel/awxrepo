@@ -41,7 +41,7 @@ BuildArch:      noarch
 
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{summary}
-Requires:       %{py3_dist trio}
+Requires:       python%{python3_pkgversion}-trio
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
 %description -n python%{python3_pkgversion}-%{srcname}
