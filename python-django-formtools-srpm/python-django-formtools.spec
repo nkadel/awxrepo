@@ -55,30 +55,30 @@ This is the associated documentation.
 %endif
 
 %if %{with_python3}
-%package -n python3-%{pypi_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        A set of high-level abstractions for Django forms
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-sphinx
-BuildRequires:  python3-django >= 1.7
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-django >= 1.7
 # Required for testing
-BuildRequires:  python3-flake8
-BuildRequires:  python3-coverage
+BuildRequires:  python%{python3_pkgversion}-flake8
+BuildRequires:  python%{python3_pkgversion}-coverage
 
-Requires:       python3-django >= 1.7
+Requires:       python%{python3_pkgversion}-django >= 1.7
 
-%description -n python3-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
-%package -n python3-%{pypi_name}-doc
+%package -n python%{python3_pkgversion}-%{pypi_name}-doc
 Summary:        A set of high-level abstractions for Django forms - documentation
-%{?python_provide:%python_provide python3-%{pypi_name}-doc}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}-doc}
 
-Requires:       python3-%{pypi_name} = %{version}-%{release}
+Requires:       python%{python3_pkgversion}-%{pypi_name} = %{version}-%{release}
 
-%description -n python3-%{pypi_name}-doc
+%description -n python%{python3_pkgversion}-%{pypi_name}-doc
 Django's "formtools" is a set of high-level abstractions for Django forms.
 
 This is the associated documentation.
@@ -103,7 +103,7 @@ PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python-coverage run %{python2
 %endif
 
 %if %{with_python3}
-PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python3-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
+PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
 %endif
 %endif
 
@@ -135,7 +135,7 @@ rm -rf html/.{doctrees,buildinfo}
 %endif
 
 %if %{with_python3}
-%files -n python3-%{pypi_name} -f py3lang
+%files -n python%{python3_pkgversion}-%{pypi_name} -f py3lang
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/formtools
@@ -143,7 +143,7 @@ rm -rf html/.{doctrees,buildinfo}
 # find_lang will find both python2 and python3 locale files
 %exclude %{python2_sitelib}/formtools/locale
 
-%files -n python3-%{pypi_name}-doc
+%files -n python%{python3_pkgversion}-%{pypi_name}-doc
 %if %{with_python2}
 doc html
 %endif
