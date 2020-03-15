@@ -2,7 +2,8 @@
 
 Name:           python-%{pypi_name}
 Version:        3.1.0
-Release:        5%{?dist}
+#Release:        5%%{?dist}
+Release:        0%{?dist}
 Summary:        Python 3 port of the python-openid library
 License:        ASL 2.0
 URL:            https://github.com/necaris/%{pypi_name}
@@ -14,6 +15,15 @@ BuildArch:      noarch
 BuildRequires:  epel-rpm-macros
 %endif
 
+%description
+This started out as a fork of the Python OpenID library,
+with changes to make it Python 3 compatible.
+It's now a port of that library,
+including cleanups and updates to the code in general.
+
+%package -n python%{python3_pkgversion}-%{pypi_name}
+Summary:        Python 3 port of the python-openid library
+
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-django
 BuildRequires:  python%{python3_pkgversion}-psycopg2
@@ -23,16 +33,16 @@ BuildRequires:  python%{python3_pkgversion}-defusedxml
 Requires:       python%{python3_pkgversion}-defusedxml
 
 # Deal with loony tunes inconstent Fedora discard of python- prefix
-Provides:       %{pypi_name}
-Obsoletes:      %{pypi_name} <= %{version}
-Conflicts:	%{pypi_name}
+Provides:       python3-openid = %{version}-%{release}
+Obsoletes:      python3-openid <= %{version}
+Conflicts:	python3-openid
 
-%description
+
+%description -n python%{python3_pkgversion}-%{pypi_name}
 This started out as a fork of the Python OpenID library,
 with changes to make it Python 3 compatible.
 It's now a port of that library,
 including cleanups and updates to the code in general.
-
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
@@ -53,7 +63,7 @@ find %{buildroot} -name "*.po" | xargs rm -f
 %check
 %{__python3} -m unittest openid.test.test_suite
 
-%files
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc LICENSE NEWS.md
 %dir %{python3_sitelib}/openid
 %{python3_sitelib}/openid/*.py
