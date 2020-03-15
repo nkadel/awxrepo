@@ -35,7 +35,6 @@ Summary:        Pytest support for asyncio
 BuildRequires:  python%{python3_pkgversion}-devel
 %if %{with tests}
 BuildRequires:  python%{python3_pkgversion}-pytest >= 3.0.6
-#BuildRequires:  %py3_dist coverage
 BuildRequires:  python%{python3_pkgversion}-coverage
 BuildRequires:  python%{python3_pkgversion}-async-generator >= 1.3
 # RHEL8.0 has 3.44.24, but we really need 3.64
