@@ -50,7 +50,7 @@ pytest-%{python3_version} test_requests_futures.py::RequestsTestCase::test_adapt
 %endif
 
 
-%files
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/requests_futures/
