@@ -2,7 +2,7 @@
 
 Name:           %{pypi_name}
 Version:        1.6.0
-#Release:        2%{?dist}
+#Release:        2%%{?dist}
 Release:        0%{?dist}
 Summary:        Add SAML support to your Python software using this library
 
@@ -20,13 +20,16 @@ BuildRequires:  epel-rpm-macros
 This toolkit lets you turn your Python application into a SP
 (Service Provider) that can be connected to an IdP (Identity Provider).
 
-
 %package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Add SAML support to your Python software using this library
 
-BuildRequires:  python%{python3_pkgversion}=devel
-BuildRequires: %{py3_dist freezegun isodate xmlsec defusedxml}
-Requires: %{py3_dist isodate xmlsec defusedxml}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-freezegun
+BuildRequires:  python%{python3_pkgversion}-isodate
+BuildRequires:  python%{python3_pkgversion}-xmlsec
+BuildRequires:  python%{python3_pkgversion}-defusedxml
+Requires:       python%{python3_pkgversion}-isodate
+Requires:       python%{python3_pkgversion}-defusedxml
 
 # Replace badly named python3-saml package
 Provides:   python3-saml
@@ -37,30 +40,26 @@ Obsoletes:  python3-saml >= %{version}-%{release}
 This toolkit lets you turn your Python application into a SP
 (Service Provider) that can be connected to an IdP (Identity Provider).
 
-
 %prep
 %autosetup -p1
-
 
 %build
 # This is already relaxed upstream, just not in a release yet.
 sed -i -e 's|defusedxml==0.5.0|defusedxml>=0.5.0|' setup.py
 %py3_build
 
-
 %install
 %py3_install
 
-
+%if 0%{?fedora}
 %check
 %__python3 setup.py test
-
+%endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.md
 %{python3_sitelib}/*
-
 
 %changelog
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.6.0-2
