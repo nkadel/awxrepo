@@ -27,12 +27,12 @@ Summary:        %{summary}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with check}
-BuildRequires:  python3dist(pytest-runner)
-BuildRequires:  python3dist(pytest)
-BuildRequires:  python3dist(pytest-asyncio)
-BuildRequires:  python3dist(pytest-cov)
-BuildRequires:  python3dist(aiohttp) > 2.3
-BuildRequires:  python3dist(idna) >= 2
+BuildRequires:  python%{python3_pkgversion}-pytest-runner
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-pytest-asyncio
+BuildRequires:  python%{python3_pkgversion}-pytest-cov
+BuildRequires:  python%{python3_pkgversion}-aiohttp > 2.3
+BuildRequires:  python%{python3_pkgversion}-idna >= 2
 %endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{modanme}}
 
