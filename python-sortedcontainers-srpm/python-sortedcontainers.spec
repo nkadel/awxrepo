@@ -23,21 +23,21 @@ pure-Python, and fast as C-extensions.
 
 %description %{_description}
 
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-pytest
-BuildRequires:  python3-matplotlib
-BuildRequires:  python3-numpy
-BuildRequires:  python3-scipy
-BuildRequires:  python3-sphinx
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-matplotlib
+BuildRequires:  python%{python3_pkgversion}-numpy
+BuildRequires:  python%{python3_pkgversion}-scipy
+BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  dvipng
 BuildRequires:  tex(anyfontsize.sty)
 BuildRequires:  tex(bm.sty)
 
-%description -n python3-%{srcname} %{_description}
+%description -n python%{python3_pkgversion}-%{srcname} %{_description}
 
 
 %package -n python-%{srcname}-doc
@@ -71,7 +71,7 @@ PYTHONPATH="%{buildroot}%{python3_sitelib}" \
 popd
 
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{srcname}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{srcname}
