@@ -46,7 +46,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 #Requires:       python2-django >= 1.11
 #Requires:       python2-python-django >= 3.1
-Requires:       python2-django >= 3.1
+Requires:       python2-django >= 1.11
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -69,7 +69,7 @@ BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 #Requires:       python%%{python3_pkgversion}-django >= 1.11
 #Requires:       python%%{python3_pkgversion}-python-django >= 3.1
-Requires:       python%{python3_pkgversion}-django >= 3.1
+Requires:       python%{python3_pkgversion}-django >= 1.11
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
