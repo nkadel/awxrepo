@@ -13,8 +13,12 @@ Source:         https://github.com/mesonbuild/meson/archive/%{version}/%{name}-%
 BuildArch:      noarch
 Obsoletes:      %{name}-gui < 0.31.0-3
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 # For RHEL < 8
 BuildRequires:  %{rpmmacrodir}
 
