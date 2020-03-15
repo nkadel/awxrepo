@@ -13,16 +13,16 @@ URL:            https://github.com/saghul/pycares
 Source0:        https://github.com/saghul/%{srcname}/archive/%{srcname}-%{version}.tar.gz
 Patch0:         fix-version_pycares_docs_conf.py.patch
 
-BuildRequires:  gcc
-BuildRequires:  python3-cffi
-# for docs
-BuildRequires:  python3-sphinx
-BuildRequires:  python3-devel
-BuildRequires:  python3-sphinx_rtd_theme
-
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
+
+BuildRequires:  gcc
+BuildRequires:  python%{python3_pkgversion}-cffi
+# for docs
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-sphinx_rtd_theme
 
 %description
 pycares is a Python module which provides an interface to
