@@ -74,23 +74,23 @@ BuildRequires:  python2-setuptools
 %{desc}
 
 %if %{with python3}
-%package -n python3-celery
+%package -n python%{python3_pkgversion}-celery
 Summary:        Distributed Task Queue
 
-%{?python_provide:%python_provide python3-celery}
+%{?python_provide:%python_provide python%{python3_pkgversion}-celery}
 
-Requires:       python3-amqp
-Requires:       python3-billiard >= 1:3.5.0.2
-Requires:       python3-kombu >= 4.2.0
-Requires:       python3-pytz
-Requires:       python3-setuptools
+Requires:       python%{python3_pkgversion}-amqp
+Requires:       python%{python3_pkgversion}-billiard >= 1:3.5.0.2
+Requires:       python%{python3_pkgversion}-kombu >= 4.2.0
+Requires:       python%{python3_pkgversion}-pytz
+Requires:       python%{python3_pkgversion}-setuptools
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-rpm-macros
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-rpm-macros
+BuildRequires:  python%{python3_pkgversion}-setuptools
 
 
-%description -n python3-celery
+%description -n python%{python3_pkgversion}-celery
 %{desc}
 
 %endif
@@ -158,7 +158,7 @@ popd
 
 
 %if %{with python3}
-%files -n python3-celery
+%files -n python%{python3_pkgversion}-celery
 %license LICENSE
 %doc README.rst TODO CONTRIBUTORS.txt examples
 %if 0%{?fedora} >= 30
