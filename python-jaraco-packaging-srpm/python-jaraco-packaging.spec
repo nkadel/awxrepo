@@ -52,8 +52,8 @@ version or author name.
 %package -n python-%{pkg_name}-doc
 Summary:        jaraco.packaging documentation
 
-BuildRequires:  python%{python3_pkgversion}dist(sphinx)
-BuildRequires:  python%{python3_pkgversion}dist(rst-linker)
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-rst-linker
 
 %description -n python-%{pkg_name}-doc
 Documentation for jaraco.packaging
