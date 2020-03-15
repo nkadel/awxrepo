@@ -23,11 +23,7 @@ BuildRequires:  epel-rpm-macros
 
 BuildRequires:  python%{python3_pkgversion}-devel
 # python3-tools is inconsistently labeled by RHEL
-%if 0%{rhel} >= 8 || 0%{?fedora}
-BuildRequires:  python%%{python3_pkgversion}-tools
-%else
-BuildRequires:  python3-tools
-%endif
+BuildRequires:  python%{python3_pkgversion}-tools
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-py
 
