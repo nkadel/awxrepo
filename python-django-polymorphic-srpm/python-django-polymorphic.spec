@@ -59,8 +59,6 @@ License:        BSD License (FIXME:No SPDX)
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-# requires stanza of py2pack
-# install_requires stanza of py2pack
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
