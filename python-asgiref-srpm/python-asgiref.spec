@@ -20,8 +20,9 @@ package includes ASGI base libraries, such as:\
 
 
 Name:           python-%{pkgname}
-Version:        2.3.2
-Release:        3%{?dist}
+Version:        3.2.5
+#Release:        3%{?dist}
+Release:        0%{?dist}
 Summary:        ASGI specs, helper code, and adapters
 License:        BSD
 URL:            https://github.com/django/asgiref
