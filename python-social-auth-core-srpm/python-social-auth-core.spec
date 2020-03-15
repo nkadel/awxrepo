@@ -33,27 +33,27 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
-BuildRequires: %{py3_dist cryptography}
-BuildRequires: %{py3_dist unittest2}
-BuildRequires: %{py3_dist nose}
-BuildRequires: %{py3_dist httpretty}
-BuildRequires: %{py3_dist defusedxml}
-BuildRequires: %{py3_dist python3-openid}
-BuildRequires: %{py3_dist python3-saml}
-BuildRequires: %{py3_dist requests}
-BuildRequires: %{py3_dist oauthlib}
-BuildRequires: %{py3_dist requests-oauthlib}
-BuildRequires: %{py3_dist six}
-BuildRequires: %{py3_dist PyJWT}
-Requires: %{py3_dist cryptography}
-Requires: %{py3_dist defusedxml}
-Requires: %{py3_dist python3-openid}
-Requires: %{py3_dist python3-saml}
-Requires: %{py3_dist requests}
-Requires: %{py3_dist oauthlib}
-Requires: %{py3_dist requests-oauthlib}
-Requires: %{py3_dist six}
-Requires: %{py3_dist PyJWT}
+BuildRequires: python%{python3_pkgversion}-cryptography
+BuildRequires: python%{python3_pkgversion}-defusedxml
+BuildRequires: python%{python3_pkgversion}-httpretty
+BuildRequires: python%{python3_pkgversion}-nose
+BuildRequires: python%{python3_pkgversion}-oauthlib
+BuildRequires: python%{python3_pkgversion}-pyjwt
+BuildRequires: python%{python3_pkgversion}-python3-openid
+BuildRequires: python%{python3_pkgversion}-python3-saml
+BuildRequires: python%{python3_pkgversion}-requests
+BuildRequires: python%{python3_pkgversion}-requests-oauthlib
+BuildRequires: python%{python3_pkgversion}-six
+BuildRequires: python%{python3_pkgversion}-unittest2
+Requires: python%{python3_pkgversion}-cryptography
+Requires: python%{python3_pkgversion}-defusedxml
+Requires: python%{python3_pkgversion}-oauthlib
+Requires: python%{python3_pkgversion}-pyjwt
+Requires: python%{python3_pkgversion}-python3-openid
+Requires: python%{python3_pkgversion}-python3-saml
+Requires: python%{python3_pkgversion}-requests
+Requires: python%{python3_pkgversion}-requests-oauthlib
+Requires: python%{python3_pkgversion}-six
 
 
 %description -n python%{python3_pkgversion}-%{srcname}
