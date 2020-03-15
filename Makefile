@@ -38,6 +38,7 @@ EPELPKGS+=python-billiard-srpm
 EPELPKGS+=python-build-srpm
 EPELPKGS+=python-celery-srpm
 EPELPKGS+=python-channels-srpm
+EPELPKGS+=python-commonmark-srpm
 EPELPKGS+=python-contextvars-srpm
 EPELPKGS+=python-coverage-srpm
 EPELPKGS+=python-curio-srpm
@@ -46,14 +47,21 @@ EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
 EPELPKGS+=python-django-extensions-srpm
+EPELPKGS+=python-django-jsonfield-srpm
+EPELPKGS+=python-django-oauth-toolkit-srpm
+EPELPKGS+=python-django-pglocks-srpm
 EPELPKGS+=python-django-solo-srpm
+EPELPKGS+=python-django-taggit-srpm
+EPELPKGS+=python-djangorestframework-srpm
+EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-gitdb-srpm
+EPELPKGS+=python-httpretty-srpm
 EPELPKGS+=python-hypothesis-srpm
-EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-idna-ssl-srpm
+EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
@@ -68,29 +76,37 @@ EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pycares-srpm
+EPELPKGS+=python-pygerduty-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-pytest-aiohttp-srpm
 EPELPKGS+=python-pytest-param-srpm
+EPELPKGS+=python-python-logstash-srpm
 EPELPKGS+=python-python-mimeparse-srpm
+EPELPKGS+=python-python3-openid-srpm
+EPELPKGS+=python-python3-saml-srpm
+EPELPKGS+=python-recommonmark-srpm
+EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
-<<<<<<< HEAD
+EPELPKGS+=python-smmap-srpm
+EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
 EPELPKGS+=python-sqlparse-srpm
-=======
-EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-typing-extensions-srpm
->>>>>>> origin/master
+EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-zope-interface-srpm
 
+# Depnds on python3-saml and python3-openid
+AWXPKGS+=python-social-auth-core-srpm
+
 # Depends on pycares
-AWXPKGA+=python-aiodns-srpm
+AWXPKGS+=python-aiodns-srpm
 
 # Depends on curio and contextvars
-AWXPKGA+=python-sniffio-srpm
+AWXPKGS+=python-sniffio-srpm
 
 # Depends on hypothesis
 AWXPKGS+=python-attrs-srpm
@@ -100,6 +116,12 @@ AWXPKGS+=python-sqlparse-srpm
 
 # Depends on http-parser and Cython
 AWXPKGS+=python-aiohttp-srpm
+
+# Depends on aiohttp
+AWXPKGS+=python-black-srpm
+
+# Depends on aiodns and aiohttp and black
+AWXPKGS+=python-slackclient-srpm
 
 # Depends on ptyprocess and pluggy
 AWXPKGS+=python-pexpect-srpm
@@ -120,23 +142,18 @@ AWXPKGS+=python-django-srpm
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
 
-<<<<<<< HEAD
 # Depends on pytest
 AWXPKGS+=python-cryptography-srpm
-=======
+
 # Depends on pytest and more-itertools
 AWXPKGS+=python-multidict-srpm
 
 # Depends on pytest and Cython and multidict and more-itertools
 AWXPKGS+=python-yarl-srpm
->>>>>>> origin/master
 
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
-
-# Depends on flake8 and pytest-flake8
-AWXPKGS+=python-tempora-srpm
 
 # Depends on aio-http and pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
@@ -161,6 +178,9 @@ AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 AWXPKGS+=python-daemon-srpm
 
+# Depends on flake8 and pytest-flake8 and jaraco-functools
+AWXPKGS+=python-tempora-srpm
+
 # Depends on django-extensions and coverage and flake8
 AWXPKGS+=python-django-formtools-srpm
 
@@ -178,22 +198,16 @@ AWXPKGS+=python-service-identity-srpm
 # Depends on pytest and service-identity
 AWXPKGS+=python-ansible-runner-srpm
 
-AWXPKGS+=python-service-identity-srpm
-
 # Depends on pytest and service-dentity
 AWXPKGS+=python-trustme-srpm
 
-<<<<<<< HEAD
-# Depends on trustme
-=======
 # Depends on attrs and pytest and pytest-asyncio and more-itertools and 
 AWXPKGS+=python-outcome-srpm
 
 # Depends on trustme and outcome
->>>>>>> origin/master
 AWXPKGS+=python-trio-srpm
 
-# Depends on trio and pytest
+# Depends on aiodns and httpretty and pytest and recommonmark and trio
 AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
