@@ -8,7 +8,8 @@
 Summary: Python wrapper module around the OpenSSL library
 Name: pyOpenSSL
 Version: 18.0.0
-Release: 1%{?dist}
+#Release: 1%%{?dist}
+Release: 0%{?dist}
 Source0: https://files.pythonhosted.org/packages/source/p/pyOpenSSL/pyOpenSSL-%{version}.tar.gz
 
 BuildArch: noarch
@@ -16,16 +17,20 @@ License: ASL 2.0
 Group: Development/Libraries
 URL: https://pyopenssl.readthedocs.org/
 
-BuildRequires: python3-setuptools
-BuildRequires: python3-sphinx
-BuildRequires: python3-sphinx_rtd_theme
+%if 0%{?rhel}
+BuildRequires: epel-rpm-macros
+%endif
+
+BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires: python%{python3_pkgversion}-sphinx
+BuildRequires: python%{python3_pkgversion}-sphinx_rtd_theme
 
 %if %{with python2}
 BuildRequires: python2-devel
 BuildRequires: python2-cryptography >= 2.2.1
 %endif
-BuildRequires: python3-devel
-BuildRequires: python3-cryptography >= 2.2.1
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-cryptography >= 2.2.1
 
 %description
 High-level wrapper around a subset of the OpenSSL library, includes among others
@@ -50,12 +55,12 @@ High-level wrapper around a subset of the OpenSSL library, includes among others
  * Extensive error-handling mechanism, mirroring OpenSSL's error codes
 %endif
 
-%package -n python3-pyOpenSSL
+%package -n python%{python3_pkgversion}-pyOpenSSL
 Summary: Python 3 wrapper module around the OpenSSL library
-Requires: python3-cryptography >= 2.2.1
-%{?python_provide:%python_provide python3-pyOpenSSL}
+Requires: python%{python3_pkgversion}-cryptography >= 2.2.1
+%{?python_provide:%python_provide python%{python3_pkgversion}-pyOpenSSL}
 
-%description -n python3-pyOpenSSL
+%description -n python%{python3_pkgversion}-pyOpenSSL
 High-level wrapper around a subset of the OpenSSL library, includes among others
  * SSL.Connection objects, wrapping the methods of Python's portable
    sockets
@@ -98,7 +103,7 @@ rm doc/_build/html/.buildinfo
 %{python_sitelib}/pyOpenSSL-*.egg-info
 %endif
 
-%files -n python3-pyOpenSSL
+%files -n python%{python3_pkgversion}-pyOpenSSL
 %license LICENSE
 %{python3_sitelib}/OpenSSL/
 %{python3_sitelib}/pyOpenSSL-*.egg-info
