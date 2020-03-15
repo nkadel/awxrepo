@@ -2,7 +2,8 @@
 
 Name:           python-typing-extensions
 Version:        3.7.4
-Release:        2%{?dist}
+#Release:        2%%{?dist}
+Release:        0%{?dist}
 Summary:        Python Typing Extensions
 
 License:        Python
@@ -32,13 +33,13 @@ Users of other Python versions should continue to install and use the typing
 module from PyPi instead of using this one unless specifically writing code that
 must be compatible with multiple Python versions or requires experimental types.
 
-%package -n python3-typing-extensions
+%package -n python%{python3_pkgversion}-typing-extensions
 Summary:        %{summary}
-BuildRequires:  python3-devel
-BuildRequires:  python3-test
-%{?python_provide:%python_provide python3-%{pypi_name}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-test
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python3-typing-extensions
+%description -n python%{python3_pkgversion}-typing-extensions
 Typing Extensions - Backported and Experimental Type Hints for Python
 
 The typing module was added to the standard library in Python 3.5 on a
@@ -67,7 +68,7 @@ must be compatible with multiple Python versions or requires experimental types.
 %check
 %{__python3} src_py3/test_typing_extensions.py
 
-%files -n python3-typing-extensions
+%files -n python%{python3_pkgversion}-typing-extensions
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
