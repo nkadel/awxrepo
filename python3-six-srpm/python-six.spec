@@ -57,16 +57,16 @@ Python 2 version.
 
 
 %if %{with python3}
-%package -n python3-%{modname}
+%package -n python%{python3_pkgversion}-%{modname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{modname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
 Obsoletes:      platform-python-%{modname} < %{version}-%{release}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 
 %if %{with tests}
-BuildRequires:  python3-pytest
-BuildRequires:  python3-tkinter
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-tkinter
 %endif
 
 %if 0%{?build_wheel}
@@ -74,7 +74,7 @@ BuildRequires:  python%{python3_pkgversion}-pip
 BuildRequires:  python%{python3_pkgversion}-wheel
 %endif
 
-%description -n python3-%{modname} %{_description}
+%description -n python%{python3_pkgversion}-%{modname} %{_description}
 Python 3 version.
 
 %endif
@@ -140,7 +140,7 @@ py.test-3 -rfsxX test_six.py
 %endif
 
 %if %{with python3}
-%files -n python3-%{modname}
+%files -n python%{python3_pkgversion}-%{modname}
 %license LICENSE
 %doc README.rst documentation/index.rst
 %{python3_sitelib}/%{modname}-*.dist-info/
