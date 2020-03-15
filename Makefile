@@ -33,7 +33,9 @@ EPELPKGS+=python-billiard-srpm
 EPELPKGS+=python-build-srpm
 EPELPKGS+=python-celery-srpm
 EPELPKGS+=python-channels-srpm
+EPELPKGS+=python-contextvars-srpm
 EPELPKGS+=python-coverage-srpm
+EPELPKGS+=python-curio-srpm
 EPELPKGS+=python-daphne-srpm
 EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
@@ -44,6 +46,8 @@ EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-gitdb-srpm
+EPELPKGS+=python-hypothesis-srpm
+EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
@@ -52,19 +56,30 @@ EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
+EPELPKGS+=python-outcome-srpm
 EPELPKGS+=python-pluggy-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
+EPELPKGS+=python-pycares-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
+EPELPKGS+=python-sortedcontainers-srpm
 EPELPKGS+=python-sqlparse-srpm
-EPELPKGS+=python-trio-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on pycares
+AWXPKGA+=python-aiodns-srpm
+
+# Depends on curio and contextvars
+AWXPKGA+=python-sniffio-srpm
+
+# Depends on hypothesis
+AWXPKGS+=python-attrs-srpm
 
 # Depends on ptyprocess and pluggy
 AWXPKGS+=python-pexpect-srpm
@@ -87,8 +102,8 @@ AWXPKGS+=python-django-srpm
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
 
-# Depends on trio and pytest
-AWXPKGS+=python-msrest-srpm
+# Depends on pytest
+AWXPKGS+=python-cryptography-srpm
 
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
@@ -122,10 +137,16 @@ AWXPKGS+=python-django-jsonfield-srpm
 
 AWXPKGS+=python-ansible-runner-srpm
 
-# Depends on pytest
+AWXPKGS+=python-service-identity-srpm
+
+# Depends on pytest and service-dentity
 AWXPKGS+=python-trustme-srpm
 
-AWXPKGS+=python-service-identity-srpm
+# Depends on trustme
+AWXPKGS+=python-trio-srpm
+
+# Depends on trio and pytest
+AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
