@@ -9,7 +9,8 @@
 
 Name:           Cython
 Version:        0.28.1
-Release:        7%{?dist}
+#Release:        7%{?dist}
+Release:        0%{?dist}
 Summary:        Language for writing Python extension modules
 
 License:        ASL 2.0
@@ -21,6 +22,10 @@ Source:         https://github.com/cython/cython/archive/%{version}/%{srcname}-%
 # go away on python2.
 # Fixed upstream: https://github.com/cython/cython/commit/9ddac7152091eac62830fea4f38b4d7f9edb6a86
 Patch0:         replace-gcc-attribute-os-with-cold.patch
+
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
 
 BuildRequires:  gcc
 
@@ -46,13 +51,13 @@ Python 2 version.
 %endif
 
 %if %{with python3}
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{srcname}}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 
-%description -n python3-%{srcname} %{_description}
+%description -n python%{python3_pkgversion}-%{srcname} %{_description}
 
 Python 3 version.
 
@@ -103,7 +108,7 @@ rm -rf %{buildroot}%{python2_sitelib}/setuptools/tests
 %endif
 
 %if %{with python3}
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{srcname}
 %license LICENSE.txt
 %doc *.txt Demos Doc Tools
 %{_bindir}/cython3
