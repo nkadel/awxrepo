@@ -22,7 +22,7 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 # For RHEL < 8
 BuildRequires:  %{rpmmacrodir}
 
-Requires:       python%{python3_version}dist(setuptools)
+Requires:       python%{python3_version}-setuptools
 Requires:       ninja-build
 
 %description
