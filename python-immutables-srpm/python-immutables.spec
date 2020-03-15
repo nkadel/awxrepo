@@ -5,6 +5,9 @@
 #
 
 %global with_python3 1
+# Fedora and RHEL split python2 and python3
+# Older RHEL requires EPEL and python34 or python36
+
 %global with_python2 0
 
 %global pypi_name immutables
@@ -19,15 +22,10 @@ License:        Apache-2.0
 Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
 Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-
 %if 0%{?rhel}
 Buildrequires: epel-rpm-macros
 %endif
-
 %description
-immutables
-==========
-
 An immutable mapping type for Python.
 
 The underlying datastructure is a Hash Array Mapped Trie (HAMT)
@@ -52,9 +50,6 @@ BuildRequires:  python2-setuptools
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
-immutables
-==========
-
 An immutable mapping type for Python.
 
 The underlying datastructure is a Hash Array Mapped Trie (HAMT)
@@ -81,9 +76,6 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
-immutables
-==========
-
 An immutable mapping type for Python.
 
 The underlying datastructure is a Hash Array Mapped Trie (HAMT)

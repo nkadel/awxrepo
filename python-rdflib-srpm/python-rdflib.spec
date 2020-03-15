@@ -13,7 +13,7 @@ Summary:        Python library for working with RDF
 
 License:        BSD
 URL:            https://github.com/RDFLib/rdflib
-Source0:        http://pypi.python.org/packages/source/r/rdflib/rdflib-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 Patch1:         %{name}-SPARQLWrapper-optional.patch
 BuildArch:      noarch
 

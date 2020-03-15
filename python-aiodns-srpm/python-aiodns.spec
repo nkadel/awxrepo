@@ -13,13 +13,11 @@ License:        MIT
 URL:            https://github.com/saghul/aiodns
 Source0:        https://github.com/saghul/%{srcname}/archive/%{srcname}-%{version}.tar.gz
 
+BuildArch:      noarch
+
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
-
-BuildArch:      noarch
-BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-pycares
 
 %description
 aiodns provides a simple way for doing asynchronous DNS resolutions
@@ -29,6 +27,8 @@ with a synchronous looking interface by using pycares.
 %package     -n python%{python3_pkgversion}-%{srcname}
 Summary:        Simple DNS resolver for asyncio
 BuildArch:      noarch
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-pycares
 Requires:       python%{python3_pkgversion}-pycares
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 

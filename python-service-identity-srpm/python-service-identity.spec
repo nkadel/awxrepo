@@ -41,7 +41,7 @@ relevant RFCs too.
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modname}}
 BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools)
+BuildRequires:  python2-setuptools
 %if %{with check}
 BuildRequires:  python2-attrs
 BuildRequires:  python2-idna >= 0.6

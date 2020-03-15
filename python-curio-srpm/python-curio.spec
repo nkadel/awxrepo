@@ -20,10 +20,10 @@ probably find it to be a bit too-low level--it's probably best to think of it\
 as a library for building libraries.  Although you might not use it directly,\
 many of its ideas have influenced other libraries with similar functionality.
 
-%if 0%{?rhel}
-%bcond_with tests
+%if 0%{?fedora}
+%bcond_without tests
 %else
-%%bcond_without tests
+%bcond_with tests
 %endif
 
 Name:           python-%{pkgname}

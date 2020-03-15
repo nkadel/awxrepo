@@ -82,11 +82,11 @@ LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 %files -n python%{python3_pkgversion}-%{pkg_name}
 %license LICENSE
 %doc README.rst
+%{python3_sitelib}/jaraco
+%{python3_sitelib}/jaraco_classes-%{version}-py?.?.egg-info
 # These excludes are provided by python%%{python3_pkgversion}-jaraco
 %exclude %{python3_sitelib}/jaraco/__init__*
 %exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
-%{python3_sitelib}/jaraco
-%{python3_sitelib}/jaraco_classes-%{version}-py?.?.egg-info
 
 %if %{with docs}
 %files -n python-%{pkg_name}-doc

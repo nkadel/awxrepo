@@ -1,0 +1,27 @@
+From 06b14a01fc20c753364f9c1f20d895059ecd109d Mon Sep 17 00:00:00 2001
+From: Luke Murphy <lukewm@riseup.net>
+Date: Sun, 25 Oct 2015 21:15:03 +0100
+Subject: [PATCH] add try/except block for 'util' import
+
+all 'util' files are being unified into 'utils' in
+the coming django 1.9.
+---
+ jsonfield/tests.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/jsonfield/tests.py b/jsonfield/tests.py
+index 5faae20..49d10b9 100644
+--- a/jsonfield/tests.py
++++ b/jsonfield/tests.py
+@@ -9,7 +9,10 @@
+     from django.utils import simplejson as json
+ 
+ from .fields import JSONField, JSONCharField
+-from django.forms.util import ValidationError
++try:
++    from django.forms.utils import ValidationError
++except ImportError:
++    from django.forms.util import ValidationError
+ 
+ from collections import OrderedDict
+ 

@@ -31,14 +31,16 @@ BuildRequires:  epel-rpm-macros
 
 %description %{_description}
 
+
 %package -n python%{python3_pkgversion}-%{pkgname}
 Summary:        %{summary}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-curio
 BuildRequires:  python%{python3_pkgversion}-contextvars
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
+BuildRequires:  python%{python3_pkgversion}-curio
+BuildRequires:  python%{python3_pkgversion}-immutables
+BuildRequires:  python%{python3_pkgversion}-more-itertools >= 4.0.0
+BuildRequires:  python%{python3_pkgversion}-pytest
 
 
 %description -n python%{python3_pkgversion}-%{pkgname} %{_description}

@@ -17,7 +17,7 @@ call, so that it can be passed around.
 Name:           python-%{pkgname}
 Version:        1.0.0
 #Release:        3%%{?dist}
-Release:        %{?dist}
+Release:        0%{?dist}
 Summary:        Capture the outcome of Python function calls
 License:        MIT or ASL 2.0
 URL:            https://github.com/python-trio/outcome
@@ -40,6 +40,7 @@ BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-pytest-asyncio
 BuildRequires:  python%{python3_pkgversion}-async-generator
 BuildRequires:  python%{python3_pkgversion}-attrs
+BuildRequires:  python%{python3_pkgversion}-more-itertools >= 4.0.0
 %endif
 Requires:       python%{python3_pkgversion}-attrs
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}

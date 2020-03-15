@@ -1,22 +1,21 @@
 %global pypi_name django-formtools
 
+%global with_python3 1
+%global with_python2 0
+
 # skip test until test suite supports later django
-%if 0%{?rhel}
 %global skip_tests 1
-%else
-%global skip_tests 0
-%endif
 
 Name:           python-%{pypi_name}
 Version:        2.1
-Release:        8%{?dist}
+Release:        1%{?dist}
 Summary:        A set of high-level abstractions for Django forms
 
 License:        BSD
 URL:            http://django-formtools.readthedocs.org/en/latest/
 Source0:        https://pypi.io/packages/source/d/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
-
+ 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
 %endif
@@ -25,96 +24,134 @@ BuildRequires:  epel-rpm-macros
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
-%package -n python%{python3_pkgversion}-%{pypi_name}
+%if %{with_python2}
+%package -n python2-%{pypi_name}
 Summary:        A set of high-level abstractions for Django forms
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-sphinx
-BuildRequires:  python%{python3_pkgversion}-django >= 1.7
+BuildRequires:  python2-devel
+BuildRequires:  python2-sphinx
+BuildRequires:  python2-django >= 1.7
 # Required for testing
-BuildRequires:  python%{python3_pkgversion}-flake8
-BuildRequires:  python%{python3_pkgversion}-coverage
-# Required for docs
-BuildRequires:  %{_bindir}/sphinx-build-3
-BuildRequires:  python%{python3_pkgversion}-pytz
+BuildRequires:  python2-flake8
+BuildRequires:  python2-coverage
 
-Requires:       python%{python3_pkgversion}-django >= 1.7
+Requires:       python2-django >= 1.7
 
-Obsoletes:      python-%{pypi_name} < 2.1-5
-Obsoletes:      python2-%{pypi_name} < 2.1-5
-
-%description -n python%{python3_pkgversion}-%{pypi_name}
+%description -n python2-%{pypi_name}
 Django's "formtools" is a set of high-level abstractions for Django forms.
 Currently for form previews and multi-step forms.
 
-%package -n python%{python3_pkgversion}-%{pypi_name}-doc
+%package -n python2-%{pypi_name}-doc
 Summary:        A set of high-level abstractions for Django forms - documentation
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}-doc}
+%{?python_provide:%python_provide python2-%{pypi_name}-doc}
 
-Requires:       python%{python3_pkgversion}-%{pypi_name} = %{version}-%{release}
+Requires:       python2-%{pypi_name} = %{version}-%{release}
 
-Obsoletes:      python-%{pypi_name}-doc < 2.1-5
-Obsoletes:      python2-%{pypi_name}-doc < 2.1-5
-
-%description -n python%{python3_pkgversion}-%{pypi_name}-doc
+%description -n python2-%{pypi_name}-doc
 Django's "formtools" is a set of high-level abstractions for Django forms.
 
 This is the associated documentation.
+%endif
+
+%if %{with_python3}
+%package -n python3-%{pypi_name}
+Summary:        A set of high-level abstractions for Django forms
+%{?python_provide:%python_provide python3-%{pypi_name}}
+
+BuildRequires:  python3-devel
+BuildRequires:  python3-sphinx
+BuildRequires:  python3-django >= 1.7
+# Required for testing
+BuildRequires:  python3-flake8
+BuildRequires:  python3-coverage
+
+Requires:       python3-django >= 1.7
+
+%description -n python3-%{pypi_name}
+Django's "formtools" is a set of high-level abstractions for Django forms.
+Currently for form previews and multi-step forms.
+
+%package -n python3-%{pypi_name}-doc
+Summary:        A set of high-level abstractions for Django forms - documentation
+%{?python_provide:%python_provide python3-%{pypi_name}-doc}
+
+Requires:       python3-%{pypi_name} = %{version}-%{release}
+
+%description -n python3-%{pypi_name}-doc
+Django's "formtools" is a set of high-level abstractions for Django forms.
+
+This is the associated documentation.
+%endif
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
 
 %build
-%{py3_build}
+%if %{with_python2}
+%{py2_build}
+%endif
 
-%if ! 0%{?skip_tests}
+%if %{with_python3}
+%{py3_build}
+%endif
+
+%if 0%{?skip_tests} == 0
 %check
-exit 37
-PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
+%if %{with_python2}
+PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python-coverage run %{python2_sitelib}/django/bin/django-admin.py test tests
+%endif
+
+%if %{with_python3}
+PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python3-coverage run %{python3_sitelib}/django/bin/django-admin.py test tests
+%endif
 %endif
 
 %install
-%{py3_install}
-%find_lang django py3lang
-# generate html docs
-# Lock in sphinx-build-3 binary
-sphinx-build-3 docs html
+%if %{with_python2}
+%{py2_install}
+%find_lang django py2lang
+# generate html docs 
+sphinx-build docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
+%endif
 
-%files -n python%{python3_pkgversion}-%{pypi_name} -f py3lang
+%if %{with_python3}
+%{py3_install} 
+%find_lang django py3lang
+%endif
+
+%if %{with_python2}
+%files -n python2-%{pypi_name} -f py2lang
+%doc README.rst
+%license LICENSE
+%{python2_sitelib}/formtools
+%{python2_sitelib}/django_formtools-%{version}-py?.?.egg-info
+
+%files -n python2-%{pypi_name}-doc
+%doc html
+%license LICENSE
+%endif
+
+%if %{with_python3}
+%files -n python3-%{pypi_name} -f py3lang
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/formtools
 %{python3_sitelib}/django_formtools-%{version}-py?.?.egg-info
+# find_lang will find both python2 and python3 locale files
+%exclude %{python2_sitelib}/formtools/locale
 
-%files -n python%{python3_pkgversion}-%{pypi_name}-doc
-%doc html
+%files -n python3-%{pypi_name}-doc
+%if %{with_python2}
+doc html
+%endif
 %license LICENSE
+%endif
+
 
 %changelog
-* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.1-8
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
-
-* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.1-7
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
-
-* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.1-6
-- Rebuilt for Python 3.7
-
-* Mon Feb 12 2018 Miro Hrončok <mhroncok@redhat.com> - 2.1-5
-- Removed Python 2 subpackage for https://fedoraproject.org/wiki/Changes/Django20
-
-* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.1-4
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
-
-* Wed Jan 24 2018 Matthias Runge <mrunge@redhat.com> - 2.1-3
-- fix python2-django1.11 requirements
-
-* Fri Jan 19 2018 Matthias Runge <mrunge@redhat.com> - 2.1-2
-- fix python2 requirements
-
 * Fri Oct 20 2017 Javier Peña <jpena@redhat.com> - 2.1-1
 - Updated to upstream release 2.1
 - Fixed Source0 URL

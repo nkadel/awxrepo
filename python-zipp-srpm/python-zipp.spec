@@ -1,8 +1,9 @@
 %global pypi_name zipp
 
 Name:           python-%{pypi_name}
-Version:        3.0.0
+#Version:        0.5.1
 #Release:        2%%{?dist}
+Version:        0.6.0
 Release:        0%{?dist}
 Summary:        Backport of pathlib-compatible object wrapper for zip files
 
@@ -12,7 +13,7 @@ Source0:        %{pypi_source}
 BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
+Buildrequires:  epel-rpm-macros
 %endif
 
 %description
@@ -29,12 +30,7 @@ Provides:       python3dist(zipp) = %{version}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
-# For testing
-BuildRequires:  python%{python3_pkgversion}-func_timeout
-BuildRequires:  python%{python3_pkgversion}-inflect
-BuildRequires:  python%{python3_pkgversion}-jaraco-itertools
 BuildRequires:  python%{python3_pkgversion}-more-itertools
-BuildRequires:  python%{python3_pkgversion}-toml
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
 A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
@@ -57,13 +53,9 @@ A pathlib-compatible Zipfile object wrapper. A backport of the Path object.
 %doc README.rst
 %{python3_sitelib}/%{pypi_name}.py
 %{python3_sitelib}/__pycache__/%{pypi_name}.*
-#%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info/
-%{python3_sitelib}/%{pypi_name}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info/
 
 %changelog
-* Mon Feb 24 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 3.0.0-0
-- Update to 3.0.0, with dependencies
-
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
