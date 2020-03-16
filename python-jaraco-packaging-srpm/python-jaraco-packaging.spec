@@ -65,6 +65,8 @@ Documentation for jaraco.packaging
 rm -rf %{pypi_name}.egg-info
 # rename package in setup to -
 sed -i 's/name = %{pypi_name}/name = %{pkg_name}/' setup.cfg
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
 %build
 %py3_build
