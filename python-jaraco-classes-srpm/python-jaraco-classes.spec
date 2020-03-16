@@ -56,9 +56,11 @@ Documentation for jaraco-classes
 %prep
 %autosetup -n jaraco.classes-%{version}
 # Remove bundled egg-info
-rm -rf %{pkg_name}.egg-info
+rm -rf %{pypi_name}.egg-info
 # rename package to use a -
 sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 # disable flake8 in the tests, need a newer version of pytest-flake8
 # https://src.fedoraproject.org/rpms/python-pytest-flake8/pull-request/2
 # AttributeError: 'Application' object has no attribute 'make_notifier'
