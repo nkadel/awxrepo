@@ -82,12 +82,14 @@ A dictionary-like object that maps a range of values to a given value.
 %endif # with_python3
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
-# fix jaraco deps in setup so they do not get improperly generated
-sed -i 's/jaraco.text/jaraco-text/' setup.cfg
-sed -i 's/jaraco.classes/jaraco-classes/' setup.cfg
-sed -i 's/jaraco.packaging/jaraco-packaging/' setup.cfg
+# Remove bundled egg-info
+rm -rf %{pkg_name}.egg-info
+# rename package to use a -
+sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
 %build
 %if %{with_python2}
