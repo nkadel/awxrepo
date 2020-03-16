@@ -53,9 +53,11 @@ Documentation for jaraco-functools
 %prep
 %autosetup -n jaraco.functools-%{version}
 # Remove bundled egg-info
-rm -rf jaraco.functools.egg-info
+rm -rf %{pypi_name}.egg-info
 # rename package with a -
 sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
 %build
 %py3_build
