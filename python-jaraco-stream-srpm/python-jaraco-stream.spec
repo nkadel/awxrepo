@@ -20,7 +20,7 @@ BuildRequires:  python3dist(pytest-black-multipy)
 BuildRequires:  python3dist(pytest-checkdocs) >= 1.2.3
 BuildRequires:  python3dist(pytest-cov)
 BuildRequires:  python3dist(pytest-flake8)
-BuildRequires:  python3dist(rst.linker) >= 1.9
+BuildRequires:  python3dist(rst-linker) >= 1.9
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(setuptools-scm) >= 1.15.0
 BuildRequires:  python3dist(sphinx)
@@ -55,6 +55,8 @@ Documentation for jaraco-stream
 %autosetup -n jaraco.stream-%{version}
 # Remove bundled egg-info
 rm -rf %{pypi_name}.egg-info
+# Use - rather than . in module names
+sed -i 's/rst.linker/rst-linker/' setup.cfg
 
 %build
 %py3_build
