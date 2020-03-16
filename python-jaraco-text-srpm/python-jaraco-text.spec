@@ -70,7 +70,13 @@ Module for text manipulation
 %endif # with_python3
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%autosetup -n %{pypi_name}-%{version}
+# Remove bundled egg-info
+rm -rf %{pypi_name}.egg-info
+# rename package to use a -
+sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
 %build
 %if %{with_python2}
