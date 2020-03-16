@@ -84,6 +84,11 @@ A dictionary-like object that maps a range of values to a given value.
 %prep
 %setup -q -n %{pypi_name}-%{version}
 
+# fix jaraco deps in setup so they do not get improperly generated
+sed -i 's/jaraco.text/jaraco-text/' setup.cfg
+sed -i 's/jaraco.classes/jaraco-classes/' setup.cfg
+sed -i 's/jaraco.packaging/jaraco-packaging/' setup.cfg
+
 %build
 %if %{with_python2}
 %py2_build
