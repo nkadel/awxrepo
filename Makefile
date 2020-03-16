@@ -70,7 +70,9 @@ EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
 EPELPKGS+=python-jaraco-collections-srpm
+EPELPKGS+=python-jaraco-logging-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
+EPELPKGS+=python-jaraco-stream-srpm
 EPELPKGS+=python-jaraco-text-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
@@ -79,6 +81,7 @@ EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
 EPELPKGS+=python-outcome-srpm
 EPELPKGS+=python-pluggy-srpm
+EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
@@ -93,6 +96,7 @@ EPELPKGS+=python-python3-openid-srpm
 EPELPKGS+=python-python3-saml-srpm
 EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
+EPELPKGS+=python-rst-linker-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-simplejson-srpm
@@ -106,6 +110,9 @@ EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on process-tests and pytest-xdist
+AWXPKGS+=python-pytest-cov-srpm
 
 # Depends on simplejson and feedparser and demjson
 AWXPKGS+=python-jsonpickle-srpm
