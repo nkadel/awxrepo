@@ -75,7 +75,9 @@ connections.
 %endif # with_python3
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%autosetup -n %{pypi_name}-%{version}
+# rename jaraco dependencies to use a -
+sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
 %build
 %if %{with_python2}
