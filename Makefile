@@ -43,19 +43,23 @@ EPELPKGS+=python-contextvars-srpm
 EPELPKGS+=python-coverage-srpm
 EPELPKGS+=python-curio-srpm
 EPELPKGS+=python-daphne-srpm
+EPELPKGS+=python-demjson-srpm
 EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
 EPELPKGS+=python-django-extensions-srpm
+EPELPKGS+=python-django-jsonbfield-srpm
 EPELPKGS+=python-django-jsonfield-srpm
 EPELPKGS+=python-django-oauth-toolkit-srpm
 EPELPKGS+=python-django-pglocks-srpm
+EPELPKGS+=python-django-polymorphic-srpm
 EPELPKGS+=python-django-solo-srpm
 EPELPKGS+=python-django-taggit-srpm
 EPELPKGS+=python-djangorestframework-srpm
 EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
+EPELPKGS+=python-feedparser-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-gitdb-srpm
 EPELPKGS+=python-httpretty-srpm
@@ -65,11 +69,14 @@ EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
 EPELPKGS+=python-isodate-srpm
+EPELPKGS+=python-jaraco-collections-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
+EPELPKGS+=python-jaraco-text-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
+EPELPKGS+=python-msrestazure-srpm
 EPELPKGS+=python-outcome-srpm
 EPELPKGS+=python-pluggy-srpm
 EPELPKGS+=python-ptyprocess-srpm
@@ -88,6 +95,7 @@ EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_scm-srpm
+EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
@@ -98,6 +106,14 @@ EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on simplejson and feedparser and demjson
+AWXPKGS+=python-jsonpickle-srpm
+
+AWXPKGS+=python-amqp-srpm
+
+# Depends on setuptools_scm
+AWXPKGS+=python-importlib_resources-srpm
 
 # Depnds on python3-saml and python3-openid
 AWXPKGS+=python-social-auth-core-srpm
