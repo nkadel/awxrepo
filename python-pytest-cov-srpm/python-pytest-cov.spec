@@ -27,7 +27,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 # For tests
 #  Not packaged: python2-fields
-#BuildRequires:  python2-pytest
+#BuildRequires:  python2-pytest >= 3.6
 #BuildRequires:  python2-coverage >= 4.4
 #BuildRequires:  python2-fields
 #BuildRequires:  python2-process-tests
@@ -45,7 +45,7 @@ distributed testing, including subprocesses and multiprocessing for Python 2.
 Summary:        Pytest plugin for coverage reporting
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-pytest >= 3.6
 BuildRequires:  python%{python3_pkgversion}-coverage >= 4.4
 # For tests
 BuildRequires:  python%{python3_pkgversion}-fields
