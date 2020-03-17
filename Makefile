@@ -72,14 +72,12 @@ EPELPKGS+=python-isodate-srpm
 EPELPKGS+=python-jaraco-collections-srpm
 EPELPKGS+=python-jaraco-logging-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
-EPELPKGS+=python-jaraco-stream-srpm
 EPELPKGS+=python-jaraco-text-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
-EPELPKGS+=python-outcome-srpm
 EPELPKGS+=python-pluggy-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
@@ -109,7 +107,14 @@ EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
+EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on more-itertools
+AWXPKGS+=python-outcome-srpm
+
+# Depends on jaraco-packaging
+AWXPKGS+=python-pytest-black-multiply-srpm
 
 # Depends on process-tests and pytest-xdist
 AWXPKGS+=python-pytest-cov-srpm
@@ -164,6 +169,14 @@ AWXPKGS+=python-django-srpm
 # python3 only update for pytest modules of misnmed source package
 # Depends on more-itertools and pluggy and py
 AWXPKGS+=pytest-srpm
+
+# Depends on pytest and importlib_metadata and jaraco-packaging ane
+# pytest-black-multiply and pytest-checkdocs and pytest-cov and
+# pytest-flake8 and rst-linker and setuptools_scm
+AWXPKGS+=python-pytest-checkdocs-srpm
+
+# Depends on black-multiply and checkdocs
+AWXPKGS+=python-jaraco-stream-srpm
 
 # Depends on pytest
 AWXPKGS+=python-cryptography-srpm
