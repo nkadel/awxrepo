@@ -7,7 +7,7 @@ Release:        0%{?dist}
 Summary:        Python JSON module and lint checker
 License:        LGPLv3+
 URL:            http://deron.meranda.us/python/%{srcname}/
-Source0:        http://deron.meranda.us/python/%{srcname}/dist/%{srcname}-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/%(n=%{srcname}; echo ${n:0:1})/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python3-devel
