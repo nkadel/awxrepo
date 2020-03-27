@@ -11,44 +11,48 @@ URL:            https://github.com/jaraco/pytest-checkdocs
 Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
 
-BuildRequires:  python3-devel
-BuildConflicts: python3dist(pytest) = 3.7.3
-BuildRequires:  python3dist(docutils) >= 0.15
-BuildRequires:  python3dist(importlib-metadata) >= 0.21
-BuildRequires:  python3dist(jaraco-packaging) >= 3.2
-BuildRequires:  python3dist(more-itertools)
-BuildRequires:  python3dist(pytest) >= 3.5
-BuildRequires:  python3dist(pytest-black-multipy)
-BuildRequires:  python3dist(pytest-checkdocs)
-BuildRequires:  python3dist(pytest-cov)
-BuildRequires:  python3dist(pytest-flake8)
-BuildRequires:  python3dist(rst-linker) >= 1.9
-BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(setuptools-scm) >= 1.15.0
-BuildRequires:  python3dist(sphinx)
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildConflicts: pytnon%{python3_pkgversion}-pytest = 3.7.3
+BuildRequires:  pytnon%{python3_pkgversion}-docutils >= 0.15
+BuildRequires:  pytnon%{python3_pkgversion}-importlib-metadata >= 0.21
+BuildRequires:  pytnon%{python3_pkgversion}-jaraco-packaging >= 3.2
+BuildRequires:  pytnon%{python3_pkgversion}-more-itertools
+BuildRequires:  pytnon%{python3_pkgversion}-pytest >= 3.5
+BuildRequires:  pytnon%{python3_pkgversion}-pytest-black-multipy
+BuildRequires:  pytnon%{python3_pkgversion}-pytest-checkdocs
+BuildRequires:  pytnon%{python3_pkgversion}-pytest-cov
+BuildRequires:  pytnon%{python3_pkgversion}-pytest-flake8)
+BuildRequires:  pytnon%{python3_pkgversion}-rst-linker >= 1.9
+BuildRequires:  pytnon%{python3_pkgversion}-setuptools
+BuildRequires:  pytnon%{python3_pkgversion}-setuptools-scm >= 1.15.0
+BuildRequires:  pytnon%{python3_pkgversion}-sphinx
 
 %description
 A pytest plugin that checks the long description of the project to ensure it
 renders properly.
 
-%package -n     python3-%{pypi_name}
+%package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-Conflicts:      python3dist(pytest) = 3.7.3
-Requires:       python3dist(docutils) >= 0.15
-Requires:       python3dist(importlib-metadata) >= 0.21
-Requires:       python3dist(jaraco-packaging) >= 3.2
-Requires:       python3dist(more-itertools)
-Requires:       python3dist(pytest) >= 3.5
-Requires:       python3dist(pytest-black-multipy)
-Requires:       python3dist(pytest-checkdocs)
-Requires:       python3dist(pytest-cov)
-Requires:       python3dist(pytest-flake8)
-Requires:       python3dist(rst-linker) >= 1.9
-Requires:       python3dist(setuptools)
-Requires:       python3dist(sphinx)
-%description -n python3-%{pypi_name}
+Conflicts:      pytnon%{python3_pkgversion}-pytest = 3.7.3
+Requires:       pytnon%{python3_pkgversion}-docutils >= 0.15
+Requires:       pytnon%{python3_pkgversion}-importlib-metadata >= 0.21
+Requires:       pytnon%{python3_pkgversion}-jaraco-packaging >= 3.2
+Requires:       pytnon%{python3_pkgversion}-more-itertools
+Requires:       pytnon%{python3_pkgversion}-pytest) >= 3.5
+Requires:       pytnon%{python3_pkgversion}-pytest-black-multipy
+Requires:       pytnon%{python3_pkgversion}-pytest-checkdocs
+Requires:       pytnon%{python3_pkgversion}-pytest-cov
+Requires:       pytnon%{python3_pkgversion}-pytest-flake8
+Requires:       pytnon%{python3_pkgversion}-rst-linker >= 1.9
+Requires:       pytnon%{python3_pkgversion}-setuptools)
+Requires:       pytnon%{python3_pkgversion}-sphinx)
+%description -n python%{python3_pkgversion}-%{pypi_name}
 A pytest plugin that checks the long description of the project to ensure it
 renders properly.
 
@@ -79,7 +83,7 @@ rm -rf html/.{doctrees,buildinfo}
 %check
 %{__python3} setup.py test
 
-%files -n python3-%{pypi_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/__pycache__/*
