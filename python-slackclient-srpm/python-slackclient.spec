@@ -1,14 +1,14 @@
-%global modname slackclient
+%global pypi_name slackclient
 
-Name:               python-%{modname}
+Name:               python-%{pypi_name}
 Version:            2.1.0
 #Release:            2%%{?dist}
 Release:            0%{?dist}
 Summary:            Slack Developer Kit for Python
 
 License:            MIT
-URL:                https://github.com/slackapi/python-%{modname}
-Source0:            %{url}/archive/%{version}/python-%{modname}-%{version}.tar.gz
+URL:                https://github.com/slackapi/python-%{pypi_name}
+Source0:            https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:          noarch
 
 %if 0%{?rhel}
@@ -18,9 +18,9 @@ BuildRequires:  epel-rpm-macros
 %description
 %{summary}.
 
-%package -n python%{python3_pkgversion}-%{modname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:            %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 BuildRequires:      python%{python3_pkgversion}-devel
 BuildRequires:      python%{python3_pkgversion}-setuptools
 BuildRequires:      python%{python3_pkgversion}-websocket-client
@@ -35,7 +35,7 @@ Requires:           python%{python3_pkgversion}-websocket-client
 Requires:           python%{python3_pkgversion}-six
 Requires:           python%{python3_pkgversion}-requests
 
-%description -n python%{python3_pkgversion}-%{modname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{summary}.
 
 Python %{python3_pkgversion} version.
@@ -53,11 +53,11 @@ Python %{python3_pkgversion} version.
 #%check
 #%{__python3} setup.py test
 
-%files -n python%{python3_pkgversion}-%{modname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.md docs/
 %license LICENSE
 %{python3_sitelib}/slack/
-%{python3_sitelib}/%{modname}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}-*.egg-info/
 
 %changelog
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.1.0-2
