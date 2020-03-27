@@ -23,7 +23,6 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-nose
 BuildRequires:  python%{python3_pkgversion}-six
 
 %description %_description
@@ -54,6 +53,12 @@ Summary:        %{sum}
 %{python3_sitelib}/more_itertools-%{version}-py%{python3_version}.egg-info
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 7.2.0-3
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
+* Thu Aug 15 2019 Miro Hrončok <mhroncok@redhat.com> - 7.2.0-2
+- Rebuilt for Python 3.8
+
 * Tue Aug 13 2019 Thomas Moschny <thomas.moschny@gmx.de> - 7.2.0-1
 - Update to 7.2.0.
 
