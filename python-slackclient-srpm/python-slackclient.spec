@@ -41,7 +41,7 @@ Requires:           python%{python3_pkgversion}-requests
 Python %{python3_pkgversion} version.
 
 %prep
-%autosetup
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
@@ -54,7 +54,8 @@ Python %{python3_pkgversion} version.
 #%{__python3} setup.py test
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
-%doc README.md docs/
+#%doc README.md docs/
+%doc README.md
 %license LICENSE
 %{python3_sitelib}/slack/
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
