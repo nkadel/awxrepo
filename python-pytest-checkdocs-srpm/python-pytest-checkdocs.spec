@@ -25,7 +25,7 @@ BuildRequires:  pytnon%{python3_pkgversion}-pytest >= 3.5
 BuildRequires:  pytnon%{python3_pkgversion}-pytest-black-multipy
 BuildRequires:  pytnon%{python3_pkgversion}-pytest-checkdocs
 BuildRequires:  pytnon%{python3_pkgversion}-pytest-cov
-BuildRequires:  pytnon%{python3_pkgversion}-pytest-flake8)
+BuildRequires:  pytnon%{python3_pkgversion}-pytest-flake8
 BuildRequires:  pytnon%{python3_pkgversion}-rst-linker >= 1.9
 BuildRequires:  pytnon%{python3_pkgversion}-setuptools
 BuildRequires:  pytnon%{python3_pkgversion}-setuptools-scm >= 1.15.0
