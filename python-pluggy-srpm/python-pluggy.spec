@@ -1,7 +1,7 @@
 %global pypi_name pluggy
 
 Name:           python-pluggy
-Version:        0.6.0
+Version:        0.12.0
 #Release:        3%%{?dist}
 Release:        0%{?dist}
 Summary:        The plugin manager stripped of pytest specific details
@@ -18,7 +18,8 @@ BuildRequires:  epel-rpm-macros
 BuildArch:      noarch
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools >= 40.0
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
 
 %description
 The plugin manager stripped of pytest specific details.
