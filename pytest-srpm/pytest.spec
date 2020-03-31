@@ -40,7 +40,9 @@ BuildRequires:  python%{python3_pkgversion}-setuptools_scm
 BuildRequires:  python%{python3_pkgversion}-attrs
 BuildRequires:  python%{python3_pkgversion}-hypothesis
 BuildRequires:  python%{python3_pkgversion}-more-itertools
-BuildRequires:  python%{python3_pkgversion}-pluggy
+# Pluggy is picky!
+BuildRequires:  python%{python3_pkgversion}-pluggy >= 0.5
+BuildRequires:  python%{python3_pkgversion}-pluggy <= 0.8
 BuildRequires:  python%{python3_pkgversion}-py >= %{pylib_version}
 %if %{with timeout}
 BuildRequires:  python%{python3_pkgversion}-pytest-timeout
