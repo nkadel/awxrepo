@@ -1,8 +1,1 @@
-*.cfg
-*.out
-*.repo
-*[0-9]
-*\#*
-*~
-rpmbuild
-awxrepo
+../.gitignore.epel
