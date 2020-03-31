@@ -39,15 +39,11 @@ build:: src.rpm
 
 .PHONY: $(MOCKS)
 $(MOCKS):: src.rpm
-	@if [ -e $@ -a -n "`find $@ -name \*.rpm`" ]; then \
-		echo "	Skipping RPM populated $@"; \
-	else \
-		echo "Actally building $? in $@"; \
-		rm -rf $@; \
-		mock -q -r $(PWD)/../$@.cfg \
-		     --resultdir=$(PWD)/$@ \
-		     $?; \
-	fi
+	@ls -d $@/*.rpm >/dev/null 2>/dev/null && \
+	    echo "    RPMs in $@, skipping" && exit 0 || \
+	    rm -rf $@
+	mock -q -r $(PWD)/../$@.cfg \
+	    --resultdir=$(PWD)/$@ $?
 
 mock:: $(MOCKS)
 
