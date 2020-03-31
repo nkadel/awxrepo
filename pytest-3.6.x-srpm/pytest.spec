@@ -24,8 +24,12 @@ BuildRequires:  python3dist(more-itertools) >= 4.0.0
 BuildRequires:  python3dist(pluggy) < 0.8
 BuildRequires:  python3dist(pluggy) >= 0.5
 BuildRequires:  python3dist(py) >= 1.5.0
+# Assume bootstrap already occured for docs
+BuildRequires:  python3dist(pytest)
 BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(sphinxcontrib_trio)
+# Renamed for RHEL naming scheme
+#BuildRequires:  python3dist(sphinxcontrib_trio)
+BuildRequires:  python3dist(sphinxcontrib-trio)
 BuildRequires:  python3dist(setuptools-scm)
 BuildRequires:  python3dist(six) >= 1.10.0
 BuildRequires:  python3dist(sphinx)
@@ -69,6 +73,10 @@ rm -rf html/.{doctrees,buildinfo}
 
 %install
 %py3_install
+mv %{buildroot}%{_bindir}/pytest %{buildroot}%{_bindir}/pytest-%{python3_version}
+ln -snf pytest-%{python3_version} %{buildroot}%{_bindir}/pytest-3
+mv %{buildroot}%{_bindir}/py.test %{buildroot}%{_bindir}/py.test-%{python3_version}
+ln -snf py.test-%{python3_version} %{buildroot}%{_bindir}/py.test-3
 
 %check
 %{__python3} setup.py test
@@ -76,8 +84,10 @@ rm -rf html/.{doctrees,buildinfo}
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license doc/en/_themes/LICENSE doc/en/license.rst LICENSE
 %doc changelog/README.rst README.rst
-%{_bindir}/py.test
-%{_bindir}/pytest
+%{_bindir}/pytest-3
+%{_bindir}/pytest-%{python3_version}
+%{_bindir}/py.test-3
+%{_bindir}/py.test-%{python3_version}
 %{python3_sitelib}/__pycache__/*
 %{python3_sitelib}/%{pypi_name}.py
 %{python3_sitelib}/_pytest
