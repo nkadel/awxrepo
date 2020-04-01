@@ -41,11 +41,12 @@ build:: src.rpm
 .PHONY: $(MOCKS)
 $(MOCKS):: src.rpm
 $(MOCKS):: src.rpm
-	@ls -d $@/*.rpm >/dev/null 2>/dev/null && \
+	@set -o pipefail; ls -d $@/*.rpm 2>/dev/null | grep -q -v src.rpm  && \
 	    echo "    RPMs in $@, skipping" && exit 0 || \
-	    rm -rf $@
-	mock -q -r $(PWD)/../$@.cfg \
-	    --resultdir=$(PWD)/$@ $?
+	    rm -rf $@ && \
+	    echo "    Building $? in $@" && \
+	    mock -q -r $(PWD)/../$@.cfg \
+		--resultdir=$(PWD)/$@ $?
 
 mock:: $(MOCKS)
 
