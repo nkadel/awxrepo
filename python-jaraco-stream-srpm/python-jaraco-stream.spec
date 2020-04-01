@@ -1,5 +1,6 @@
 # Created by pyp2rpm-3.3.3
 %global pypi_name jaraco-stream
+%global pkg_name jaraco.stream
 
 Name:           python-%{pypi_name}
 Version:        3.0.0
@@ -41,7 +42,7 @@ Requires:       python3dist(pytest-black-multipy)
 Requires:       python3dist(pytest-checkdocs) >= 1.2.3
 Requires:       python3dist(pytest-cov)
 Requires:       python3dist(pytest-flake8)
-Requires:       python3dist(rst.linker) >= 1.9
+Requires:       python3dist(rst-linker) >= 1.9
 Requires:       python3dist(sphinx)
 %description -n python3-%{pypi_name}
  .. .. .. .. image::
@@ -75,7 +76,7 @@ rm -rf html/.{doctrees,buildinfo}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/jaraco
-%{python3_sitelib}/jaraco_stream-%{version}-py%{python3_version}.egg-info
+%{python3_sitelib}/%{pkg_name}-%{version}-py%{python3_version}.egg-info
 
 %files -n python-%{pypi_name}-doc
 %doc html
