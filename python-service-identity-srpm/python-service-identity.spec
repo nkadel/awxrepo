@@ -101,7 +101,7 @@ Documentation for service-identity.
 %endif
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{modname}-%{version}
 
 %build
 %if %{with python2}
