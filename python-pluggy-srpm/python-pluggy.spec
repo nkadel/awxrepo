@@ -35,7 +35,7 @@ BuildRequires:  python2
 BuildRequires:  python2-setuptools_scm
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-sphinx
-BuildRequires:  python2-importlib_metadata
+BuildRequires:  python2-importlib-metadata
  
 %description -n python2-%{pypi_name}
  pluggy A minimalist production ready plugin system |pypi| |condaforge|
@@ -55,7 +55,7 @@ BuildRequires:  python%{python3_pkgversion}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm
 BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-importlib_metadata
+BuildRequires:  python%{python3_pkgversion}-importlib-metadata
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
  pluggy A minimalist production ready plugin system |pypi| |condaforge|
