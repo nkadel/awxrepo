@@ -25,14 +25,16 @@ BuildRequires:  python3dist(rst-linker) >= 1.9
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(setuptools-scm) >= 1.15.0
 BuildRequires:  python3dist(sphinx)
-BuildRequires:  python3dist(sphinx)
 
 %description
  .. .. .. .. image::
 
-%package -n     python3-%{pypi_name}
+%package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+# Add provide manually, to avoid confusion
+Provides:  python3dist(%{pypi_name}) = %{version}
+Provides:  python%{python3_version}dist(%{pypi_name}) = %{version}
 
 Conflicts:      python3dist(pytest) = 3.7.3
 Requires:       python3dist(jaraco-packaging) >= 3.2
@@ -44,7 +46,7 @@ Requires:       python3dist(pytest-cov)
 Requires:       python3dist(pytest-flake8)
 Requires:       python3dist(rst-linker) >= 1.9
 Requires:       python3dist(sphinx)
-%description -n python3-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
  .. .. .. .. image::
 
 %package -n python-%{pypi_name}-doc
@@ -72,11 +74,14 @@ rm -rf html/.{doctrees,buildinfo}
 %check
 %{__python3} setup.py test
 
-%files -n python3-%{pypi_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/jaraco
 %{python3_sitelib}/%{pkg_name}-%{version}-py%{python3_version}.egg-info
+# These excludes are provided by python%{python3_pkgversion}-jaraco
+%exclude %{python3_sitelib}/jaraco/__init__*
+%exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 
 %files -n python-%{pypi_name}-doc
 %doc html
