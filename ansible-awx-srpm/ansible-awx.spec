@@ -1,16 +1,17 @@
-%define  debug_package %{nil}
-%define _prefix /opt/awx
-%define _mandir %{_prefix}/share/man
+%global  debug_package %{nil}
+%global _prefix /opt/awx
+%global _bindir /usr/bin
+%global _mandir %{_prefix}/share/man
 %global __os_install_post %{nil}
 
-%define service_user awx
-%define service_group awx
-%define service_homedir /var/lib/awx
-%define service_logdir /var/log/tower
-%define service_configdir /etc/tower
+%global service_user awx
+%global service_group awx
+%global service_homedir /var/lib/awx
+%global service_logdir /var/log/tower
+%global service_configdir /etc/tower
 
 %global awx_mainversion 9.3.0
-%global awx_subversion %{nil}
+%global awx_subversion .104
 
 Summary: Ansible AWX
 Name: ansible-awx
@@ -51,33 +52,50 @@ BuildRequires: postgresql-server-devel >= 10
 BuildRequires: xmlsec1-devel
 BuildRequires: xmlsec1-openssl-devel
 
-# "via" options
+BuildRequires: python%{python3_pkgversion}-GitPython
 BuildRequires: python%{python3_pkgversion}-adal
-BuildRequires: python%{python3_pkgversion}-amqp
-BuildRequires: python%{python3_pkgversion}-asgiref
+BuildRequires: python%{python3_pkgversion}-ansible-runner
 BuildRequires: python%{python3_pkgversion}-attrs
 BuildRequires: python%{python3_pkgversion}-autobahn
-BuildRequires: python%{python3_pkgversion}-automat
 BuildRequires: python%{python3_pkgversion}-azure-common
 BuildRequires: python%{python3_pkgversion}-azure-keyvault
 BuildRequires: python%{python3_pkgversion}-azure-nspkg
+BuildRequires: python%{python3_pkgversion}-build
 BuildRequires: python%{python3_pkgversion}-cachetools
+BuildRequires: python%{python3_pkgversion}-celery
 BuildRequires: python%{python3_pkgversion}-certifi
 BuildRequires: python%{python3_pkgversion}-cffi
+BuildRequires: python%{python3_pkgversion}-channels
+BuildRequires: python%{python3_pkgversion}-chardet
 BuildRequires: python%{python3_pkgversion}-constantly
 BuildRequires: python%{python3_pkgversion}-cryptography
 BuildRequires: python%{python3_pkgversion}-daphne
 BuildRequires: python%{python3_pkgversion}-dateutil
 BuildRequires: python%{python3_pkgversion}-defusedxml
+BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-dictdiffer
+BuildRequires: python%{python3_pkgversion}-django
+BuildRequires: python%{python3_pkgversion}-django-auth-ldap
+BuildRequires: python%{python3_pkgversion}-django-cors-headers
+BuildRequires: python%{python3_pkgversion}-django-crum
+BuildRequires: python%{python3_pkgversion}-django-extensions
+BuildRequires: python%{python3_pkgversion}-django-jsonbfield
+BuildRequires: python%{python3_pkgversion}-django-jsonfield
+BuildRequires: python%{python3_pkgversion}-django-oauth-toolkit
+BuildRequires: python%{python3_pkgversion}-django-pglocks
+BuildRequires: python%{python3_pkgversion}-django-polymorphic
+BuildRequires: python%{python3_pkgversion}-django-solo
+BuildRequires: python%{python3_pkgversion}-django-taggit
+BuildRequires: python%{python3_pkgversion}-djangorestframework
+BuildRequires: python%{python3_pkgversion}-djangorestframework-yaml
 BuildRequires: python%{python3_pkgversion}-docutils
 BuildRequires: python%{python3_pkgversion}-future
 BuildRequires: python%{python3_pkgversion}-gitdb
 BuildRequires: python%{python3_pkgversion}-google-auth
 BuildRequires: python%{python3_pkgversion}-hyperlink
 BuildRequires: python%{python3_pkgversion}-idna
-BuildRequires: python%{python3_pkgversion}-importlib_metadata
-BuildRequires: python%{python3_pkgversion}-importlib_resources
+BuildRequires: python%{python3_pkgversion}-importlib-metadata
+BuildRequires: python%{python3_pkgversion}-importlib-resources
 BuildRequires: python%{python3_pkgversion}-incremental
 BuildRequires: python%{python3_pkgversion}-inflect
 BuildRequires: python%{python3_pkgversion}-irc
@@ -89,26 +107,41 @@ BuildRequires: python%{python3_pkgversion}-jaraco-itertools
 BuildRequires: python%{python3_pkgversion}-jaraco-logging
 BuildRequires: python%{python3_pkgversion}-jaraco-stream
 BuildRequires: python%{python3_pkgversion}-jaraco-text
+BuildRequires: python%{python3_pkgversion}-jinja2
 BuildRequires: python%{python3_pkgversion}-jsonpickle
 BuildRequires: python%{python3_pkgversion}-jsonschema
 BuildRequires: python%{python3_pkgversion}-kombu
 BuildRequires: python%{python3_pkgversion}-kubernetes
+BuildRequires: python%{python3_pkgversion}-ldap
 BuildRequires: python%{python3_pkgversion}-markupsafe
+BuildRequires: python%{python3_pkgversion}-more-itertools
 BuildRequires: python%{python3_pkgversion}-msrest
 BuildRequires: python%{python3_pkgversion}-msrestazure
+BuildRequires: python%{python3_pkgversion}-oauthlib
+BuildRequires: python%{python3_pkgversion}-openid
 BuildRequires: python%{python3_pkgversion}-pexpect
+BuildRequires: python%{python3_pkgversion}-pip
 BuildRequires: python%{python3_pkgversion}-psutil
+BuildRequires: python%{python3_pkgversion}-psycopg2
 BuildRequires: python%{python3_pkgversion}-ptyprocess
 BuildRequires: python%{python3_pkgversion}-pyasn1
 BuildRequires: python%{python3_pkgversion}-pyasn1-modules
-# Renamed from PyYAML for RHEL
-BuildRequires: python%{python3_pkgversion}-pyyaml
-BuildRequires: python%{python3_pkgversion}-openid
+BuildRequires: python%{python3_pkgversion}-pygerduty
+BuildRequires: python%{python3_pkgversion}-pygments
+BuildRequires: python%{python3_pkgversion}-pyjwt >= 1.7.1
+BuildRequires: python%{python3_pkgversion}-pyparsing
+BuildRequires: python%{python3_pkgversion}-pyrsistent
+BuildRequires: python%{python3_pkgversion}-pytest-runner >= 1.4.4
+BuildRequires: python%{python3_pkgversion}-python-logstash
 BuildRequires: python%{python3_pkgversion}-pytz
+BuildRequires: python%{python3_pkgversion}-pyyaml
 BuildRequires: python%{python3_pkgversion}-requests
+BuildRequires: python%{python3_pkgversion}-requests-futures
 BuildRequires: python%{python3_pkgversion}-requests-oauthlib
 BuildRequires: python%{python3_pkgversion}-six >= 1.13.0
+BuildRequires: python%{python3_pkgversion}-slackclient
 BuildRequires: python%{python3_pkgversion}-smmap
+BuildRequires: python%{python3_pkgversion}-social-auth-app-django
 BuildRequires: python%{python3_pkgversion}-social-auth-core
 BuildRequires: python%{python3_pkgversion}-tempora
 BuildRequires: python%{python3_pkgversion}-twilio
@@ -120,47 +153,6 @@ BuildRequires: python%{python3_pkgversion}-websocket-client
 BuildRequires: python%{python3_pkgversion}-xmlsec
 BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
 BuildRequires: python%{python3_pkgversion}-zope-interface >= 4.7.1
-
-BuildRequires: python%{python3_pkgversion}-GitPython
-BuildRequires: python%{python3_pkgversion}-ansible-runner
-BuildRequires: python%{python3_pkgversion}-build
-BuildRequires: python%{python3_pkgversion}-celery
-BuildRequires: python%{python3_pkgversion}-channels
-BuildRequires: python%{python3_pkgversion}-chardet
-BuildRequires: python%{python3_pkgversion}-devel
-# Named as lower case "django" in RHEL
-BuildRequires: python%{python3_pkgversion}-django
-BuildRequires: python%{python3_pkgversion}-django-auth-ldap
-BuildRequires: python%{python3_pkgversion}-django-cors-headers
-BuildRequires: python%{python3_pkgversion}-django-crum
-BuildRequires: python%{python3_pkgversion}-django-extensions
-# Renamed with django prefix
-BuildRequires: python%{python3_pkgversion}-django-jsonbfield
-BuildRequires: python%{python3_pkgversion}-django-jsonfield
-BuildRequires: python%{python3_pkgversion}-django-oauth-toolkit
-BuildRequires: python%{python3_pkgversion}-django-pglocks
-BuildRequires: python%{python3_pkgversion}-django-polymorphic
-BuildRequires: python%{python3_pkgversion}-django-solo
-BuildRequires: python%{python3_pkgversion}-django-taggit
-BuildRequires: python%{python3_pkgversion}-djangorestframework
-BuildRequires: python%{python3_pkgversion}-djangorestframework-yaml
-BuildRequires: python%{python3_pkgversion}-jinja2
-BuildRequires: python%{python3_pkgversion}-ldap
-BuildRequires: python%{python3_pkgversion}-more-itertools
-BuildRequires: python%{python3_pkgversion}-oauthlib
-BuildRequires: python%{python3_pkgversion}-pip
-BuildRequires: python%{python3_pkgversion}-psycopg2
-BuildRequires: python%{python3_pkgversion}-pygerduty
-BuildRequires: python%{python3_pkgversion}-pygments
-# Renamed from PyJWT for RHEL
-BuildRequires: python%{python3_pkgversion}-pyjwt >= 1.7.1
-BuildRequires: python%{python3_pkgversion}-pyparsing
-BuildRequires: python%{python3_pkgversion}-pytest-runner >= 1.4.4
-BuildRequires: python%{python3_pkgversion}-python-logstash
-BuildRequires: python%{python3_pkgversion}-requests-futures
-BuildRequires: python%{python3_pkgversion}-slackclient
-BuildRequires: python%{python3_pkgversion}-social-auth-app-django
-BuildRequires: python%{python3_pkgversion}-sqlparse
 
 Requires: bubblewrap
 Requires: curl
@@ -176,8 +168,8 @@ Requires: subversion
 Requires: xmlsec1-devel
 Requires: xmlsec1-openssl-devel
 
+Requires: python%{python3_pkgversion}-GitPython
 Requires: python%{python3_pkgversion}-PyHamcrest
-Requires: python%{python3_pkgversion}-PyYAML
 Requires: python%{python3_pkgversion}-adal
 Requires: python%{python3_pkgversion}-ansible-runner
 Requires: python%{python3_pkgversion}-attrs
@@ -196,15 +188,13 @@ Requires: python%{python3_pkgversion}-cryptography
 Requires: python%{python3_pkgversion}-daphne
 Requires: python%{python3_pkgversion}-dateutil
 Requires: python%{python3_pkgversion}-devel
-# Named as lower case "django" in RHEL
 Requires: python%{python3_pkgversion}-django
 Requires: python%{python3_pkgversion}-django-auth-ldap
 Requires: python%{python3_pkgversion}-django-cors-headers
 Requires: python%{python3_pkgversion}-django-crum
 Requires: python%{python3_pkgversion}-django-extensions
-Requires: python%{python3_pkgversion}-django-jsonfield
-# Renamed with django prefix
 Requires: python%{python3_pkgversion}-django-jsonbfield
+Requires: python%{python3_pkgversion}-django-jsonfield
 Requires: python%{python3_pkgversion}-django-oauth-toolkit
 Requires: python%{python3_pkgversion}-django-pglocks
 Requires: python%{python3_pkgversion}-django-polymorphic
@@ -213,10 +203,9 @@ Requires: python%{python3_pkgversion}-django-taggit
 Requires: python%{python3_pkgversion}-djangorestframework
 Requires: python%{python3_pkgversion}-djangorestframework-yaml
 Requires: python%{python3_pkgversion}-gitdb
-Requires: python%{python3_pkgversion}-GitPython
 Requires: python%{python3_pkgversion}-google-auth
 Requires: python%{python3_pkgversion}-idna
-Requires: python%{python3_pkgversion}-importlib_metadata
+Requires: python%{python3_pkgversion}-importlib-metadata
 Requires: python%{python3_pkgversion}-incremental
 Requires: python%{python3_pkgversion}-inflect
 Requires: python%{python3_pkgversion}-irc
@@ -248,11 +237,12 @@ Requires: python%{python3_pkgversion}-pyasn1
 Requires: python%{python3_pkgversion}-pyasn1-modules
 Requires: python%{python3_pkgversion}-pygerduty
 Requires: python%{python3_pkgversion}-pygments
-# Renamed from PyJWT for RHEL
 Requires: python%{python3_pkgversion}-pyjwt >= 1.7.1
 Requires: python%{python3_pkgversion}-pyparsing
+Requires: python%{python3_pkgversion}-pyrsistent
 Requires: python%{python3_pkgversion}-python-logstash
 Requires: python%{python3_pkgversion}-pytz
+Requires: python%{python3_pkgversion}-pyyaml
 Requires: python%{python3_pkgversion}-requests
 Requires: python%{python3_pkgversion}-requests-futures
 Requires: python%{python3_pkgversion}-requests-oauthlib
@@ -267,7 +257,7 @@ Requires: python%{python3_pkgversion}-twilio
 Requires: python%{python3_pkgversion}-twisted >= 19.1.0
 Requires: python%{python3_pkgversion}-txaio
 Requires: python%{python3_pkgversion}-urllib3
-Requires: python%{python3_pkgversion}-websocket_client
+Requires: python%{python3_pkgversion}-websocket-client
 Requires: python%{python3_pkgversion}-wheel >= 0.33.6
 Requires: python%{python3_pkgversion}-zipp >= 0.6.0
 Requires: python%{python3_pkgversion}-zope-interface >= 4.7.1
@@ -283,22 +273,28 @@ Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 
 %install
 # Setup build environment
-#pip-%{python3_pkgversion} install --root=$RPM_BUILD_ROOT .
+#pip-%{python3_pkgversion} install --root=%{buildroot} .
 %{py3_install}
 
 # Collect django static
 cat > _awx_rpmbuild_collectstatic_settings.py <<EOF
 from awx.settings.defaults import *
 DEFAULTS_SNAPSHOT = {}
+CLUSTER_HOST_ID = "awx-static"
 STATIC_ROOT = "static/"
 LOG_AGGREGATOR_AUDIT = False
 EOF
 
 export DJANGO_SETTINGS_MODULE="_awx_rpmbuild_collectstatic_settings"
 export PYTHONPATH="$PYTHONPATH:."
-%{__install} -d -m 755 static/
+%{__install} -d -m755 static/
 
-%{python3} "$RPM_BUILD_ROOT%{_bindir}/awx-manage collectstatic --noinput --clear"
+# Transfer scripts
+
+echo _bindir: %{_bindir}
+%{__sed} -i 's$/usr/bin/awx-python$%{python3}$g' %{buildroot}/usr/bin/awx-manage
+
+PYTHONPATH=$PYTHONPATH:%{buildROOT}%{python3_sitelib} %{python3} %{buildroot}/usr/bin/awx-manage collectstatic --noinput --clear
 
 # Cleanup
 unset PYTHONPATH
@@ -336,15 +332,15 @@ EOF
 %{__install} %{_sourcedir}/nginx.conf.example ./
 
 # Install VENV Script
-%{__install} -m755 %{_sourcedir}/awx-create-venv $RPM_BUILD_ROOT%{_bindir}/
-sed -i 's|#!/usr/bin/python$|#!%{__python3}|g' "$RPM_BUILD_ROOT%{_bindir}/awx-create-venv"
-%{__install} -d -m755 $RPM_BUILD_ROOT%{service_homedir}/venv
+%{__install} -m755 %{_sourcedir}/awx-create-venv %{buildroot}%{_bindir}/
+%{__sed} -i 's|#!/usr/bin/python$|#!%{__python3}|g' "%{buildroot}%{_bindir}/awx-create-venv"
+%{__install} -d -m755 %{buildroot}%{service_homedir}/venv
 
-%{__install} %{_sourcedir}/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/awx-rpm-logo.svg
-%{__mv} $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg.orig
-%{__mv} $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg.orig
-%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-header.svg
-%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg $RPM_BUILD_ROOT/opt/awx/static/assets/logo-login.svg
+%{__install} %{_sourcedir}/awx-rpm-logo.svg %{buildroot}/opt/awx/static/assets/awx-rpm-logo.svg
+%{__mv} %{buildroot}/opt/awx/static/assets/logo-header.svg %{buildroot}/opt/awx/static/assets/logo-header.svg.orig
+%{__mv} %{buildroot}/opt/awx/static/assets/logo-login.svg %{buildroot}/opt/awx/static/assets/logo-login.svg.orig
+%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg %{buildroot}/opt/awx/static/assets/logo-header.svg
+%{__ln_s} /opt/awx/static/assets/awx-rpm-logo.svg %{buildroot}/opt/awx/static/assets/logo-login.svg
 
 %pre
 /usr/bin/getent group %{service_group} >/dev/null || /usr/sbin/groupadd --system %{service_group}
