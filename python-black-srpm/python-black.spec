@@ -26,14 +26,14 @@ BuildRequires:  python%{python3_pkgversion}-attrs >= 17.4.0
 BuildRequires:  python%{python3_pkgversion}-click >= 6.5
 BuildRequires:  python%{python3_pkgversion}-toml >= 0.9.4
 
-
 %description
 Black is the uncompromising Python code formatter. By using it, you agree to
 cease control over minutiae of hand-formatting. In return, Black gives you
 speed, determinism, and freedom from pycodestyle nagging about formatting.
 You will save time and mental energy for more important matters.
 
-%package -n     %{pypi_name}
+#%%package -n     %{pypi_name}
+%package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 
 Requires:       python%{python3_pkgversion}-aiohttp
@@ -46,9 +46,10 @@ Requires:       python%{python3_pkgversion}-toml >= 0.9.4
 # Package was renamed when Fedora 31 was rawhide
 # Don't remove this before Fedora 33
 Provides:       python%{python3_pkgversion}-%{pypi_name} = %{version}-%{release}
-Obsoletes:      python%{python3_pkgversion}-%{pypi_name} < 19.3b0-2
+#Obsoletes:      python%{python3_pkgversion}-%{pypi_name} < 19.3b0-2
 
-%description -n %{pypi_name}
+#%description -n %{pypi_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Black is the uncompromising Python code formatter. By using it, you agree to
 cease control over minutiae of hand-formatting. In return, Black gives you
 speed, determinism, and freedom from pycodestyle nagging about formatting.
@@ -77,7 +78,8 @@ export PIP_INDEX_URL=http://host.invalid./
 export PIP_NO_DEPS=yes
 %{__python3} setup.py test
 
-%files -n %{pypi_name}
+#%files -n %{pypi_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.md
 %{_bindir}/black
