@@ -41,25 +41,21 @@ BuildRequires:  python%{python3_pkgversion}-pytest-asyncio
 BuildRequires:  python%{python3_pkgversion}-async-generator
 BuildRequires:  python%{python3_pkgversion}-attrs
 BuildRequires:  python%{python3_pkgversion}-more-itertools >= 4.0.0
+BuildRequires:  %{_bindir}/py.test-%{python3_version}
 %endif
 Requires:       python%{python3_pkgversion}-attrs
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pkgname}}
 
-
 %description -n python%{python3_pkgversion}-%{pkgname} %{_description}
-
 
 %prep
 %autosetup -n %{srcname}-%{version}
 
-
 %build
 %py3_build
 
-
 %install
 %py3_install
-
 
 %if %{with tests}
 %check
