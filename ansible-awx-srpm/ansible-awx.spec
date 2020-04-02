@@ -1,6 +1,5 @@
 %global  debug_package %{nil}
 %global _prefix /opt/awx
-%global _bindir /usr/bin
 %global _mandir %{_prefix}/share/man
 %global __os_install_post %{nil}
 
@@ -290,8 +289,6 @@ export PYTHONPATH="$PYTHONPATH:."
 %{__install} -d -m755 static/
 
 # Transfer scripts
-
-echo _bindir: %{_bindir}
 %{__sed} -i 's$/usr/bin/awx-python$%{python3}$g' %{buildroot}/usr/bin/awx-manage
 
 PYTHONPATH=$PYTHONPATH:%{buildROOT}%{python3_sitelib} %{python3} %{buildroot}/usr/bin/awx-manage collectstatic --noinput --clear
@@ -319,6 +316,7 @@ done
 %endif
 
 # Create fake python executable
+%{__install} -d -m755 %{_bindir}
 cat > %{buildroot}%{_bindir}/python <<"EOF"
 #!/bin/sh
 export AWX_SETTINGS_FILE=/etc/tower/settings.py
@@ -332,8 +330,8 @@ EOF
 %{__install} %{_sourcedir}/nginx.conf.example ./
 
 # Install VENV Script
-%{__install} -m755 %{_sourcedir}/awx-create-venv %{buildroot}%{_bindir}/
-%{__sed} -i 's|#!/usr/bin/python$|#!%{__python3}|g' "%{buildroot}%{_bindir}/awx-create-venv"
+%{__install} -m755 %{_sourcedir}/awx-create-venv %{buildroot}/usr/bin/
+%{__sed} -i 's|#!/usr/bin/python$|#!%{__python3}|g' "%{buildroot}/usr/bin//awx-create-venv"
 %{__install} -d -m755 %{buildroot}%{service_homedir}/venv
 
 %{__install} %{_sourcedir}/awx-rpm-logo.svg %{buildroot}/opt/awx/static/assets/awx-rpm-logo.svg
@@ -380,9 +378,9 @@ EOF
 %files
 %defattr(0644, awx, awx, 0755)
 %doc nginx.conf.example
-%attr(0755, root, root) %{_bindir}/awx-manage
-%attr(0755, root, root) %{_bindir}/awx-create-venv
-%{_bindir}/awx-create-venv
+%attr(0755, root, root) /usr/bin/awx-manage
+%attr(0755, root, root) /usr/bin/awx-create-venv
+/usr/bin/awx-create-venv
 %{python3_sitelib}/awx
 %attr(0755, root, root) %{python3_sitelib}/awx/plugins/*/*.py
 %attr(0755, awx, awx) %{_prefix}/static
@@ -394,10 +392,11 @@ EOF
 %{python3_sitelib}/awx-*.egg-info/
 /usr/share/doc/awx/
 /opt/awx/bin/python
-%{_bindir}/ansible-tower-service
-%{_bindir}/ansible-tower-setup
-%{_bindir}/awx-python
-%{_bindir}/failure-event-handler
+# Not in _bindir, in /usr/bin
+/usr/bin/ansible-tower-service
+/usr/bin/ansible-tower-setup
+/usr/bin/awx-python
+/usr/bin/failure-event-handler
 /usr/share/awx
 /usr/share/sosreport/sos/plugins/tower.py
 /var/lib/awx/favicon.ico
