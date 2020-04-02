@@ -44,9 +44,7 @@ BuildREquires:  python2
 BuildREquires:  python2-devel
 Requires:	python2-amqp >= 2.5.2
 Conflicts:	python2-amqp >= 2.6
-# name correctly for RHEL
-#Requires:	python2-importlib-metadata >= 0.18
-Requires:	python2-importlib_metadata >= 0.18
+Requires:	python2-importlib-metadata >= 0.18
 %{?python_provide:%python_provide python%{python2_pkgversion}-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
@@ -69,9 +67,7 @@ BuildREquires:  python%{python3_pkgversion}
 BuildREquires:  python%{python3_pkgversion}-devel
 Requires:	python%{python3_pkgversion}-amqp >= 2.5.2
 Conflicts:	python%{python3_pkgversion}-amqp >= 2.6
-# name correctly for RHEL
-#Requires:	python%%{python3_pkgversion}-importlib-metadata >= 0.18
-Requires:	python%{python3_pkgversion}-importlib_metadata >= 0.18
+Requires:	python%%{python3_pkgversion}-importlib-metadata >= 0.18
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
