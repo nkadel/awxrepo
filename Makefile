@@ -14,8 +14,8 @@ REPOBASE=file://$(PWD)
 #EPELPKGS+=PyYAML-srpm
 
 EPELPKGS+=Cython-srpm
-EPELPKGS+=meson-srpm
 EPELPKGS+=http-parser-srpm
+EPELPKGS+=meson-srpm
 
 # RHEL name funkiness for python-pythlakes
 EPELPKGS+=pyflakes-srpm
@@ -27,7 +27,9 @@ EPELPKGS+=python2-sphinx-srpm
 EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-amqp-srpm
 EPELPKGS+=python-async-generator-srpm
+EPELPKGS+=python-atomicwrites-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
@@ -38,7 +40,9 @@ EPELPKGS+=python-billiard-srpm
 EPELPKGS+=python-build-srpm
 EPELPKGS+=python-celery-srpm
 EPELPKGS+=python-channels-srpm
+EPELPKGS+=python-colorama-srpm
 EPELPKGS+=python-commonmark-srpm
+EPELPKGS+=python-contextlib2-srpm
 EPELPKGS+=python-contextvars-srpm
 EPELPKGS+=python-coverage-srpm
 EPELPKGS+=python-curio-srpm
@@ -49,7 +53,6 @@ EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
 EPELPKGS+=python-django-extensions-srpm
 EPELPKGS+=python-django-jsonbfield-srpm
-EPELPKGS+=python-django-jsonfield-srpm
 EPELPKGS+=python-django-oauth-toolkit-srpm
 EPELPKGS+=python-django-pglocks-srpm
 EPELPKGS+=python-django-polymorphic-srpm
@@ -57,10 +60,13 @@ EPELPKGS+=python-django-solo-srpm
 EPELPKGS+=python-django-taggit-srpm
 EPELPKGS+=python-djangorestframework-srpm
 EPELPKGS+=python-djangorestframework-yaml-srpm
+EPELPKGS+=python-docutils-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-feedparser-srpm
 EPELPKGS+=python-func_timeout-srpm
+EPELPKGS+=python-funcsigs-srpm
+EPELPKGS+=python-futures-srpm
 EPELPKGS+=python-gitdb-srpm
 EPELPKGS+=python-httpretty-srpm
 EPELPKGS+=python-hypothesis-srpm
@@ -78,7 +84,7 @@ EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
-EPELPKGS+=python-pluggy-srpm
+EPELPKGS+=python-path-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-py-srpm
@@ -86,6 +92,7 @@ EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pycares-srpm
 EPELPKGS+=python-pygerduty-srpm
 EPELPKGS+=python-pyjwt-srpm
+EPELPKGS+=python-pyrsistent-srpm
 EPELPKGS+=python-pytest-aiohttp-srpm
 EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-logstash-srpm
@@ -96,12 +103,14 @@ EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
 EPELPKGS+=python-selenium-srpm
+EPELPKGS+=python-setuptools_git-srpm
 EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
 EPELPKGS+=python-sqlparse-srpm
+EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-unittest2-srpm
@@ -109,6 +118,27 @@ EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on contextlib2 and setuptools_git and termcolor
+AWXPKGS+=python-pytest-shutil-srpm
+
+# Depends on setuptools_git
+AWXPKGS+=python-pytest-fixture-config-srpm
+
+# Depends on path and contextlib2 and
+AWXPKGS+=python-pytest-virtualenv-srpm
+
+# bootstrup updated setuptools, depends on python2-futures,
+# virtualenv, mock, pytest-fixture-config
+AWXPKGS+=python-setuptools-srpm
+
+# python3 only update for pytest modules of misnmed source package
+# Depends on more-itertools and upstream pluggy 0.6, not local updated version
+AWXPKGS+=pytest-srpm
+
+# Updated pytest for 3.6.x dependencies
+# Depends on more-itertools and atomicwrites and colorama and funcsigs
+AWXPKGS+=pytest-3.6.x-srpm
 
 # Depends on more-itertools
 AWXPKGS+=python-outcome-srpm
@@ -121,8 +151,6 @@ AWXPKGS+=python-pytest-cov-srpm
 
 # Depends on simplejson and feedparser and demjson
 AWXPKGS+=python-jsonpickle-srpm
-
-AWXPKGS+=python-amqp-srpm
 
 # Depends on setuptools_scm
 AWXPKGS+=python-importlib_resources-srpm
@@ -142,10 +170,16 @@ AWXPKGS+=python-attrs-srpm
 # Depends on pytest
 AWXPKGS+=python-sqlparse-srpm
 
-# Depends on http-parser and Cython
+# Depends on http-parser and Cython and yarl and async-timeout
 AWXPKGS+=python-aiohttp-srpm
 
-# Depends on aiohttp
+# Depends on pytest and Cython and multidict and more-itertools
+AWXPKGS+=python-yarl-srpm
+
+# Depends on aiohttp and pyttest-aiohttp
+AWXPKGS+=python-async-timeout-srpm
+
+# Depends on aiohttp, which Requires yarl and async-timeout
 AWXPKGS+=python-black-srpm
 
 # Depends on aiodns and aiohttp and black
@@ -166,33 +200,15 @@ AWXPKGS+=python-twilio-srpm
 # Depends on memcached
 AWXPKGS+=python-django-srpm
 
-# python3 only update for pytest modules of misnmed source package
-# Depends on more-itertools and pluggy and py
-AWXPKGS+=pytest-srpm
-
-# Depends on pytest and importlib_metadata and jaraco-packaging ane
-# pytest-black-multiply and pytest-checkdocs and pytest-cov and
-# pytest-flake8 and rst-linker and setuptools_scm
-AWXPKGS+=python-pytest-checkdocs-srpm
-
-# Depends on black-multiply and checkdocs
-AWXPKGS+=python-jaraco-stream-srpm
-
 # Depends on pytest
 AWXPKGS+=python-cryptography-srpm
 
 # Depends on pytest and more-itertools
 AWXPKGS+=python-multidict-srpm
 
-# Depends on pytest and Cython and multidict and more-itertools
-AWXPKGS+=python-yarl-srpm
-
 # Depends on pytest and entrypoints
 AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
-
-# Depends on aio-http and pyttest-aiohttp
-AWXPKGS+=python-async-timeout-srpm
 
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
@@ -201,7 +217,23 @@ AWXPKGS+=python-jaraco-itertools-srpm
 AWXPKGS+=python-zipp-srpm
 
 # Depends on zipp
-AWXPKGS+=python-importlib_metadata-srpm
+AWXPKGS+=python-importlib-metadata-srpm
+
+# Depends on pytest-black and pytest = 3.5.0
+AWXPKGS+=python-pytest-black-srpm
+
+# Depends on pytest and importlib-metadata and jaraco-packaging ane
+# pytest-black-multiply and pytest-checkdocs and pytest-cov and
+# pytest-flake8 and rst-linker and setuptools_scm and pytest-black
+
+# Disable temporarily
+AWXPKGS+=python-pytest-checkdocs-srpm
+
+# Depends on black-multiply and checkdocs
+AWXPKGS+=python-jaraco-stream-srpm
+
+# Depends on importlib-metadata
+AWXPKGS+=python-pluggy-srpm
 
 # Depends on pytest and pytest-flake8 and setuptools_scm and more-itertools
 AWXPKGS+=python-jaraco-classes-srpm
@@ -317,6 +349,7 @@ awxrepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
+	@echo >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 	@echo '[awxrepo]' >> $@
 	@echo 'name=awxrepo' >> $@
@@ -337,6 +370,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
 	@echo "best=0" >> $@
+	@echo >> $@
 	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 	@echo '[awxrepo]' >> $@
 	@echo 'name=awxrepo' >> $@
@@ -357,6 +391,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo "Disabling 'best=' for $@"
 #	@sed -i '/^best=/d' $@
 #	@echo "best=0" >> $@
+#	@echo >> $@
 #	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
 #	@echo '[awxrepo]' >> $@
 #	@echo 'name=awxrepo' >> $@
