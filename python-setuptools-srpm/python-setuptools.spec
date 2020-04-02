@@ -6,14 +6,18 @@
 %bcond_without tests
 
 %bcond_without python2
+%bcond_without python3
 
 %if %{without bootstrap}
 %global python_wheelname %{srcname}-%{version}-py2.py3-none-any.whl
+
 %if %{with python2}
 %global python2_record %{python2_sitelib}/%{srcname}-%{version}.dist-info/RECORD
 %endif
+
 %global python3_record %{python3_sitelib}/%{srcname}-%{version}.dist-info/RECORD
 %endif
+
 %global python_wheeldir %{_datadir}/python-wheels
 
 Name:           python-setuptools
@@ -37,10 +41,6 @@ Patch0:         create-site-packages.patch
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  gcc
 %if %{with python2}
 BuildRequires:  python2-devel
@@ -56,20 +56,20 @@ BuildRequires:  python2-mock
 %endif # with tests
 %endif # with python2
 
-BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python3-devel
 %if %{with tests}
-BuildRequires:  python%{python3_pkgversion}-pip
-BuildRequires:  python%{python3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-mock
-BuildRequires:  python%{python3_pkgversion}-pytest-fixture-config
-BuildRequires:  python%{python3_pkgversion}-pytest-virtualenv
+BuildRequires:  python3-pip
+BuildRequires:  python3-pytest
+BuildRequires:  python3-mock
+BuildRequires:  python3-pytest-fixture-config
+BuildRequires:  python3-pytest-virtualenv
 %endif # with tests
 %if %{without bootstrap}
-BuildRequires:  python%{python3_pkgversion}-pip
-BuildRequires:  python%{python3_pkgversion}-wheel
+BuildRequires:  python3-pip
+BuildRequires:  python3-wheel
 # python3 bootstrap: this is built before the final build of python3, which
 # adds the dependency on python3-rpm-generators, so we require it manually
-BuildRequires:  python%{python3_pkgversion}-rpm-generators
+BuildRequires:  python3-rpm-generators
 %endif # without bootstrap
 
 %description
@@ -104,17 +104,21 @@ execute the software that requires pkg_resources.py.
 
 %endif # with python2
 
+%if 0%{?rhel} == 8
+%package -n platform-python-setuptools
+Summary:        Ridiculous RHEL wrapper for python3-setuptools
+Requires:       python%{python3_pkgversion}-setuptools >= %{version}-%{release}
+
+%description -n platform-python-setuptools
+This is an entirely unnecessary RHEL 8 wrapper for python%{python3_pkgversion}-setuptools
+%endif
+
 %package -n python%{python3_pkgversion}-setuptools
 Summary:        Easily build and distribute Python 3 packages
 Conflicts:      python-setuptools < %{version}-%{release}
-
-# Replace *amazingly* stupid platform-python-setuptools
 %if 0%{?rhel} == 8
-Provides:  platform-python-setuptools = %{version}-%{version}
-Obsoletes: platform-python-setuptools <= %{version}-%{version}
-Conflicts: platform-python-setuptools
+Requires:       platform-python-setuptools >= %{version}
 %endif
-
 %{?python_provide:%python_provide python%{python3_pkgversion}-setuptools}
 %{bundled 3}
 
@@ -238,6 +242,10 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=$(pwd) pytest-%{python3_version} --ignore=p
 %{python2_sitelib}/*
 %{_bindir}/easy_install-2.*
 %endif # with python2
+
+%files -n platform-python-setuptools
+%license LICENSE
+%doc docs/* CHANGES.rst README.rst
 
 %files -n python%{python3_pkgversion}-setuptools
 %license LICENSE
