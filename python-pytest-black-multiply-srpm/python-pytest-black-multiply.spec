@@ -34,7 +34,7 @@ Requires:       python3dist(pytest) >= 3.5
 Requires:       python3dist(pytest-black)
 Requires:       python3dist(pytest-checkdocs)
 Requires:       python3dist(pytest-flake8)
-Requires:       python3dist(rst.linker) >= 1.9
+Requires:       python3dist(rst-linker) >= 1.9
 Requires:       python3dist(setuptools)
 Requires:       python3dist(sphinx)
 %description -n python%{python3_pkgversion}-%{pypi_name}
