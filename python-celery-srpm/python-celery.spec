@@ -63,8 +63,11 @@ Requires:       python2-pytz
 Requires:       python2-setuptools
 
 BuildRequires:  python2-devel
-BuildRequires:  python2-rpm-macros
 BuildRequires:  python2-setuptools
+# Use epel-rpm-macros on RHEL
+%if ! 0%{?rhel}
+BuildRequires:  python2-rpm-macros
+%endif
 # Not used since we don't have sphinx_celery
 #BuildRequires:  python2-sphinx
 
@@ -86,9 +89,11 @@ Requires:       python%{python3_pkgversion}-pytz
 Requires:       python%{python3_pkgversion}-setuptools
 
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-rpm-macros
 BuildRequires:  python%{python3_pkgversion}-setuptools
-
+# Use epel-rpm-macros on RHEL
+%if ! 0%{?rhel}
+BuildRequires:  python%{python3_pkgversion}-rpm-macros
+%endif
 
 %description -n python%{python3_pkgversion}-celery
 %{desc}
