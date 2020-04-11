@@ -1,4 +1,5 @@
 %global with_python3 1
+%global with_python2 0
 
 %global bname path
 
@@ -21,12 +22,16 @@ BuildArch:      noarch
 BuildRequires:  epel-rpm-macros
 %endif
 
-BuildRequires:  python2-devel
+%if %{with_python2}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
-BuildRequires:  python2-pytest
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  %{_bindir}/py.test-%{python3_version}
+%endif
 %endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
@@ -41,6 +46,7 @@ allowing common operations on files to be invoked on those path objects directly
 
 See documentation here http://amoffat.github.io/sh/.
 
+%if %{with_python2}
 %package    -n python2-%{bname}
 Summary:    Python 2 module wrapper for os.path
 %{?python_provide:%python_provide python2-%{bname}}
@@ -49,8 +55,9 @@ path.py implements a path objects as first-class entities,
 allowing common operations on files to be invoked on those path objects directly.
 
 See documentation here http://amoffat.github.io/sh/.
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %package    -n python%{python3_pkgversion}-%{bname}
 Summary:    Python 3 module wrapper for os.path
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{bname}}
@@ -68,20 +75,23 @@ See documentation here http://amoffat.github.io/sh/.
 sed -i 's/\[pytest\]/\[tool:pytest\]/' setup.cfg
 
 %build
-%if 0%{?with_python3}
+%if %{with_python3}
 %py3_build
 %endif
 
+%if %{with_python2}
 %py2_build
+%endif
 
 %if %{with tests}
 %check
+%if %{with_python2}
 pushd build/lib
    LC_ALL=C.UTF-8 py.test-%{python2_version} -v
-#%{__python} test_path.py
-popd
+   popd
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd build/lib
     py.test-%{python3_version} -v
 popd
@@ -89,13 +99,16 @@ popd
 %endif # with tests
 
 %install
-%if 0%{?with_python3}
+%if %{with_python3}
 %py3_install
 %endif
 
+%if %{with_python2}
 %py2_install
+%endif
 
 
+%if %{with_python2}
 %files -n python2-path
 %doc CHANGES.rst README.rst
 %{python2_sitelib}/path.py
@@ -103,8 +116,9 @@ popd
 %{python2_sitelib}/path.pyo
 %{python2_sitelib}/path.py-%{version}-py?.?.egg-info/
 %{python2_sitelib}/test_path.py*
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %files -n python%{python3_pkgversion}-path
 %{python3_sitelib}/__pycache__/*
 %{python3_sitelib}/path.py
