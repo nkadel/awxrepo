@@ -3,6 +3,7 @@
 %global _python_bytecompile_extra 1
 
 %global with_python3 1
+%global with_python2 1
 
 # -doc package generation
 # EL6: python-sphinx is not new enough
@@ -41,6 +42,7 @@ Userland RSS 0.91, RSS 0.92, RSS 0.93, RSS 0.94, RSS 1.0, RSS 2.0,
 Atom 0.3, Atom 1.0, and CDF feeds. It also parses several popular extension
 modules, including Dublin Core and Apple's iTunes extensions.
 
+%if %{with_python2}
 %package -n python2-%{srcname}
 Summary:        Parse RSS and Atom feeds in Python 2
 
@@ -71,8 +73,9 @@ syndicated feeds. It can handle RSS 0.90, Netscape RSS 0.91,
 Userland RSS 0.91, RSS 0.92, RSS 0.93, RSS 0.94, RSS 1.0, RSS 2.0,
 Atom 0.3, Atom 1.0, and CDF feeds. It also parses several popular extension
 modules, including Dublin Core and Apple's iTunes extensions.
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary:        Parse RSS and Atom feeds in Python
 BuildRequires:  python%{python3_pkgversion}-devel
@@ -102,7 +105,7 @@ The documentation is also included in source form (Sphinx ReST).
 
 %prep
 %setup -q -n %{srcname}-%{version}
-%if 0%{?with_python3}
+%if %{with_python3}
 cp -a . %{py3dir}
 pushd %{py3dir}
 %patch0 -p1
@@ -114,7 +117,9 @@ find -type f -exec chmod 0644 {} ';'
 
 
 %build
+%if %{with_python2}
 %{__python2} setup.py build
+%endif
 
 %if 0%{?with_docpkg}
 # build documentation
@@ -122,7 +127,7 @@ rm -rf __tmp_docs ; mkdir __tmp_docs
 sphinx-build -b html -d __tmp_docs/ docs/ __tmp_docs/html/
 %endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd %{py3dir}
 %{__python3} setup.py build
 popd
@@ -130,32 +135,38 @@ popd
 
 
 %install
+%if %{with_python2}
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
 popd
 %endif
 
 %check
+%if %{with_python2}
 pushd feedparser
 PYTHONPATH=%{buildroot}%{python2_sitelib} %{__python2} feedparsertest.py || :
 popd
-%if 0%{?with_python3}
+%endif
+%if %{with_python3}
 pushd %{py3dir}/feedparser
 PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} feedparsertest.py || :
 popd
 %endif
 
 
+%if %{with_python2}
 %files -n python2-%{srcname}
 %{!?_licensedir:%global license %%doc}
 %license LICENSE
 %doc README.rst NEWS
 %{python2_sitelib}/*
+%endif
 
-%if 0%{?with_python3}
+%if %{with_python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %{!?_licensedir:%global license %%doc}
 %license LICENSE
