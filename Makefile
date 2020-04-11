@@ -17,14 +17,17 @@ EPELPKGS+=Cython-srpm
 EPELPKGS+=http-parser-srpm
 EPELPKGS+=meson-srpm
 
-# RHEL name funkiness for python-pythlakes
+# RHEL name funkiness for python-pyflakes
 EPELPKGS+=pyflakes-srpm
 
+# RHEL packages do not currently "provide"  python2- dependendcies
 EPELPKGS+=python2-lockfile-srpm
 EPELPKGS+=python2-sphinx-srpm
 
 # python3 only update modules for version sensitive python-six
 EPELPKGS+=python3-six-srpm
+# python3 named package from EPEL 8 backported to EPEL 7
+EPELPKGS+=python3-chardet-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-amqp-srpm
@@ -63,13 +66,9 @@ EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-docutils-srpm
 EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
-EPELPKGS+=python-feedparser-srpm
 EPELPKGS+=python-func_timeout-srpm
-EPELPKGS+=python-funcsigs-srpm
 EPELPKGS+=python-futures-srpm
 EPELPKGS+=python-gitdb-srpm
-EPELPKGS+=python-httpretty-srpm
-EPELPKGS+=python-hypothesis-srpm
 EPELPKGS+=python-idna-ssl-srpm
 EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
@@ -110,6 +109,7 @@ EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
 EPELPKGS+=python-sqlparse-srpm
+EPELPKGS+=python-sure-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
@@ -118,6 +118,18 @@ EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on coverage for python2 on RHEL 7
+AWXPKGS+=python-hypothesis-srpm
+
+# Depends on sure
+AWXPKGS+=python-httpretty-srpm
+
+# Depends on chardet
+AWXPKGS+=python-feedparser-srpm
+
+# Depends on unittest2 for RHEL 7
+AWXPKGS+=python-funcsigs-srpm
 
 # Depends on contextlib2 and setuptools_git and termcolor
 AWXPKGS+=python-pytest-shutil-srpm
@@ -304,8 +316,8 @@ install:: $(AWXPKGS)
 .PHONY: all
 all:: install
 
-.PHONY: install clean getsrc build
-install clean getsrc build::
+.PHONY: install clean getsrc src.rpm build 
+install clean getsrc src.rpm build::
 	@for name in $(EPELPKGS) $(AWXPKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done
