@@ -62,21 +62,27 @@ This package contains documentation in reST and HTML formats.
 %build
 %py3_build
 
+%if ! 0%{?el7}
 # Build sphinx documentation
 pushd docs/
-make html
+# Force python3 settings
+#make html
+make html PYTHON="%{__python3}" SPHINXBUILD=sphinx-build-%{python3_version}
 popd # docs
+%endif
 
 
 %install
 %py3_install
 
 # Install html docs
+%if ! 0%{?el7}
 mkdir -p %{buildroot}%{_pkgdocdir}/
 cp -pr docs/_build/html %{buildroot}%{_pkgdocdir}/
 
-# Move sources
+# Move HTML sources
 mv -f %{buildroot}%{_pkgdocdir}/html/_sources/ %{buildroot}%{_pkgdocdir}/rst/
+%endif
 
 # Remove buildinfo sphinx documentation
 rm -rf %{buildroot}%{_pkgdocdir}/html/.buildinfo
@@ -100,8 +106,9 @@ chmod 755 %{buildroot}%{python3_sitearch}/%{srcname}/_cares.cpython-*.so
 
 %files -n python-%{srcname}-doc
 %doc examples/
+%if ! 0%{?el7}
 %{_pkgdocdir}/
-
+%endif
 
 
 %changelog
