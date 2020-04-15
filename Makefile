@@ -97,7 +97,6 @@ EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-logstash-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-python3-openid-srpm
-EPELPKGS+=python-python3-saml-srpm
 EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
@@ -118,6 +117,9 @@ EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
+
+# Depends on isodate and xmsec for RHEL 7
+AWXPKGS+=python-python3-saml-srpm
 
 # Depends on coverage for python2 on RHEL 7
 AWXPKGS+=python-hypothesis-srpm
