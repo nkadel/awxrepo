@@ -96,7 +96,9 @@ PYTHONPATH=src READTHEDOCS=True sphinx-build -b man docs docs/_build/man
 %install
 %py2_install
 %py3_install
-%{__install} -Dpm0644 -t %{buildroot}%{_mandir}/man1 docs/_build/man/hypothesis.1
+
+%{__install} -d -m0755  %{buildroot}%{_mandir}/man1
+%{__install} -m0644  docs/_build/man/hypothesis.1 %{buildroot}%{_mandir}/man1
 
 %if %{with tests}
 %check
