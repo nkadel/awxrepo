@@ -69,13 +69,13 @@ python stdlib.
 
 %package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
-BuildRequires: python%{python3_pkgversion}-devel
-BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
-BuildRequires: python%{python3_pkgversion}-nose
+BuildRequires:  python%{python3_pkgversion}-nose
 %endif
 %if %{with docs}
-BuildRequires: python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-sphinx
 %endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-simplejson}
 
@@ -106,7 +106,10 @@ python stdlib.
 %py3_build
 
 %if %{with docs}
-PATH=%{_libexecdir}/python%{python3_pkgversion}-sphinx:$PATH %{__python3} scripts/make_docs.py
+PYTHON="%{__python3}" \
+    SPHINXBUILD=sphinx-build-%{python3_version} \
+    PATH=%{_libexecdir}/python%{python3_pkgversion}-sphinx:$PATH \
+    %{__python3} scripts/make_docs.py
 
 rm docs/.buildinfo
 rm docs/.nojekyll
@@ -293,7 +296,7 @@ rm docs/.nojekyll
 * Thu Jun  4 2009 Kyle VanderBeek <kylev@kylev.com> - 2.0.9-1
 - Update to 2.0.9
 - Make sure to require gcc to the speedups get compiled
-- Fix description since we're not "pure" python
+- Fix description since we are not "pure" python
 - Change to pypi instead of cheesehop
 
 * Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.7-2
