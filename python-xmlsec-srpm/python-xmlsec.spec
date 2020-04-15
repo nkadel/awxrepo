@@ -28,14 +28,14 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
-BuildRequires: %{py3_dist lxml}
-BuildRequires: %{py3_dist pkgconfig}
-BuildRequires: %{py3_dist pytest}
+BuildRequires: python%{python3_pkgversion}-lxml
+BuildRequires: python%{python3_pkgversion}-pkgconfig
+BuildRequires: python%{python3_pkgversion}-pytest
 Requires: libxml2 >= 2.9.1
 Requires: xmlsec1 >= 1.2.18
 Requires: xmlsec1-openssl
-Requires: %{py3_dist lxml}
-Requires: %{py3_dist pkgconfig}
+Requires: python%{python3_pkgversion}-lxml
+Requires: python%{python3_pkgversion}-pkgconfig
 
 
 %description -n python%{python3_pkgversion}-%{srcname}
