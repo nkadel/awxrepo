@@ -28,11 +28,11 @@ BuildRequires:  epel-rpm-macros
 BuildRequires:  gcc
 BuildRequires:  python%{python3_pkgversion}-devel
 
-BuildRequires:  python3dist(hypothesis)
-BuildRequires:  python3dist(pytest)
-BuildRequires:  python3dist(pytest-runner)
-BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(six)
+BuildRequires:  python%{python3_pkgversion}-hypothesis
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-pytest-runner
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-six
 
 %description %{common_description}
 
@@ -60,9 +60,10 @@ rm -rf %{pypi_name}.egg-info
 %py3_install
 
 
+%if ! 0%{?el7}
 %check
 %{__python3} setup.py test
-
+%endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.rst
