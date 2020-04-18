@@ -43,6 +43,11 @@ Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
 BuildRequires:  gcc
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
+%if 0%{?el7}
+BuildRequires:  python-sphinx
+%else
+BuildRequires:  python2-sphinx
+%endif
 %if %{with tests}
 BuildRequires:  python2-nose
 %endif
