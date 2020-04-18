@@ -16,6 +16,10 @@ URL:            https://github.com/jaraco/rst.linker
 Source0:        https://files.pythonhosted.org/packages/source/r/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 BuildArch:      noarch
  
+%if 0%{?rhel}
+BuildRequires:  epel-rpm-macros
+%endif
+
 %description
  rst.linker provides a routine for adding links and performing other custom
 replacements to restructured text files as a Sphinx extension.License License
@@ -24,25 +28,25 @@ classifiers). For more details, see this explanation < In your sphinx
 configuration file, include rst.linker as an extension and then add a
 link_files configuration section...
 
-%package -n python3-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pkg_name}
 Summary:        %{summary}
-Requires:       python3dist(six)
-Requires:       python3-dateutil
+Requires:       python%{python3_pkgversion}-six
+Requires:       python%{python3_pkgversion}-dateutil
 
-BuildRequires:  python3-devel
-BuildRequires:  python3dist(pathspec)
-BuildRequires:  python3-setuptools_scm >= 1.15.0
-BuildRequires:  python3dist(setuptools)
-%{?python_provide:%python_provide python3-%{pkg_name}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-pathspec
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
+BuildRequires:  python%{python3_pkgversion}-setuptools
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
 
-%description -n python3-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pkg_name}
 %{description}
 
 %if %{with docs}
 %package -n python-%{pkg_name}-doc
 Summary:        rst.linker documentation
-BuildRequires:  python3dist(sphinx)
-BuildRequires:  python3-jaraco-packaging
+BuildRequires:  python%{python3_pkgversion}-sphinx
+BuildRequires:  python%{python3_pkgversion}-jaraco-packaging
 
 %description -n python-%{pkg_name}-doc
 Documentation for rst.linker
@@ -74,7 +78,7 @@ rm -rf html/.{doctrees,buildinfo}
 # BuildRequires:  python(2/3)-path does not meet the test-requirement for path.py
 #%%{__python3} setup.py test
 
-%files -n python3-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pkg_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/rst
