@@ -37,6 +37,7 @@ BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pathspec
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
 BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-dateutil
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
 
 %description -n python%{python3_pkgversion}-%{pkg_name}
@@ -58,20 +59,19 @@ Documentation for rst.linker
 rm -rf %{pypi_name}.egg-info
 # rename package using a -
 sed -i 's/rst.linker/rst-linker/' setup.py
+# Reset python in setup.py
 
 %build
 %py3_build
 %if %{with docs}
 # generate html docs 
 # this package requires itself to build docs :/
-PYTHONPATH=./ sphinx-build docs html
+PYTHONPATH=./ sphinx-build-%{python3_version} docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 %endif
 
 %install
-# Must do the subpackages' install first because the scripts in /usr/bin are
-# overwritten with every setup.py install.
 %py3_install
 
 %check
