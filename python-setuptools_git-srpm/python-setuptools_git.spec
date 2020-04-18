@@ -58,6 +58,8 @@ Provides:  python3-%{pypi_name} == %{version}-%{release}
 
 
 %check
+# Needed for RHEL7
+LANG=en_US.utf8
 %{__python3} setup.py test -vv
 unset LANG
 
