@@ -13,21 +13,13 @@ REPOBASE=file://$(PWD)
 # Dependency metapackage
 #EPELPKGS+=PyYAML-srpm
 
-EPELPKGS+=Cython-srpm
+EPELPKGS+=
 EPELPKGS+=http-parser-srpm
 EPELPKGS+=meson-srpm
 
-# RHEL name funkiness for python-pyflakes
-EPELPKGS+=pyflakes-srpm
-
-# RHEL packages do not currently "provide"  python2- dependendcies
-EPELPKGS+=python2-lockfile-srpm
-EPELPKGS+=python2-sphinx-srpm
 
 # python3 only update modules for version sensitive python-six
 EPELPKGS+=python3-six-srpm
-# python3 named package from EPEL 8 backported to EPEL 7
-EPELPKGS+=python3-chardet-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-amqp-srpm
@@ -64,55 +56,45 @@ EPELPKGS+=python-django-taggit-srpm
 EPELPKGS+=python-djangorestframework-srpm
 EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-docutils-srpm
-EPELPKGS+=python-entrypoints-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-futures-srpm
-EPELPKGS+=python-gitdb-srpm
 EPELPKGS+=python-idna-ssl-srpm
 EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
 EPELPKGS+=python-irc-srpm
-EPELPKGS+=python-isodate-srpm
 EPELPKGS+=python-jaraco-collections-srpm
 EPELPKGS+=python-jaraco-logging-srpm
 EPELPKGS+=python-jaraco-packaging-srpm
 EPELPKGS+=python-jaraco-text-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
-EPELPKGS+=python-memcached-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
 EPELPKGS+=python-path-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
-EPELPKGS+=python-py-srpm
 EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pycares-srpm
 EPELPKGS+=python-pygerduty-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-pyrsistent-srpm
 EPELPKGS+=python-pytest-aiohttp-srpm
-EPELPKGS+=python-pytest-param-srpm
 EPELPKGS+=python-python-logstash-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-python3-openid-srpm
 EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
-EPELPKGS+=python-selenium-srpm
 EPELPKGS+=python-setuptools_git-srpm
 EPELPKGS+=python-setuptools_scm-srpm
 EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
-EPELPKGS+=python-sqlparse-srpm
-EPELPKGS+=python-sure-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
-EPELPKGS+=python-unittest2-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
@@ -181,9 +163,6 @@ AWXPKGS+=python-sniffio-srpm
 # Depends on hypothesis
 AWXPKGS+=python-attrs-srpm
 
-# Depends on pytest
-AWXPKGS+=python-sqlparse-srpm
-
 # Depends on http-parser and Cython and yarl and async-timeout
 AWXPKGS+=python-aiohttp-srpm
 
@@ -202,33 +181,14 @@ AWXPKGS+=python-slackclient-srpm
 # Depends on ptyprocess and pluggy
 AWXPKGS+=python-pexpect-srpm
 
-# Depndes on unittest2
-AWXPKGS+=python-case-srpm
-
-# Depnds on isodate
-AWXPKGS+=python-rdflib-srpm
-
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
 
-# Depends on memcached
-AWXPKGS+=python-django-srpm
-
-# Depends on pytest
-AWXPKGS+=python-cryptography-srpm
-
-# Depends on pytest and more-itertools
-AWXPKGS+=python-multidict-srpm
-
 # Depends on pytest and entrypoints
-AWXPKGS+=python-flake8-srpm
 AWXPKGS+=python-pytest-flake8-srpm
 
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
-
-# Depends on jaraco-packaging and setuptools_scm and jaraco-itertools and toml
-AWXPKGS+=python-zipp-srpm
 
 # Depends on zipp
 AWXPKGS+=python-importlib-metadata-srpm
@@ -266,9 +226,6 @@ AWXPKGS+=python-tempora-srpm
 # Depends on django-extensions and coverage and flake8
 AWXPKGS+=python-django-formtools-srpm
 
-# Depends on coverage and async-generator and hypothesis
-AWXPKGS+=python-pytest-asyncio-srpm
-
 # Depends on pytest and and pytest-asyncio and async-timeout
 AWXPKGS+=python-asgiref-srpm
 
@@ -294,20 +251,18 @@ AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
-REPOS+=awxrepo/el/7
+#REPOS+=awxrepo/el/7
 REPOS+=awxrepo/el/8
-#REPOS+=awxrepo/fedora/31
+#REPOS+=awxrepo/fedora/32
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
-CFGS+=awxrepo-7-x86_64.cfg
 CFGS+=awxrepo-8-x86_64.cfg
-#CFGS+=awxrepo-f31-x86_64.cfg
+#CFGS+=awxrepo-f32-x86_64.cfg
 
 # Link from /etc/mock
-MOCKCFGS+=epel-7-x86_64.cfg
 MOCKCFGS+=epel-8-x86_64.cfg
-#MOCKCFGS+=fedora-31-x86_64.cfg
+#MOCKCFGS+=fedora-32-x86_64.cfg
 
 install:: $(CFGS)
 install:: $(MOCKCFGS)
@@ -355,27 +310,6 @@ cfg:: cfgs
 .PHONY: cfgs
 cfgs: $(CFGS) $(MOCKCFGS)
 
-awxrepo-7-x86_64.cfg: /etc/mock/epel-7-x86_64.cfg
-	@echo Generating $@ from $?
-	@cat $? > $@
-	@sed -i 's/epel-7-x86_64/awxrepo-7-x86_64/g' $@
-	@echo >> $@
-	@echo "Disabling 'best=' for $@"
-	@sed -i '/^best=/d' $@
-	@echo "best=0" >> $@
-	@echo >> $@
-	@echo "config_opts['yum.conf'] += \"\"\"" >> $@
-	@echo '[awxrepo]' >> $@
-	@echo 'name=awxrepo' >> $@
-	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awxrepo/el/7/x86_64/' >> $@
-	@echo 'failovermethod=priority' >> $@
-	@echo 'skip_if_unavailable=False' >> $@
-	@echo 'metadata_expire=0' >> $@
-	@echo 'gpgcheck=0' >> $@
-	@echo '#cost=2000' >> $@
-	@echo '"""' >> $@
-
 awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
@@ -397,10 +331,10 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
 
-#awxrepo-f31-x86_64.cfg: /etc/mock/fedora-31-x86_64.cfg
+#awxrepo-f32-x86_64.cfg: /etc/mock/fedora-32-x86_64.cfg
 #	@echo Generating $@ from $?
 #	@cat $? > $@
-#	@sed -i 's/fedora-31-x86_64/awxrepo-f31-x86_64/g' $@
+#	@sed -i 's/fedora-32-x86_64/awxrepo-f32-x86_64/g' $@
 #	@echo >> $@
 #	@echo "Disabling 'best=' for $@"
 #	@sed -i '/^best=/d' $@
@@ -410,7 +344,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo '[awxrepo]' >> $@
 #	@echo 'name=awxrepo' >> $@
 #	@echo 'enabled=1' >> $@
-#	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/31/x86_64/' >> $@
+#	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/32/x86_64/' >> $@
 #	@echo 'failovermethod=priority' >> $@
 #	@echo 'skip_if_unavailable=False' >> $@
 #	@echo 'metadata_expire=0' >> $@
