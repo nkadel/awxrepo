@@ -9,8 +9,8 @@
 %global service_logdir /var/log/tower
 %global service_configdir /etc/tower
 
-%global awx_mainversion 9.3.0
-%global awx_subversion .104
+%global awx_mainversion 14.0.0
+%global awx_subversion %{nil}
 
 Summary: Ansible AWX
 Name: ansible-awx
@@ -153,6 +153,142 @@ BuildRequires: python%{python3_pkgversion}-xmlsec
 BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
 BuildRequires: python%{python3_pkgversion}-zope-interface >= 4.7.1
 
+#BuildRequires: python%%{python3_pkgversion}-adal = 1.2.2               # via msrestazure
+#BuildRequires: python%%{python3_pkgversion}-aiohttp = 3.6.2            # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-aioredis = 1.3.1           # via channels-redis
+#BuildRequires: python%%{python3_pkgversion}-ansible-runner = 1.4.6     # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-ansiconv = 1.0.0           # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-asgiref = 3.2.5            # via channels, channels-redis, daphne
+#BuildRequires: python%%{python3_pkgversion}-async-timeout = 3.0.1      # via aiohttp, aioredis
+#BuildRequires: python%%{python3_pkgversion}-attrs = 19.3.0             # via aiohttp, automat, jsonschema, service-identity, twisted
+#BuildRequires: python%%{python3_pkgversion}-autobahn = 20.3.1          # via daphne
+#BuildRequires: python%%{python3_pkgversion}-automat = 20.2.0           # via twisted
+#BuildRequires: python%%{python3_pkgversion}-azure-common = 1.1.25      # via azure-keyvault
+#BuildRequires: python%%{python3_pkgversion}-azure-keyvault = 1.1.0     # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-azure-nspkg = 3.0.2        # via azure-keyvault
+#BuildRequires: python%%{python3_pkgversion}-boto = 2.49.0              # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-cachetools = 4.0.0         # via google-auth
+#BuildRequires: python%%{python3_pkgversion}-certifi = 2019.11.28       # via kubernetes, msrest, requests
+#BuildRequires: python%%{python3_pkgversion}-cffi = 1.14.0              # via cryptography
+#BuildRequires: python%%{python3_pkgversion}-channels-redis = 2.4.2     # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-channels = 2.4.0           # via -r /awx_devel/requirements/requirements.in, channels-redis
+#BuildRequires: python%%{python3_pkgversion}-chardet = 3.0.4            # via aiohttp, requests
+#BuildRequires: python%%{python3_pkgversion}-constantly = 15.1.0        # via twisted
+#BuildRequires: python%%{python3_pkgversion}-cryptography = 2.8         # via adal, autobahn, azure-keyvault, pyopenssl, service-identity, social-auth-core
+#BuildRequires: python%%{python3_pkgversion}-daphne = 2.4.1             # via -r /awx_devel/requirements/requirements.in, channels
+#BuildRequires: python%%{python3_pkgversion}-defusedxml = 0.6.0         # via python3-openid, python3-saml, social-auth-core
+#BuildRequires: python%%{python3_pkgversion}-dictdiffer = 0.8.1         # via openshift
+#BuildRequires: python%%{python3_pkgversion}-django-auth-ldap = 2.1.0   # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-cors-headers = 3.2.1  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-crum = 0.7.5        # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-extensions = 2.2.9  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-jsonfield = 1.2.0   # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-oauth-toolkit = 1.1.3  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-pglocks = 1.0.4     # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-polymorphic = 2.1.2  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-qsstats-magic = 1.1.0  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-radius = 1.3.3      # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-redis = 4.5.0       # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-solo = 1.1.3        # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-split-settings = 1.0.0  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django-taggit = 1.2.0      # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-django = 2.2.11            # via -r /awx_devel/requirements/requirements.in, channels, django-auth-ldap, django-cors-headers, django-crum, django-jsonfield, django-oauth-toolkit, django-polymorphic, django-taggit, djangorestframework
+#BuildRequires: python%%{python3_pkgversion}-djangorestframework-yaml = 1.0.3  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-djangorestframework = 3.11.0  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-docutils = 0.16            # via python-daemon
+#BuildRequires: python%%{python3_pkgversion}-future = 0.16.0            # via django-radius
+#BuildRequires: python%%{python3_pkgversion}-gitdb = 4.0.2              # via gitpython
+#BuildRequires: python%%{python3_pkgversion}-gitpython = 3.1.0          # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-google-auth = 1.11.3       # via kubernetes
+#BuildRequires: python%%{python3_pkgversion}-hiredis = 1.0.1            # via aioredis
+#BuildRequires: python%%{python3_pkgversion}-hyperlink = 19.0.0         # via twisted
+#BuildRequires: python%%{python3_pkgversion}-idna-ssl = 1.1.0           # via aiohttp
+#BuildRequires: python%%{python3_pkgversion}-idna = 2.9                 # via hyperlink, idna-ssl, requests, twisted, yarl
+#BuildRequires: python%%{python3_pkgversion}-importlib-metadata = 1.5.0  # via importlib-resources, irc, jsonschema
+#BuildRequires: python%%{python3_pkgversion}-importlib-resources = 1.4.0  # via jaraco.text
+#BuildRequires: python%%{python3_pkgversion}-incremental = 17.5.0       # via twisted
+#BuildRequires: python%%{python3_pkgversion}-irc = 18.0.0               # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-isodate = 0.6.0            # via msrest, python3-saml
+#BuildRequires: python%%{python3_pkgversion}-jaraco.classes = 3.1.0     # via jaraco.collections
+#BuildRequires: python%%{python3_pkgversion}-jaraco.collections = 3.0.0  # via irc
+#BuildRequires: python%%{python3_pkgversion}-jaraco.functools = 3.0.0   # via irc, jaraco.text, tempora
+#BuildRequires: python%%{python3_pkgversion}-jaraco.logging = 3.0.0     # via irc
+#BuildRequires: python%%{python3_pkgversion}-jaraco.stream = 3.0.0      # via irc
+#BuildRequires: python%%{python3_pkgversion}-jaraco.text = 3.2.0        # via irc, jaraco.collections
+#BuildRequires: python%%{python3_pkgversion}-jinja2 = 2.11.2            # via -r /awx_devel/requirements/requirements.in, openshift
+#BuildRequires: python%%{python3_pkgversion}-jsonschema = 3.2.0         # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-kubernetes = 11.0.0        # via openshift
+#BuildRequires: python%%{python3_pkgversion}-lockfile = 0.12.2          # via python-daemon
+#BuildRequires: python%%{python3_pkgversion}-lxml = 4.5.0               # via xmlsec
+#BuildRequires: python%%{python3_pkgversion}-markdown = 3.2.1           # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-markupsafe = 1.1.1         # via jinja2
+#BuildRequires: python%%{python3_pkgversion}-more-itertools = 8.2.0     # via irc, jaraco.classes, jaraco.functools
+#BuildRequires: python%%{python3_pkgversion}-msgpack = 0.6.2            # via channels-redis
+#BuildRequires: python%%{python3_pkgversion}-msrest = 0.6.11            # via azure-keyvault, msrestazure
+#BuildRequires: python%%{python3_pkgversion}-msrestazure = 0.6.3        # via azure-keyvault
+#BuildRequires: python%%{python3_pkgversion}-multidict = 4.7.5          # via aiohttp, yarl
+#BuildRequires: python%%{python3_pkgversion}-netaddr = 0.7.19           # via pyrad
+#BuildRequires: python%%{python3_pkgversion}-oauthlib = 3.1.0           # via django-oauth-toolkit, requests-oauthlib, social-auth-core
+#BuildRequires: python%%{python3_pkgversion}-openshift = 0.11.0         # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-pexpect = 4.7.0            # via -r /awx_devel/requirements/requirements.in, ansible-runner
+#BuildRequires: python%%{python3_pkgversion}-pkgconfig = 1.5.1          # via xmlsec
+#BuildRequires: python%%{python3_pkgversion}-prometheus-client = 0.7.1  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-psutil = 5.7.0             # via ansible-runner
+#BuildRequires: python%%{python3_pkgversion}-psycopg2 = 2.8.4           # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-ptyprocess = 0.6.0         # via pexpect
+#BuildRequires: python%%{python3_pkgversion}-pyasn1-modules = 0.2.8     # via google-auth, python-ldap, service-identity
+#BuildRequires: python%%{python3_pkgversion}-pyasn1 = 0.4.8             # via pyasn1-modules, python-ldap, rsa, service-identity
+#BuildRequires: python%%{python3_pkgversion}-pycparser = 2.20           # via cffi
+#BuildRequires: python%%{python3_pkgversion}-pygerduty = 0.38.2         # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-pyhamcrest = 2.0.2         # via twisted
+#BuildRequires: python%%{python3_pkgversion}-pyjwt = 1.7.1              # via adal, social-auth-core, twilio
+#BuildRequires: python%%{python3_pkgversion}-pyopenssl = 19.1.0         # via twisted
+#BuildRequires: python%%{python3_pkgversion}-pyparsing = 2.4.6          # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-pyrad = 2.3                # via django-radius
+#BuildRequires: python%%{python3_pkgversion}-pyrsistent = 0.15.7        # via jsonschema
+#BuildRequires: python%%{python3_pkgversion}-python-daemon = 2.2.4      # via ansible-runner
+#BuildRequires: python%%{python3_pkgversion}-python-dateutil = 2.8.1    # via adal, kubernetes
+#BuildRequires: python%%{python3_pkgversion}-python-ldap = 3.2.0        # via django-auth-ldap
+#BuildRequires: python%%{python3_pkgversion}-python-radius = 1.0        # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-python-string-utils = 1.0.0  # via openshift
+#BuildRequires: python%%{python3_pkgversion}-python3-openid = 3.1.0     # via social-auth-core
+#BuildRequires: python%%{python3_pkgversion}-python3-saml = 1.9.0       # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-pytz = 2019.3              # via django, irc, tempora, twilio
+#BuildRequires: python%%{python3_pkgversion}-pyyaml = 5.3.1             # via -r /awx_devel/requirements/requirements.in, ansible-runner, djangorestframework-yaml, kubernetes
+#BuildRequires: python%%{python3_pkgversion}-redis = 3.4.1              # via -r /awx_devel/requirements/requirements.in, django-redis
+#BuildRequires: python%%{python3_pkgversion}-requests-oauthlib = 1.3.0  # via kubernetes, msrest, social-auth-core
+#BuildRequires: python%%{python3_pkgversion}-requests = 2.23.0          # via -r /awx_devel/requirements/requirements.in, adal, azure-keyvault, django-oauth-toolkit, kubernetes, msrest, requests-oauthlib, slackclient, social-auth-core, twilio
+#BuildRequires: python%%{python3_pkgversion}-rsa = 4.0                  # via google-auth
+#BuildRequires: python%%{python3_pkgversion}-ruamel.yaml.clib = 0.2.0   # via ruamel.yaml
+#BuildRequires: python%%{python3_pkgversion}-ruamel.yaml = 0.16.10      # via openshift
+#BuildRequires: python%%{python3_pkgversion}-schedule = 0.6.0           # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-service-identity = 18.1.0  # via twisted
+#BuildRequires: python%%{python3_pkgversion}-six = 1.14.0               # via ansible-runner, automat, cryptography, django-extensions, django-pglocks, google-auth, isodate, jaraco.collections, jaraco.logging, jaraco.text, jsonschema, kubernetes, openshift, pygerduty, pyopenssl, pyrad, pyrsistent, python-dateutil, slackclient, social-auth-app-django, social-auth-core, tacacs-plus, twilio, txaio, websocket-client
+#BuildRequires: python%%{python3_pkgversion}-slackclient = 1.1.2        # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-smmap = 3.0.1              # via gitdb
+#BuildRequires: python%%{python3_pkgversion}-social-auth-app-django = 3.1.0  # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-social-auth-core = 3.3.1   # via -r /awx_devel/requirements/requirements.in, social-auth-app-django
+#BuildRequires: python%%{python3_pkgversion}-sqlparse = 0.3.1           # via django
+#BuildRequires: python%%{python3_pkgversion}-tacacs_plus = 1.0          # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-tempora = 2.1.0            # via irc, jaraco.logging
+#BuildRequires: python%%{python3_pkgversion}-twilio = 6.37.0            # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-twisted[tls] = 20.3.0      # via -r /awx_devel/requirements/requirements.in, daphne
+#BuildRequires: python%%{python3_pkgversion}-txaio = 20.1.1             # via autobahn
+#BuildRequires: python%%{python3_pkgversion}-typing-extensions = 3.7.4.1  # via aiohttp
+#BuildRequires: python%%{python3_pkgversion}-urllib3 = 1.25.8           # via kubernetes, requests
+#BuildRequires: python%%{python3_pkgversion}-uwsgi = 2.0.18             # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-uwsgitop = 0.11            # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-websocket-client = 0.57.0  # via kubernetes, slackclient
+#BuildRequires: python%%{python3_pkgversion}-xmlsec = 1.3.3             # via python3-saml
+#BuildRequires: python%%{python3_pkgversion}-yarl = 1.4.2               # via aiohttp
+#BuildRequires: python%%{python3_pkgversion}-zipp = 3.1.0               # via importlib-metadata, importlib-resources
+#BuildRequires: python%%{python3_pkgversion}-zope.interface = 5.0.0     # via twisted
+
+## The following packages are considered to be unsafe in a requirements file:
+#BuildRequires: python%%{python3_pkgversion}-#pip = 19.3.1               # via -r /awx_devel/requirements/requirements.in
+#BuildRequires: python%%{python3_pkgversion}-#setuptools = 41.6.0        # via -r /awx_devel/requirements/requirements.in, google-auth, jsonschema, kubernetes, markdown, python-daemon, zope.interface
+
+
 Requires: bubblewrap
 Requires: curl
 Requires: git
@@ -170,6 +306,8 @@ Requires: xmlsec1-openssl-devel
 Requires: python%{python3_pkgversion}-GitPython
 Requires: python%{python3_pkgversion}-PyHamcrest
 Requires: python%{python3_pkgversion}-adal
+#Requires: python%{python3_pkgversion}-adal = 1.2.2
+Requires: python%{python3_pkgversion}-aiohttp
 Requires: python%{python3_pkgversion}-ansible-runner
 Requires: python%{python3_pkgversion}-attrs
 Requires: python%{python3_pkgversion}-autobahn
