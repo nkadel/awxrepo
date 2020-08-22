@@ -17,6 +17,8 @@ EPELPKGS+=
 EPELPKGS+=http-parser-srpm
 EPELPKGS+=meson-srpm
 
+# Confusing sources for build module
+#EPELPKGS+=python-build-srpm
 
 # python3 only update modules for version sensitive python-six
 EPELPKGS+=python3-six-srpm
@@ -32,7 +34,6 @@ EPELPKGS+=python-azure-keyvault-secrets-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
 EPELPKGS+=python-billiard-srpm
-EPELPKGS+=python-build-srpm
 EPELPKGS+=python-celery-srpm
 EPELPKGS+=python-channels-srpm
 EPELPKGS+=python-colorama-srpm
