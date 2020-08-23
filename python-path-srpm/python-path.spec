@@ -1,12 +1,12 @@
 %global with_python3 1
 %global with_python2 0
 
-%global bname path
+%global pypi_name path
 
 # Disable tests
 %bcond_with tests
 
-Name:           python-%{bname}
+Name:           python-%{pypi_name}
 Version:        5.2
 #Release:        17%%{?dist}
 Release:        0%{?dist}
@@ -14,7 +14,7 @@ Summary:        A python module wrapper for os.path
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/path.py
-Source0:        https://pypi.python.org/packages/source/p/path.py/%{bname}.py-%{version}.zip
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -47,10 +47,10 @@ allowing common operations on files to be invoked on those path objects directly
 See documentation here http://amoffat.github.io/sh/.
 
 %if %{with_python2}
-%package    -n python2-%{bname}
+%package    -n python2-%{pypi_name}
 Summary:    Python 2 module wrapper for os.path
-%{?python_provide:%python_provide python2-%{bname}}
-%description -n python2-%{bname}
+%{?python_provide:%python_provide python2-%{pypi_name}}
+%description -n python2-%{pypi_name}
 path.py implements a path objects as first-class entities,
 allowing common operations on files to be invoked on those path objects directly.
 
@@ -58,11 +58,11 @@ See documentation here http://amoffat.github.io/sh/.
 %endif
 
 %if %{with_python3}
-%package    -n python%{python3_pkgversion}-%{bname}
+%package    -n python%{python3_pkgversion}-%{pypi_name}
 Summary:    Python 3 module wrapper for os.path
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{bname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{bname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 path.py implements a path objects as first-class entities,
 allowing common operations on files to be invoked on those path objects directly.
 
@@ -71,7 +71,7 @@ See documentation here http://amoffat.github.io/sh/.
 
 
 %prep
-%setup -q -n %{bname}.py-%{version}
+%setup -q -n %{pypi_name}.py-%{version}
 sed -i 's/\[pytest\]/\[tool:pytest\]/' setup.cfg
 
 %build
