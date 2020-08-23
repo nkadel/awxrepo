@@ -2,8 +2,6 @@
 
 %global pypi_name pexpect
 
-%global with_python2 0
-
 Name:           python-%{pypi_name}
 Summary:        Unicode-aware Pure Python Expect-like module
 Version:        4.7.0
@@ -35,35 +33,6 @@ does not require TCL or Expect nor does it require C extensions to be
 compiled.  It should work on any platform that supports the standard Python
 pty module.
 
-%if %{with_python2}
-%package -n python2-%{pypi_name}
-Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{pypi_name}}
-BuildRequires:  python2-devel
-BuildRequires:  python2-pytest
-BuildRequires:  python2-pluggy
-BuildRequires:  python2-ptyprocess
-Requires:       python2-ptyprocess
-Provides:       pexpect = %{version}-%{release}
-Obsoletes:      pexpect <= 2.3-20
-
-%description -n python2-pexpect
-Pexpect is a pure Python module for spawning child applications; controlling
-them; and responding to expected patterns in their output. Pexpect works like
-Don Libes' Expect. Pexpect allows your script to spawn a child application and
-control it as if a human were typing commands. This package contains the
-python2 version of this module.
-
-Pexpect can be used for automating interactive applications such as ssh, ftp,
-passwd, telnet, etc. It can be used to automate setup scripts for duplicating
-software package installations on different servers. And it can be used for
-automated software testing. Pexpect is in the spirit of Don Libes' Expect, but
-Pexpect is pure Python. Unlike other Expect-like modules for Python, Pexpect
-does not require TCL or Expect nor does it require C extensions to be
-compiled.  It should work on any platform that supports the standard Python
-pty module.
-%endif
-
 %package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
@@ -90,75 +59,30 @@ compiled.  It should work on any platform that supports the standard Python
 pty module.
 
 %prep
-%autosetup -c
-mv %{pypi_name}-%{version} python2
-chmod +x python2/tools/*
-find python2/examples -type f | xargs chmod a-x
-cp -pr python2 python3
+%autosetup -n %{pypi_name}-%{version}
 
-%if %{with_python2}
-find python2 -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python2}|'
-%endif
-find python3 -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python3}|'
+find . -type f -name '*.py' | xargs sed -i '1s|^#!.*|#!%{__python3}|'
 
 %build
-%if %{with_python2}
-pushd python2
-  %py2_build
-popd
-%endif
-
-pushd python3
-  %py3_build
-popd
+%py3_build
 
 %install
-%if %{with_python2}
-pushd python2
-  %py2_install
-  rm -rf ${buildroot}%{python2_sitelib}/setuptools/tests
-  # Drop asyncio stuff from py2
-  rm -f %{buildroot}%{python2_sitelib}/%{pypi_name}/_async.py
-popd
-%endif
-
-pushd python3
-  %py3_install
-  rm -rf %{buildroot}%{python3_sitelib}/pexpect/tests
-popd
+%py3_install
+rm -rf %{buildroot}%{python3_sitelib}/pexpect/tests
 
 %if %{with check}
 %check
 export PYTHONIOENCODING=UTF-8
 
-%if %{with_python2}
-pushd python2
-  %{__python2} ./tools/display-sighandlers.py
-  %{__python2} ./tools/display-terminalinfo.py
-  PYTHONPATH=%{buildroot}%{python2_sitelib} %{__python2} ./tools/display-maxcanon.py
-  py.test-2 --verbose
-popd
-%endif
-
-pushd python3
-  %{__python3} ./tools/display-sighandlers.py
-  %{__python3} ./tools/display-terminalinfo.py
-  PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} ./tools/display-maxcanon.py
-  py.test-3 --verbose
-popd
-%endif
-
-%if %{with_python2}
-%files -n python2-%{pypi_name}
-%license python2/LICENSE
-%doc python2/doc python2/examples
-%{python2_sitelib}/%{pypi_name}/
-%{python2_sitelib}/%{pypi_name}-*.egg-info
+%{__python3} ./tools/display-sighandlers.py
+%{__python3} ./tools/display-terminalinfo.py
+PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} ./tools/display-maxcanon.py
+py.test-3 --verbose
 %endif
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
-%license python3/LICENSE
-%doc python3/doc python3/examples
+%license LICENSE
+%doc doc examples
 %{python3_sitelib}/%{pypi_name}/
 %{python3_sitelib}/%{pypi_name}-*.egg-info
 
