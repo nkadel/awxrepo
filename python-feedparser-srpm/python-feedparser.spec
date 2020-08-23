@@ -21,7 +21,7 @@ Summary:        Parse RSS and Atom feeds in Python
 
 License:        BSD
 URL:            https://github.com/kurtmckee/feedparser
-Source0:        https://pypi.python.org/packages/source/f/%{srcname}/%{srcname}-%{version}.tar.bz2
+Source0:        %pypi_source
 
 # shows that for Python 3 the test-suite fails early with
 #   ImportError: No module named 'BaseHTTPServer'
