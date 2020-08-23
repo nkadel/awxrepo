@@ -27,7 +27,9 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 %description
-
+This library, ADAL for Python, will no longer receive new feature
+improvements. Instead, use the new library [MSAL for Python]( If you are
+starting a new project, you can get started with the [MSAL Python docs]
 
 %if %{with_python2}
 %package -n python2-%{pypi_name}
@@ -46,7 +48,9 @@ Requires:	python2-cryptography >= 1.1.0
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
 %description -n python2-%{pypi_name}
-
+This library, ADAL for Python, will no longer receive new feature
+improvements. Instead, use the new library [MSAL for Python]( If you are
+starting a new project, you can get started with the [MSAL Python docs]
 
 %endif # with_python2
 
@@ -67,7 +71,9 @@ Requires:	python%{python3_pkgversion}-cryptography >= 1.1.0
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
-
+This library, ADAL for Python, will no longer receive new feature
+improvements. Instead, use the new library [MSAL for Python]( If you are
+starting a new project, you can get started with the [MSAL Python docs]
 
 %endif # with_python3
 
