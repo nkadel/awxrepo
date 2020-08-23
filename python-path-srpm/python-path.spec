@@ -14,7 +14,7 @@ Summary:        A python module wrapper for os.path
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/path.py
-Source0:        %pypi_source
+Source0:        %{pypi_source %{pypi_name} %{version} zip}
 
 BuildArch:      noarch
 
