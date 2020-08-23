@@ -21,7 +21,7 @@ Summary:        HTTP request mock tool for Python
 
 License:        MIT
 URL:            https://github.com/%{github_owner}/%{github_name}
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 # Alternative for building from a github snapshot
 #Source0:        https://github.com/%%{github_owner}/%%{github_name}/archive/%%{github_commit}/%%{github_name}-%%{shortcommit}.tar.gz
 
