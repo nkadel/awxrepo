@@ -1,14 +1,14 @@
-%global srcname xmlsec
+%global pypi_name xmlsec
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.3.3
 #Release:        6%{?dist}
 Release:        0
 Summary:        Python bindings for the XML Security Library
 
 License:        MIT
-URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/x/%{srcname}/%{srcname}-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/%{pypi_name}
+Source0:        %pypi_source
 
 %if -%{?rhel}
 buildrequires:  epel-rpm-macros
@@ -25,9 +25,9 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %{summary}.
 
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary: %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 BuildRequires: python%{python3_pkgversion}-lxml
 BuildRequires: python%{python3_pkgversion}-pkgconfig
 BuildRequires: python%{python3_pkgversion}-pytest
@@ -38,12 +38,12 @@ Requires: python%{python3_pkgversion}-lxml
 Requires: python%{python3_pkgversion}-pkgconfig
 
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{summary}.
 
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 rm -rf *.egg-info
 
 
@@ -58,7 +58,7 @@ rm -rf *.egg-info
 # Tests aren't available
 
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitearch}/xmlsec*.so
