@@ -8,7 +8,7 @@ Summary:        Python HTTP client/server for asyncio
 
 License:        ASL 2.0
 URL:            https://github.com/aio-libs/aiohttp
-Source0:        %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
