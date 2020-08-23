@@ -20,7 +20,7 @@ Summary:        Testscenarios, a pyunit extension for dependency injection
 
 License:        ASL 2.0 and BSD
 URL:            https://launchpad.net/testscenarios
-Source0:        https://pypi.python.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
