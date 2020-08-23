@@ -1,17 +1,17 @@
 # Created by pyp2rpm-3.3.2
-%global pypi_name jaraco.functools
-%global pkg_name jaraco-functools
+%global srcname jaraco.functools
+%global pypi_name jaraco-functools
 # Fedora doesn't have all the docs deps yet
 %bcond_with docs
 
-Name:           python-%{pkg_name}
+Name:           python-%{pypi_name}
 Version:        2.0
 Release:        2%{?dist}
 Summary:        Functools like those found in stdlib
 
 License:        MIT
 URL:            https://github.com/jaraco/jaraco.functools
-Source0:        %{pypi_source %{pypi_name}}
+Source0:        %{pypi_source %{srcname}}
 BuildArch:      noarch
  
 %if 0%{?rhel}
@@ -21,7 +21,7 @@ BuildRequires:  epel-rpm-macros
 %description
 Functools like those found in stdlib
 
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-jaraco
 
@@ -33,29 +33,29 @@ BuildRequires:  python%{python3_pkgversion}-pytest-flake8
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
 BuildRequires:  python%{python3_pkgversion}-six
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Functools like those found in stdlib
 
 %if %{with docs}
-%package -n python-%{pkg_name}-doc
+%package -n python-%{pypi_name}-doc
 Summary:        jaraco-functools documentation
 
 BuildRequires:  python%{python3_pkgversion}-jaraco-packaging >= 3.2
 BuildRequires:  python%{python3_pkgversion}-rst-linker >= 1.9
 BuildRequires:  python%{python3_pkgversion}-sphinx
 
-%description -n python-%{pkg_name}-doc
+%description -n python-%{pypi_name}-doc
 Documentation for jaraco-functools
 %endif
 
 %prep
 %autosetup -n jaraco.functools-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{srcname}.egg-info
 # rename package with a -
-sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+sed -i 's/%{srcname}/%{pypi_name}/' setup.cfg
 # rename jaraco dependencies to use a -
 sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
@@ -78,7 +78,7 @@ rm -rf html/.{doctrees,buildinfo}
 # AttributeError: 'Application' object has no attribute 'make_notifier'
 # LANG=C.utf-8 %%{__python3} -m pytest --ignore=build
 
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/jaraco/functools*
@@ -89,7 +89,7 @@ rm -rf html/.{doctrees,buildinfo}
 %exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
 
 %if %{with docs}
-%files -n python-%{pkg_name}-doc
+%files -n python-%{pypi_name}-doc
 %doc html
 %license LICENSE
 %endif
