@@ -39,11 +39,9 @@ process and its pty.
 
 %build
 %py3_build
-%py2_build
 
 %install
 %py3_install
-%py2_install
 
 %if %{with tests}
 %check
