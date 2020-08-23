@@ -3,7 +3,7 @@
 Name:           python-%{pypi_name}
 Version:        1.6.0
 #Release:        5%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Python module for parsing mime-type names
 License:        MIT
 URL:            https://github.com/dbtsai/python-mimeparse
@@ -15,20 +15,6 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 %description
-This module provides basic functions for parsing mime-type names
-and matching them against a list of media-ranges.
-
-
-%package -n python2-%{pypi_name}
-Summary:        %{summary}
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-%{?python_provide:%python_provide python2-%{pypi_name}}
-# Handle EPEL snipping leading python- off package name
-Provides: python2-mimeparse = %{version}-%{release}
-Obsoletes: python2-mimeparse <= %{version}-%{release}
-
-%description -n python2-%{pypi_name}
 This module provides basic functions for parsing mime-type names
 and matching them against a list of media-ranges.
 
@@ -63,14 +49,7 @@ and matching them against a list of media-ranges.
 
 
 %check
-%{__python2} -m unittest -v mimeparse_test
 %{__python3} -m unittest -v mimeparse_test
-
-
-%files -n python2-%{pypi_name}
-%license LICENSE
-%doc README.rst
-%{python2_sitelib}/*
 
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
