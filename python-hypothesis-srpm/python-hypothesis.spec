@@ -1,10 +1,10 @@
 %{?python_enable_dependency_generator}
-%global srcname hypothesis
+%global pypi_name hypothesis
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        4.23.8
 #Release:        2%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Library for property based testing
 
 License:        MPLv2.0
@@ -32,28 +32,10 @@ flow.
 
 %description %{_description}
 
-%package     -n python2-%{srcname}
+%package     -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{srcname}}
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-BuildRequires:  python2-attrs >= 16
-BuildRequires:  python2-coverage
-BuildRequires:  python2-enum34
-%if 0%{?fedora}
-Suggests:       python2--pytz >= 2014.1
-Suggests:       python2--numpy >= 1.9.0
-Suggests:       python2--pytest >= 3.0
-%endif
-						 
-%description -n python2-%{srcname} %{_description}
-
-Python 2 version.
-
-%package     -n python%{python3_pkgversion}-%{srcname}
-Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
-Obsoletes:      platform-python-%{srcname} < %{version}-%{release}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+Obsoletes:      platform-python-%{pypi_name} < %{version}-%{release}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-attrs >= 16
@@ -74,12 +56,12 @@ Suggests:       python%{python3_pkgversion}-numpy >= 1.9.0
 Suggests:       python%{python3_pkgversion}-pytest >= 3.0
 %endif
 						 
-%description -n python%{python3_pkgversion}-%{srcname} %{_description}
+%description -n python%{python3_pkgversion}-%{pypi_name} %{_description}
 
 Python 3 version.
 
 %prep
-%autosetup -n %{srcname}-%{srcname}-python-%{version}/%{srcname}-python -p1
+%autosetup -n %{pypi_name}-%{pypi_name}-python-%{version}/%{pypi_name}-python -p1
 # disable Sphinx extensions that require Internet access
 sed -i -e '/sphinx.ext.intersphinx/d' docs/conf.py
 
@@ -105,14 +87,7 @@ PYTHONPATH=src READTHEDOCS=True sphinx-build -b man docs docs/_build/man
 PYTHONPATH=%{buildroot}%{python3_sitelib} pytest-3 -v -n auto
 %endif
 
-%files -n python2-%{srcname}
-%license ../LICENSE.txt
-%doc README.rst
-%{python2_sitelib}/hypothesis-*.egg-info/
-%{python2_sitelib}/hypothesis/
-%{_mandir}/man1/hypothesis.1*
-
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license ../LICENSE.txt
 %doc README.rst
 %{python3_sitelib}/hypothesis-*.egg-info
