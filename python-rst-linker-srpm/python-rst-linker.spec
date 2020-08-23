@@ -13,7 +13,7 @@ Summary:        Can add links and perform other custom replacements to rst
 
 License:        MIT
 URL:            https://github.com/jaraco/rst.linker
-Source0:        https://files.pythonhosted.org/packages/source/r/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
  
 %if 0%{?rhel}
