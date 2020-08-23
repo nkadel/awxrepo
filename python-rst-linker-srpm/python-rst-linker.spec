@@ -1,14 +1,14 @@
 # Created by pyp2rpm-3.2.2
-%global pypi_name rst.linker
-%global pkg_name rst-linker
+%global srcname rst.linker
+%global pypi_name rst-linker
 # This package is interdependant on jaraco-packaging to build docs
 # will build both with out docs and add docs in later
 %bcond_with docs
 
-Name:           python-%{pkg_name}
+Name:           python-%{pypi_name}
 Version:        1.10
 #Release:        5%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Can add links and perform other custom replacements to rst
 
 License:        MIT
@@ -28,7 +28,7 @@ classifiers). For more details, see this explanation < In your sphinx
 configuration file, include rst.linker as an extension and then add a
 link_files configuration section...
 
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-six
 Requires:       python%{python3_pkgversion}-dateutil
@@ -38,25 +38,25 @@ BuildRequires:  python%{python3_pkgversion}-pathspec
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-dateutil
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{description}
 
 %if %{with docs}
-%package -n python-%{pkg_name}-doc
+%package -n python-%{pypi_name}-doc
 Summary:        rst.linker documentation
 BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  python%{python3_pkgversion}-jaraco-packaging
 
-%description -n python-%{pkg_name}-doc
+%description -n python-%{pypi_name}-doc
 Documentation for rst.linker
 %endif
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{srcname}-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{srcname}.egg-info
 # rename package using a -
 sed -i 's/rst.linker/rst-linker/' setup.py
 # Reset python in setup.py
@@ -78,14 +78,14 @@ rm -rf html/.{doctrees,buildinfo}
 # BuildRequires:  python(2/3)-path does not meet the test-requirement for path.py
 #%%{__python3} setup.py test
 
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/rst
 %{python3_sitelib}/rst_linker-%{version}-py?.?.egg-info
 
 %if %{with docs}
-%files -n python-%{pkg_name}-doc
+%files -n python-%{pypi_name}-doc
 %license LICENSE
 %doc html 
 %endif
