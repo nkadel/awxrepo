@@ -23,27 +23,10 @@ BuildArch:       noarch
 BuildRequires:  epel-rpm-macros
 %endif
 
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 
 %description
-The Docutils project specifies a plaintext markup language, reStructuredText,
-which is easy to read and quick to write.  The project includes a python
-library to parse rST files and transform them into other useful formats such
-as HTML, XML, and TeX as well as commandline tools that give the enduser
-access to this functionality.
-
-Currently, the library supports parsing rST that is in standalone files and
-PEPs (Python Enhancement Proposals).  Work is underway to parse rST from
-Python inline documentation modules and packages.
-
-%package -n python2-%{srcname}
-Summary:        System for processing plaintext documentation for python2
-%{?python_provide:%python_provide python2-%{srcname}}
-
-%description -n python2-%{srcname}
 The Docutils project specifies a plaintext markup language, reStructuredText,
 which is easy to read and quick to write.  The project includes a python
 library to parse rST files and transform them into other useful formats such
@@ -91,7 +74,6 @@ popd
 
 # Create the two folders mentioned above
 mv %{srcname}-%{version} python3
-cp -rp python3 python2
 
 # Get the doc and license files out
 pushd python3
@@ -107,9 +89,6 @@ rm python3/test/test_writers/test_odt.py
 %endif
 
 %build
-pushd python2
-%py2_build
-popd
 
 pushd python3
 %py3_build
@@ -117,13 +96,6 @@ popd
 
 
 %install
-pushd python2
-%py2_install
-
-# Flash file is used for testing docutils but shouldn't be in the installed package.
-mv docs/user/rst/images/biohazard.swf ./biohazard.swf
-popd
-
 rm -f %{buildroot}/%{_bindir}/*
 
 pushd python3
@@ -148,14 +120,6 @@ for PY in 2 3; do
   rm docs/user/rst/images/biohazard.swf
   popd
 done
-
-
-%files -n python2-%{srcname}
-%license COPYING.txt licenses/*
-%doc BUGS.txt FAQ.txt HISTORY.txt README.txt RELEASE-NOTES.txt 
-%doc THANKS.txt python2/docs editors
-%{python2_sitelib}/%{srcname}/
-%{python2_sitelib}/%{srcname}-%{version}-py%{python2_version}.egg-info
 
 
 %files -n python%{python3_pkgversion}-%{srcname}
