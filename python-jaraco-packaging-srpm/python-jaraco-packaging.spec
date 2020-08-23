@@ -12,7 +12,7 @@ Summary:        Tools to supplement packaging Python releases
 
 License:        MIT
 URL:            https://github.com/jaraco/jaraco.packaging
-Source0:        https://files.pythonhosted.org/packages/source/j/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
  
 %description
