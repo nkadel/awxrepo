@@ -7,7 +7,7 @@ Release:        0%{?dist}
 Summary:        Python module for parsing mime-type names
 License:        MIT
 URL:            https://github.com/dbtsai/python-mimeparse
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
