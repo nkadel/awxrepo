@@ -9,7 +9,7 @@ Summary:        %{sum}
 
 License:        MIT
 URL:            http://pypi.python.org/pypi/termcolor/1.1.0
-Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
