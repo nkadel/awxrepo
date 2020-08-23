@@ -9,9 +9,7 @@ License:        LGPLv3+
 URL:            http://deron.meranda.us/python/%{srcname}/
 Source0:        %pypi_source
 BuildArch:      noarch
-BuildRequires:  python2-devel
 BuildRequires:  python3-devel
-BuildRequires:  python2-setuptools
 BuildRequires:  python3-setuptools
 BuildRequires:  %{_bindir}/2to3
 
@@ -27,14 +25,6 @@ to make it easier to read.
 %{base_description}
 
 
-%package -n python2-%{srcname}
-Summary:        Python JSON module and lint checker
-%{?python_provide:%python_provide python2-%{srcname}}
-
-%description -n python2-%{srcname}
-%{base_description}
-
-
 %package -n python3-%{srcname}
 Summary:        Python JSON module and lint checker
 %{?python_provide:%python_provide python3-%{srcname}}
@@ -44,76 +34,39 @@ Summary:        Python JSON module and lint checker
 
 
 %prep
-%autosetup -c -n %{srcname}-%{version}
-mv %{srcname}-%{version} python2
-cp -a python2 python3
-
+%autosetup -n %{srcname}-%{version}
 
 %build
-pushd python2
-%py2_build
-popd
-
-pushd python3
 %py3_build
-popd
-
 
 %install
-pushd python2
-%py2_install
-mv %{buildroot}%{_bindir}/jsonlint %{buildroot}%{_bindir}/jsonlint-%{python2_version}
-ln -s jsonlint-%{python2_version} %{buildroot}%{_bindir}/jsonlint-2
-popd
-
-pushd python3
 %py3_install
 mv %{buildroot}%{_bindir}/jsonlint %{buildroot}%{_bindir}/jsonlint-%{python3_version}
 ln -s jsonlint-%{python3_version} %{buildroot}%{_bindir}/jsonlint-3
-popd
 
 # fix shebang lines
-find %{buildroot}%{python2_sitelib} \
-     %{buildroot}%{python3_sitelib} \
+find %{buildroot}%{python3_sitelib} \
      -name '*.py' -exec \
      sed -i "1{/^#!/d}" {} \;
 
 find %{buildroot}%{_bindir} -ls
 
-# 2.X binary is called by default for now
-ln -s jsonlint-%{python2_version} %{buildroot}%{_bindir}/jsonlint
-
+# 3.X binary is called by default for now
+ln -s jsonlint-%{python3_version} %{buildroot}%{_bindir}/jsonlint
 
 %check
-pushd python2/test
-PYTHONPATH=%{buildroot}%{python2_sitelib} \
-%{__python2} test_demjson.py
-popd
-
-pushd python3/test
+cd test
 2to3 -w --no-diffs test_demjson.py
 PYTHONPATH=%{buildroot}%{python3_sitelib} \
 %{__python3} test_demjson.py
-popd
-
-
-%files -n python2-%{srcname}
-%doc python2/README.txt
-%doc python2/README.md
-%doc python2/docs
-%license python2/LICENSE.txt
-%{python2_sitelib}/*
-%{_bindir}/jsonlint
-%{_bindir}/jsonlint-2
-%{_bindir}/jsonlint-%{python2_version}
-
 
 %files -n python3-%{srcname}
-%doc python3/README.txt
-%doc python3/README.md
-%doc python3/docs
-%license python3/LICENSE.txt
+%doc README.txt
+%doc README.md
+%doc docs
+%license LICENSE.txt
 %{python3_sitelib}/*
+%{_bindir}/jsonlint
 %{_bindir}/jsonlint-3
 %{_bindir}/jsonlint-%{python3_version}
 
