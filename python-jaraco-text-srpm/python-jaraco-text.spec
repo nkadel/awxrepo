@@ -11,11 +11,11 @@
 # Enable only as needed
 %global with_python2 0
 
-%global pypi_name jaraco.text
-%global pkg_name jaraco-text
+%global srcname jaraco.text
+%global pypi_name jaraco-text
 
 # Common SRPM package
-Name:           python-%{pkg_name}
+Name:           python-%{pypi_name}
 Version:        3.2.0
 Release:        0%{?dist}
 Url:            https://github.com/jaraco/jaraco.text
@@ -34,7 +34,7 @@ Buildrequires:  epel-rpm-macros
 Module for text manipulation
 
 %if %{with_python2}
-%package -n python2-%{pkg_name}
+%package -n python2-%{pypi_name}
 Url:            https://github.com/jaraco/jaraco.text
 Summary:        Module for text manipulation
 License:        MIT
@@ -46,13 +46,13 @@ BuildRequires:  python2-setuptools_scm >= 1.15.0
 # install_requires stanza of py2pack
 %{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{pkg_name}
+%description -n python2-%{pypi_name}
 Module for text manipulation
 
 %endif # with_python2
 
 %if %{with_python3}
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Url:            https://github.com/jaraco/jaraco.text
 Summary:        Module for text manipulation
 License:        MIT
@@ -64,17 +64,17 @@ BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
 # install_requires stanza of py2pack
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Module for text manipulation
 
 %endif # with_python3
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{srcname}-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{srcname}.egg-info
 # rename package to use a -
-sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+sed -i 's/%{srcname}/%{pypi_name}/' setup.cfg
 # rename jaraco dependencies to use a -
 sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
@@ -100,7 +100,7 @@ sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 rm -rf %{buildroot}
 
 %if %{with_python2}
-%files -n python2-%{pkg_name}
+%files -n python2-%{pypi_name}
 %defattr(-,root,root,-)
 %{python2_sitelib}/*
 # These excludes are provided by python2-jaraco
@@ -109,7 +109,7 @@ rm -rf %{buildroot}
 %endif # with_python2
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %defattr(-,root,root,-)
 %{python3_sitelib}/*
 # These excludes are provided by python3-jaraco
