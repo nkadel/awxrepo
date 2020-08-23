@@ -10,14 +10,14 @@
 
 %global with_python2 0
 
-%global pypi_name importlib_metadata
-%global pkg_name importlib-metadata
+%global srcname importlib_metadata
+%global pypi_name importlib-metadata
 
 # Common SRPM package
-#Name:           python-%{pypi_name}
-Name:           python-%{pkg_name}
+#Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.5.0
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Url:            http://importlib-metadata.readthedocs.io/
 Summary:        Read metadata from Python packages
 License:        Apache-2.0
@@ -35,7 +35,7 @@ BuildRequires:  epel-rpm-macros
 package.  It is intended to be ported to Python 3.8.
 
 %if %{with_python2}
-%package -n python2-%%{pkg_name}
+%package -n python2-%%{pypi_name}
 Version:        1.5.0
 Release:        0%{?dist}
 Url:            http://importlib-metadata.readthedocs.io/
@@ -52,17 +52,17 @@ BuildRequires:  python2-pathlib2
 BuildRequires:  python2-contextlib2
 BuildRequires:  python2-configparser >= 3.5
 
-#%{?python_provide:%python_provide python2-%{pypi_name}}
-%{?python_provide:%python_provide python2-%{pkg_name}}
+#%{?python_provide:%python_provide python2-%{srcname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{pkg_name}
+%description -n python2-%{pypi_name}
 ``importlib_metadata`` is a library to access the metadata for a Python
 package.  It is intended to be ported to Python 3.8.
 
 %endif # with_python2
 
 %if %{with_python3}
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Version:        1.5.0
 Release:        0%{?dist}
 Url:            http://importlib-metadata.readthedocs.io/
@@ -79,16 +79,16 @@ BuildRequires:  python%{python3_pkgversion}-zipp >= 0.5
 #BuildRequires:  python%%{python3_pkgversion}-configparser >= 3.5
 
 
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 ``importlib_metadata`` is a library to access the metadata for a Python
 package.  It is intended to be ported to Python 3.8.
 
 %endif # with_python3
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%setup -q -n %{srcname}-%{version}
 
 %build
 %if %{with_python2}
@@ -112,13 +112,13 @@ package.  It is intended to be ported to Python 3.8.
 rm -rf %{buildroot}
 
 %if %{with_python2}
-%files -n python2-%{pkg_name}
+%files -n python2-%{pypi_name}
 %defattr(-,root,root,-)
 %{python2_sitelib}/*
 %endif # with_python2
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %defattr(-,root,root,-)
 %{python3_sitelib}/*
 %endif # with_python3
