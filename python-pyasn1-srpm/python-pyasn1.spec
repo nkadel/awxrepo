@@ -1,13 +1,13 @@
-%global module pyasn1
+%global pypi_name pyasn1
 %global modules_version 0.2.2
 
-Name:           python-pyasn1
+Name:           python-%{pypi_name}
 Version:        0.4.4
 #Release:        5%%{?dist}
 Release:        0%{?dist}
 Summary:        ASN.1 tools for Python
 License:        BSD
-Source0:        https://github.com/etingof/pyasn1/archive/v%{version}.tar.gz
+Source0:        %pypi_source
 Source1:        https://github.com/etingof/pyasn1-modules/archive/v%{modules_version}.tar.gz
 URL:            http://pyasn1.sourceforge.net/
 BuildArch:      noarch
@@ -70,7 +70,7 @@ BuildRequires:  python%{python3_pkgversion}-sphinx
 %endif
 
 %prep
-%setup -n %{module}-%{version} -q -b1
+%setup -n %{pypi_name}-%{version} -q -b1
 
 
 %build
@@ -105,22 +105,22 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} setup.py test
 %files -n python2-pyasn1
 %doc README.md
 %license LICENSE.rst
-%{python2_sitelib}/%{module}
-%{python2_sitelib}/%{module}-%{version}-*.egg-info/
+%{python2_sitelib}/%{pypi_name}
+%{python2_sitelib}/%{pypi_name}-%{version}-*.egg-info/
 
 %files -n python2-pyasn1-modules
-%{python2_sitelib}/%{module}_modules/
-%{python2_sitelib}/%{module}_modules-%{modules_version}-*.egg-info/
+%{python2_sitelib}/%{pypi_name}_modules/
+%{python2_sitelib}/%{pypi_name}_modules-%{modules_version}-*.egg-info/
 
 %files -n python%{python3_pkgversion}-pyasn1
 %doc README.md
 %license LICENSE.rst
-%{python3_sitelib}/%{module}
-%{python3_sitelib}/%{module}-%{version}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}
+%{python3_sitelib}/%{pypi_name}-%{version}-*.egg-info/
 
 %files -n python%{python3_pkgversion}-pyasn1-modules
-%{python3_sitelib}/%{module}_modules/
-%{python3_sitelib}/%{module}_modules-%{modules_version}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}_modules/
+%{python3_sitelib}/%{pypi_name}_modules-%{modules_version}-*.egg-info/
 
 %if 0%{?fedora}
 %files doc
