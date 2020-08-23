@@ -5,7 +5,7 @@ Version:       3.3.0
 Release:       0%{?dist}
 License:       Python
 URL:           https://github.com/agronholm/pythonfutures
-Source0:       https://files.pythonhosted.org/packages/source/f/futures/futures-%{version}.tar.gz
+Source0:        %pypi_source
 BuildRequires: python2-devel
 BuildArch:     noarch
 
