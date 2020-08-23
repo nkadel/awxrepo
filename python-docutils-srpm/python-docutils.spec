@@ -113,7 +113,7 @@ done
 
 
 %check
-for PY in 2 3; do
+for PY in 3; do
   pushd python${PY}
   mv  biohazard.swf docs/user/rst/images/biohazard.swf
   python${PY} test${PY/2/}/alltests.py
