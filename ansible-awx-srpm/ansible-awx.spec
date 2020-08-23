@@ -16,6 +16,7 @@ Summary: Ansible AWX
 Name: ansible-awx
 Version: %{awx_mainversion}%{awx_subversion}
 Release: 0%{?dist}
+# Pulled from git repo tag
 Source0: awx-%{version}.tar.gz
 Source1: settings.py.dist
 %if 0%{?el7}
@@ -51,107 +52,11 @@ BuildRequires: postgresql-server-devel >= 10
 BuildRequires: xmlsec1-devel
 BuildRequires: xmlsec1-openssl-devel
 
-BuildRequires: python%{python3_pkgversion}-GitPython
-BuildRequires: python%{python3_pkgversion}-adal
-BuildRequires: python%{python3_pkgversion}-ansible-runner
-BuildRequires: python%{python3_pkgversion}-attrs
-BuildRequires: python%{python3_pkgversion}-autobahn
-BuildRequires: python%{python3_pkgversion}-azure-common
-BuildRequires: python%{python3_pkgversion}-azure-keyvault
-BuildRequires: python%{python3_pkgversion}-azure-nspkg
-BuildRequires: python%{python3_pkgversion}-build
-BuildRequires: python%{python3_pkgversion}-cachetools
-BuildRequires: python%{python3_pkgversion}-celery
-BuildRequires: python%{python3_pkgversion}-certifi
-BuildRequires: python%{python3_pkgversion}-cffi
-BuildRequires: python%{python3_pkgversion}-channels
-BuildRequires: python%{python3_pkgversion}-chardet
-BuildRequires: python%{python3_pkgversion}-constantly
-BuildRequires: python%{python3_pkgversion}-cryptography
-BuildRequires: python%{python3_pkgversion}-daphne
-BuildRequires: python%{python3_pkgversion}-dateutil
-BuildRequires: python%{python3_pkgversion}-defusedxml
-BuildRequires: python%{python3_pkgversion}-devel
-BuildRequires: python%{python3_pkgversion}-dictdiffer
-BuildRequires: python%{python3_pkgversion}-django
-BuildRequires: python%{python3_pkgversion}-django-auth-ldap
-BuildRequires: python%{python3_pkgversion}-django-cors-headers
-BuildRequires: python%{python3_pkgversion}-django-crum
-BuildRequires: python%{python3_pkgversion}-django-extensions
-BuildRequires: python%{python3_pkgversion}-django-jsonbfield
-BuildRequires: python%{python3_pkgversion}-django-jsonfield
-BuildRequires: python%{python3_pkgversion}-django-oauth-toolkit
-BuildRequires: python%{python3_pkgversion}-django-pglocks
-BuildRequires: python%{python3_pkgversion}-django-polymorphic
-BuildRequires: python%{python3_pkgversion}-django-solo
-BuildRequires: python%{python3_pkgversion}-django-taggit
-BuildRequires: python%{python3_pkgversion}-djangorestframework
-BuildRequires: python%{python3_pkgversion}-djangorestframework-yaml
-BuildRequires: python%{python3_pkgversion}-docutils
-BuildRequires: python%{python3_pkgversion}-future
-BuildRequires: python%{python3_pkgversion}-gitdb
-BuildRequires: python%{python3_pkgversion}-google-auth
-BuildRequires: python%{python3_pkgversion}-hyperlink
-BuildRequires: python%{python3_pkgversion}-idna
-BuildRequires: python%{python3_pkgversion}-importlib-metadata
-BuildRequires: python%{python3_pkgversion}-importlib-resources
-BuildRequires: python%{python3_pkgversion}-incremental
-BuildRequires: python%{python3_pkgversion}-inflect
-BuildRequires: python%{python3_pkgversion}-irc
-BuildRequires: python%{python3_pkgversion}-isodate
-BuildRequires: python%{python3_pkgversion}-jaraco-classes
-BuildRequires: python%{python3_pkgversion}-jaraco-collections
-BuildRequires: python%{python3_pkgversion}-jaraco-functools
-BuildRequires: python%{python3_pkgversion}-jaraco-itertools
-BuildRequires: python%{python3_pkgversion}-jaraco-logging
-BuildRequires: python%{python3_pkgversion}-jaraco-stream
-BuildRequires: python%{python3_pkgversion}-jaraco-text
-BuildRequires: python%{python3_pkgversion}-jinja2
-BuildRequires: python%{python3_pkgversion}-jsonpickle
-BuildRequires: python%{python3_pkgversion}-jsonschema
-BuildRequires: python%{python3_pkgversion}-kombu
-BuildRequires: python%{python3_pkgversion}-kubernetes
-BuildRequires: python%{python3_pkgversion}-ldap
-BuildRequires: python%{python3_pkgversion}-markupsafe
-BuildRequires: python%{python3_pkgversion}-more-itertools
-BuildRequires: python%{python3_pkgversion}-msrest
-BuildRequires: python%{python3_pkgversion}-msrestazure
-BuildRequires: python%{python3_pkgversion}-oauthlib
-BuildRequires: python%{python3_pkgversion}-openid
-BuildRequires: python%{python3_pkgversion}-pexpect
-BuildRequires: python%{python3_pkgversion}-pip
-BuildRequires: python%{python3_pkgversion}-psutil
-BuildRequires: python%{python3_pkgversion}-psycopg2
-BuildRequires: python%{python3_pkgversion}-ptyprocess
-BuildRequires: python%{python3_pkgversion}-pyasn1
-BuildRequires: python%{python3_pkgversion}-pyasn1-modules
-BuildRequires: python%{python3_pkgversion}-pygerduty
-BuildRequires: python%{python3_pkgversion}-pygments
-BuildRequires: python%{python3_pkgversion}-pyjwt >= 1.7.1
-BuildRequires: python%{python3_pkgversion}-pyparsing
-BuildRequires: python%{python3_pkgversion}-pyrsistent
-BuildRequires: python%{python3_pkgversion}-pytest-runner >= 1.4.4
-BuildRequires: python%{python3_pkgversion}-python-logstash
+BuildRequires: python%{python3_pkgversion}-asgiref
+BuildRequires: python%{python3_pkgversion}-oauth2_provider
 BuildRequires: python%{python3_pkgversion}-pytz
-BuildRequires: python%{python3_pkgversion}-pyyaml
-BuildRequires: python%{python3_pkgversion}-requests
-BuildRequires: python%{python3_pkgversion}-requests-futures
-BuildRequires: python%{python3_pkgversion}-requests-oauthlib
-BuildRequires: python%{python3_pkgversion}-six >= 1.13.0
-BuildRequires: python%{python3_pkgversion}-slackclient
-BuildRequires: python%{python3_pkgversion}-smmap
-BuildRequires: python%{python3_pkgversion}-social-auth-app-django
-BuildRequires: python%{python3_pkgversion}-social-auth-core
-BuildRequires: python%{python3_pkgversion}-tempora
-BuildRequires: python%{python3_pkgversion}-twilio
-BuildRequires: python%{python3_pkgversion}-twisted >= 19.1.0
-BuildRequires: python%{python3_pkgversion}-txaio
-BuildRequires: python%{python3_pkgversion}-urllib3
-BuildRequires: python%{python3_pkgversion}-vine
-BuildRequires: python%{python3_pkgversion}-websocket-client
-BuildRequires: python%{python3_pkgversion}-xmlsec
-BuildRequires: python%{python3_pkgversion}-zipp >= 0.6.0
-BuildRequires: python%{python3_pkgversion}-zope-interface >= 4.7.1
+BuildRequires: python%{python3_pkgversion}-sqlparse
+
 
 #BuildRequires: python%%{python3_pkgversion}-adal = 1.2.2               # via msrestazure
 #BuildRequires: python%%{python3_pkgversion}-aiohttp = 3.6.2            # via -r /awx_devel/requirements/requirements.in
@@ -303,101 +208,110 @@ Requires: subversion
 Requires: xmlsec1-devel
 Requires: xmlsec1-openssl-devel
 
-Requires: python%{python3_pkgversion}-GitPython
-Requires: python%{python3_pkgversion}-PyHamcrest
-Requires: python%{python3_pkgversion}-adal
-#Requires: python%{python3_pkgversion}-adal = 1.2.2
-Requires: python%{python3_pkgversion}-aiohttp
-Requires: python%{python3_pkgversion}-ansible-runner
-Requires: python%{python3_pkgversion}-attrs
-Requires: python%{python3_pkgversion}-autobahn
-Requires: python%{python3_pkgversion}-azure-common
-Requires: python%{python3_pkgversion}-azure-keyvault
-Requires: python%{python3_pkgversion}-azure-nspkg
-Requires: python%{python3_pkgversion}-build
-Requires: python%{python3_pkgversion}-celery
-Requires: python%{python3_pkgversion}-certifi
-Requires: python%{python3_pkgversion}-cffi
-Requires: python%{python3_pkgversion}-channels
-Requires: python%{python3_pkgversion}-chardet
-Requires: python%{python3_pkgversion}-constantly
-Requires: python%{python3_pkgversion}-cryptography
-Requires: python%{python3_pkgversion}-daphne
-Requires: python%{python3_pkgversion}-dateutil
-Requires: python%{python3_pkgversion}-devel
-Requires: python%{python3_pkgversion}-django
-Requires: python%{python3_pkgversion}-django-auth-ldap
-Requires: python%{python3_pkgversion}-django-cors-headers
-Requires: python%{python3_pkgversion}-django-crum
-Requires: python%{python3_pkgversion}-django-extensions
-Requires: python%{python3_pkgversion}-django-jsonbfield
-Requires: python%{python3_pkgversion}-django-jsonfield
-Requires: python%{python3_pkgversion}-django-oauth-toolkit
-Requires: python%{python3_pkgversion}-django-pglocks
-Requires: python%{python3_pkgversion}-django-polymorphic
-Requires: python%{python3_pkgversion}-django-solo
-Requires: python%{python3_pkgversion}-django-taggit
-Requires: python%{python3_pkgversion}-djangorestframework
-Requires: python%{python3_pkgversion}-djangorestframework-yaml
-Requires: python%{python3_pkgversion}-gitdb
-Requires: python%{python3_pkgversion}-google-auth
-Requires: python%{python3_pkgversion}-idna
-Requires: python%{python3_pkgversion}-importlib-metadata
-Requires: python%{python3_pkgversion}-incremental
-Requires: python%{python3_pkgversion}-inflect
-Requires: python%{python3_pkgversion}-irc
-Requires: python%{python3_pkgversion}-isodate
-Requires: python%{python3_pkgversion}-jaraco-classes
-Requires: python%{python3_pkgversion}-jaraco-collections
-Requires: python%{python3_pkgversion}-jaraco-functools
-Requires: python%{python3_pkgversion}-jaraco-itertools
-Requires: python%{python3_pkgversion}-jaraco-logging
-Requires: python%{python3_pkgversion}-jaraco-stream
-Requires: python%{python3_pkgversion}-jaraco-text
-Requires: python%{python3_pkgversion}-jinja2
-Requires: python%{python3_pkgversion}-jsonschema
-Requires: python%{python3_pkgversion}-kombu
-Requires: python%{python3_pkgversion}-kubernetes
-Requires: python%{python3_pkgversion}-ldap
-Requires: python%{python3_pkgversion}-markupsafe
-Requires: python%{python3_pkgversion}-more-itertools
-Requires: python%{python3_pkgversion}-msrest
-Requires: python%{python3_pkgversion}-msrestazure
-Requires: python%{python3_pkgversion}-oauthlib
-Requires: python%{python3_pkgversion}-openid
-Requires: python%{python3_pkgversion}-pexpect
-Requires: python%{python3_pkgversion}-pip
-Requires: python%{python3_pkgversion}-psutil
-Requires: python%{python3_pkgversion}-psycopg2
-Requires: python%{python3_pkgversion}-ptyprocess
-Requires: python%{python3_pkgversion}-pyasn1
-Requires: python%{python3_pkgversion}-pyasn1-modules
-Requires: python%{python3_pkgversion}-pygerduty
-Requires: python%{python3_pkgversion}-pygments
-Requires: python%{python3_pkgversion}-pyjwt >= 1.7.1
-Requires: python%{python3_pkgversion}-pyparsing
-Requires: python%{python3_pkgversion}-pyrsistent
-Requires: python%{python3_pkgversion}-python-logstash
-Requires: python%{python3_pkgversion}-pytz
-Requires: python%{python3_pkgversion}-pyyaml
-Requires: python%{python3_pkgversion}-requests
-Requires: python%{python3_pkgversion}-requests-futures
-Requires: python%{python3_pkgversion}-requests-oauthlib
-Requires: python%{python3_pkgversion}-runtime
-Requires: python%{python3_pkgversion}-six >= 1.13.0
-Requires: python%{python3_pkgversion}-slackclient
-Requires: python%{python3_pkgversion}-smmap
-Requires: python%{python3_pkgversion}-social-auth-app-django
-Requires: python%{python3_pkgversion}-social-auth-core
-Requires: python%{python3_pkgversion}-tempora
-Requires: python%{python3_pkgversion}-twilio
-Requires: python%{python3_pkgversion}-twisted >= 19.1.0
-Requires: python%{python3_pkgversion}-txaio
-Requires: python%{python3_pkgversion}-urllib3
-Requires: python%{python3_pkgversion}-websocket-client
-Requires: python%{python3_pkgversion}-wheel >= 0.33.6
-Requires: python%{python3_pkgversion}-zipp >= 0.6.0
-Requires: python%{python3_pkgversion}-zope-interface >= 4.7.1
+#Required: python%{python3_pkgversion}-GitPython
+#Requires: python%{python3_pkgversion}-PyHamcrest
+#Requires: python%{python3_pkgversion}-adal
+##Requires: python%{python3_pkgversion}-adal = 1.2.2
+#Requires: python%{python3_pkgversion}-aiohttp
+#Requires: python%{python3_pkgversion}-ansible-runner
+#Requires: python%{python3_pkgversion}-attrs
+#Requires: python%{python3_pkgversion}-autobahn
+#Requires: python%{python3_pkgversion}-azure-common
+#Requires: python%{python3_pkgversion}-azure-keyvault
+#Requires: python%{python3_pkgversion}-azure-nspkg
+##Requires: python%{python3_pkgversion}-build
+#Requires: python%{python3_pkgversion}-celery
+#Requires: python%{python3_pkgversion}-certifi
+#Requires: python%{python3_pkgversion}-cffi
+#Requires: python%{python3_pkgversion}-channels
+#Requires: python%{python3_pkgversion}-chardet
+#Requires: python%{python3_pkgversion}-constantly
+#Requires: python%{python3_pkgversion}-cryptography
+#Requires: python%{python3_pkgversion}-daphne
+#Requires: python%{python3_pkgversion}-dateutil
+#Requires: python%{python3_pkgversion}-devel
+#Requires: python%{python3_pkgversion}-django
+#Requires: python%{python3_pkgversion}-django-auth-ldap
+#Requires: python%{python3_pkgversion}-django-cors-headers
+#Requires: python%{python3_pkgversion}-django-crum
+#Requires: python%{python3_pkgversion}-django-extensions
+#Requires: python%{python3_pkgversion}-django-jsonbfield
+#Requires: python%{python3_pkgversion}-django-jsonfield
+#Requires: python%{python3_pkgversion}-django-oauth-toolkit
+#Requires: python%{python3_pkgversion}-django-pglocks
+#Requires: python%{python3_pkgversion}-django-polymorphic
+#Requires: python%{python3_pkgversion}-django-solo
+#Requires: python%{python3_pkgversion}-django-taggit
+#Requires: python%{python3_pkgversion}-djangorestframework
+#Requires: python%{python3_pkgversion}-djangorestframework-yaml
+#Requires: python%{python3_pkgversion}-gitdb
+#Requires: python%{python3_pkgversion}-google-auth
+#Requires: python%{python3_pkgversion}-idna
+#Requires: python%{python3_pkgversion}-importlib-metadata
+#Requires: python%{python3_pkgversion}-incremental
+#Requires: python%{python3_pkgversion}-inflect
+#Requires: python%{python3_pkgversion}-irc
+#Requires: python%{python3_pkgversion}-isodate
+#Requires: python%{python3_pkgversion}-jaraco-classes
+#Requires: python%{python3_pkgversion}-jaraco-collections
+#Requires: python%{python3_pkgversion}-jaraco-functools
+#Requires: python%{python3_pkgversion}-jaraco-itertools
+#Requires: python%{python3_pkgversion}-jaraco-logging
+#Requires: python%{python3_pkgversion}-jaraco-stream
+#Requires: python%{python3_pkgversion}-jaraco-text
+#Requires: python%{python3_pkgversion}-jinja2
+#Requires: python%{python3_pkgversion}-jsonschema
+#Requires: python%{python3_pkgversion}-kombu
+#Requires: python%{python3_pkgversion}-kubernetes
+#Requires: python%{python3_pkgversion}-ldap
+#Requires: python%{python3_pkgversion}-markupsafe
+#Requires: python%{python3_pkgversion}-more-itertools
+#Requires: python%{python3_pkgversion}-msrest
+#Requires: python%{python3_pkgversion}-msrestazure
+#Requires: python%{python3_pkgversion}-oauthlib
+#Requires: python%{python3_pkgversion}-openid
+#Requires: python%{python3_pkgversion}-pexpect
+#Requires: python%{python3_pkgversion}-pip
+#Requires: python%{python3_pkgversion}-psutil
+#Requires: python%{python3_pkgversion}-psycopg2
+#Requires: python%{python3_pkgversion}-ptyprocess
+#Requires: python%{python3_pkgversion}-pyasn1
+#Requires: python%{python3_pkgversion}-pyasn1-modules
+#Requires: python%{python3_pkgversion}-pygerduty
+##Requires: python%{python3_pkgversion}-pygments
+#Requires: python%{python3_pkgversion}-pyjwt >= 1.7.1
+#Requires: python%{python3_pkgversion}-pyparsing
+#Requires: python%{python3_pkgversion}-pyrsistent
+#Requires: python%{python3_pkgversion}-python-logstash
+#Requires: python%{python3_pkgversion}-pytz
+#Requires: python%{python3_pkgversion}-pyyaml
+#Requires: python%{python3_pkgversion}-requests
+#Requires: python%{python3_pkgversion}-requests-futures
+#Requires: python%{python3_pkgversion}-requests-oauthlib
+#Requires: python%{python3_pkgversion}-runtime
+#Requires: python%{python3_pkgversion}-six >= 1.13.0
+#Requires: python%{python3_pkgversion}-slackclient
+#Requires: python%{python3_pkgversion}-smmap
+#Requires: python%{python3_pkgversion}-social-auth-app-django
+#Requires: python%{python3_pkgversion}-social-auth-core
+#Requires: python%{python3_pkgversion}-tempora
+#Requires: python%{python3_pkgversion}-twilio
+#Requires: python%{python3_pkgversion}-twisted >= 19.1.0
+#Requires: python%{python3_pkgversion}-txaio
+#Requires: python%{python3_pkgversion}-urllib3
+#Requires: python%{python3_pkgversion}-websocket-client
+#Requires: python%{python3_pkgversion}-wheel >= 0.33.6
+#Requires: python%{python3_pkgversion}-zipp >= 0.6.0
+#Requires: python%{python3_pkgversion}-zope-interface >= 4.7.1
+
+# Simplified list from running aws-manage
+Requires:  python%{python3_pkgversion}-asgiref
+Requires:  python%{python3_pkgversion}-django
+Requires:  python%{python3_pkgversion}-django-split-settings
+Requires:  python%{python3_pkgversion}-oauth2_provider
+Requires:  python%{python3_pkgversion}-pip
+Requires:  python%{python3_pkgversion}-sqlparse
+
 
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 %{?systemd_requires}
@@ -410,7 +324,6 @@ Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 
 %install
 # Setup build environment
-#pip-%{python3_pkgversion} install --root=%{buildroot} .
 %{py3_install}
 
 # Collect django static
