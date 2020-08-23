@@ -15,7 +15,7 @@ Release:        0%{?prever}%{?dist}
 #  coverage/htmlfiles/jquery.isonscreen.js
 License:        ASL 2.0 and MIT and (MIT or GPL)
 URL:            http://nedbatchelder.com/code/modules/coverage.html
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
