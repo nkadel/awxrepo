@@ -4,7 +4,8 @@
 
 Name:           python-ptyprocess
 Version:        0.6.0
-Release:        6%{?dist}
+#Release:        6%%{?dist}
+Release:        0.1%{?dist}
 Summary:        Run a subprocess in a pseudo terminal
 
 License:        ISC
@@ -18,19 +19,6 @@ BuildRequires:  epel-rpm-macros
 %endif
 
 %description
-Launch a subprocess in a pseudo terminal (pty), and interact with both the
-process and its pty.
-
-%package -n python2-ptyprocess
-Summary:        Run a subprocess in a pseudo terminal
-%{?python_provide:%python_provide python2-%{srcname}}
-BuildRequires:  python2
-BuildRequires:  python2-devel
-%if %{with tests}
-BuildRequires:  python2-pytest
-%endif
-
-%description -n python2-ptyprocess
 Launch a subprocess in a pseudo terminal (pty), and interact with both the
 process and its pty.
 
@@ -60,14 +48,7 @@ process and its pty.
 %if %{with tests}
 %check
 %{__python3} -m pytest -v
-%{__python2} -m pytest -v
 %endif
-
-%files -n python2-ptyprocess
-%license LICENSE
-%doc README.rst
-%{python2_sitelib}/ptyprocess/
-%{python2_sitelib}/ptyprocess-*.egg-info
 
 %files -n python%{python3_pkgversion}-ptyprocess
 %license LICENSE

@@ -1,12 +1,7 @@
 %global pypi_name attrs
 
-%if 0%{?rhel} && 0%{?rhel} <= 7
-# Can't run tests on EPEL7 due to need for pytest >= 2.8
-%bcond_with tests
-%else
 # Turn the tests off when bootstrapping Python, because pytest requires attrs
 %bcond_without tests
-%endif
 
 Name:           python-%{pypi_name}
 Version:        19.1.0
@@ -20,17 +15,6 @@ BuildArch:      noarch
 Source0:        %pypi_source
 
 
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-%if %{with tests}
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-BuildRequires:  python2-pytest
-BuildRequires:  python2-hypothesis
-BuildRequires:  python2-six
-BuildRequires:  python2-zope-interface
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
@@ -41,15 +25,6 @@ BuildRequires:  python%{python3_pkgversion}-zope-interface
 %endif
 
 %description
-attrs is an MIT-licensed Python package with class decorators that
-ease the chores of implementing the most common attribute-related
-object protocols.
-
-%package -n python2-%{pypi_name}
-Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{pypi_name}}
-
-%description -n python2-%{pypi_name}
 attrs is an MIT-licensed Python package with class decorators that
 ease the chores of implementing the most common attribute-related
 object protocols.
@@ -67,25 +42,15 @@ object protocols.
 %setup -q -n %{pypi_name}-%{version}
 
 %build
-%py2_build
 %py3_build
 
 %install
-# Doesn't install anything to /usr/bin, so I don't think the order of
-# installing python2 and python3 actually matters.
 %py3_install
-%py2_install
 
 %if %{with tests}
 %check
-PYTHONPATH=%{buildroot}/%{python2_sitelib} py.test-2.7 -v
 PYTHONPATH=%{buildroot}/%{python3_sitelib} py.test-3 -v
 %endif
-
-%files -n python2-%{pypi_name}
-%license LICENSE
-%doc AUTHORS.rst README.rst
-%{python2_sitelib}/*
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
@@ -93,6 +58,9 @@ PYTHONPATH=%{buildroot}/%{python3_sitelib} py.test-3 -v
 %{python3_sitelib}/*
 
 %changelog
+* Sun Aug 23 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 19.1.0-1
+- Discard python2
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 19.1.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 

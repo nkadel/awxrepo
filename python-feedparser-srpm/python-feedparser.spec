@@ -3,7 +3,7 @@
 %global _python_bytecompile_extra 1
 
 %global with_python3 1
-%global with_python2 1
+%global with_python2 0
 
 # -doc package generation
 # EL6: python-sphinx is not new enough

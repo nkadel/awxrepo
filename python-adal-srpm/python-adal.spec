@@ -5,22 +5,15 @@
 #
 
 # Fedora and RHEL split python2 and python3
-# Older RHEL requires EPEL and python34 or python36
 %global with_python3 1
-
-# Fedora >= 38 no longer publishes python2 by default
-%if 0%{?fedora} >= 30
 %global with_python2 0
-%else
-%global with_python2 1
-%endif
 
 %global pypi_name adal
 
 # Common SRPM package
 Name:           python-%{pypi_name}
 Version:        1.2.2
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Url:            https://github.com/AzureAD/azure-activedirectory-library-for-python
 Summary:        The ADAL for Python library makes it easy for python application to authenticate to Azure Active Directory (AAD) in order to access AAD protected web resources.
 License:        MIT
