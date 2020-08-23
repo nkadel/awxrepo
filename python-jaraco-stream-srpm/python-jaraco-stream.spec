@@ -9,7 +9,7 @@ Summary:        routines for dealing with data streams
 
 License:        None
 URL:            https://github.com/jaraco/jaraco.stream
-Source0:        https://files.pythonhosted.org/packages/source/j/%{pypi_name}/jaraco.stream-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
