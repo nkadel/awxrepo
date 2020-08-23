@@ -5,15 +5,15 @@
 
 %global pypi_name django-cors-headers
 
-Name:               python-django-cors-headers
-Version:            2.0.2
-Release:            9%{?dist}
-Summary:            A Django application for handling CORS headers
+Name:           python-django-cors-headers
+Version:        2.0.2
+Release:        9%{?dist}
+Summary:        A Django application for handling CORS headers
 
-License:            MIT
-URL:                https://pypi.io/project/django-cors-headers
-Source0:            https://pypi.io/packages/source/d/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-BuildArch:          noarch
+License:        MIT
+URL:            https://pypi.io/project/django-cors-headers
+Source0:        %pypi_source
+BuildArch:      noarch
 
 %if 0%{?rhel}
 BuildRequires:      epel-rpm-macros
