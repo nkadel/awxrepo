@@ -8,7 +8,7 @@ Summary:        A module that allows any object to be serialized into JSON
 
 License:        BSD
 URL:            https://pypi.io/project/jsonpickle/
-Source0:        https://pypi.io/packages/source/j/jsonpickle/jsonpickle-%{version}.tar.gz
+Source0:        %pypi_source
 
 %global _docdir_fmt %{name}
 
