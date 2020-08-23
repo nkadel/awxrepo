@@ -6,7 +6,6 @@
 LANG=C
 
 #
-#MOCKS+=epel-7-x86_64
 MOCKS+=epel-8-x86_64
 #MOCKS+=fedora-32-x86_64
 
@@ -53,7 +52,6 @@ install:: $(MOCKS)
 	@for repo in $(MOCKS); do \
 	    echo Installing $$repo; \
 	    case $$repo in \
-		*-7-x86_64) yumrelease=el/7; yumarch=x86_64; ;; \
 		*-8-x86_64) yumrelease=el/8; yumarch=x86_64; ;; \
 		*-32-x86_64) yumrelease=fedora/32; yumarch=x86_64; ;; \
 		*-f32-x86_64) yumrelease=fedora/32; yumarch=x86_64; ;; \
