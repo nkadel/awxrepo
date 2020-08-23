@@ -10,11 +10,11 @@
 
 %global with_python2 0
 
-%global pypi_name jaraco.itertools
-%global pkg_name jaraco-itertools
+%global srcname jaraco.itertools
+%global pypi_name jaraco-itertools
 
 # Common SRPM package
-Name:           python-%{pkg_name}
+Name:           python-%{pypi_name}
 Version:        5.0.0
 Release:        0%{?dist}
 Url:            https://github.com/jaraco/jaraco.itertools
@@ -33,7 +33,7 @@ BuildRequires:  epel-rpm-macros
 
 
 %if %{with_python2}
-%package -n python2-%{pkg_name}
+%package -n python2-%{pypi_name}
 Version:        5.0.0
 Release:        0%{?dist}
 Url:            https://github.com/jaraco/jaraco.itertools
@@ -43,15 +43,15 @@ License:        MIT
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-setuptools_scm >= 1.15
-%{?python_provide:%python_provide python2-%{pkg_name}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{pypi_name}
+%description -n python2-%{srcname}
 
 
 %endif # with_python2
 
 %if %{with_python3}
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Version:        5.0.0
 Release:        0%{?dist}
 Url:            https://github.com/jaraco/jaraco.itertools
@@ -61,18 +61,18 @@ License:        MIT
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 
 %endif # with_python3
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{srcname}-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{srcname}.egg-info
 # rename package to use a -
-sed -i 's/%{pypi_name}/%{pkg_name}/' setup.cfg
+sed -i 's/%{srcname}/%{pypi_name}/' setup.cfg
 # rename jaraco dependencies to use a -
 sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
@@ -98,7 +98,7 @@ sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 rm -rf %{buildroot}
 
 %if %{with_python2}
-%files -n python2-%{pkg_name}
+%files -n python2-%{pypi_name}
 %defattr(-,root,root,-)
 %{python2_sitelib}/*
 # These excludes are provided by python2-jaraco
@@ -107,7 +107,7 @@ rm -rf %{buildroot}
 %endif # with_python2
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %defattr(-,root,root,-)
 %{python3_sitelib}/*
 # These excludes are provided by python3-jaraco
