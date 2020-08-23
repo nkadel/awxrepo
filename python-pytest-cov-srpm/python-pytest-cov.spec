@@ -8,7 +8,7 @@ Summary:        Pytest plugin for coverage reporting
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://github.com/pytest-dev/%{srcname}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
