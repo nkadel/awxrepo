@@ -13,7 +13,7 @@ Summary:        Useful extra bits for Python
 
 License:        MIT
 URL:            https://github.com/testing-cabal/extras
-Source0:        https://pypi.python.org/packages/source/e/extras/extras-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 %if 0%{?rhel}
