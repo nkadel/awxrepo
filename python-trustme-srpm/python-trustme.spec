@@ -22,7 +22,7 @@ Release:        2%{?dist}
 Summary:        #1 quality TLS certs while you wait, for the discerning tester
 License:        MIT or ASL 2.0
 URL:            https://github.com/python-trio/trustme
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
