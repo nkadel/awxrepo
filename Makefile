@@ -61,6 +61,7 @@ EPELPKGS+=python-docutils-srpm
 EPELPKGS+=python-docutils-stubs-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
+EPELPKGS+=python-funcsigs-srpm
 EPELPKGS+=python-futures-srpm
 EPELPKGS+=python-hypothesis-srpm
 EPELPKGS+=python-idna-ssl-srpm
@@ -75,7 +76,7 @@ EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
-EPELPKGS+=python-mypy-extions-srpm
+EPELPKGS+=python-mypy-exensions-srpm
 EPELPKGS+=python-oauth2_provider-srpm
 EPELPKGS+=python-path-srpm
 EPELPKGS+=python-process-tests-srpm
@@ -100,7 +101,6 @@ EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
-EPELPKGS+=python-sphinx-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
@@ -122,6 +122,9 @@ AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
 # Depends on flake8, importlib-metadata, pyenchant
 AWXPKGS+=python-sphinxcontrib-spelling-srpm
 
+# Depends on sphinxcontrib-*
+AWXPKGS+=python-sphinx-srpm
+
 # Depends on sphinxcontrb-spelling
 AWXPKGS+=python-coverage-srpm
 
@@ -130,9 +133,6 @@ AWXPKGS+=python-httpretty-srpm
 
 # Depends on chardet
 AWXPKGS+=python-feedparser-srpm
-
-# Depends on unittest2 for RHEL 7
-AWXPKGS+=python-funcsigs-srpm
 
 # Depends on contextlib2 and setuptools_git and termcolor
 AWXPKGS+=python-pytest-shutil-srpm
@@ -212,9 +212,6 @@ AWXPKGS+=python-jaraco-itertools-srpm
 # Depends on zipp
 AWXPKGS+=python-importlib-metadata-srpm
 
-# Depends on mypy-extensions
-AWXPKGS+=python-mypy-srpm
-
 # Depends on sphinxcontrib-*
 AWXPKGS+=python-sphinx-sprm
 
@@ -272,7 +269,6 @@ AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
-#REPOS+=awxrepo/el/7
 REPOS+=awxrepo/el/8
 #REPOS+=awxrepo/fedora/32
 
