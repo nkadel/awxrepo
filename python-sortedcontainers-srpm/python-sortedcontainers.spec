@@ -48,8 +48,7 @@ Documentation for %{pypi_name} package.
 
 
 %prep
-%autosetup
-
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
