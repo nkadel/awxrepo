@@ -1,15 +1,15 @@
-%global srcname pytest-fixture-config
+%global pypi_name pytest-fixture-config
 %global sum Simple configuration objects for Py.test fixtures
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.7.0
 #Release:        3%%{?dist}
 Release:        0%{?dist}
 Summary:        %{sum}
 
 License:        MIT
-URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/%{pypi_name}
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -26,16 +26,16 @@ BuildRequires:  python%{python3_pkgversion}-setuptools_git
 Simple configuration objects for Py.test fixtures.
 Allows you to skip tests when their required config variables aren't set.
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{sum}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Simple configuration objects for Py.test fixtures.
 Allows you to skip tests when their required config variables aren't set.
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1694205
 # https://github.com/manahl/pytest-plugins/pull/134
@@ -50,7 +50,7 @@ sed -i "s/'pytest<4.0.0'/'pytest'/" setup.py
 %check
 %{__python3} setup.py test
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.md CHANGES.md
 %{python3_sitelib}/*
 
