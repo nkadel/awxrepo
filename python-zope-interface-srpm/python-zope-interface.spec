@@ -16,7 +16,7 @@ Release:	1%{?dist}
 Summary:	Zope 3 Interface Infrastructure
 License:	ZPLv2.1
 URL:		https://pypi.io/project/zope.interface
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
