@@ -14,7 +14,7 @@ Summary:        Service identity verification for pyOpenSSL
 
 License:        MIT
 URL:            https://github.com/pyca/service_identity
-Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
