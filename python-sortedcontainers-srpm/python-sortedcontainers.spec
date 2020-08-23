@@ -53,22 +53,23 @@ Documentation for %{pypi_name} package.
 %build
 %py3_build
 
-pushd docs
-make SPHINXBUILD=sphinx-build-%{python3_version} html
-rm _build/html/.buildinfo
-popd
-
+# Apparently discarded in more recent versions
+#pushd docs
+#make SPHINXBUILD=sphinx-build-%{python3_version} html
+#rm _build/html/.buildinfo
+#popd
 
 %install
 %py3_install
 
 
-%check
-pushd tests
-PYTHONPATH="%{buildroot}%{python3_sitelib}" \
-    pytest-%{python3_version}
-popd
+#%check
+# Apparently discarded in more recent versions
+#PYTHONPATH="%{buildroot}%{python3_sitelib}" \
+#    pytest-%{python3_version}
 
+# standard format, not available for this module
+#%{__python3} setup.py test
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
@@ -79,8 +80,7 @@ popd
 
 %files -n python-%{pypi_name}-doc
 %license LICENSE
-%doc README.rst docs/_build/html
-
+%doc README.rst
 
 %changelog
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.1.0-3
