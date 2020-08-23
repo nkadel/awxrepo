@@ -1,15 +1,15 @@
-%global srcname pytest-virtualenv
+%global pypi_name pytest-virtualenv
 %global sum Virtualenv fixture for py.test
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.7.0
 #Release:        3%%{?dist}
 Release:        0%{?dist}
 Summary:        %{sum}
 
 License:        MIT
-URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/%{pypi_name}
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -33,9 +33,9 @@ BuildRequires:  python%{python3_pkgversion}-virtualenv
 Create a Python virtual environment in your test that cleans up on teardown.
 The fixture has utility methods to install packages and list what's installed.
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{sum}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 Requires: python%{python3_pkgversion}-contextlib2
 Requires: python%{python3_pkgversion}-execnet
 Requires: python%{python3_pkgversion}-path
@@ -44,12 +44,12 @@ Requires: python%{python3_pkgversion}-pytest-fixture-config
 Requires: python%{python3_pkgversion}-pytest-shutil
 Requires: python%{python3_pkgversion}-virtualenv
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Create a Python virtual environment in your test that cleans up on teardown.
 The fixture has utility methods to install packages and list what's installed.
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 # Upstream pins pytest to older than 4.0.0 until they finish cleaning up deprecications. 
@@ -63,7 +63,7 @@ sed -i -e 's|pytest<4.0.0|pytest|' setup.py
 %check
 %{__python3} setup.py test
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.md CHANGES.md
 %{python3_sitelib}/*
 
