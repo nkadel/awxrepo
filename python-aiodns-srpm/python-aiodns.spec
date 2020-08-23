@@ -1,7 +1,5 @@
 # set upstream name variable
-%global srcname aiodns
-
-
+%global pypi_name aiodns
 
 Name:           python-aiodns
 Version:        2.0.0
@@ -11,7 +9,7 @@ Summary:        Simple DNS resolver for asyncio
 
 License:        MIT
 URL:            https://github.com/saghul/aiodns
-Source0:        https://github.com/saghul/%{srcname}/archive/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -24,23 +22,23 @@ aiodns provides a simple way for doing asynchronous DNS resolutions
 with a synchronous looking interface by using pycares.
 
 
-%package     -n python%{python3_pkgversion}-%{srcname}
+%package     -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Simple DNS resolver for asyncio
 BuildArch:      noarch
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pycares
 Requires:       python%{python3_pkgversion}-pycares
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 aiodns provides a simple way for doing asynchronous DNS resolutions
 with a synchronous looking interface by using pycares.
 
 
 
 %prep
-%autosetup -n %{srcname}-%{srcname}-%{version}
-
+# Tarball has extra prexix in name
+%autosetup -n %{pypi_name}-%{pypi_name}-%{version}
 
 %build
 %py3_build
@@ -57,12 +55,12 @@ with a synchronous looking interface by using pycares.
 
 
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst ChangeLog
 # For noarch packages: sitelib
-%{python3_sitelib}/%{srcname}-%{version}-*.egg-info/
-%{python3_sitelib}/%{srcname}/
+%{python3_sitelib}/%{pypi_name}-%{version}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}/
 
 
 
