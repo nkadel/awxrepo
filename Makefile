@@ -171,9 +171,6 @@ AWXPKGS+=python-aiodns-srpm
 # Depends on curio and contextvars
 AWXPKGS+=python-sniffio-srpm
 
-# Depends on http-parser and Cython and yarl and async-timeout
-AWXPKGS+=python-aiohttp-srpm
-
 # Depends on pytest and Cython and multidict and more-itertools
 AWXPKGS+=python-yarl-srpm
 
