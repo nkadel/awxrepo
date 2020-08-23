@@ -1,6 +1,6 @@
-%global modname smmap
+%global pypi_name smmap
 
-Name:           python-%{modname}
+Name:           python-%{pypi_name}
 Version:        3.0.1
 #Release:        7%%{?dist}
 Release:        0%{?dist}
@@ -8,7 +8,7 @@ Summary:        Sliding window memory map manager
 
 License:        BSD
 URL:            https://github.com/gitpython-developers/smmap
-Source0:        %{url}/archive/v%{version}/%{modname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -24,19 +24,19 @@ to allow continued operation.
 
 %description %{_description}
 
-%package -n python%{python3_pkgversion}-%{modname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-nose
 
-%description -n python%{python3_pkgversion}-%{modname} %{_description}
+%description -n python%{python3_pkgversion}-%{pypi_name} %{_description}
 
 Python 3 version.
 
 %prep
-%autosetup -n %{modname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
@@ -47,9 +47,9 @@ Python 3 version.
 %check
 nosetests-%{python3_version} -v
 
-%files -n python%{python3_pkgversion}-%{modname}
-%{python3_sitelib}/%{modname}-*.egg-info/
-%{python3_sitelib}/%{modname}/
+%files -n python%{python3_pkgversion}-%{pypi_name}
+%{python3_sitelib}/%{pypi_name}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}/
 
 %changelog
 * Tue Mar 3 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 3.0.1
