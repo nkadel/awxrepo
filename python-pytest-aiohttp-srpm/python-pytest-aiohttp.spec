@@ -8,7 +8,7 @@ Summary:        A pytest plugin for aiohttp support
 
 License:        ASL 2.0
 URL:            https://github.com/aio-libs/pytest-aiohttp/
-Source0:        https://github.com/aio-libs/pytest-aiohttp/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
