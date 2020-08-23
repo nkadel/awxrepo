@@ -10,9 +10,9 @@
 %global with_python2 0
 %endif
 
-%define upstream_name lockfile
+%define pypi_name lockfile
 
-Name:           python-%{upstream_name}
+Name:           python-%{pypi_name}
 Version:        0.11.0
 #Release:        13%%{?dist}.1
 Release:        0%{?dist}
@@ -21,7 +21,7 @@ Summary:        A platform-independent file locking module
 
 License:        MIT
 URL:            https://github.com/openstack/pylockfile
-Source0:        https://pypi.python.org/packages/source/l/lockfile/%{upstream_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -74,7 +74,7 @@ This is a Python 3 build of lockfile package.
 %endif # with_python3
 
 %prep
-%setup -q -n %{upstream_name}-%{version}
+%setup -q -n %{pypi_name}-%{version}
 
 # pbr isn't needed in runtime: https://bugs.launchpad.net/pylockfile/+bug/1506679
 sed -i '/pbr/d' requirements.txt
@@ -121,15 +121,15 @@ popd
 %if %{with_python2}
 %files -n python2-lockfile
 %doc ACKS AUTHORS LICENSE PKG-INFO README.rst RELEASE-NOTES doc/
-%{python2_sitelib}/%{upstream_name}
-%{python2_sitelib}/%{upstream_name}-%{version}-*.egg-info
+%{python2_sitelib}/%{pypi_name}
+%{python2_sitelib}/%{pypi_name}-%{version}-*.egg-info
 %endif
 
 %if %{with_python3}
 %files -n python%{python3_pkgversion}-lockfile
 %doc ACKS AUTHORS LICENSE PKG-INFO README.rst RELEASE-NOTES doc/
-%{python3_sitelib}/%{upstream_name}
-%{python3_sitelib}/%{upstream_name}-%{version}-*.egg-info
+%{python3_sitelib}/%{pypi_name}
+%{python3_sitelib}/%{pypi_name}-%{version}-*.egg-info
 %endif # with_python3
 
 %changelog
