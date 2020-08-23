@@ -1,4 +1,4 @@
-%global srcname social-auth-core
+%global pypi_name social-auth-core
 %global desc Python Social Auth is an easy to setup social \
 authentication/registration mechanism with support for several frameworks and \
 auth providers. This is the core component of the python-social-auth ecosystem, \
@@ -6,15 +6,15 @@ it implements the common interface to define new authentication backends to \
 third parties services, implement integrations with web frameworks and storage \
 solutions. \
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.7.0
 #Release:        6%%{?dist}
 Release:        0%{?dist}
 Summary:        The core component of the python-social-auth ecosystem
 
 License:        BSD
-URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://github.com/python-social-auth/social-core/archive/%{version}/%{srcname}-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/%{pypi_name}
+Source0:        %pypi_source
 Patch0:         Unpin-the-test-requirements-and-use-unittest2-for-Py.patch
 
 BuildArch:      noarch
@@ -29,9 +29,9 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %description
 %{desc}
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary: %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 BuildRequires: python%{python3_pkgversion}-cryptography
 BuildRequires: python%{python3_pkgversion}-defusedxml
 BuildRequires: python%{python3_pkgversion}-httpretty
@@ -54,7 +54,7 @@ Requires: python%{python3_pkgversion}-requests
 Requires: python%{python3_pkgversion}-requests-oauthlib
 Requires: python%{python3_pkgversion}-six
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{desc}
 
 %prep
@@ -78,7 +78,7 @@ sed -i -e 's|defusedxml>=0.5.0rc1|defusedxml>=0.5.0|' requirements-python3.txt
 %__python3 setup.py test
 %endif
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.md CHANGELOG.md
 %{python3_sitelib}/*
