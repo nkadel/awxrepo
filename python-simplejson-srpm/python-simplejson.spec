@@ -37,41 +37,6 @@ included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
-
-%package -n python2-simplejson
-Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
-BuildRequires:  gcc
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-%if 0%{?el7}
-BuildRequires:  python-sphinx
-%else
-BuildRequires:  python2-sphinx
-%endif
-%if %{with tests}
-BuildRequires:  python2-nose
-%endif
-%{?python_provide:%python_provide python2-simplejson}
-
-%description -n python2-simplejson
-simplejson is a simple, fast, complete, correct and extensible JSON
-<http://json.org> encoder and decoder for Python 2.5+. It is pure Python code
-with no dependencies, but includes an optional C extension for a serious speed
-boost.
-
-The encoder may be subclassed to provide serialization in any kind of
-situation, without any special support by the objects to be serialized
-(somewhat like pickle).
-
-The decoder can handle incoming JSON strings of any specified encoding (UTF-8
-by default).
-
-simplejson is the externally maintained development version of the json library
-included with Python 2.6 and Python 3.0, but maintains backwards compatibility
-with Python 2.5.  It gets updated more regularly than the json module in the
-python stdlib.
-
-
 %package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
 BuildRequires:  python%{python3_pkgversion}-devel
@@ -126,17 +91,8 @@ rm docs/.nojekyll
 
 %if %{with tests}
 %check
-%{__python2} -m nose
 %{__python3} -m nose
 %endif
-
-%files -n python2-simplejson
-%license LICENSE.txt
-%if %{with docs}
-%doc docs
-%endif
-%{python2_sitearch}/simplejson/
-%{python2_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %files -n python%{python3_pkgversion}-simplejson
 %license LICENSE.txt
@@ -147,6 +103,9 @@ rm docs/.nojekyll
 %{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %changelog
+* Sat Aug 22 2020 Nico Kadel-Garcia <nkadel@gmail.com>
+- Discard python2
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.16.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
