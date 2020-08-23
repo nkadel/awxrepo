@@ -1,17 +1,17 @@
 %bcond_with check
 
-%global pypi_pkgname pexpect
+%global pypi_name pexpect
 
 %global with_python2 0
 
-Name:           python-%{pypi_pkgname}
+Name:           python-%{pypi_name}
 Summary:        Unicode-aware Pure Python Expect-like module
 Version:        4.7.0
 Release:        2%{?dist}
 
 License:        ISC
 URL:            https://github.com/pexpect/pexpect
-Source0:        %{url}/archive/%{version}/%{pypi_pkgname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildRequires:  %{_bindir}/man
 %if 0%{?rhel}
@@ -36,9 +36,9 @@ compiled.  It should work on any platform that supports the standard Python
 pty module.
 
 %if %{with_python2}
-%package -n python2-%{pypi_pkgname}
+%package -n python2-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{pypi_pkgname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 BuildRequires:  python2-devel
 BuildRequires:  python2-pytest
 BuildRequires:  python2-pluggy
@@ -64,16 +64,16 @@ compiled.  It should work on any platform that supports the standard Python
 pty module.
 %endif
 
-%package -n python%{python3_pkgversion}-%{pypi_pkgname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_pkgname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-pluggy
 BuildRequires:  python%{python3_pkgversion}-ptyprocess
 Requires:       python%{python3_pkgversion}-ptyprocess
 
-%description -n python%{python3_pkgversion}-%{pypi_pkgname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Pexpect is a pure Python module for spawning child applications; controlling
 them; and responding to expected patterns in their output. Pexpect works like
 Don Libes' Expect. Pexpect allows your script to spawn a child application and
@@ -91,7 +91,7 @@ pty module.
 
 %prep
 %autosetup -c
-mv %{pypi_pkgname}-%{version} python2
+mv %{pypi_name}-%{version} python2
 chmod +x python2/tools/*
 find python2/examples -type f | xargs chmod a-x
 cp -pr python2 python3
@@ -118,7 +118,7 @@ pushd python2
   %py2_install
   rm -rf ${buildroot}%{python2_sitelib}/setuptools/tests
   # Drop asyncio stuff from py2
-  rm -f %{buildroot}%{python2_sitelib}/%{pypi_pkgname}/_async.py
+  rm -f %{buildroot}%{python2_sitelib}/%{pypi_name}/_async.py
 popd
 %endif
 
@@ -149,18 +149,18 @@ popd
 %endif
 
 %if %{with_python2}
-%files -n python2-%{pypi_pkgname}
+%files -n python2-%{pypi_name}
 %license python2/LICENSE
 %doc python2/doc python2/examples
-%{python2_sitelib}/%{pypi_pkgname}/
-%{python2_sitelib}/%{pypi_pkgname}-*.egg-info
+%{python2_sitelib}/%{pypi_name}/
+%{python2_sitelib}/%{pypi_name}-*.egg-info
 %endif
 
-%files -n python%{python3_pkgversion}-%{pypi_pkgname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license python3/LICENSE
 %doc python3/doc python3/examples
-%{python3_sitelib}/%{pypi_pkgname}/
-%{python3_sitelib}/%{pypi_pkgname}-*.egg-info
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-*.egg-info
 
 %changelog
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 4.7.0-2
