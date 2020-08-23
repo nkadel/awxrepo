@@ -20,7 +20,7 @@ Group:          Development/Tools
 %endif
 License:        MIT
 URL:            https://launchpad.net/testtools
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 Patch0:         testtools-0.9.30-py3.patch
 
 BuildArch:      noarch
