@@ -1,11 +1,11 @@
 %bcond_without tests
 
-%global srcname setuptools_scm
+%global pypi_name setuptools_scm
 
 %global with_python2 0
 %global with_python3 1
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 # Updated for awx
 #Version:        3.3.3
 #Release:        2%%{?dist}
@@ -15,7 +15,7 @@ Summary:        Blessed package to manage your versions by scm tags
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/setuptools_scm
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{srcname}; echo ${n:0:1})/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -33,36 +33,36 @@ Setuptools_scm handles managing your python package versions in scm metadata.
 It also handles file finders for the suppertes scms.
 
 %if %{with_python2}
-%package -n python2-%{srcname}
+%package -n python2-%{pypi_name}
 Summary:        %{summary}
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 %if %{with tests}
 BuildRequires:  python2-pytest
 %endif
-%{?python_provide:%python_provide python2-%{srcname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{srcname}
+%description -n python2-%{pypi_name}
 Setuptools_scm handles managing your python package versions in scm metadata.
 It also handles file finders for the suppertes scms.
 %endif
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 %if %{with tests}
 BuildRequires:  python%{python3_pkgversion}-pytest
 %endif
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
-Obsoletes:      platform-python-%{srcname} < %{version}-%{release}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+Obsoletes:      platform-python-%{pypi_name} < %{version}-%{release}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Setuptools_scm handles managing your python package versions in scm metadata.
 It also handles file finders for the suppertes scms.
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %if %{with_python2}
@@ -85,18 +85,18 @@ PYTHONPATH=%{buildroot}%{python2_sitelib} py.test-%{python3_version} -v -k 'not 
 %endif
 
 %if %{with_python2}
-%files -n python2-%{srcname}
+%files -n python2-%{pypi_name}
 %license LICENSE
 %doc README.rst
-%{python2_sitelib}/%{srcname}/
-%{python2_sitelib}/%{srcname}-*.egg-info/
+%{python2_sitelib}/%{pypi_name}/
+%{python2_sitelib}/%{pypi_name}-*.egg-info/
 %endif
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
-%{python3_sitelib}/%{srcname}/
-%{python3_sitelib}/%{srcname}-*.egg-info
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-*.egg-info
 
 %changelog
 * Mon Feb 17 2020 Nico Kadel-Garcia <nkadel@gmail.com>
