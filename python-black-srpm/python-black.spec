@@ -9,7 +9,7 @@ Summary:        The uncompromising code formatter
 
 License:        MIT
 URL:            https://github.com/ambv/black
-Source0:        https://files.pythonhosted.org/packages/source/b/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 Source1:        black.1
 Source2:        blackd.1
 BuildArch:      noarch
