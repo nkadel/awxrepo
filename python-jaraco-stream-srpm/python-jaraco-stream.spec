@@ -1,10 +1,10 @@
 # Created by pyp2rpm-3.3.3
+%global srcname jaraco.stream
 %global pypi_name jaraco-stream
-%global pkg_name jaraco.stream
 
 Name:           python-%{pypi_name}
 Version:        3.0.0
-Release:        1%{?dist}
+Release:        0%{?dist}
 Summary:        routines for dealing with data streams
 
 License:        None
@@ -78,7 +78,7 @@ rm -rf html/.{doctrees,buildinfo}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/jaraco
-%{python3_sitelib}/%{pkg_name}-%{version}-py%{python3_version}.egg-info
+%{python3_sitelib}/%{srcname}-%{version}-py%{python3_version}.egg-info
 # These excludes are provided by python%{python3_pkgversion}-jaraco
 %exclude %{python3_sitelib}/jaraco/__init__*
 %exclude %{python3_sitelib}/jaraco/__pycache__/__init__*
