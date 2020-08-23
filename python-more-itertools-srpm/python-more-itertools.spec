@@ -15,7 +15,7 @@ Release:        0%{?dist}
 Summary:        %{sum} 
 License:        MIT
 URL:            https://github.com/erikrose/more-itertools
-Source0:        https://pypi.io/packages/source/m/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
