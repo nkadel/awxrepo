@@ -9,7 +9,7 @@ Summary:        System for processing plaintext documentation
 # See COPYING.txt for information
 License:        Public Domain and BSD and Python and GPLv3+
 URL:            http://docutils.sourceforge.net
-Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 # Sometimes we need snapshots.  Instructions below:
 # svn co -r 7687 svn://svn.code.sf.net/p/docutils/code/trunk/docutils
 # cd docutils
