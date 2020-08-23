@@ -1,4 +1,4 @@
-%global srcname msrestazure
+%global pypi_name msrestazure
 %global common_description %{summary}.
 
 %global _with_python2 0
@@ -19,7 +19,7 @@
 %global adal_min_version 0.6.0
 %global msrest_min_version 0.4.28
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        0.6.1
 #Release:        1%%{?dist}
 Release:        0%{?dist}
@@ -27,7 +27,8 @@ Summary:        The runtime library "msrestazure" for AutoRest generated Python 
 
 License:        MIT
 URL:            https://github.com/Azure/msrestazure-for-python
-Source0:        %{url}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
+#Source0:        %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
@@ -68,25 +69,25 @@ BuildArch:      noarch
 
 
 %if 0%{?_with_python2}
-%package -n python2-%{srcname}
+%package -n python2-%{pypi_name}
 Summary:        %{summary}
 Requires:       python2-adal >= %{adal_min_version}
 Requires:       python2-msrest >= %{msrest_min_version}
-%{?python_provide:%python_provide python2-%{srcname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{srcname}
+%description -n python2-%{pypi_name}
 %{common_description}
 %endif
 
 
 %if 0%{?_with_python3}
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-adal >= %{adal_min_version}
 Requires:       python%{python3_pkgversion}-msrest >= %{msrest_min_version}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{common_description}
 %endif
 
@@ -101,7 +102,7 @@ This package provides documentation for %{name}.
 
 
 %prep
-%autosetup -n %{srcname}-for-python-%{version}
+%autosetup -n %{pypi_name}-for-python-%{version}
 
 
 %build
@@ -141,20 +142,20 @@ py.test-%{python3_version}
 
 
 %if 0%{?_with_python2}
-%files -n python2-%{srcname}
+%files -n python2-%{pypi_name}
 %doc README.rst
 %license LICENSE.md
-%{python2_sitelib}/%{srcname}/
-%{python2_sitelib}/%{srcname}-*.egg-info/
+%{python2_sitelib}/%{pypi_name}/
+%{python2_sitelib}/%{pypi_name}-*.egg-info/
 %endif
 
 
 %if 0%{?_with_python3}
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.rst
 %license LICENSE.md
-%{python3_sitelib}/%{srcname}/
-%{python3_sitelib}/%{srcname}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-*.egg-info/
 %endif
 
 
