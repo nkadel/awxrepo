@@ -8,7 +8,7 @@ Summary:        Add SAML support to your Python software using this library
 
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://github.com/onelogin/python3-saml/archive/v%{version}/%{pypi_name}-v%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch: noarch
 
