@@ -11,7 +11,7 @@ Release:        0%{?dist}
 Summary:        Simple powerful testing with Python
 License:        MIT
 URL:            http://pytest.org
-Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 # The tests in this specfile use pytest-timeout
 # When building pytest for the first time with new Python version
