@@ -8,7 +8,7 @@ Summary:        Tools for testing processes
 
 License:        BSD
 URL:            https://github.com/ionelmc/python-process-tests
-Source0:        https://pypi.python.org/packages/source/p/process-tests/process-tests-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
