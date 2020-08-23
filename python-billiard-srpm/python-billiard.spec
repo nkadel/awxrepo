@@ -1,9 +1,9 @@
-%global srcname billiard
+%global pypi_name billiard
 # Disable tests for now as python-case is not packaged
 %bcond_with tests
 %bcond_without python3
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        3.5.0.5
 Release:        1%{?dist}
 Epoch:          1
@@ -11,7 +11,7 @@ Summary:        Multiprocessing Pool Extensions
 
 License:        BSD
 URL:            https://github.com/celery/billiard
-Source0:        https://files.pythonhosted.org/packages/source/b/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 %if 0%{?rhel}
 Buildrequires:  epel-rpm-macros
@@ -30,17 +30,17 @@ BuildRequires:  gcc
 %description
 This package contains extensions to the multiprocessing Pool.
 
-%package -n python2-%{srcname}
+%package -n python2-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{srcname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{srcname}
+%description -n python2-%{pypi_name}
 This package contains extensions to the multiprocessing Pool.
 
 %if 0%{?with_python3}
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
@@ -50,12 +50,12 @@ BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-case
 %endif
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 This package contains extensions to the multiprocessing Pool.
 %endif
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %if 0%{?with_python3}
 cp -a . %{py3dir}
@@ -84,20 +84,20 @@ cp -a . %{py3dir}
 %endif
 
 
-%files -n python2-%{srcname}
+%files -n python2-%{pypi_name}
 %doc CHANGES.txt README.rst
 %license LICENSE.txt
 %{python2_sitearch}/_billiard*
-%{python2_sitearch}/%{srcname}/
-%{python2_sitearch}/%{srcname}*.egg-info
+%{python2_sitearch}/%{pypi_name}/
+%{python2_sitearch}/%{pypi_name}*.egg-info
 %exclude %{python2_sitearch}/funtests/
 
 %if 0%{?with_python3}
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc CHANGES.txt README.rst
 %license LICENSE.txt
-%{python3_sitelib}/%{srcname}
-%{python3_sitelib}/%{srcname}*.egg-info
+%{python3_sitelib}/%{pypi_name}
+%{python3_sitelib}/%{pypi_name}*.egg-info
 %exclude %{python3_sitelib}/funtests/
 %endif
 
