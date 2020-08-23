@@ -54,7 +54,8 @@ rm -rf html/.{doctrees,buildinfo}
 %doc README.rst
 %{python3_sitelib}/__pycache__/*
 %{python3_sitelib}/%{pypi_name}.py
-%{python3_sitelib}/%{pypi_name}
+# No actual files deposited here
+#%{python3_sitelib}/%{pypi_name}
 %{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
 
 %files -n python-%{pypi_name}-doc
@@ -64,3 +65,4 @@ rm -rf html/.{doctrees,buildinfo}
 %changelog
 * Sun Aug 23 2020 Nico KAdel-Garcia <nkadel@gmail.com> - 1.14.0-1
 - Initial package.
+- Comment out out %%{python3_sitelib}/%%{pypi_name}
