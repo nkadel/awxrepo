@@ -1,14 +1,14 @@
-%global srcname pytest-shutil
+%global pypi_name pytest-shutil
 %global sum A goodie-bag of unix shell and environment tools for py.test
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.7.0
 Release:        3%{?dist}
 Summary:        %{sum}
 
 License:        MIT
-URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/p/%{srcname}/%{srcname}-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/%{pypi_name}
+Source0:        %pypi_source
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
@@ -25,19 +25,19 @@ BuildRequires:  python3-termcolor
 This library is a goodie-bag of Unix shell and 
 environment management tools for automated tests.
 
-%package -n python3-%{srcname}
+%package -n python3-%{pypi_name}
 Summary:        %{sum}
 %if 0%{?fedora}
 Recommends:     %{py3_dist termcolor}
 %endif
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python3-%{pypi_name}}
 
-%description -n python3-%{srcname}
+%description -n python3-%{pypi_name}
 This library is a goodie-bag of Unix shell and 
 environment management tools for automated tests.
 
 %prep
-%autosetup -n %{srcname}-%{version} -p1
+%autosetup -n %{pypi_name}-%{version} -p1
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1702355
 sed -i "/'termcolor'/d" setup.py
@@ -56,7 +56,7 @@ sed -i -e 's|pytest<4.0.0|pytest|' setup.py
 # test_pretty_formatter requires termcolor
 PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} -m pytest
 
-%files -n python3-%{srcname}
+%files -n python3-%{pypi_name}
 %doc README.md CHANGES.md
 %{python3_sitelib}/*
 
