@@ -1,15 +1,15 @@
 %global pypi_name slackclient
 
-Name:               python-%{pypi_name}
-Version:            2.1.0
-#Release:            2%%{?dist}
-Release:            0%{?dist}
-Summary:            Slack Developer Kit for Python
+Name:           python-%{pypi_name}
+Version:        2.1.0
+#Release:        2%%{?dist}
+Release:        0%{?dist}
+Summary:        Slack Developer Kit for Python
 
-License:            MIT
-URL:                https://github.com/slackapi/python-%{pypi_name}
-Source0:            https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
-BuildArch:          noarch
+License:        MIT
+URL:            https://github.com/slackapi/python-%{pypi_name}
+Source0:        %pypi_source
+BuildArch:      noarch
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
