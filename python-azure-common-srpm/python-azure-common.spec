@@ -22,7 +22,7 @@ Summary:        Microsoft Azure Client Library for Python (Common)
 License:        MIT
 Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
-Source0:        %pypi_source
+Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
 %if 0%{?rhel}

@@ -5,15 +5,8 @@
 #
 
 # Fedora and RHEL split python2 and python3
-# Older RHEL requires EPEL and python34 or python36
 %global with_python3 1
-
-# Fedora >= 38 no longer publishes python2 by default
-%if 0%{?fedora} >= 30
 %global with_python2 0
-%else
-%global with_python2 1
-%endif
 
 # Older RHEL does not use dnf, does not support "Suggests"
 %global pypi_name azure-nspkg
@@ -27,7 +20,7 @@ Summary:        Microsoft Azure Namespace Package [Internal]
 License:        MIT
 Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
-Source0:        %pypi_source
+Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
 BuildRequires:  bzip2
