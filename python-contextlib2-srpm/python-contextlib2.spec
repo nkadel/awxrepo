@@ -3,36 +3,36 @@
 
 %{!?_licensedir: %global license %%doc}
 
-%global modname contextlib2
+%global pypi_name contextlib2
 
-Name:               python-contextlib2
-Version:            0.5.5
-#Release:            9%{?dist}
-Release:            0%{?dist}
-Summary:            Backports and enhancements for the contextlib module
+Name:           python-%{pypi_name}
+Version:        0.5.5
+#Release:        9%{?dist}
+Release:        0%{?dist}
+Summary:        Backports and enhancements for the contextlib module
 
-License:            Python
-URL:                https://pypi.io/project/contextlib2
-Source0:            https://pypi.io/packages/source/c/%{modname}/%{modname}-%{version}.tar.gz
+License:        Python
+URL:            https://pypi.io/project/contextlib2
+Source0:        %pypi_source
 
-BuildArch:          noarch
+BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires:      epel-rpm-macros
+BuildRequires:  epel-rpm-macros
 %endif
 
 %if 0%{?with_python2}
-BuildRequires:      python2-devel
+BuildRequires:  python2-devel
 # needed for check: assertRaisesRegex in unittest.TestCase
-BuildRequires:      python2-unittest2
+BuildRequires:  python2-unittest2
 %endif
 
 %if 0%{?with_python3}
-BuildRequires:      python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-devel
 %endif
 
 %if 0%{?el6}
-Patch0:             contextlib2-skip-tests-on-el6.patch
+Patch0:         contextlib2-skip-tests-on-el6.patch
 %endif
 
 %global _description\
@@ -54,7 +54,7 @@ Summary: %summary
 
 %if 0%{?with_python3}
 %package -n python%{python3_pkgversion}-contextlib2
-Summary:            Backports and enhancements for the contextlib module
+Summary:        Backports and enhancements for the contextlib module
 
 %description -n python%{python3_pkgversion}-contextlib2
 contextlib2 is a backport of the standard library's contextlib module to
@@ -65,13 +65,13 @@ enhancements to the standard library version.
 %endif
 
 %prep
-%setup -q -n %{modname}-%{version}
+%setup -q -n %{pypi_name}-%{version}
 %if 0%{?el6}
 %patch0 -p1 -b skip-tests-on-el6
 %endif
 
 # Remove bundled egg-info in case it exists
-rm -rf %{modname}.egg-info
+rm -rf %{pypi_name}.egg-info
 %if 0%{?with_python3}
 rm -rf %{py3dir}
 cp -a . %{py3dir}
@@ -111,17 +111,17 @@ popd
 %files -n python2-contextlib2
 %doc README.rst VERSION.txt NEWS.rst
 %license LICENSE.txt
-%{python2_sitelib}/%{modname}.py*
-%{python2_sitelib}/%{modname}-%{version}*
+%{python2_sitelib}/%{pypi_name}.py*
+%{python2_sitelib}/%{pypi_name}-%{version}*
 %endif
 
 %if 0%{?with_python3}
 %files -n python%{python3_pkgversion}-contextlib2
 %doc README.rst VERSION.txt NEWS.rst
 %license LICENSE.txt
-%{python3_sitelib}/%{modname}.py*
-%{python3_sitelib}/__pycache__/%{modname}*
-%{python3_sitelib}/%{modname}-%{version}-*
+%{python3_sitelib}/%{pypi_name}.py*
+%{python3_sitelib}/__pycache__/%{pypi_name}*
+%{python3_sitelib}/%{pypi_name}-%{version}-*
 %endif
 
 %changelog
