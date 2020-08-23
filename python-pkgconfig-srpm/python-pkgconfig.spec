@@ -9,7 +9,7 @@ Summary:        Interface Python with pkg-config
 
 License:        None
 URL:            https://github.com/matze/pkgconfig
-Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
