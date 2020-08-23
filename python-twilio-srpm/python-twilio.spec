@@ -9,17 +9,17 @@ The Twilio REST API lets to you initiate outgoing calls, list previous calls, \
 and much more.
 
 
-Name:           python-%{pypi_name}
-Version:        6.29.1
-#Release:        1%%{?dist}
-Release:        0%{?dist}
-Summary:        %{sum}
+Name:       python-%{pypi_name}
+Version:    6.29.1
+#Release:    1%%{?dist}
+Release:    0%{?dist}
+Summary:    %{sum}
 
-License:        MIT
-URL:            https://www.github.com/%{pypi_name}/%{pypi_name}-python
-Source0:        https://github.com/%{pypi_name}/%{pypi_name}-python/archive/%{version}/%{name}-%{version}.tar.gz
+License:    MIT
+URL:        https://www.github.com/%{pypi_name}/%{pypi_name}-python
+Source0:    %pypi_source
 
-BuildArch:      noarch
+BuildArch:  noarch
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
