@@ -1,4 +1,4 @@
-%global modname attrs
+%global pypi_name attrs
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
 # Can't run tests on EPEL7 due to need for pytest >= 2.8
@@ -8,7 +8,7 @@
 %bcond_without tests
 %endif
 
-Name:           python-attrs
+Name:           python-%{pypi_name}
 Version:        19.1.0
 #Release:        2%%{?dist}
 Release:        0%{?dist}
@@ -17,7 +17,7 @@ Summary:        Python attributes without boilerplate
 License:        MIT
 URL:            http://www.attrs.org/
 BuildArch:      noarch
-Source0:        https://github.com/hynek/%{modname}/archive/%{version}/%{modname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 
 BuildRequires:  python2-devel
@@ -45,26 +45,26 @@ attrs is an MIT-licensed Python package with class decorators that
 ease the chores of implementing the most common attribute-related
 object protocols.
 
-%package -n python2-%{modname}
+%package -n python2-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{modname}}
+%{?python_provide:%python_provide python2-%{pypi_name}}
 
-%description -n python2-%{modname}
+%description -n python2-%{pypi_name}
 attrs is an MIT-licensed Python package with class decorators that
 ease the chores of implementing the most common attribute-related
 object protocols.
 
-%package -n python%{python3_pkgversion}-%{modname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{modname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 attrs is an MIT-licensed Python package with class decorators that
 ease the chores of implementing the most common attribute-related
 object protocols.
 
 %prep
-%setup -q -n %{modname}-%{version}
+%setup -q -n %{pypi_name}-%{version}
 
 %build
 %py2_build
@@ -82,12 +82,12 @@ PYTHONPATH=%{buildroot}/%{python2_sitelib} py.test-2.7 -v
 PYTHONPATH=%{buildroot}/%{python3_sitelib} py.test-3 -v
 %endif
 
-%files -n python2-%{modname}
+%files -n python2-%{pypi_name}
 %license LICENSE
 %doc AUTHORS.rst README.rst
 %{python2_sitelib}/*
 
-%files -n python%{python3_pkgversion}-%{modname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc AUTHORS.rst README.rst
 %{python3_sitelib}/*
