@@ -51,9 +51,9 @@ Summary:        zope.interface documentation
 Documentation for zope.interface
 
 %prep
-%autosetup -n %{pkg_name}-%{version}
+%autosetup -n %{srcname}-%{version}
 # Remove bundled egg-info
-rm -rf %{pkg_name}.egg-info
+rm -rf %{srcname}.egg-info
 
 %build
 %py3_build
@@ -72,8 +72,8 @@ rm -rf html/.{doctrees,buildinfo}
 %license LICENSE.txt
 %doc README.rst docs/README.rst docs/README.ru.rst
 %{python3_sitearch}/zope
-%{python3_sitearch}/%{pkg_name}-%{version}-py%{python3_version}-*.pth
-%{python3_sitearch}/%{pkg_name}-%{version}-py%{python3_version}.egg-info
+%{python3_sitearch}/%{srcname}-%{version}-py%{python3_version}-*.pth
+%{python3_sitearch}/%{srcname}-%{version}-py%{python3_version}.egg-info
 
 %files -n python-%{pypi_name}-doc
 %doc html
