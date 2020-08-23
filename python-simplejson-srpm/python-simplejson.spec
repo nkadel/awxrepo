@@ -72,7 +72,6 @@ python stdlib.
 %setup -q -n simplejson-%{version}
 
 %build
-%py2_build
 %py3_build
 
 %if %{with docs}
@@ -86,7 +85,6 @@ rm docs/.nojekyll
 %endif
 
 %install
-%py2_install
 %py3_install
 
 %if %{with tests}
