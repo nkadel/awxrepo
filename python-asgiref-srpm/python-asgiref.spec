@@ -27,6 +27,7 @@ Summary:        ASGI specs, helper code, and adapters
 License:        BSD
 URL:            https://github.com/django/asgiref
 # PyPI tarball doesn't have tests
+#Source0:        %pypi_source
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
 
