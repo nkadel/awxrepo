@@ -13,7 +13,7 @@ Summary:        A set of high-level abstractions for Django forms
 
 License:        BSD
 URL:            http://django-formtools.readthedocs.org/en/latest/
-Source0:        https://pypi.io/packages/source/d/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
  
 %if 0%{?rhel}
