@@ -25,7 +25,6 @@ BuildArch:      noarch
 BuildRequires:  epel-rpm-macros
 %endif
 
-BuildRequires:  %{_bindir}/sphinx-build
 BuildRequires:  %{_bindir}/rst2html
 
 %description
@@ -48,6 +47,8 @@ BuildRequires:  python%{python3_pkgversion}-py >= %{pylib_version}
 BuildRequires:  python%{python3_pkgversion}-pytest-timeout
 %endif
 BuildRequires:  python%{python3_pkgversion}-six
+BuildRequires:  python%{python3_pkgversion}-sphinx
+
 Requires:       python%{python3_pkgversion}-attrs
 Requires:       python%{python3_pkgversion}-pluggy
 Requires:       python%{python3_pkgversion}-six
