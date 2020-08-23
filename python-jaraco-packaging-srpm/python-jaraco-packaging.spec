@@ -1,11 +1,11 @@
 # Created by pyp2rpm-3.2.2
-%global pypi_name jaraco.packaging
-%global pkg_name jaraco-packaging
+%global srcname jaraco.packaging
+%global pypi_name jaraco-packaging
 # This package is interdependant on rst-linker to build docs
 # will build both with out docs and add docs in later
 %bcond_with docs 
 
-Name:           python-%{pkg_name}
+Name:           python-%{pypi_name}
 Version:        6.1
 Release:        8%{?dist}
 Summary:        Tools to supplement packaging Python releases
@@ -29,7 +29,7 @@ BuildRequires:  python%{python3_pkgversion}-devel
 %description -n python%{python3_pkgversion}-jaraco
 A Parent package for jaraco's parent dir and init file.
 
-%package -n python%{python3_pkgversion}-%{pkg_name}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-jaraco
 Requires:       python%{python3_pkgversion}-rst-linker
@@ -39,9 +39,9 @@ Requires:       python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm >= 1.15.0
 BuildRequires:  python%{python3_pkgversion}-six >= 1.4
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pkg_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{pkg_name}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 Tools for packaging.dependency_tree A dist-utils command for reporting the
 dependency tree as resolved by setup-tools. Use after installing a package.show
 A dist-utils command for reporting the attributes of a distribution, such as the
@@ -49,22 +49,22 @@ version or author name.
 
 
 %if %{with docs}
-%package -n python-%{pkg_name}-doc
+%package -n python-%{pypi_name}-doc
 Summary:        jaraco.packaging documentation
 
 BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  python%{python3_pkgversion}-rst-linker
 
-%description -n python-%{pkg_name}-doc
+%description -n python-%{pypi_name}-doc
 Documentation for jaraco.packaging
 %endif
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{srcname}-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{srcname}.egg-info
 # rename package in setup to -
-sed -i 's/name = %{pypi_name}/name = %{pkg_name}/' setup.cfg
+sed -i 's/name = %{srcname}/name = %{pypi_name}/' setup.cfg
 # rename jaraco dependencies to use a -
 sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 
@@ -90,7 +90,7 @@ rm -rf html/.{doctrees,buildinfo}
 %{python3_sitelib}/jaraco
 %exclude %{python3_sitelib}/jaraco/packaging
 
-%files -n python%{python3_pkgversion}-%{pkg_name}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{_bindir}/upload-package
@@ -99,7 +99,7 @@ rm -rf html/.{doctrees,buildinfo}
 %{python3_sitelib}/jaraco_packaging-%{version}-py?.?.egg-info
 
 %if %{with docs}
-%files -n python-%{pkg_name}-doc
+%files -n python-%{pypi_name}-doc
 %license LICENSE
 %doc html 
 %endif
