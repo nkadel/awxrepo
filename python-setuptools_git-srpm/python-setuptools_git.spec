@@ -14,7 +14,7 @@ Summary:        Setuptools revision control system plugin for Git
 
 License:        BSD
 URL:            http://pypi.python.org/pypi/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/source/s/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
