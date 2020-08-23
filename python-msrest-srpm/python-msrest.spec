@@ -1,7 +1,7 @@
-%global srcname msrest
+%global pypi_name msrest
 %global common_description %{summary}.
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        0.6.10
 #Release:        1%%{?dist}
 Release:        0%{?dist}
@@ -9,7 +9,7 @@ Summary:        The runtime library "msrest" for AutoRest generated Python clien
 
 License:        MIT
 URL:            https://github.com/Azure/msrest-for-python
-Source0:        %{url}/archive/v%{version}/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 # Disable tests requiring an Internet connection
 Patch0:         %{name}-0.6.1-tests.patch
 
@@ -39,12 +39,12 @@ BuildArch:      noarch
 %{common_description}
 
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 Requires:       python%{python3_pkgversion}-trio
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{common_description}
 
 
@@ -56,7 +56,7 @@ This package provides documentation for %{name}.
 
 
 %prep
-%autosetup -p1 -n %{srcname}-for-python-%{version}
+%autosetup -p1 -n %{pypi_name}-for-python-%{version}
 
 
 %build
@@ -76,11 +76,11 @@ popd
 py.test-3
 
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %doc README.rst
 %license LICENSE.md
-%{python3_sitelib}/%{srcname}/
-%{python3_sitelib}/%{srcname}-*.egg-info/
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-*.egg-info/
 
 
 %files doc
