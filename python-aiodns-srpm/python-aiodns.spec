@@ -38,15 +38,13 @@ with a synchronous looking interface by using pycares.
 
 %prep
 # Tarball has extra prexix in name
-%autosetup -n %{pypi_name}-%{pypi_name}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
 
-
 %install
 %py3_install
-
 
 %check
 # Unit tests perform DNS resolution and requires active Internet
