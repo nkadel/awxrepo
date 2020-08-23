@@ -8,7 +8,7 @@ Summary:        A Python module to handle URLs
 
 License:        ASL 2.0
 URL:            https://yarl.readthedocs.io
-Source0:        https://github.com/aio-libs/yarl/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 %if 0%{?rhel}
 BuildRequires:  epel-rpm-macros
