@@ -5,7 +5,7 @@
 %bcond_with bootstrap
 %bcond_without tests
 
-%bcond_without python2
+%bcond_with python2
 %bcond_without python3
 
 %if %{without bootstrap}
@@ -23,7 +23,8 @@
 Name:           python-setuptools
 # When updating, update the bundled libraries versions bellow!
 Version:        41.2.0
-Release:        1%{?dist}
+#Release:        1%%{?dist}
+Release:        0.1%{?dist}
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
 # packaging is BSD or ASL 2.0
