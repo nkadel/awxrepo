@@ -13,17 +13,11 @@ Source0:        %{pypi_source}
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(coverage) >= 5.0.3
-BuildRequires:  python3dist(coverage) >= 5.0.3
-BuildRequires:  python3dist(coverage) >= 5.0.3
-BuildRequires:  python3dist(repoze.sphinx.autointerface)
+BuildRequires:  python3dist(repoze-sphinx-autointerface)
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(sphinx)
-BuildRequires:  python3dist(zope.event)
-BuildRequires:  python3dist(zope.event)
-BuildRequires:  python3dist(zope.event)
-BuildRequires:  python3dist(zope.testing)
-BuildRequires:  python3dist(zope.testing)
-BuildRequires:  python3dist(zope.testing)
+BuildRequires:  python3dist(zope-event)
+BuildRequires:  python3dist(zope-testing)
 BuildRequires:  python3dist(sphinx)
 
 %description
@@ -34,14 +28,11 @@ Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
 Requires:       python3dist(coverage) >= 5.0.3
-Requires:       python3dist(coverage) >= 5.0.3
-Requires:       python3dist(repoze.sphinx.autointerface)
+Requires:       python3dist(repoze-sphinx-autointerface)
 Requires:       python3dist(setuptools)
 Requires:       python3dist(sphinx)
-Requires:       python3dist(zope.event)
-Requires:       python3dist(zope.event)
-Requires:       python3dist(zope.testing)
-Requires:       python3dist(zope.testing)
+Requires:       python3dist(zope-event)
+Requires:       python3dist(zope-testing)
 %description -n python3-%{pypi_name}
  zope.interface :target:
 
