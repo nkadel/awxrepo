@@ -27,7 +27,7 @@ Summary:        Microsoft Azure Namespace Package [Internal]
 License:        MIT
 Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.zip
+Source0:        %pypi_source
 BuildArch:      noarch
 
 BuildRequires:  bzip2
