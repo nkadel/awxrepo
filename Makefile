@@ -13,7 +13,6 @@ REPOBASE=file://$(PWD)
 # Dependency metapackage
 #EPELPKGS+=PyYAML-srpm
 
-EPELPKGS+=
 EPELPKGS+=http-parser-srpm
 EPELPKGS+=meson-srpm
 
@@ -29,13 +28,13 @@ EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
 EPELPKGS+=python-async-generator-srpm
+EPELPKGS+=python-attrs-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
 EPELPKGS+=python-azure-keyvault-secrets-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
-EPELPKGS+=python-billiard-srpm
 EPELPKGS+=python-channels-srpm
 EPELPKGS+=python-colorama-srpm
 EPELPKGS+=python-commonmark-srpm
@@ -61,7 +60,6 @@ EPELPKGS+=python-docutils-srpm
 EPELPKGS+=python-docutils-stubs-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-funcsigs-srpm
-EPELPKGS+=python-hypothesis-srpm
 EPELPKGS+=python-idna-ssl-srpm
 EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
@@ -74,7 +72,7 @@ EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
-EPELPKGS+=python-mypy-exensions-srpm
+EPELPKGS+=python-mypy-extensions-srpm
 EPELPKGS+=python-oauth2_provider-srpm
 EPELPKGS+=python-path-srpm
 EPELPKGS+=python-process-tests-srpm
@@ -107,6 +105,8 @@ EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
 
+# Depends on mypy-extensions
+AWXPKGS+=python-mypy-sprm
 
 # Depends on mypy, docutils-stubs
 AWXPKGS+=python-sphinxcontrib-applehelp-srpm
@@ -116,12 +116,6 @@ AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
 AWXPKGS+=python-sphinxcontrib-jsmath-srpm
 AWXPKGS+=python-sphinxcontrib-qthelp-srpm
 AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
-
-# Depends on flake8, importlib-metadata, pyenchant
-AWXPKGS+=python-sphinxcontrib-spelling-srpm
-
-# Depends on sphinxcontrib-*
-AWXPKGS+=python-sphinx-srpm
 
 # Depends on sphinxcontrb-spelling
 AWXPKGS+=python-coverage-srpm
@@ -177,9 +171,6 @@ AWXPKGS+=python-aiodns-srpm
 # Depends on curio and contextvars
 AWXPKGS+=python-sniffio-srpm
 
-# Depends on hypothesis
-AWXPKGS+=python-attrs-srpm
-
 # Depends on http-parser and Cython and yarl and async-timeout
 AWXPKGS+=python-aiohttp-srpm
 
@@ -203,6 +194,12 @@ AWXPKGS+=python-twilio-srpm
 
 # Depends on pytest and entrypoints
 AWXPKGS+=python-pytest-flake8-srpm
+
+# Depends on flake8, importlib-metadata, pyenchant
+AWXPKGS+=python-sphinxcontrib-spelling-srpm
+
+# Depends on sphinxcontrib-*
+AWXPKGS+=python-sphinx-srpm
 
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
@@ -340,7 +337,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo 'baseurl=$(REPOBASE)/awxrepo/el/8/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
-	@echo 'metadata_expire=0' >> $@
+	@echo 'metadata_expire=1' >> $@
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
 	@echo '"""' >> $@
@@ -361,7 +358,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/32/x86_64/' >> $@
 #	@echo 'failovermethod=priority' >> $@
 #	@echo 'skip_if_unavailable=False' >> $@
-#	@echo 'metadata_expire=0' >> $@
+#	@echo 'metadata_expire=1' >> $@
 #	@echo 'gpgcheck=0' >> $@
 #	@echo '#cost=2000' >> $@
 #	@echo '"""' >> $@
