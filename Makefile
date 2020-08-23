@@ -235,7 +235,6 @@ AWXPKGS+=python-jaraco-classes-srpm
 # Depends on jaraco-packaging and jaraco-classes and pytest-flske8
 AWXPKGS+=python-jaraco-functools-srpm
 
-AWXPKGS+=python-testtools-srpm
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 
