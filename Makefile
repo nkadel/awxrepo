@@ -20,13 +20,15 @@ EPELPKGS+=meson-srpm
 # Confusing sources for build module
 #EPELPKGS+=python-build-srpm
 
+# uncertain requirements
+#EPELPKGS+=python-pkgconfig-srpm
+#EPELPKGS+=python-pytest-xdist-srpm
+
 # python3 only update modules for version sensitive python-six
 EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
-EPELPKGS+=python-amqp-srpm
 EPELPKGS+=python-async-generator-srpm
-EPELPKGS+=python-atomicwrites-srpm
 EPELPKGS+=python-azure-common-srpm
 EPELPKGS+=python-azure-core-srpm
 EPELPKGS+=python-azure-keyvault-keys-srpm
@@ -34,13 +36,11 @@ EPELPKGS+=python-azure-keyvault-secrets-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
 EPELPKGS+=python-billiard-srpm
-EPELPKGS+=python-celery-srpm
 EPELPKGS+=python-channels-srpm
 EPELPKGS+=python-colorama-srpm
 EPELPKGS+=python-commonmark-srpm
 EPELPKGS+=python-contextlib2-srpm
 EPELPKGS+=python-contextvars-srpm
-EPELPKGS+=python-coverage-srpm
 EPELPKGS+=python-curio-srpm
 EPELPKGS+=python-daphne-srpm
 EPELPKGS+=python-demjson-srpm
@@ -53,13 +53,16 @@ EPELPKGS+=python-django-oauth-toolkit-srpm
 EPELPKGS+=python-django-pglocks-srpm
 EPELPKGS+=python-django-polymorphic-srpm
 EPELPKGS+=python-django-solo-srpm
+EPELPKGS+=python-django-split_settings-srpm
 EPELPKGS+=python-django-taggit-srpm
 EPELPKGS+=python-djangorestframework-srpm
 EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-docutils-srpm
+EPELPKGS+=python-docutils-stubs-srpm
 EPELPKGS+=python-extras-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-futures-srpm
+EPELPKGS+=python-hypothesis-srpm
 EPELPKGS+=python-idna-ssl-srpm
 EPELPKGS+=python-immutables-srpm
 EPELPKGS+=python-inflect-srpm
@@ -72,11 +75,14 @@ EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
+EPELPKGS+=python-mypy-extions-srpm
+EPELPKGS+=python-oauth2_provider-srpm
 EPELPKGS+=python-path-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-pyasn1-srpm
 EPELPKGS+=python-pycares-srpm
+EPELPKGS+=python-pyenchant-srpm
 EPELPKGS+=python-pygerduty-srpm
 EPELPKGS+=python-pyjwt-srpm
 EPELPKGS+=python-pyrsistent-srpm
@@ -84,6 +90,7 @@ EPELPKGS+=python-pytest-aiohttp-srpm
 EPELPKGS+=python-python-logstash-srpm
 EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-python3-openid-srpm
+EPELPKGS+=python-python3-saml-srpm
 EPELPKGS+=python-recommonmark-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
@@ -93,6 +100,7 @@ EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
+EPELPKGS+=python-sphinx-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
@@ -101,11 +109,21 @@ EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 EPELPKGS+=python-zope-interface-srpm
 
-# Depends on isodate and xmsec for RHEL 7
-AWXPKGS+=python-python3-saml-srpm
 
-# Depends on coverage for python2 on RHEL 7
-AWXPKGS+=python-hypothesis-srpm
+# Depends on mypy, docutils-stubs
+AWXPKGS+=python-sphinxcontrib-applehelp-srpm
+AWXPKGS+=python-sphinxcontrib-devhelp-srpm
+
+AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
+AWXPKGS+=python-sphinxcontrib-jsmath-srpm
+AWXPKGS+=python-sphinxcontrib-qthelp-srpm
+AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
+
+# Depends on flake8, importlib-metadata, pyenchant
+AWXPKGS+=python-sphinxcontrib-spelling-srpm
+
+# Depends on sphinxcontrb-spelling
+AWXPKGS+=python-coverage-srpm
 
 # Depends on sure
 AWXPKGS+=python-httpretty-srpm
@@ -194,6 +212,12 @@ AWXPKGS+=python-jaraco-itertools-srpm
 # Depends on zipp
 AWXPKGS+=python-importlib-metadata-srpm
 
+# Depends on mypy-extensions
+AWXPKGS+=python-mypy-srpm
+
+# Depends on sphinxcontrib-*
+AWXPKGS+=python-sphinx-sprm
+
 # Depends on pytest-black and pytest = 3.5.0
 AWXPKGS+=python-pytest-black-srpm
 
@@ -219,7 +243,6 @@ AWXPKGS+=python-jaraco-functools-srpm
 AWXPKGS+=python-testtools-srpm
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
-AWXPKGS+=python-daemon-srpm
 
 # Depends on flake8 and pytest-flake8 and jaraco-functools
 AWXPKGS+=python-tempora-srpm
@@ -234,9 +257,6 @@ AWXPKGS+=python-asgiref-srpm
 AWXPKGS+=python-django-jsonfield-srpm
 
 AWXPKGS+=python-service-identity-srpm
-
-# Depends on pytest and service-identity
-AWXPKGS+=python-ansible-runner-srpm
 
 # Depends on pytest and service-dentity
 AWXPKGS+=python-trustme-srpm
