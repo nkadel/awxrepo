@@ -11,7 +11,7 @@ Summary:        Python function signatures from PEP362 for Python 2.6, 2.7 and 3
 
 License:        ASL 2.0
 URL:            https://github.com/testing-cabal/funcsigs?
-Source0:        https://pypi.io/packages/source/f/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
