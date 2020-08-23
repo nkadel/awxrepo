@@ -7,7 +7,7 @@ Release:        0%{?dist}
 Summary:        Python 3 port of the python-openid library
 License:        ASL 2.0
 URL:            https://github.com/necaris/%{pypi_name}
-Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
