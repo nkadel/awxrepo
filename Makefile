@@ -89,6 +89,7 @@ EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-python3-openid-srpm
 EPELPKGS+=python-python3-saml-srpm
 EPELPKGS+=python-recommonmark-srpm
+EPELPKGS+=python-repoze-sphinx-autointerface-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
 EPELPKGS+=python-setuptools_git-srpm
@@ -103,10 +104,12 @@ EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
-EPELPKGS+=python-zope-interface-srpm
+
+# Depends on repoze-sphinx-autointerface
+AWXPKGS+=python-zope-interface-srpm
 
 # Depends on mypy-extensions
-AWXPKGS+=python-mypy-sprm
+AWXPKGS+=python-mypy-srpm
 
 # Depends on mypy, docutils-stubs
 AWXPKGS+=python-sphinxcontrib-applehelp-srpm
@@ -116,6 +119,12 @@ AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
 AWXPKGS+=python-sphinxcontrib-jsmath-srpm
 AWXPKGS+=python-sphinxcontrib-qthelp-srpm
 AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
+
+# Depends on importlib-metadata, pyenchant
+AWXPKGS+=python-sphinxcontrib-spelling-srpm
+
+# Depends on sphinxcontrib-*
+AWXPKGS+=python-sphinx-srpm
 
 # Depends on sphinxcontrb-spelling
 AWXPKGS+=python-coverage-srpm
@@ -156,9 +165,6 @@ AWXPKGS+=python-pytest-black-multiply-srpm
 # Depends on process-tests and pytest-xdist
 AWXPKGS+=python-pytest-cov-srpm
 
-# Depends on simplejson and feedparser and demjson
-AWXPKGS+=python-jsonpickle-srpm
-
 # Depends on setuptools_scm
 AWXPKGS+=python-importlib_resources-srpm
 
@@ -192,12 +198,6 @@ AWXPKGS+=python-twilio-srpm
 # Depends on pytest and entrypoints
 AWXPKGS+=python-pytest-flake8-srpm
 
-# Depends on flake8, importlib-metadata, pyenchant
-AWXPKGS+=python-sphinxcontrib-spelling-srpm
-
-# Depends on sphinxcontrib-*
-AWXPKGS+=python-sphinx-srpm
-
 # Depends on jaraco-packaging and setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
 
@@ -205,7 +205,7 @@ AWXPKGS+=python-jaraco-itertools-srpm
 AWXPKGS+=python-importlib-metadata-srpm
 
 # Depends on sphinxcontrib-*
-AWXPKGS+=python-sphinx-sprm
+AWXPKGS+=python-sphinx-srpm
 
 # Depends on pytest-black and pytest = 3.5.0
 AWXPKGS+=python-pytest-black-srpm
@@ -232,10 +232,10 @@ AWXPKGS+=python-jaraco-functools-srpm
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 
-# Depends on flake8 and pytest-flake8 and jaraco-functools
+# Depends on pytest-flake8 and jaraco-functools
 AWXPKGS+=python-tempora-srpm
 
-# Depends on django-extensions and coverage and flake8
+# Depends on django-extensions and coverage
 AWXPKGS+=python-django-formtools-srpm
 
 # Depends on pytest and and pytest-asyncio and async-timeout
