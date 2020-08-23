@@ -1,17 +1,17 @@
 %{?python_enable_dependency_generator}
-%global modname idna-ssl
+%global pypi_name idna-ssl
 
 # Circular dependency with aiohttp
 %bcond_with check
 
-Name:           python-%{modname}
+Name:           python-%{pypi_name}
 Version:        1.1.0
 Release:        4%{?dist}
 Summary:        Patch ssl.match_hostname for Unicode(idna) domains support
 
 License:        MIT
 URL:            https://github.com/aio-libs/idna_ssl
-Source0:        %{url}/archive/v%{version}/%{modname}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -22,7 +22,7 @@ BuildRequires:  epel-rpm-macros
 %description
 %{summary}.
 
-%package -n python%{python3_pkgversion}-%{modname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
@@ -36,11 +36,11 @@ BuildRequires:  python%{python3_pkgversion}-idna >= 2
 %endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{modanme}}
 
-%description -n python%{python3_pkgversion}-%{modname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 %{summary}.
 
 %prep
-%autosetup -n %{modname}-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 %py3_build
