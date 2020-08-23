@@ -1,12 +1,13 @@
 %global with_python3 1
 %global with_python2 0
 
-%global pypi_name path
+%global pypi_name path.py
+%global srcname path
 
 # Disable tests
 %bcond_with tests
 
-Name:           python-%{pypi_name}
+Name:           python-%{srcname}
 Version:        5.2
 #Release:        17%%{?dist}
 Release:        0%{?dist}
@@ -47,10 +48,10 @@ allowing common operations on files to be invoked on those path objects directly
 See documentation here http://amoffat.github.io/sh/.
 
 %if %{with_python2}
-%package    -n python2-%{pypi_name}
+%package    -n python2-%{srcname}
 Summary:    Python 2 module wrapper for os.path
-%{?python_provide:%python_provide python2-%{pypi_name}}
-%description -n python2-%{pypi_name}
+%{?python_provide:%python_provide python2-%{srcname}}
+%description -n python2-%{srcname}
 path.py implements a path objects as first-class entities,
 allowing common operations on files to be invoked on those path objects directly.
 
@@ -58,11 +59,11 @@ See documentation here http://amoffat.github.io/sh/.
 %endif
 
 %if %{with_python3}
-%package    -n python%{python3_pkgversion}-%{pypi_name}
+%package    -n python%{python3_pkgversion}-%{srcname}
 Summary:    Python 3 module wrapper for os.path
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
-%description -n python%{python3_pkgversion}-%{pypi_name}
+%description -n python%{python3_pkgversion}-%{srcname}
 path.py implements a path objects as first-class entities,
 allowing common operations on files to be invoked on those path objects directly.
 
@@ -71,7 +72,7 @@ See documentation here http://amoffat.github.io/sh/.
 
 
 %prep
-%setup -q -n %{pypi_name}.py-%{version}
+%setup -q -n %{pypi_name}-%{version}
 sed -i 's/\[pytest\]/\[tool:pytest\]/' setup.cfg
 
 %build
@@ -109,7 +110,7 @@ popd
 
 
 %if %{with_python2}
-%files -n python2-path
+%files -n python2-%{srcname}
 %doc CHANGES.rst README.rst
 %{python2_sitelib}/path.py
 %{python2_sitelib}/path.pyc
@@ -119,7 +120,7 @@ popd
 %endif
 
 %if %{with_python3}
-%files -n python%{python3_pkgversion}-path
+%files -n python%{python3_pkgversion}-%{srcname}
 %{python3_sitelib}/__pycache__/*
 %{python3_sitelib}/path.py
 %{python3_sitelib}/path.py-%{version}-py?.?.egg-info/
