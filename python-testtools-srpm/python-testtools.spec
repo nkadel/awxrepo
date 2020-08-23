@@ -1,18 +1,12 @@
 %global pypi_name testtools
 
 %global with_python3 1
-
- # Skip rhel 7 because of EPEL published python2 version
-%if 0%{?fedora} > 30 || 0%{?rhel} > 7
 %global with_python2 0
-%else
-%global with_python2 1
-%endif
 
 Name:           python-%{pypi_name}
 Version:        1.1.0
 #Release:        1%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Extensions to the Python unit testing framework
 
 %if 0%{?rhel}
