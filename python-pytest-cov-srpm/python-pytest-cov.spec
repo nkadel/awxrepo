@@ -3,7 +3,7 @@
 Name:           python-%{srcname}
 Version:        2.7.1
 #Release:        3%%{?dist}
-Release:        0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Pytest plugin for coverage reporting
 
 License:        MIT
@@ -19,26 +19,6 @@ BuildRequires:  epel-rpm-macros
 %description
 Py.test plugin for coverage reporting with support for both centralised and
 distributed testing, including subprocesses and multiprocessing for Python.
-
-
-%package -n python2-%{srcname}
-Summary:        Pytest plugin for coverage reporting
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-# For tests
-#  Not packaged: python2-fields
-#BuildRequires:  python2-pytest >= 3.6
-#BuildRequires:  python2-coverage >= 4.4
-#BuildRequires:  python2-fields
-#BuildRequires:  python2-process-tests
-#BuildRequires:  python2-six
-#BuildRequires:  python2-virtualenv
-#BuildRequires:  python2-pytest-xdist
-%{?python_provide:%python_provide python2-%{srcname}}
-
-%description -n python2-%{srcname}
-Py.test plugin for coverage reporting with support for both centralised and
-distributed testing, including subprocesses and multiprocessing for Python 2.
 
 
 %package -n python%{python3_pkgversion}-%{srcname}
@@ -88,11 +68,6 @@ py.test-%{python3_version} -vv \
     -k "not test_dist_missing_data and not test_subprocess_with_path_aliasing and not test_dist_combine_racecondition and not central_subprocess and not dist_subprocess \
         and not test_multiprocessing_pool and not test_multiprocessing_pool_terminate and not test_multiprocessing_pool_close"
 
-
-%files -n python2-%{srcname}
-%license LICENSE
-%doc AUTHORS.rst CHANGELOG.rst CONTRIBUTING.rst README.rst
-%{python2_sitelib}/*
 
 %files -n python%{python3_pkgversion}-%{srcname}
 %license LICENSE
