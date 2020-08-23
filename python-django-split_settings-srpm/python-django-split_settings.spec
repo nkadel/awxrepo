@@ -8,7 +8,7 @@ Summary:        Organize Django settings into multiple files and directories
 
 License:        None
 URL:            https://django-split-settings.readthedocs.io
-Source0:        https://files.pythonhosted.org/packages/source/d/%{pypi_name}/django-split-settings-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
