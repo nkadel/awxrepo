@@ -39,14 +39,10 @@ and matching them against a list of media-ranges.
 
 
 %build
-%py2_build
 %py3_build
 
-
 %install
-%py2_install
 %py3_install
-
 
 %check
 %{__python3} -m unittest -v mimeparse_test
