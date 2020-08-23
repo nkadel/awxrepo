@@ -16,7 +16,7 @@ Summary:        Cross-platform colored terminal text
 
 License:        BSD
 URL:            http://pypi.python.org/pypi/colorama
-Source0:        https://files.pythonhosted.org/packages/source/c/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
  
 %if 0%{?rhel}
