@@ -1,8 +1,8 @@
 # set upstream name variable
-%global srcname pycares
+%global pypi_name pycares
 
 
-Name:           python-pycares
+Name:           python-%{pypi_name}
 Version:        3.0.0
 #Release:        1%%{?dist}
 Release:        0%{?dist}
@@ -10,7 +10,7 @@ Summary:        Python interface for c-ares
 
 License:        MIT
 URL:            https://github.com/saghul/pycares
-Source0:        https://github.com/saghul/%{srcname}/archive/%{srcname}-%{version}.tar.gz
+Source0:        %pypi_source
 Patch0:         fix-version_pycares_docs_conf.py.patch
 
 %if 0%{?rhel}
@@ -31,22 +31,22 @@ resolutions asynchronously.
 
 
 
-%package     -n python%{python3_pkgversion}-%{srcname}
+%package     -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Python interface for c-ares
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
-%description -n python%{python3_pkgversion}-%{srcname}
+%description -n python%{python3_pkgversion}-%{pypi_name}
 pycares is a Python module which provides an interface to
 c-ares. c-ares is a C library that performs DNS requests and name
 resolutions asynchronously.
 
 
-%package     -n python-%{srcname}-doc
+%package     -n python-%{pypi_name}-doc
 Summary:        Documentation for python-pycares
 BuildArch:      noarch
-Requires:       python%{python3_pkgversion}-%{srcname}
+Requires:       python%{python3_pkgversion}-%{pypi_name}
 
-%description -n python-%{srcname}-doc
+%description -n python-%{pypi_name}-doc
 pycares is a Python module which provides an interface to
 c-ares. c-ares is a C library that performs DNS requests and name
 resolutions asynchronously.
@@ -56,7 +56,7 @@ This package contains documentation in reST and HTML formats.
 
 
 %prep
-%autosetup -p1 -n %{srcname}-%{srcname}-%{version}
+%autosetup -p1 -n %{pypi_name}-%{pypi_name}-%{version}
 
 
 %build
@@ -88,7 +88,7 @@ mv -f %{buildroot}%{_pkgdocdir}/html/_sources/ %{buildroot}%{_pkgdocdir}/rst/
 rm -rf %{buildroot}%{_pkgdocdir}/html/.buildinfo
 
 # Fix non-standard modes (775)
-chmod 755 %{buildroot}%{python3_sitearch}/%{srcname}/_cares.cpython-*.so
+chmod 755 %{buildroot}%{python3_sitearch}/%{pypi_name}/_cares.cpython-*.so
 
 
 %check
@@ -96,15 +96,15 @@ chmod 755 %{buildroot}%{python3_sitearch}/%{srcname}/_cares.cpython-*.so
 
 
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst ChangeLog
 # For arch-specific packages: sitearch
-%{python3_sitearch}/%{srcname}/
-%{python3_sitearch}/%{srcname}-%{version}-*.egg-info/
+%{python3_sitearch}/%{pypi_name}/
+%{python3_sitearch}/%{pypi_name}-%{version}-*.egg-info/
 
 
-%files -n python-%{srcname}-doc
+%files -n python-%{pypi_name}-doc
 %doc examples/
 %if ! 0%{?el7}
 %{_pkgdocdir}/
