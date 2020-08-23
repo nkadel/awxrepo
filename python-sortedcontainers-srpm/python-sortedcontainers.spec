@@ -1,15 +1,15 @@
-%global srcname sortedcontainers
+%global pypi_name sortedcontainers
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        2.1.0
 #Release:        3%%{?dist}
 Release:        0%{?dist}
 Summary:        Pure Python sorted container types
 
 License:        ASL 2.0
-URL:            https://pypi.python.org/pypi/%{srcname}
+URL:            https://pypi.python.org/pypi/%{pypi_name}
 # PyPI tarball does not include docs or tests.
-Source0:        https://github.com/grantjenks/python-sortedcontainers/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
@@ -23,9 +23,9 @@ pure-Python, and fast as C-extensions.
 
 %description %{_description}
 
-%package -n python%{python3_pkgversion}-%{srcname}
+%package -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-pytest
@@ -37,14 +37,14 @@ BuildRequires:  dvipng
 BuildRequires:  tex(anyfontsize.sty)
 BuildRequires:  tex(bm.sty)
 
-%description -n python%{python3_pkgversion}-%{srcname} %{_description}
+%description -n python%{python3_pkgversion}-%{pypi_name} %{_description}
 
 
-%package -n python-%{srcname}-doc
+%package -n python-%{pypi_name}-doc
 Summary:        %{summary}
 
-%description -n python-%{srcname}-doc
-Documentation for %{srcname} package.
+%description -n python-%{pypi_name}-doc
+Documentation for %{pypi_name} package.
 
 
 %prep
@@ -71,14 +71,14 @@ PYTHONPATH="%{buildroot}%{python3_sitelib}" \
 popd
 
 
-%files -n python%{python3_pkgversion}-%{srcname}
+%files -n python%{python3_pkgversion}-%{pypi_name}
 %license LICENSE
 %doc README.rst
-%{python3_sitelib}/%{srcname}
-%{python3_sitelib}/%{srcname}-%{version}-py?.?.egg-info
+%{python3_sitelib}/%{pypi_name}
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 
-%files -n python-%{srcname}-doc
+%files -n python-%{pypi_name}-doc
 %license LICENSE
 %doc README.rst docs/_build/html
 
