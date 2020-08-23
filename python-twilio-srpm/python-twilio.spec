@@ -10,7 +10,7 @@ and much more.
 
 
 Name:       python-%{pypi_name}
-Version:    6.29.1
+Version:    6.37.0
 #Release:    1%%{?dist}
 Release:    0%{?dist}
 Summary:    %{sum}
