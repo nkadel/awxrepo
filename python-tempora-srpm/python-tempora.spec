@@ -10,7 +10,7 @@ Summary:        Objects and routines pertaining to date and time (tempora)
 
 License:        MIT
 URL:            https://github.com/jaraco/tempora
-Source0:        https://files.pythonhosted.org/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
