@@ -1,3 +1,5 @@
+%global pypi_name celery
+
 %global desc An open source asynchronous task queue/job queue based on\
 distributed message passing. It is focused on real-time\
 operation, but supports scheduling as well.\
@@ -21,7 +23,7 @@ for Redis, Beanstalk, MongoDB, CouchDB and databases\
 # Enable python3 by default
 %bcond_without python3
 
-Name:           python-celery
+Name:           python-%{pypi_name}
 Version:        4.2.1
 #Release:        3%%{?dist}
 Release:        0%{?dist}
@@ -29,7 +31,7 @@ BuildArch:      noarch
 
 License:        BSD
 URL:            http://celeryproject.org
-Source0:        https://github.com/celery/celery/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %pypi_source
 Summary:        Distributed Task Queue
 
 Patch0:         https://github.com/celery/celery/pull/4852.patch#/python37.patch
@@ -102,7 +104,7 @@ BuildRequires:  python%{python3_pkgversion}-rpm-macros
 
 
 %prep
-%autosetup -n celery-%{version} -p1 -S git
+%autosetup -n %{pypi_name}-%{version} -p1 -S git
 
 %if 0%{?rhel} && 0%{?rhel} < 8
 # Fix setup.py for EL7 setuptools
