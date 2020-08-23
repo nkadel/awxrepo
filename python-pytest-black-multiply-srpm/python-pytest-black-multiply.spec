@@ -8,7 +8,7 @@ Summary:        Allow '--black' on older Pythons
 
 License:        None
 URL:            https://github.com/jaraco/skeleton
-Source0:        https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 BuildArch:      noarch
 
 %if 0%{?rhel}
