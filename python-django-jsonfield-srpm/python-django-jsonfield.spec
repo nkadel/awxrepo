@@ -14,7 +14,7 @@ Summary:        A reusable Django field that allows you to store validated JSON 
 
 License:        BSD
 URL:            https://github.com/bradjasper/django-jsonfield
-Source0:        https://files.pythonhosted.org/packages/source/%(n=%{pypi_name}; echo ${n:0:1})/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildArch:      noarch
 
