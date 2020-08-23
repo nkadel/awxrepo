@@ -1,5 +1,6 @@
-%global srcname setuptools_git
-%global pypi_name setuptools-git
+
+%global srcname setuptools-git
+%global pypi_name setuptools_git
 
 %global common_desc \
 This is a plugin for setup tools that enables Git integration.  Once \
@@ -7,9 +8,10 @@ installed, Setuptools can be told to include in a module distribution \
 all the files tracked by git.  This is an alternative to explicit \
 inclusion specifications with MANIFEST.in.
 
-Name:           python-%{srcname}
+Name:           python-%{pypi_name}
 Version:        1.1
-Release:        13%{?dist}
+#Release:        13%%{?dist}
+Release:        0.1%{?dist}
 Summary:        Setuptools revision control system plugin for Git
 
 License:        BSD
@@ -24,7 +26,7 @@ BuildRequires:  git
 %{common_desc}
 
 
-%package -n python3-%{srcname}
+%package -n python3-%{pypi_name}
 Summary:  %{summary}
 
 BuildRequires:  python3-devel
@@ -34,14 +36,14 @@ Requires:  python3-setuptools
 
 Provides:  python3-%{pypi_name} == %{version}-%{release}
 
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python3-%{pypi_name}}
 
-%description -n python3-%{srcname}
+%description -n python3-%{pypi_name}
 %{common_desc}
 
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%setup -q -n %{srcname}-%{version}
 %{_bindir}/git config --global user.email "koji@dummy.lan"
 %{_bindir}/git config --global user.name "Koji Builder"
 %{_bindir}/git init
@@ -64,11 +66,11 @@ LANG=en_US.utf8
 unset LANG
 
 
-%files -n python3-%{srcname}
+%files -n python3-%{pypi_name}
 %doc PKG-INFO README.rst TODO.txt
 %license AUTHORS.txt LICENSE.txt
-%{python3_sitelib}/%{srcname}/
-%{python3_sitelib}/%{srcname}-%{version}-py%{python3_version}.egg-info/
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info/
 
 
 %changelog
