@@ -19,7 +19,7 @@ BuildRequires:  python3-setuptools
 
 %if %{with check}
 BuildRequires:  python3-pytest
-BuildRequires:  python3-sphinx >= 1:3
+BuildRequires:  python3-sphinx >= 1:2
 %endif
 
 %description
