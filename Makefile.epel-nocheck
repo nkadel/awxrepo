@@ -1,18 +1,19 @@
 #
-# Build mock and local RPM versions of tools for Awx
+# Build mock and local RPM versions of tools for Samba
 #    Set --without-tests --without-checks for sphinx bootstrap
 #
 
 # Assure that sorting is case sensitive
 LANG=C
 
-#MOCKS+=awxrepo-f32-x86_64
-MOCKS+=awxrepo-8-x86_64
+#
+MOCKS+=epel-8-x86_64
+#MOCKS+=fedora-32-x86_64
 
-#REPOBASEDIR=/var/www/linux/awxrepo
+#REPOBASEDIR=/var/www/linux/mockrepo
 REPOBASEDIR:=`/bin/pwd`/../awxrepo
 
-SPEC := `ls *.spec`
+SPEC := `ls *.spec | head -1`
 
 all:: $(MOCKS)
 
