@@ -89,7 +89,7 @@ EPELPKGS+=python-python-mimeparse-srpm
 EPELPKGS+=python-python3-openid-srpm
 EPELPKGS+=python-python3-saml-srpm
 EPELPKGS+=python-recommonmark-srpm
-EPELPKGS+=python-repoze-sphinx-autointerface-srpm
+#EPELPKGS+=python-repoze-sphinx-autointerface-srpm
 EPELPKGS+=python-requests-futures-srpm
 EPELPKGS+=python-rst-linker-srpm
 EPELPKGS+=python-setuptools_git-srpm
@@ -108,22 +108,22 @@ EPELPKGS+=python-xmlsec-srpm
 # Depends on mypy-extensions
 AWXPKGS+=python-mypy-srpm
 
-# Depends on mypy, docutils-stubs
-AWXPKGS+=python-sphinxcontrib-applehelp-srpm
-AWXPKGS+=python-sphinxcontrib-devhelp-srpm
-
-AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
-AWXPKGS+=python-sphinxcontrib-jsmath-srpm
-AWXPKGS+=python-sphinxcontrib-qthelp-srpm
-AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
-
+## Depends on mypy, docutils-stubs
+#AWXPKGS+=python-sphinxcontrib-applehelp-srpm
+#AWXPKGS+=python-sphinxcontrib-devhelp-srpm
+#
+#AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
+#AWXPKGS+=python-sphinxcontrib-jsmath-srpm
+#AWXPKGS+=python-sphinxcontrib-qthelp-srpm
+#AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
+#
 # Depends on importlib-metadata and pyenchant
 AWXPKGS+=python-sphinxcontrib-spelling-srpm
 
-# Depends on sphinxcontrib-*
-AWXPKGS+=python-sphinx-srpm
+## Depends on sphinxcontrib-*
+#AWXPKGS+=python-sphinx-srpm
 
-# Depends on sphinxcontrb-spelling
+# Depends on sphinxcontrib-spelling
 AWXPKGS+=python-coverage-srpm
 
 # Depends on repoze-sphinx-autointerface, coverage
