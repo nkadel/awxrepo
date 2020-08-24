@@ -22,7 +22,7 @@ BuildRequires:  python3dist(pytest)
 BuildRequires:  python3dist(setuptools)
 
 %if %{with check}
-BuildRequires:  python3dist(sphinx) >= 1:3
+BuildRequires:  python3dist(sphinx) >= 1:2
 BuildRequires:  python3dist(sphinx)
 %endif
 
