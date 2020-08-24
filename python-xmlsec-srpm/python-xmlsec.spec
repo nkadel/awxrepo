@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.3.3
-#Release:        6%{?dist}
+#Release:        6%%{?dist}
 Release:        0
 Summary:        Python bindings for the XML Security Library
 
