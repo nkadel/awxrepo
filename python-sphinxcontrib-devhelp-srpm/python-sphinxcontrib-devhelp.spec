@@ -1,6 +1,9 @@
 # Created by pyp2rpm-3.3.4
 %global pypi_name sphinxcontrib-devhelp
 
+# when bootstrapping sphinx, we cannot run tests yet
+%bcond_without check
+
 Name:           python-%{pypi_name}
 Version:        1.0.2
 Release:        0%{?dist}
@@ -18,9 +21,10 @@ BuildRequires:  python3dist(mypy)
 BuildRequires:  python3dist(pytest)
 BuildRequires:  python3dist(setuptools)
 
-# Manually added for tests
-BuildRequires:  python3dist(sphinx) >= 3
+%if %{with check}
+BuildRequires:  python3dist(sphinx) >= 1:3
 BuildRequires:  python3dist(sphinx)
+%endif
 
 %description
 sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp document.
@@ -48,15 +52,18 @@ rm -rf %{pypi_name}.egg-info
 %install
 %py3_install
 
-# Disable for now
-#%check
-#%{__python3} setup.py test
+%if %{with check}
+%check
+%{__python3} setup.py test
+%endif
 
 %files -n python3-%{pypi_name}
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/sphinxcontrib
 %{python3_sitelib}/sphinxcontrib_devhelp-%{version}-py%{python3_version}.egg-info
+# Why are these being generated???
+%{python3_sitelib}/sphinxcontrib_devhelp-%{version}-py%{python3_version}-nspkg.pth
 
 %changelog
 * Sun Aug 23 2020 Nico Kadel-Garcia <nkadel@gmail.com> - 1.0.2-1
