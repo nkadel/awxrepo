@@ -112,7 +112,7 @@ PYTHONPATH=. DJANGO_SETTINGS_MODULE=tests.settings python%{python3_pkgversion}-c
 %{py2_install}
 %find_lang django py2lang
 # generate html docs 
-sphinx-build docs html
+sphinx-build-%{python3_version} docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 %endif
