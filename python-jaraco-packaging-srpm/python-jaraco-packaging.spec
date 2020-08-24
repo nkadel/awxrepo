@@ -73,7 +73,7 @@ sed -i 's/^\tjaraco\./	jaraco-/' setup.cfg
 %if %{with docs}
 # generate html docs 
 # This package requires itself to build docs :/
-PYTHONPATH=./ sphinx-build docs html
+PYTHONPATH=./ sphinx-build-%{python3_version} docs html
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 %endif
