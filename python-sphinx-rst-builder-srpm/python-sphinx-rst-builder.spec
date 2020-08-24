@@ -27,7 +27,9 @@ parsed reST file from Sphinx...
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
-Requires:       python3dist(sphinx) >= 2
+# Add Epoch for RHEL 8 and awx compatibility
+#Requires:       python3dist(sphinx) >= 2
+Requires:       python3dist(sphinx) >= 1:2
 %description -n python3-%{pypi_name}
 Sphinx reStructuredText Builder *******************************Sphinx <
 extension to build reST (reStructuredText < files.This extension is in
