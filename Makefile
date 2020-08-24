@@ -98,6 +98,7 @@ EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
+EPELPKGS+=python-sphinx-rst-builder-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
@@ -123,7 +124,7 @@ AWXPKGS+=python-sphinxcontrib-spelling-srpm
 ## Depends on sphinxcontrib-*
 #AWXPKGS+=python-sphinx-srpm
 
-# Depends on sphinxcontrib-spelling
+# Depends on sphinxcontrib-spelling and sphinx-rst-builder
 AWXPKGS+=python-coverage-srpm
 
 # Depends on repoze-sphinx-autointerface, coverage
