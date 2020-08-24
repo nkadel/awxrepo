@@ -18,6 +18,10 @@ BuildRequires:  python3dist(mypy)
 BuildRequires:  python3dist(pytest)
 BuildRequires:  python3dist(setuptools)
 
+# Manually added for tests
+BuildRequires:  python3dist(sphinx) >= 3
+BuildRequires:  python3dist(sphinx)
+
 %description
 sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp document.
 
@@ -44,8 +48,9 @@ rm -rf %{pypi_name}.egg-info
 %install
 %py3_install
 
-%check
-%{__python3} setup.py test
+# Disable for now
+#%check
+#%{__python3} setup.py test
 
 %files -n python3-%{pypi_name}
 %license LICENSE
