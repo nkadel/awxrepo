@@ -19,6 +19,7 @@ BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3dist(sphinxcontrib-spelling)
 BuildRequires:  python3dist(sphinx-rtd-theme)
 BuildRequires:  python3dist(sphinx-rst-builder)
+BuildRequires:  python3dist(sphinx-tabs)
 
 %description
 Coverage.py is a Python 3 module that measures code coverage during Python

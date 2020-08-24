@@ -99,6 +99,7 @@ EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
 EPELPKGS+=python-sphinx-rst-builder-srpm
+EPELPKGS+=python-sphinx-tabs-srpm
 EPELPKGS+=python-termcolor-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
@@ -118,13 +119,13 @@ AWXPKGS+=python-mypy-srpm
 #AWXPKGS+=python-sphinxcontrib-qthelp-srpm
 #AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
 #
-# Depends on importlib-metadata and pyenchant
+# Depends on importlib-metadata, pyenchant
 AWXPKGS+=python-sphinxcontrib-spelling-srpm
 
 ## Depends on sphinxcontrib-*
 #AWXPKGS+=python-sphinx-srpm
 
-# Depends on sphinxcontrib-spelling and sphinx-rst-builder
+# Depends on sphinxcontrib-spelling, sphinx-rst-builder, sphinx-tabs
 AWXPKGS+=python-coverage-srpm
 
 # Depends on repoze-sphinx-autointerface, coverage
@@ -136,7 +137,7 @@ AWXPKGS+=python-httpretty-srpm
 # Depends on chardet
 AWXPKGS+=python-feedparser-srpm
 
-# Depends on contextlib2 and setuptools_git and termcolor
+# Depends on contextlib2, setuptools_git, termcolor
 AWXPKGS+=python-pytest-shutil-srpm
 
 # Depends on setuptools_git
@@ -150,11 +151,11 @@ AWXPKGS+=python-pytest-virtualenv-srpm
 AWXPKGS+=python-setuptools-srpm
 
 # python3 only update for pytest modules of misnmed source package
-# Depends on more-itertools and upstream pluggy 0.6, not local updated version
+# Depends on more-itertools, upstream pluggy 0.6, not local updated version
 AWXPKGS+=pytest-srpm
 
 # Updated pytest for 3.6.x dependencies
-# Depends on more-itertools and atomicwrites and colorama and funcsigs
+# Depends on more-itertools, atomicwrites, colorama, funcsigs
 AWXPKGS+=pytest-3.6.x-srpm
 
 # Depends on more-itertools
@@ -163,40 +164,40 @@ AWXPKGS+=python-outcome-srpm
 # Depends on jaraco-packaging
 AWXPKGS+=python-pytest-black-multiply-srpm
 
-# Depends on process-tests and pytest-xdist
+# Depends on process-tests, pytest-xdist
 AWXPKGS+=python-pytest-cov-srpm
 
 # Depends on setuptools_scm
 AWXPKGS+=python-importlib_resources-srpm
 
-# Depnds on python3-saml and python3-openid
+# Depnds on python3-saml, python3-openid
 AWXPKGS+=python-social-auth-core-srpm
 
 # Depends on pycares
 AWXPKGS+=python-aiodns-srpm
 
-# Depends on curio and contextvars
+# Depends on curio, contextvars
 AWXPKGS+=python-sniffio-srpm
 
-# Depends on pytest and Cython and multidict and more-itertools
+# Depends on pytest, Cython, multidict, more-itertools
 AWXPKGS+=python-yarl-srpm
 
-# Depends on aiohttp and pyttest-aiohttp
+# Depends on aiohttp, pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
 
-# Depends on aiohttp, which Requires yarl and async-timeout
+# Depends on aiohttp, which Requires yarl, async-timeout
 AWXPKGS+=python-black-srpm
 
-# Depends on aiodns and aiohttp and black
+# Depends on aiodns, aiohttp, black
 AWXPKGS+=python-slackclient-srpm
 
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
 
-# Depends on pytest and entrypoints
+# Depends on pytest, entrypoints
 AWXPKGS+=python-pytest-flake8-srpm
 
-# Depends on jaraco-packaging and setuptools_scm
+# Depends on jaraco-packaging, setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
 
 # Depends on zipp
@@ -205,58 +206,58 @@ AWXPKGS+=python-importlib-metadata-srpm
 # Depends on sphinxcontrib-*
 AWXPKGS+=python-sphinx-srpm
 
-# Depends on pytest-black and pytest = 3.5.0
+# Depends on pytest-black, pytest = 3.5.0
 AWXPKGS+=python-pytest-black-srpm
 
-# Depends on pytest and importlib-metadata and jaraco-packaging ane
-# pytest-black-multiply and pytest-checkdocs and pytest-cov and
-# pytest-flake8 and rst-linker and setuptools_scm and pytest-black
+# Depends on pytest, importlib-metadata, jaraco-packaging ane
+# pytest-black-multiply, pytest-checkdocs, pytest-cov and
+# pytest-flake8, rst-linker, setuptools_scm, pytest-black
 
 # Disable temporarily
 AWXPKGS+=python-pytest-checkdocs-srpm
 
-# Depends on black-multiply and checkdocs
+# Depends on black-multiply, checkdocs
 AWXPKGS+=python-jaraco-stream-srpm
 
 # Depends on importlib-metadata
 AWXPKGS+=python-pluggy-srpm
 
-# Depends on ptyprocess and pluggy
+# Depends on ptyprocess, pluggy
 AWXPKGS+=python-pexpect-srpm
 
-# Depends on pytest and pytest-flake8 and setuptools_scm and more-itertools
+# Depends on pytest, pytest-flake8, setuptools_scm, more-itertools
 AWXPKGS+=python-jaraco-classes-srpm
 
-# Depends on jaraco-packaging and jaraco-classes and pytest-flske8
+# Depends on jaraco-packaging, jaraco-classes, pytest-flske8
 AWXPKGS+=python-jaraco-functools-srpm
 
 AWXPKGS+=python-fixtures-srpm
 AWXPKGS+=python-testscenario-srpm
 
-# Depends on pytest-flake8 and jaraco-functools
+# Depends on pytest-flake8, jaraco-functools
 AWXPKGS+=python-tempora-srpm
 
-# Depends on django-extensions and coverage
+# Depends on django-extensions, coverage
 AWXPKGS+=python-django-formtools-srpm
 
-# Depends on pytest and and pytest-asyncio and async-timeout
+# Depends on pytest, and pytest-asyncio, async-timeout
 AWXPKGS+=python-asgiref-srpm
 
-# Depends on django and django-formtools
+# Depends on django, django-formtools
 AWXPKGS+=python-django-jsonfield-srpm
 
 AWXPKGS+=python-service-identity-srpm
 
-# Depends on pytest and service-dentity
+# Depends on pytest, service-dentity
 AWXPKGS+=python-trustme-srpm
 
-# Depends on attrs and pytest and pytest-asyncio and more-itertools and 
+# Depends on attrs, pytest, pytest-asyncio, more-itertools, 
 AWXPKGS+=python-outcome-srpm
 
-# Depends on trustme and outcome
+# Depends on trustme, outcome
 AWXPKGS+=python-trio-srpm
 
-# Depends on aiodns and httpretty and pytest and recommonmark and trio
+# Depends on aiodns, httpretty, pytest, recommonmark, trio
 AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
