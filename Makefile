@@ -105,9 +105,6 @@ EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-xmlsec-srpm
 
-# Depends on repoze-sphinx-autointerface
-AWXPKGS+=python-zope-interface-srpm
-
 # Depends on mypy-extensions
 AWXPKGS+=python-mypy-srpm
 
@@ -120,7 +117,7 @@ AWXPKGS+=python-sphinxcontrib-jsmath-srpm
 AWXPKGS+=python-sphinxcontrib-qthelp-srpm
 AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
 
-# Depends on importlib-metadata, pyenchant
+# Depends on importlib-metadata and pyenchant
 AWXPKGS+=python-sphinxcontrib-spelling-srpm
 
 # Depends on sphinxcontrib-*
@@ -128,6 +125,9 @@ AWXPKGS+=python-sphinx-srpm
 
 # Depends on sphinxcontrb-spelling
 AWXPKGS+=python-coverage-srpm
+
+# Depends on repoze-sphinx-autointerface, coverage
+AWXPKGS+=python-zope-interface-srpm
 
 # Depends on sure
 AWXPKGS+=python-httpretty-srpm
@@ -189,9 +189,6 @@ AWXPKGS+=python-black-srpm
 # Depends on aiodns and aiohttp and black
 AWXPKGS+=python-slackclient-srpm
 
-# Depends on ptyprocess and pluggy
-AWXPKGS+=python-pexpect-srpm
-
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
 
@@ -222,6 +219,9 @@ AWXPKGS+=python-jaraco-stream-srpm
 
 # Depends on importlib-metadata
 AWXPKGS+=python-pluggy-srpm
+
+# Depends on ptyprocess and pluggy
+AWXPKGS+=python-pexpect-srpm
 
 # Depends on pytest and pytest-flake8 and setuptools_scm and more-itertools
 AWXPKGS+=python-jaraco-classes-srpm
@@ -309,8 +309,8 @@ epel:: $(EPELPKGS)
 # awx pkgs depend on epelpkgs
 awxpkgs: awx
 .PHONY: awx
-#awx:: epel %(AWXPKGS)
-awx: $(AWXPKGS)
+#awx:: epel
+awx:: $(AWXPKGS)
 
 .PHONY: cfg
 cfg:: cfgs
@@ -337,6 +337,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo 'metadata_expire=1' >> $@
 	@echo 'gpgcheck=0' >> $@
 	@echo '#cost=2000' >> $@
+	@echo "best=0" >> $@
 	@echo '"""' >> $@
 
 #awxrepo-f32-x86_64.cfg: /etc/mock/fedora-32-x86_64.cfg
@@ -358,6 +359,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo 'metadata_expire=1' >> $@
 #	@echo 'gpgcheck=0' >> $@
 #	@echo '#cost=2000' >> $@
+#	@echo "best=0" >> $@
 #	@echo '"""' >> $@
 
 $(MOCKCFGS)::
