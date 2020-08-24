@@ -56,7 +56,7 @@ Requires:   python%{python3_pkgversion}-pytz
 
 
 %prep
-%autosetup -n %{pypi_name}-python-%{version}
+%autosetup -n %{pypi_name}-%{version}
 
 %build
 
