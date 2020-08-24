@@ -3,7 +3,8 @@
 
 Name:           python-%{pypi_name}
 Version:        0.782
-Release:        1%{?dist}
+#Release:        1%%{?dist}
+Release:        0%{?dist}
 Summary:        Optional static typing for Python
 
 License:        MIT License
