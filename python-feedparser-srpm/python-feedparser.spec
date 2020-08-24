@@ -124,7 +124,7 @@ find -type f -exec chmod 0644 {} ';'
 %if 0%{?with_docpkg}
 # build documentation
 rm -rf __tmp_docs ; mkdir __tmp_docs
-sphinx-build -b html -d __tmp_docs/ docs/ __tmp_docs/html/
+sphinx-build-%{python3_version} -b html -d __tmp_docs/ docs/ __tmp_docs/html/
 %endif
 
 %if %{with_python3}
