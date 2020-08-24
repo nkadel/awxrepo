@@ -29,8 +29,6 @@ pycares is a Python module which provides an interface to
 c-ares. c-ares is a C library that performs DNS requests and name
 resolutions asynchronously.
 
-
-
 %package     -n python%{python3_pkgversion}-%{pypi_name}
 Summary:        Python interface for c-ares
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
@@ -39,7 +37,6 @@ Summary:        Python interface for c-ares
 pycares is a Python module which provides an interface to
 c-ares. c-ares is a C library that performs DNS requests and name
 resolutions asynchronously.
-
 
 %package     -n python-%{pypi_name}-doc
 Summary:        Documentation for python-pycares
@@ -56,8 +53,7 @@ This package contains documentation in reST and HTML formats.
 
 
 %prep
-%autosetup -p1 -n %{pypi_name}-%{pypi_name}-%{version}
-
+%autosetup -p1 -n %{pypi_name}-%{version}
 
 %build
 %py3_build
@@ -70,7 +66,6 @@ pushd docs/
 make html PYTHON="%{__python3}" SPHINXBUILD=sphinx-build-%{python3_version}
 popd # docs
 %endif
-
 
 %install
 %py3_install
