@@ -74,12 +74,14 @@ sed -i '/extras_require/,+3d' setup.py
 %build
 %if 0%{?with_python2}
 %py2_build
+# generate html docs
+sphinx-build-%{python2_version} docs html
 %endif
 %if 0%{?with_python3}
 %py3_build
-%endif
 # generate html docs
-sphinx-build docs html
+sphinx-build-%{python3_version} docs html
+%endif
 # remove the sphinx-build leftovers
 rm -rf html/.{doctrees,buildinfo}
 
