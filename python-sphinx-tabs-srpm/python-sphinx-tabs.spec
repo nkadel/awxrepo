@@ -29,8 +29,8 @@ Summary:        %{summary}
 
 Requires:       python3dist(coverage)
 Requires:       python3dist(lxml)
-Requires:       python3dist(pre-commit) = 2.6
-Requires:       python3dist(pygments)
+#Requires:       python3dist(pre-commit) = 2.6
+Requires:       python3dist(pre-commit) = 2.0.0
 Requires:       python3dist(pygments)
 Requires:       (python3dist(pytest) >= 3.6 with python3dist(pytest) < 4)
 Requires:       python3dist(pytest-cov)
