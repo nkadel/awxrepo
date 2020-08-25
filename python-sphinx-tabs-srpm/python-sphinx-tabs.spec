@@ -16,8 +16,7 @@ BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
 
 %description
- sphinx-tabs[![Github-CI][github-ci]][github-link] [![Coverage Status][codecov-
-badge]][codecov-link] [![PyPI][pypi-badge]][pypi-link]Create tabbed content in
+Create tabbed content in
 [Sphinx documentation]() when building HTML.For example, see the [Raw] code of
 [docs/index.rst](docs/index.rst) which generates the following:A live demo can
 be found here: <>![Tabs](/images/tabs.gif) Installationbash pip install
@@ -32,13 +31,15 @@ Requires:       python3dist(lxml)
 #Requires:       python3dist(pre-commit) = 2.6
 Requires:       python3dist(pre-commit) = 2.0.0
 Requires:       python3dist(pygments)
-Requires:       (python3dist(pytest) >= 3.6 with python3dist(pytest) < 4)
+#Requires:       (python3dist(pytest) >= 3.6 with python3dist(pytest) < 4)
+# Loosen up pytest requirements manually
+Requires:       (python3dist(pytest) >= 3.6 with python3dist(pytest) < 5)
 Requires:       python3dist(pytest-cov)
-Requires:       (python3dist(sphinx) >= 2 with python3dist(sphinx) < 4)
+# Apply epoch manually
+Requires:       (python3dist(sphinx) >= 1:2 with python3dist(sphinx) < 1:4)
 Requires:       python3dist(sphinx-testing)
 %description -n python3-%{pypi_name}
- sphinx-tabs[![Github-CI][github-ci]][github-link] [![Coverage Status][codecov-
-badge]][codecov-link] [![PyPI][pypi-badge]][pypi-link]Create tabbed content in
+Create tabbed content in
 [Sphinx documentation]() when building HTML.For example, see the [Raw] code of
 [docs/index.rst](docs/index.rst) which generates the following:A live demo can
 be found here: <>![Tabs](/images/tabs.gif) Installationbash pip install
