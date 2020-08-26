@@ -28,7 +28,6 @@ Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
 # Add Epoch for RHEL 8 and awx compatibility
-#Requires:       python3dist(sphinx) >= 2
 Requires:       python3dist(sphinx) >= 1:2
 %description -n python3-%{pypi_name}
 Sphinx reStructuredText Builder *******************************Sphinx <
@@ -37,7 +36,6 @@ particular useful to use in combination with the autodoc extension to
 automatically generate documentation for use by any rst parser (such as the
 GitHub wiki).In itself, the extension is fairly straightforward – it takes the
 parsed reST file from Sphinx...
-
 
 %prep
 %autosetup -n %{pypi_name}-%{version}
