@@ -2,12 +2,12 @@
 # the actual version is composed from these below, including leading 0 for release candidates
 #   bzrmajor:  main bzr version
 #   Version: bzr version, add subrelease version here
-#   bzrrc: release candidate version, if any, line starts with % for rc, # for stable releas (no %).
+#   bzrrc: release candidate version, if any, line starts with %% for rc, # for stable releas (no %%).
 #   baserelease: rpm release number (0.N for rc candidates, N for stable releases)
 %global brzmajor 3.0
 %global brzminor .2
 #global brzrc b6
-#%global baserelease 2
+#global baserelease 2
 %global baserelease 0
 
 # https://fedoraproject.org/wiki/Changes/ReplaceBazaarWithBreezy
