@@ -3,7 +3,8 @@
 
 Name:           python-%{pypi_name}
 Version:        5.0.3
-Release:        1%{?dist}
+Release:        1%%{?dist}
+Release:        0%{?dist}
 Summary:        Code coverage measurement for Python
 
 License:        Apache 2.0
@@ -20,7 +21,8 @@ BuildRequires:  python3dist(sphinxcontrib-spelling)
 BuildRequires:  python3dist(sphinx-rtd-theme)
 BuildRequires:  python3dist(sphinx-rst-builder)
 BuildRequires:  python3dist(sphinx-tabs)
-BuildRequires:  python3dist(sphinx-pre-commit)
+# Embedded requirement, added here manually
+BuildRequires:  python3dist(pre-commit) = 2.0.0
 
 %description
 Coverage.py is a Python 3 module that measures code coverage during Python
