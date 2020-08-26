@@ -27,6 +27,7 @@ EPELPKGS+=meson-srpm
 EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-aspy.yaml-srpm
 EPELPKGS+=python-async-generator-srpm
 EPELPKGS+=python-attrs-srpm
 EPELPKGS+=python-azure-common-srpm
@@ -35,6 +36,7 @@ EPELPKGS+=python-azure-keyvault-keys-srpm
 EPELPKGS+=python-azure-keyvault-secrets-srpm
 EPELPKGS+=python-azure-keyvault-srpm
 EPELPKGS+=python-azure-nspkg-srpm
+EPELPKGS+=python-cfgv-srpm
 EPELPKGS+=python-channels-srpm
 EPELPKGS+=python-colorama-srpm
 EPELPKGS+=python-commonmark-srpm
@@ -46,6 +48,7 @@ EPELPKGS+=python-demjson-srpm
 EPELPKGS+=python-django-auth-ldap-srpm
 EPELPKGS+=python-django-cors-headers-srpm
 EPELPKGS+=python-django-crum-srpm
+EPELPKGS+=python-editdistance-srpm
 EPELPKGS+=python-django-extensions-srpm
 EPELPKGS+=python-django-jsonbfield-srpm
 EPELPKGS+=python-django-oauth-toolkit-srpm
@@ -58,6 +61,8 @@ EPELPKGS+=python-djangorestframework-srpm
 EPELPKGS+=python-djangorestframework-yaml-srpm
 EPELPKGS+=python-docutils-srpm
 EPELPKGS+=python-docutils-stubs-srpm
+EPELPKGS+=python-dulwich-srpm
+EPELPKGS+=python-fastimport-srpm
 EPELPKGS+=python-func_timeout-srpm
 EPELPKGS+=python-funcsigs-srpm
 EPELPKGS+=python-idna-ssl-srpm
@@ -73,8 +78,10 @@ EPELPKGS+=python-lockfile-srpm
 EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
 EPELPKGS+=python-mypy-extensions-srpm
+EPELPKGS+=python-nodeenv-srpm
 EPELPKGS+=python-oauth2_provider-srpm
 EPELPKGS+=python-path-srpm
+EPELPKGS+=python-pre-commit-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
 EPELPKGS+=python-pyasn1-srpm
@@ -98,38 +105,39 @@ EPELPKGS+=python-simplejson-srpm
 EPELPKGS+=python-smmap-srpm
 EPELPKGS+=python-social-auth-app-django-srpm
 EPELPKGS+=python-sortedcontainers-srpm
+EPELPKGS+=python-sphinx-epytext-srpm
 EPELPKGS+=python-sphinx-rst-builder-srpm
 EPELPKGS+=python-sphinx-tabs-srpm
+EPELPKGS+=python-scripttest-srpm
 EPELPKGS+=python-termcolor-srpm
+EPELPKGS+=python-towncrier-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-vine-srpm
 EPELPKGS+=python-websocket_client-srpm
+EPELPKGS+=python-wheel-srpm
 EPELPKGS+=python-xmlsec-srpm
+
+# Depends on editdistance
+AWXPKGS+=python-identify-srpm
 
 # Depends on mypy-extensions
 AWXPKGS+=python-mypy-srpm
 
-## Depends on mypy, docutils-stubs
-#AWXPKGS+=python-sphinxcontrib-applehelp-srpm
-#AWXPKGS+=python-sphinxcontrib-devhelp-srpm
-#
-#AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
-#AWXPKGS+=python-sphinxcontrib-jsmath-srpm
-#AWXPKGS+=python-sphinxcontrib-qthelp-srpm
-#AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
-#
+# Depends on mypy, docutils-stubs
+AWXPKGS+=python-sphinxcontrib-applehelp-srpm
+AWXPKGS+=python-sphinxcontrib-devhelp-srpm
+
+AWXPKGS+=python-sphinxcontrib-htmlhelp-srpm
+AWXPKGS+=python-sphinxcontrib-jsmath-srpm
+AWXPKGS+=python-sphinxcontrib-qthelp-srpm
+AWXPKGS+=python-sphinxcontrib-serializinghtml-srpm
+
 # Depends on importlib-metadata, pyenchant
 AWXPKGS+=python-sphinxcontrib-spelling-srpm
 
 ## Depends on sphinxcontrib-*
-#AWXPKGS+=python-sphinx-srpm
-
-# Depends on sphinxcontrib-spelling, sphinx-rst-builder, sphinx-tabs
-AWXPKGS+=python-coverage-srpm
-
-# Depends on repoze-sphinx-autointerface, coverage
-AWXPKGS+=python-zope-interface-srpm
+AWXPKGS+=python-sphinx-srpm
 
 # Depends on sure
 AWXPKGS+=python-httpretty-srpm
@@ -143,14 +151,27 @@ AWXPKGS+=python-pytest-shutil-srpm
 # Depends on setuptools_git
 AWXPKGS+=python-pytest-fixture-config-srpm
 
-# Depends on path and contextlib2 and
+# Depends on path, contextlib2, towncrier
 AWXPKGS+=python-pytest-virtualenv-srpm
+
+# Source control, /usr/bin/bzr
+# Depends on sphinx-epytext
+AWXPKGS+=breezy-srpm
 
 # bootstrup updated setuptools, depends on python2-futures,
 # virtualenv, mock, pytest-fixture-config
 AWXPKGS+=python-setuptools-srpm
 
-# python3 only update for pytest modules of misnmed source package
+# Depends on setuptools, breezy, dulwich, fastimport, wheel, pretend, scripttest
+AWXPKGS+=python-pip-srpm
+
+# Depends on sphinxcontrib-spelling, sphinx-rst-builder, sphinx-tabs, sphinx-pre-commit, sphinx, aspy.yaml, pip, setuptools
+AWXPKGS+=python-coverage-srpm
+
+# Depends on repoze-sphinx-autointerface, coverage
+AWXPKGS+=python-zope-interface-srpm
+
+# python3 only update for pytest modules of misanmed source package
 # Depends on more-itertools, upstream pluggy 0.6, not local updated version
 AWXPKGS+=pytest-srpm
 
@@ -168,7 +189,7 @@ AWXPKGS+=python-pytest-black-multiply-srpm
 AWXPKGS+=python-pytest-cov-srpm
 
 # Depends on setuptools_scm
-AWXPKGS+=python-importlib_resources-srpm
+AWXPKGS+=python-importlib-resources-srpm
 
 # Depnds on python3-saml, python3-openid
 AWXPKGS+=python-social-auth-core-srpm
@@ -391,13 +412,13 @@ clean::
 	rm -f *.cfg
 	rm -f *.out
 	@for name in $(EPELPKGS) $(AWXPKGS); do \
-	    $(MAKE) -C $$name $@; \
+	    $(MAKE) -C $$name clean; \
 	done
 
 distclean: clean
 	rm -rf awxrepo
 	@for name in $(EPELPKGS) $(AWXPKGS); do \
-	    $(MAKE) -C $$name $@; \
+	    $(MAKE) -C $$name maintainer-clean; \
 	done
 
 maintainer-clean: distclean
