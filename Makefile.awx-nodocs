@@ -1,5 +1,6 @@
 #
 # Build mock and local RPM versions of tools for Awx
+#    Set --without-tests --without-checks for sphinx bootstrap
 #
 
 # Assure that sorting is case sensitive
@@ -34,6 +35,7 @@ src.rpm:: Makefile
 .PHONY: build
 build:: src.rpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
+	        --without docs \
 		--rebuild $?
 
 .PHONY: $(MOCKS)
@@ -44,6 +46,7 @@ $(MOCKS):: src.rpm
 	    echo "    Building $? in $@" && \
 	    touch ../$@.cfg && \
 	    mock -q -r $(PWD)/../$@.cfg \
+	        --without docs \
 		--resultdir=$(PWD)/$@ $?
 
 mock:: $(MOCKS)

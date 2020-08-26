@@ -42,6 +42,7 @@ $(MOCKS):: src.rpm
 	    echo "    RPMs in $@, skipping" && exit 0 || \
 	    rm -rf $@ && \
 	    echo "    Building $? in $@" && \
+	    touch ../$@.cfg && \
 	    mock -q -r $(PWD)/../$@.cfg \
 		--resultdir=$(PWD)/$@ $?
 
