@@ -31,7 +31,9 @@ Requires:       python3dist(nodeenv) >= 0.11.1
 Requires:       python3dist(pyyaml)
 Requires:       python3dist(setuptools)
 Requires:       python3dist(toml)
-Requires:       python3dist(virtualenv) >= 15.2
+# Loosen up, backporting ivrtualenv to RHEL 8 runs indo modular dependencies
+#Requires:       python3dist(virtualenv) >= 15.2
+Requires:       python3dist(virtualenv)
 %description -n python3-%{pypi_name}
 [![Build Status]( [![Azure DevOps coverage]( pre-commitA framework for managing
 and maintaining multi-language pre-commit hooks.For more information see:
@@ -41,6 +43,13 @@ and maintaining multi-language pre-commit hooks.For more information see:
 %autosetup -n pre_commit-%{version}
 # Remove bundled egg-info
 rm -rf %{pypi_name}.egg-info
+
+%if 0%{?rhel}
+grep -rl 'virtualenv>=' . | while read name; do
+    echo Roll back virtualenv requirement on for RHEL in: $name
+    sed -i.bak 's/virtualenv>=.*/virtualenv/g' $name
+done
+%endif
 
 %build
 %py3_build
