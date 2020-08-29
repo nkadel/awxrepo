@@ -3,7 +3,7 @@
 
 Name:           python-%{pypi_name}
 Version:        5.0.3
-Release:        1%%{?dist}
+#Release:        1%%{?dist}
 Release:        0%{?dist}
 Summary:        Code coverage measurement for Python
 
