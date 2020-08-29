@@ -14,7 +14,6 @@
 %global pypi_name importlib-metadata
 
 # Common SRPM package
-#Name:           python-%{srcname}
 Name:           python-%{pypi_name}
 Version:        1.5.0
 Release:        0.1%{?dist}
