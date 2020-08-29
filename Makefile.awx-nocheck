@@ -9,8 +9,8 @@ LANG=C
 #MOCKS+=awxrepo-f32-x86_64
 MOCKS+=awxrepo-8-x86_64
 
-#REPOBASEDIR=/var/www/linux/awxrepo
-REPOBASEDIR:=`/bin/pwd`/../awxrepo
+#REPOBASEDIR=/var/www/linux/repo
+REPOBASEDIR:=`/bin/pwd`/../repo
 
 SPEC := `ls *.spec`
 
@@ -37,6 +37,7 @@ build:: src.rpm
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 	        --without check \
 	        --without tests \
+	        --without optional_tests \
 		--rebuild $?
 
 .PHONY: $(MOCKS)
@@ -66,9 +67,11 @@ install:: $(MOCKS)
 	    rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
 	    srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
 	    echo "    Pushing SRPMS to $$srpmdir"; \
+	    install -d $$srpmdir/; \
 	    rsync -a $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
 	    createrepo -q $$srpmdir/.; \
 	    echo "    Pushing RPMS to $$rpmdir"; \
+	    install -d $$rpmdir/; \
 	    rsync -a $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
 	    createrepo -q $$rpmdir/.; \
 	done
