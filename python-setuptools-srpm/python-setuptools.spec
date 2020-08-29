@@ -3,7 +3,8 @@
 #  WARNING  When bootstrapping, disable tests as well,
 #           because tests need pip.
 %bcond_with bootstrap
-%bcond_without tests
+#%%bcond_without tests
+%bcond_with tests
 
 %bcond_with python2
 %bcond_without python3
