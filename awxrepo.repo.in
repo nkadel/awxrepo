@@ -1,13 +1,13 @@
 [awxrepo]
 name=AWX repo - $basearch
-baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/$basearch
+baseurl=@REPOURL@/@RELEASEDIR@/$releasever/$basearch
 enabled=0
 gpgcheck=0
 metadata_expire=1
 
 [awxrepo-source]
 name=AWX repo - Source
-baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/SRPMS/
+baseurl=@REPOURL@/@RELEASEDIR@/$releasever/SRPMS/
 enabled=0
 gpgcheck=0
 metadata_expire=1
