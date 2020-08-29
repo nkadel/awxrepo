@@ -7,8 +7,10 @@
 #
 #	Set up local
 
-#REPOBASE=http://localhost
-REPOBASE=file://$(PWD)
+REPOBASEDIR=$(PWD)/repo
+REPOURL=file://$(REPOBASEDIR)
+# In case of web access
+#REPOURL=http://localhost/repo
 
 # Dependency metapackage
 #EPELPKGS+=PyYAML-srpm
@@ -27,6 +29,7 @@ EPELPKGS+=meson-srpm
 EPELPKGS+=python3-six-srpm
 
 EPELPKGS+=python-adal-srpm
+EPELPKGS+=python-argcomplete-srpm
 EPELPKGS+=python-aspy.yaml-srpm
 EPELPKGS+=python-async-generator-srpm
 EPELPKGS+=python-attrs-srpm
@@ -75,12 +78,16 @@ EPELPKGS+=python-jaraco-packaging-srpm
 EPELPKGS+=python-jaraco-text-srpm
 EPELPKGS+=python-kombu-srpm
 EPELPKGS+=python-lockfile-srpm
-EPELPKGS+=python-more-itertools-srpm
 EPELPKGS+=python-msrestazure-srpm
 EPELPKGS+=python-mypy-extensions-srpm
 EPELPKGS+=python-nodeenv-srpm
 EPELPKGS+=python-oauth2_provider-srpm
 EPELPKGS+=python-path-srpm
+# Compile without tests to avoid excess dependencies
+# Otherwise, Depends on setuptools, breezy, dulwich, fastimport,
+#    wheel, pretend, scripttest
+#EPELPKGS+=python-pip-srpm
+EPELPKGS+=python-pluggy-srpm
 EPELPKGS+=python-pre-commit-srpm
 EPELPKGS+=python-process-tests-srpm
 EPELPKGS+=python-ptyprocess-srpm
@@ -114,6 +121,7 @@ EPELPKGS+=python-towncrier-srpm
 EPELPKGS+=python-typing-extensions-srpm
 EPELPKGS+=python-typing-srpm
 EPELPKGS+=python-vine-srpm
+EPELPKGS+=python-virtualenv-api-srpm
 EPELPKGS+=python-websocket_client-srpm
 EPELPKGS+=python-wheel-srpm
 EPELPKGS+=python-xmlsec-srpm
@@ -152,7 +160,7 @@ AWXPKGS+=python-pytest-shutil-srpm
 AWXPKGS+=python-pytest-fixture-config-srpm
 
 # Depends on path, contextlib2, towncrier
-AWXPKGS+=python-pytest-virtualenv-srpm
+#AWXPKGS+=python-pytest-virtualenv-srpm
 
 # Source control, /usr/bin/bzr
 # Depends on sphinx-epytext
@@ -162,55 +170,50 @@ AWXPKGS+=breezy-srpm
 # virtualenv, mock, pytest-fixture-config
 AWXPKGS+=python-setuptools-srpm
 
-# Depends on setuptools, breezy, dulwich, fastimport, wheel, pretend, scripttest
-AWXPKGS+=python-pip-srpm
+# Depends on pip, wheel
+#AWXPKGS+=python-virtualenv-srpm
 
-# Depends on sphinxcontrib-spelling, sphinx-rst-builder, sphinx-tabs, sphinx-pre-commit, sphinx, aspy.yaml, pip, setuptools
-AWXPKGS+=python-coverage-srpm
-
-# Depends on repoze-sphinx-autointerface, coverage
-AWXPKGS+=python-zope-interface-srpm
-
-# python3 only update for pytest modules of misanmed source package
-# Depends on more-itertools, upstream pluggy 0.6, not local updated version
+# Depends on argcomplete,attrs,pluggy,setuptools_scm,pluggy, sphinx-removed-in. argcomplete
 AWXPKGS+=pytest-srpm
 
-# Updated pytest for 3.6.x dependencies
-# Depends on more-itertools, atomicwrites, colorama, funcsigs
-AWXPKGS+=pytest-3.6.x-srpm
-
-# Depends on more-itertools
-AWXPKGS+=python-outcome-srpm
+# Depends on zipp
+AWXPKGS+=python-importlib-metadata-srpm
 
 # Depends on jaraco-packaging
 AWXPKGS+=python-pytest-black-multiply-srpm
 
-# Depends on process-tests, pytest-xdist
-AWXPKGS+=python-pytest-cov-srpm
-
 # Depends on setuptools_scm
 AWXPKGS+=python-importlib-resources-srpm
-
-# Depnds on python3-saml, python3-openid
-AWXPKGS+=python-social-auth-core-srpm
 
 # Depends on pycares
 AWXPKGS+=python-aiodns-srpm
 
-# Depends on curio, contextvars
-AWXPKGS+=python-sniffio-srpm
-
-# Depends on pytest, Cython, multidict, more-itertools
-AWXPKGS+=python-yarl-srpm
-
 # Depends on aiohttp, pyttest-aiohttp
 AWXPKGS+=python-async-timeout-srpm
+
+# Depends on pytest-black, pytest = 3.5.0
+AWXPKGS+=python-pytest-black-srpm
+
+# Depends on sphinxcontrib-*
+AWXPKGS+=python-sphinx-srpm
 
 # Depends on aiohttp, which Requires yarl, async-timeout
 AWXPKGS+=python-black-srpm
 
 # Depends on aiodns, aiohttp, black
 AWXPKGS+=python-slackclient-srpm
+
+# Depends on attrs, pytest, pytest-asyncio, pluggy
+AWXPKGS+=python-outcome-srpm
+
+# Depends on process-tests, pytest-xdist
+AWXPKGS+=python-pytest-cov-srpm
+
+# Depnds on python3-saml, python3-openid
+AWXPKGS+=python-social-auth-core-srpm
+
+# Depends on curio, contextvars
+AWXPKGS+=python-sniffio-srpm
 
 # Depends on pyjwt
 AWXPKGS+=python-twilio-srpm
@@ -221,14 +224,11 @@ AWXPKGS+=python-pytest-flake8-srpm
 # Depends on jaraco-packaging, setuptools_scm
 AWXPKGS+=python-jaraco-itertools-srpm
 
-# Depends on zipp
-AWXPKGS+=python-importlib-metadata-srpm
+# Depends on sphinxcontrib-spelling, sphinx-rst-builder, sphinx-tabs, sphinx-pre-commit, sphinx, aspy.yaml, pip, setuptools, typing
+AWXPKGS+=python-coverage-srpm
 
-# Depends on sphinxcontrib-*
-AWXPKGS+=python-sphinx-srpm
-
-# Depends on pytest-black, pytest = 3.5.0
-AWXPKGS+=python-pytest-black-srpm
+# Depends on repoze-sphinx-autointerface, coverage
+AWXPKGS+=python-zope-interface-srpm
 
 # Depends on pytest, importlib-metadata, jaraco-packaging ane
 # pytest-black-multiply, pytest-checkdocs, pytest-cov and
@@ -240,13 +240,10 @@ AWXPKGS+=python-pytest-checkdocs-srpm
 # Depends on black-multiply, checkdocs
 AWXPKGS+=python-jaraco-stream-srpm
 
-# Depends on importlib-metadata
-AWXPKGS+=python-pluggy-srpm
-
 # Depends on ptyprocess, pluggy
 AWXPKGS+=python-pexpect-srpm
 
-# Depends on pytest, pytest-flake8, setuptools_scm, more-itertools
+# Depends on pytest, pytest-flake8, setuptools_scm
 AWXPKGS+=python-jaraco-classes-srpm
 
 # Depends on jaraco-packaging, jaraco-classes, pytest-flske8
@@ -272,9 +269,6 @@ AWXPKGS+=python-service-identity-srpm
 # Depends on pytest, service-dentity
 AWXPKGS+=python-trustme-srpm
 
-# Depends on attrs, pytest, pytest-asyncio, more-itertools, 
-AWXPKGS+=python-outcome-srpm
-
 # Depends on trustme, outcome
 AWXPKGS+=python-trio-srpm
 
@@ -283,8 +277,8 @@ AWXPKGS+=python-msrest-srpm
 
 AWXPKGS+=ansible-awx-srpm
 
-REPOS+=awxrepo/el/8
-#REPOS+=awxrepo/fedora/32
+REPOS+=repo/el/8
+#REPOS+=repo/fedora/32
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
@@ -344,7 +338,7 @@ cfgs: $(CFGS) $(MOCKCFGS)
 awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@cat $? > $@
-	@sed -i 's/epel-8-x86_64/awxrepo-8-x86_64/g' $@
+	@sed -i 's/epel-8-x86_64/repo-8-x86_64/g' $@
 	@echo >> $@
 	@echo "Disabling 'best=' for $@"
 	@sed -i '/^best=/d' $@
@@ -354,7 +348,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 	@echo '[awxrepo]' >> $@
 	@echo 'name=awxrepo' >> $@
 	@echo 'enabled=1' >> $@
-	@echo 'baseurl=$(REPOBASE)/awxrepo/el/8/x86_64/' >> $@
+	@echo 'baseurl=$(REPOURL)/el/8/x86_64/' >> $@
 	@echo 'failovermethod=priority' >> $@
 	@echo 'skip_if_unavailable=False' >> $@
 	@echo 'metadata_expire=1' >> $@
@@ -366,7 +360,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #awxrepo-f32-x86_64.cfg: /etc/mock/fedora-32-x86_64.cfg
 #	@echo Generating $@ from $?
 #	@cat $? > $@
-#	@sed -i 's/fedora-32-x86_64/awxrepo-f32-x86_64/g' $@
+#	@sed -i 's/fedora-32-x86_64/repo-f32-x86_64/g' $@
 #	@echo >> $@
 #	@echo "Disabling 'best=' for $@"
 #	@sed -i '/^best=/d' $@
@@ -376,7 +370,7 @@ awxrepo-8-x86_64.cfg: /etc/mock/epel-8-x86_64.cfg
 #	@echo '[awxrepo]' >> $@
 #	@echo 'name=awxrepo' >> $@
 #	@echo 'enabled=1' >> $@
-#	@echo 'baseurl=$(REPOBASE)/awxrepo/fedora/32/x86_64/' >> $@
+#	@echo 'baseurl=$(REPOURL)/fedora/32/x86_64/' >> $@
 #	@echo 'failovermethod=priority' >> $@
 #	@echo 'skip_if_unavailable=False' >> $@
 #	@echo 'metadata_expire=1' >> $@
@@ -390,13 +384,14 @@ $(MOCKCFGS)::
 
 repo: awxrepo.repo
 awxrepo.repo:: Makefile awxrepo.repo.in
-	@if [ -s /etc/fedora-release ]; then \
+	@echo REPOURL: $(REPOURL)
+	if [ -s /etc/fedora-release ]; then \
 		cat $@.in | \
-			sed "s|@REPOBASEDIR@/|$(PWD)/|g" | \
+			sed "s|@REPOURL@/|$(REPOURL)/|g" | \
 			sed "s|/@RELEASEDIR@/|/fedora/|g" > $@; \
 	elif [ -s /etc/redhat-release ]; then \
 		cat $@.in | \
-			sed "s|@REPOBASEDIR@/|$(PWD)/|g" | \
+			sed "s|@REPOURL@/|$(REPOURL)/|g" | \
 			sed "s|/@RELEASEDIR@/|/el/|g" > $@; \
 	else \
 		echo Error: unknown release, check /etc/*-release; \
