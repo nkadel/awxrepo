@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires:  epel-rpm-macros
-%endif
-
 %description
 Django-polymorphic simplifies using inherited models in Django projects.
 When a query is made at the base model, the inherited model classes are returned.

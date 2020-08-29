@@ -30,9 +30,6 @@ Source0:        %pypi_source
 BuildArch:      noarch
 
 BuildRequires:  bzip2
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
 
 %description
 UNKNOWN

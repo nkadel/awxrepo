@@ -18,10 +18,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 %description
 Python Library for PagerDuty's REST API and Events API. This library
 was originally written to support v1 and is currently being updated to

@@ -27,10 +27,6 @@ URL:                https://github.com/websocket-client/websocket-client
 Source0:            %pypi_source
 BuildArch:          noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description %{common_description}
 
 

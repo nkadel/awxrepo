@@ -12,10 +12,6 @@ Source0:        %{pypi_source}
 
 BuildArch:      noarch
 
-%if 0%{?rhyel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Typing Extensions - Backported and Experimental Type Hints for Python
 

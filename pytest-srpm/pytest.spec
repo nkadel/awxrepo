@@ -112,7 +112,7 @@ find %{buildroot}%{python3_sitelib} \
      -name '*.py' \
      -exec sed -i -e '1{/^#!/d}' {} \;
 
-%if 0%{?rhel}
+%if 0%{?fedora}
 # Tests fail on rhel 
 %check
 PYTHONDONTWRITEBYTECODE=1 \

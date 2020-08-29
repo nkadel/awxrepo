@@ -24,9 +24,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
 %description
 Django Solo helps working with singletons: database tables that only
 have one row.  Singletons are useful for things like global settings

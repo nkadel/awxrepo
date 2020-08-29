@@ -12,10 +12,6 @@ URL:            https://github.com/ross/requests-futures
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Small add-on for the Python requests http library. Makes use of Python 3.2’s
 concurrent.futures or the back-port for prior versions of Python.

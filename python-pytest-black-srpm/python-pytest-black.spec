@@ -12,10 +12,6 @@ URL:            https://github.com/shopkeep/pytest-black
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python3dist(black) >= 19.3b0
 BuildRequires:  python3dist(pytest) >= 3.5.0

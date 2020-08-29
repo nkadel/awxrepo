@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 BuildRequires:  unzip
 
 %description

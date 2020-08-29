@@ -11,10 +11,6 @@ URL:            https://github.com/jaraco/skeleton
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(setuptools-scm) >= 1.15.0

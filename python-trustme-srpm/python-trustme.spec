@@ -25,10 +25,6 @@ URL:            https://github.com/python-trio/trustme
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description %{common_description}
 
 %package -n python%{python3_pkgversion}-%{pypi_name}

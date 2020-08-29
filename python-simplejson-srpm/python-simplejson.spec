@@ -15,10 +15,6 @@ License: (MIT or AFL) and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
 Source0:        %pypi_source simplejson
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 simplejson is a simple, fast, complete, correct and extensible JSON
 <http://json.org> encoder and decoder for Python 2.5+. It is pure Python code

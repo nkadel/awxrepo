@@ -22,10 +22,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This library, ADAL for Python, will no longer receive new feature
 improvements. Instead, use the new library [MSAL for Python]( If you are

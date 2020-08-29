@@ -17,10 +17,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %if 0%{?with_python2}
 BuildRequires:  python2-devel
 # needed for check: assertRaisesRegex in unittest.TestCase

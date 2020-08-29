@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 # Azure Key Vault client libraries for Python
 

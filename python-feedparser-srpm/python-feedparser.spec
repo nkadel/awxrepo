@@ -31,10 +31,6 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Universal Feed Parser is a Python module for downloading and parsing
 syndicated feeds. It can handle RSS 0.90, Netscape RSS 0.91,

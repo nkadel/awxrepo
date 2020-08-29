@@ -10,10 +10,6 @@ URL:            https://github.com/dbtsai/python-mimeparse
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This module provides basic functions for parsing mime-type names
 and matching them against a list of media-ranges.

@@ -13,10 +13,6 @@ Source0:        %pypi_source
 # Disable tests requiring an Internet connection
 Patch0:         %{name}-0.6.1-tests.patch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-aiodns
 BuildRequires:  python%{python3_pkgversion}-aiohttp
 BuildRequires:  python%{python3_pkgversion}-certifi

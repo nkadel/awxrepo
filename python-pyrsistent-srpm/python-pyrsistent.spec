@@ -21,10 +21,6 @@ License:        MIT
 URL:            http://github.com/tobgu/pyrsistent/
 Source0:        %{pypi_source}
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  gcc
 BuildRequires:  python%{python3_pkgversion}-devel
 

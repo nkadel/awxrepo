@@ -22,9 +22,7 @@ License:        Apache-2.0
 Group:          Development/Languages/Python
 # Stop using py2pack macros, use local macros published by Fedora
 Source0:        %pypi_source
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
+
 %description
 An immutable mapping type for Python.
 

@@ -12,10 +12,6 @@ Source0:        %pypi_source
 
 BuildArch: noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This toolkit lets you turn your Python application into a SP
 (Service Provider) that can be connected to an IdP (Identity Provider).

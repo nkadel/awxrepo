@@ -14,10 +14,6 @@ URL:            https://github.com/testing-cabal/funcsigs?
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %if ! 0%{?with_python3}
 BuildRequires:  python2-sphinx
 %endif

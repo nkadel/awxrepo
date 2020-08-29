@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 ``importlib_metadata`` is a library to access the metadata for a Python
 package.  It is intended to be ported to Python 3.8.

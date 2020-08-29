@@ -14,10 +14,6 @@ URL:            https://github.com/jaraco/jaraco.functools
 Source0:        %{pypi_source %{srcname}}
 BuildArch:      noarch
  
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Functools like those found in stdlib
 

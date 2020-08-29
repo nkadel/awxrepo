@@ -22,10 +22,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This library provides a low-level implementation of the IRC protocol for
 Python.  It provides an event-driven IRC client framework.  It has

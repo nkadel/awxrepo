@@ -12,9 +12,6 @@ URL:            https://github.com/pexpect/pexpect
 Source0:        %pypi_source
 
 BuildRequires:  %{_bindir}/man
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
 
 BuildArch:      noarch
 

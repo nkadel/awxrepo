@@ -19,10 +19,6 @@ Patch0:         Unpin-the-test-requirements-and-use-unittest2-for-Py.patch
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python2-devel
 BuildRequires:  python%{python3_pkgversion}-devel
 

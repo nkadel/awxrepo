@@ -26,9 +26,6 @@ Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
 BuildRequires:  bzip2
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
 
 %description
 # Azure Key Vault Keys client library for Python

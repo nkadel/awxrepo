@@ -14,10 +14,6 @@ Source:         %{pypi_source}
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Launch a subprocess in a pseudo terminal (pty), and interact with both the
 process and its pty.

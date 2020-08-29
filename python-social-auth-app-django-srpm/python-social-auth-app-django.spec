@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires:  epel-rpm-macros
-%endif
-
 %description
 Python Social Auth is an easy to setup social authentication/registration
 mechanism with support for several frameworks and auth providers.

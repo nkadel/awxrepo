@@ -10,10 +10,6 @@ License:        MIT
 URL:            https://pypi.python.org/pypi/%{pypi_name}
 Source0:        %pypi_source
 
-%if -%{?rhel}
-buildrequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  gcc
 BuildRequires:  libxml2-devel >= 2.9.1
 BuildRequires:  xmlsec1-devel >= 1.2.18

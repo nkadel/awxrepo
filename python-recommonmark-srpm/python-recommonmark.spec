@@ -18,10 +18,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 %description
 A docutils-compatibility bridge to CommonMark.
 

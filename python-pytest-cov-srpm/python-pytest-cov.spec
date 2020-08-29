@@ -12,10 +12,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Py.test plugin for coverage reporting with support for both centralised and
 distributed testing, including subprocesses and multiprocessing for Python.

@@ -13,7 +13,6 @@ URL:            http://pyasn1.sourceforge.net/
 BuildArch:      noarch
 
 %if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
 BuildRequires:  python%{python3_pkgversion}-sphinx
 BuildRequires:  /usr/bin/sphinx-build-3
 %endif

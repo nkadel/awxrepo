@@ -24,10 +24,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 %description
 Python logging handler for Logstash.
 http://logstash.net/

@@ -22,10 +22,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Django-CRUM (Current Request User Middleware) captures the current request and
 user in thread local storage.

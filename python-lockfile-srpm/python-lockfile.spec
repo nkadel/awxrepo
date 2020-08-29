@@ -25,10 +25,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %if %{with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools

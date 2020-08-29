@@ -16,10 +16,6 @@ URL:            https://github.com/jaraco/rst.linker
 Source0:        %pypi_source
 BuildArch:      noarch
  
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
  rst.linker provides a routine for adding links and performing other custom
 replacements to restructured text files as a Sphinx extension.License License

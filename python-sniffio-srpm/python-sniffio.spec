@@ -25,10 +25,6 @@ URL:            https://github.com/python-trio/sniffio
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description %{_description}
 
 

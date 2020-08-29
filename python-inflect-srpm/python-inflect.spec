@@ -12,10 +12,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 The methods of the class 'engine' in module 'inflect.py' provide plural
 inflections, singular noun inflections, "a"/"an" selection for English words,
@@ -86,9 +82,6 @@ pytest-3
 %{python3_sitelib}/inflect-%{version}-*.egg-info
 
 %changelog
-* Mon Feb 17 2020 Nico Kadel-Garcia <nkadel@gmail.com>
-- Add epel-rpm-macros for RHEL compilation, activate %%{python3_pkgversion}
-
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.1.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 

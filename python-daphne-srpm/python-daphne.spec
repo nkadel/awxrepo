@@ -24,10 +24,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Daphne is a HTTP, HTTP2 and WebSocket protocol server for
 `ASGI <https://github.com/django/asgiref/blob/master/specs/asgi.rst>`_ and

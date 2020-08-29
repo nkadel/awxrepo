@@ -36,10 +36,6 @@ URL:            https://github.com/dabeaz/curio
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description %{_description}
 
 

@@ -31,9 +31,6 @@ URL:            https://github.com/django/asgiref
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
 %description %{_description}
 
 

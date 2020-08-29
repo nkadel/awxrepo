@@ -12,10 +12,6 @@ URL:            https://github.com/jaraco/pytest-checkdocs
 Source0:        %{pypi_source}
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-devel
 # Ignore this, it is unnecessary and confusing
 #BuildConflicts: python3dist(pytest) = 3.7.3

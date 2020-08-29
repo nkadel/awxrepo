@@ -25,10 +25,6 @@ Group:          Development/Languages/Python
 Source0:        %{pypi_source %{pypi_name} %{version} zip}
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This is the Microsoft Azure common code.
 

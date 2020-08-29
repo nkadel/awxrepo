@@ -19,10 +19,6 @@ URL:            https://github.com/tholo/pytest-flake8
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-flake8 >= 3.5
 BuildRequires:  python%{python3_pkgversion}-pytest >= 3.5

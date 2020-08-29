@@ -11,10 +11,6 @@ URL:            https://github.com/aio-libs/pytest-aiohttp/
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 The library allows to use aiohttp pytest plugin without need for implicitly
 loading it like pytest_plugins = 'aiohttp.pytest_plugin'.

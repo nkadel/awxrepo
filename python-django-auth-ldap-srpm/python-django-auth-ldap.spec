@@ -24,10 +24,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This is a Django authentication backend that authenticates against an LDAP
 service. Configuration can be as simple as a single distinguished name

@@ -11,10 +11,6 @@ URL:            https://github.com/slackapi/python-%{pypi_name}
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 %{summary}.
 

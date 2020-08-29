@@ -11,10 +11,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 This started out as a fork of the Python OpenID library,
 with changes to make it Python 3 compatible.

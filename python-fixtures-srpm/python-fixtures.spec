@@ -16,9 +16,6 @@ License:        ASL 2.0 or BSD
 URL:            https://launchpad.net/python-fixtures
 Source0:        %pypi_source
 BuildArch:      noarch
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
 
 %global _description\
 Fixtures defines a Python contract for reusable state / support logic,\

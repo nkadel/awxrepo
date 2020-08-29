@@ -13,10 +13,6 @@ URL:            https://github.com/saghul/pycares
 Source0:        %pypi_source
 Patch0:         fix-version_pycares_docs_conf.py.patch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 BuildRequires:  gcc
 BuildRequires:  python%{python3_pkgversion}-cffi
 # for docs

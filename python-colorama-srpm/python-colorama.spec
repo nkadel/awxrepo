@@ -19,10 +19,6 @@ URL:            http://pypi.python.org/pypi/colorama
 Source0:        %pypi_source
 BuildArch:      noarch
  
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Makes ANSI escape character sequences, for producing colored
 terminal text and cursor positioning, work under MS Windows.

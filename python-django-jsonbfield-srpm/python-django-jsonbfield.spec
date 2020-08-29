@@ -22,10 +22,6 @@ Group:          Development/Languages/Python
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-Buildrequires: epel-rpm-macros
-%endif
-
 %description
 This is basically a standalone version of the JSONB support in the
 Postgres contrib package of the Django master branch, targeted for the

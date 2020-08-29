@@ -13,10 +13,6 @@ URL:            https://github.com/jaraco/tempora
 Source0:        %pypi_source
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 Objects and routines pertaining to date and time (tempora).
 

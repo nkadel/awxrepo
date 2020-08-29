@@ -30,10 +30,6 @@ URL:            https://github.com/Azure/msrestazure-for-python
 Source0:        %pypi_source
 #Source0:        %{url}/archive/v%{version}/%{pypi_name}-%{version}.tar.gz
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %if 0%{?_with_python2}
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools

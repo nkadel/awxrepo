@@ -12,10 +12,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %global _description \
 Smmap wraps an interface around mmap and tracks the mapped files as well as\
 the amount of clients who use it. If the system runs out of resources,\

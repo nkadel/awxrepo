@@ -13,10 +13,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %global _description \
 SortedContainers is an Apache2 licensed sorted collections library, written in \
 pure-Python, and fast as C-extensions.

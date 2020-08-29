@@ -9,7 +9,7 @@
 %global service_logdir /var/log/tower
 %global service_configdir /etc/tower
 
-%global awx_mainversion 14.0.0
+%global awx_mainversion 14.1.0
 %global awx_subversion %{nil}
 
 Summary: Ansible AWX
@@ -27,7 +27,7 @@ Source6: awx-daphne.service
 Source7: awx-web.service
 %endif
 Source8: nginx.conf.example
-Source9: awx-create-venv
+Source9: awx-create-venv.sh
 Source10: awx-rpm-logo.svg
 Source11: awx.service
 License: GPLv3
@@ -36,10 +36,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}.buildroot
 Vendor: AWX
 Prefix: %{_prefix}
 AutoReqProv: false
-
-%if 0%{?rhel}
-BuildRequires: epel-rpm-macros
-%endif
 
 BuildRequires: git
 BuildRequires: libcurl-devel
@@ -208,101 +204,101 @@ Requires: subversion
 Requires: xmlsec1-devel
 Requires: xmlsec1-openssl-devel
 
-#Required: python%{python3_pkgversion}-GitPython
-#Requires: python%{python3_pkgversion}-PyHamcrest
-#Requires: python%{python3_pkgversion}-adal
-##Requires: python%{python3_pkgversion}-adal = 1.2.2
-#Requires: python%{python3_pkgversion}-aiohttp
-#Requires: python%{python3_pkgversion}-ansible-runner
-#Requires: python%{python3_pkgversion}-attrs
-#Requires: python%{python3_pkgversion}-autobahn
-#Requires: python%{python3_pkgversion}-azure-common
-#Requires: python%{python3_pkgversion}-azure-keyvault
-#Requires: python%{python3_pkgversion}-azure-nspkg
-##Requires: python%{python3_pkgversion}-build
-#Requires: python%{python3_pkgversion}-celery
-#Requires: python%{python3_pkgversion}-certifi
-#Requires: python%{python3_pkgversion}-cffi
-#Requires: python%{python3_pkgversion}-channels
-#Requires: python%{python3_pkgversion}-chardet
-#Requires: python%{python3_pkgversion}-constantly
-#Requires: python%{python3_pkgversion}-cryptography
-#Requires: python%{python3_pkgversion}-daphne
-#Requires: python%{python3_pkgversion}-dateutil
-#Requires: python%{python3_pkgversion}-devel
-#Requires: python%{python3_pkgversion}-django
-#Requires: python%{python3_pkgversion}-django-auth-ldap
-#Requires: python%{python3_pkgversion}-django-cors-headers
-#Requires: python%{python3_pkgversion}-django-crum
-#Requires: python%{python3_pkgversion}-django-extensions
-#Requires: python%{python3_pkgversion}-django-jsonbfield
-#Requires: python%{python3_pkgversion}-django-jsonfield
-#Requires: python%{python3_pkgversion}-django-oauth-toolkit
-#Requires: python%{python3_pkgversion}-django-pglocks
-#Requires: python%{python3_pkgversion}-django-polymorphic
-#Requires: python%{python3_pkgversion}-django-solo
-#Requires: python%{python3_pkgversion}-django-taggit
-#Requires: python%{python3_pkgversion}-djangorestframework
-#Requires: python%{python3_pkgversion}-djangorestframework-yaml
-#Requires: python%{python3_pkgversion}-gitdb
-#Requires: python%{python3_pkgversion}-google-auth
-#Requires: python%{python3_pkgversion}-idna
-#Requires: python%{python3_pkgversion}-importlib-metadata
-#Requires: python%{python3_pkgversion}-incremental
-#Requires: python%{python3_pkgversion}-inflect
-#Requires: python%{python3_pkgversion}-irc
-#Requires: python%{python3_pkgversion}-isodate
-#Requires: python%{python3_pkgversion}-jaraco-classes
-#Requires: python%{python3_pkgversion}-jaraco-collections
-#Requires: python%{python3_pkgversion}-jaraco-functools
-#Requires: python%{python3_pkgversion}-jaraco-itertools
-#Requires: python%{python3_pkgversion}-jaraco-logging
-#Requires: python%{python3_pkgversion}-jaraco-stream
-#Requires: python%{python3_pkgversion}-jaraco-text
-#Requires: python%{python3_pkgversion}-jinja2
-#Requires: python%{python3_pkgversion}-jsonschema
-#Requires: python%{python3_pkgversion}-kombu
-#Requires: python%{python3_pkgversion}-kubernetes
-#Requires: python%{python3_pkgversion}-ldap
-#Requires: python%{python3_pkgversion}-markupsafe
-#Requires: python%{python3_pkgversion}-more-itertools
-#Requires: python%{python3_pkgversion}-msrest
-#Requires: python%{python3_pkgversion}-msrestazure
-#Requires: python%{python3_pkgversion}-oauthlib
-#Requires: python%{python3_pkgversion}-openid
-#Requires: python%{python3_pkgversion}-pexpect
-#Requires: python%{python3_pkgversion}-pip
-#Requires: python%{python3_pkgversion}-psutil
-#Requires: python%{python3_pkgversion}-psycopg2
-#Requires: python%{python3_pkgversion}-ptyprocess
-#Requires: python%{python3_pkgversion}-pyasn1
-#Requires: python%{python3_pkgversion}-pyasn1-modules
-#Requires: python%{python3_pkgversion}-pygerduty
-##Requires: python%{python3_pkgversion}-pygments
-#Requires: python%{python3_pkgversion}-pyjwt >= 1.7.1
-#Requires: python%{python3_pkgversion}-pyparsing
-#Requires: python%{python3_pkgversion}-pyrsistent
-#Requires: python%{python3_pkgversion}-python-logstash
-#Requires: python%{python3_pkgversion}-pytz
-#Requires: python%{python3_pkgversion}-pyyaml
-#Requires: python%{python3_pkgversion}-requests
-#Requires: python%{python3_pkgversion}-requests-futures
-#Requires: python%{python3_pkgversion}-requests-oauthlib
-#Requires: python%{python3_pkgversion}-runtime
-#Requires: python%{python3_pkgversion}-six >= 1.13.0
-#Requires: python%{python3_pkgversion}-slackclient
-#Requires: python%{python3_pkgversion}-smmap
-#Requires: python%{python3_pkgversion}-social-auth-app-django
-#Requires: python%{python3_pkgversion}-social-auth-core
-#Requires: python%{python3_pkgversion}-tempora
-#Requires: python%{python3_pkgversion}-twilio
-#Requires: python%{python3_pkgversion}-twisted >= 19.1.0
-#Requires: python%{python3_pkgversion}-txaio
-#Requires: python%{python3_pkgversion}-urllib3
-#Requires: python%{python3_pkgversion}-websocket-client
-#Requires: python%{python3_pkgversion}-wheel >= 0.33.6
-#Requires: python%{python3_pkgversion}-zipp >= 0.6.0
-#Requires: python%{python3_pkgversion}-zope-interface >= 4.7.1
+#Required: python%%{python3_pkgversion}-GitPython
+#Requires: python%%{python3_pkgversion}-PyHamcrest
+#Requires: python%%{python3_pkgversion}-adal
+##Requires: python%%{python3_pkgversion}-adal = 1.2.2
+#Requires: python%%{python3_pkgversion}-aiohttp
+#Requires: python%%{python3_pkgversion}-ansible-runner
+#Requires: python%%{python3_pkgversion}-attrs
+#Requires: python%%{python3_pkgversion}-autobahn
+#Requires: python%%{python3_pkgversion}-azure-common
+#Requires: python%%{python3_pkgversion}-azure-keyvault
+#Requires: python%%{python3_pkgversion}-azure-nspkg
+##Requires: python%%{python3_pkgversion}-build
+#Requires: python%%{python3_pkgversion}-celery
+#Requires: python%%{python3_pkgversion}-certifi
+#Requires: python%%{python3_pkgversion}-cffi
+#Requires: python%%{python3_pkgversion}-channels
+#Requires: python%%{python3_pkgversion}-chardet
+#Requires: python%%{python3_pkgversion}-constantly
+#Requires: python%%{python3_pkgversion}-cryptography
+#Requires: python%%{python3_pkgversion}-daphne
+#Requires: python%%{python3_pkgversion}-dateutil
+#Requires: python%%{python3_pkgversion}-devel
+#Requires: python%%{python3_pkgversion}-django
+#Requires: python%%{python3_pkgversion}-django-auth-ldap
+#Requires: python%%{python3_pkgversion}-django-cors-headers
+#Requires: python%%{python3_pkgversion}-django-crum
+#Requires: python%%{python3_pkgversion}-django-extensions
+#Requires: python%%{python3_pkgversion}-django-jsonbfield
+#Requires: python%%{python3_pkgversion}-django-jsonfield
+#Requires: python%%{python3_pkgversion}-django-oauth-toolkit
+#Requires: python%%{python3_pkgversion}-django-pglocks
+#Requires: python%%{python3_pkgversion}-django-polymorphic
+#Requires: python%%{python3_pkgversion}-django-solo
+#Requires: python%%{python3_pkgversion}-django-taggit
+#Requires: python%%{python3_pkgversion}-djangorestframework
+#Requires: python%%{python3_pkgversion}-djangorestframework-yaml
+#Requires: python%%{python3_pkgversion}-gitdb
+#Requires: python%%{python3_pkgversion}-google-auth
+#Requires: python%%{python3_pkgversion}-idna
+#Requires: python%%{python3_pkgversion}-importlib-metadata
+#Requires: python%%{python3_pkgversion}-incremental
+#Requires: python%%{python3_pkgversion}-inflect
+#Requires: python%%{python3_pkgversion}-irc
+#Requires: python%%{python3_pkgversion}-isodate
+#Requires: python%%{python3_pkgversion}-jaraco-classes
+#Requires: python%%{python3_pkgversion}-jaraco-collections
+#Requires: python%%{python3_pkgversion}-jaraco-functools
+#Requires: python%%{python3_pkgversion}-jaraco-itertools
+#Requires: python%%{python3_pkgversion}-jaraco-logging
+#Requires: python%%{python3_pkgversion}-jaraco-stream
+#Requires: python%%{python3_pkgversion}-jaraco-text
+#Requires: python%%{python3_pkgversion}-jinja2
+#Requires: python%%{python3_pkgversion}-jsonschema
+#Requires: python%%{python3_pkgversion}-kombu
+#Requires: python%%{python3_pkgversion}-kubernetes
+#Requires: python%%{python3_pkgversion}-ldap
+#Requires: python%%{python3_pkgversion}-markupsafe
+#Requires: python%%{python3_pkgversion}-more-itertools
+#Requires: python%%{python3_pkgversion}-msrest
+#Requires: python%%{python3_pkgversion}-msrestazure
+#Requires: python%%{python3_pkgversion}-oauthlib
+#Requires: python%%{python3_pkgversion}-openid
+#Requires: python%%{python3_pkgversion}-pexpect
+#Requires: python%%{python3_pkgversion}-pip
+#Requires: python%%{python3_pkgversion}-psutil
+#Requires: python%%{python3_pkgversion}-psycopg2
+#Requires: python%%{python3_pkgversion}-ptyprocess
+#Requires: python%%{python3_pkgversion}-pyasn1
+#Requires: python%%{python3_pkgversion}-pyasn1-modules
+#Requires: python%%{python3_pkgversion}-pygerduty
+##Requires: python%%{python3_pkgversion}-pygments
+#Requires: python%%{python3_pkgversion}-pyjwt >= 1.7.1
+#Requires: python%%{python3_pkgversion}-pyparsing
+#Requires: python%%{python3_pkgversion}-pyrsistent
+#Requires: python%%{python3_pkgversion}-python-logstash
+#Requires: python%%{python3_pkgversion}-pytz
+#Requires: python%%{python3_pkgversion}-pyyaml
+#Requires: python%%{python3_pkgversion}-requests
+#Requires: python%%{python3_pkgversion}-requests-futures
+#Requires: python%%{python3_pkgversion}-requests-oauthlib
+#Requires: python%%{python3_pkgversion}-runtime
+#Requires: python%%{python3_pkgversion}-six >= 1.13.0
+#Requires: python%%{python3_pkgversion}-slackclient
+#Requires: python%%{python3_pkgversion}-smmap
+#Requires: python%%{python3_pkgversion}-social-auth-app-django
+#Requires: python%%{python3_pkgversion}-social-auth-core
+#Requires: python%%{python3_pkgversion}-tempora
+#Requires: python%%{python3_pkgversion}-twilio
+#Requires: python%%{python3_pkgversion}-twisted >= 19.1.0
+#Requires: python%%{python3_pkgversion}-txaio
+#Requires: python%%{python3_pkgversion}-urllib3
+#Requires: python%%{python3_pkgversion}-websocket-client
+#Requires: python%%{python3_pkgversion}-wheel >= 0.33.6
+#Requires: python%%{python3_pkgversion}-zipp >= 0.6.0
+#Requires: python%%{python3_pkgversion}-zope-interface >= 4.7.1
 
 # Simplified list from running aws-manage
 Requires:  python%{python3_pkgversion}-asgiref

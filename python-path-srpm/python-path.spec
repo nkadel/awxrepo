@@ -19,10 +19,6 @@ Source0:        %{pypi_source %{pypi_name} %{version} zip}
 
 BuildArch:      noarch
 
-%if 0%{rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %if %{with_python2}
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools

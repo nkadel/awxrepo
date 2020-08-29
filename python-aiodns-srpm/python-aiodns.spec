@@ -13,10 +13,6 @@ Source0:        %pypi_source
 
 BuildArch:      noarch
 
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
 aiodns provides a simple way for doing asynchronous DNS resolutions
 with a synchronous looking interface by using pycares.

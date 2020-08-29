@@ -14,10 +14,6 @@ URL:            https://github.com/pytest-dev/pluggy
 Source0:        %pypi_source
 BuildArch:      noarch
  
-%if 0%{?rhel}
-BuildRequires:  epel-rpm-macros
-%endif
-
 %description
  pluggy A minimalist production ready plugin system |pypi| |condaforge|
 |versions| |travis| |appveyor| |gitter| |black| |codecov|This is the core
