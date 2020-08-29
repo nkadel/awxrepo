@@ -1,7 +1,7 @@
 Name:           python-virtualenv
 Version:        16.7.10
 #Release:        1%%{?dist}
-Release:        1%{?dist}
+Release:        0%{?dist}
 Summary:        Tool to create isolated Python environments
 
 License:        MIT
@@ -39,7 +39,9 @@ BuildRequires:  fish
 %endif
 
 # RPM installed wheels
+%if 0%{?fedora}
 BuildRequires:  python-pip-wheel
+%endif
 BuildRequires:  python-setuptools-wheel
 BuildRequires:  python-wheel-wheel
 
@@ -61,7 +63,9 @@ Obsoletes:      python3-virtualenv-python26 < 16.6
 Provides:       virtualenv = %{version}-%{release}
 
 # RPM installed wheels
+%if 0%{?fedora}
 Requires:       python-pip-wheel
+%endif
 Requires:       python-setuptools-wheel
 Requires:       python-wheel-wheel
 
