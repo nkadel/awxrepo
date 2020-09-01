@@ -9,9 +9,14 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
+# System requirements for pip installs to work
+yum -y install gcc openldap-devel libpq-devel krb5-devel xmlsec1 postgresql-devel
+
+
 # AWX is no longer compatible with python 2, stop supporting it
 PYTHONBIN=/usr/bin/python3
 TARBALL=awx-14.1.0.tar.gz
+VERSION=14.1.0
 
 #DIRNAME=${PWD}/ansible
 DIRNAME=/var/lib/awx
@@ -33,7 +38,16 @@ if [ -e $TARBALL ]; then
     echo Using ansible tarball: $%ARBALL
     ${DIRNAME}/bin/pip3 install --upgrade $TARBALL
 else
-    echo Using obsolete pypi.org version of ansible
-    # pypi.org 2.9.12, version of Ansible, *way* behind 14.1.0 tag in git repo
-    ${DIRNAME}/bin/pip3 install --upgrade ansible
+    echo Checkout out git repo in $PWD/awx
+    git clone https://github.com/ansible/awx awx
+    cd awx
+    git checkout $VERSION
+    python setup.py install
 fi
+
+# Add modules
+pip install django
+pip install split_settings
+pip install ldap
+
+
