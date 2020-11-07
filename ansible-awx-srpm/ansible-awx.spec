@@ -9,7 +9,7 @@
 %global service_logdir /var/log/tower
 %global service_configdir /etc/tower
 
-%global awx_mainversion 14.1.0
+%global awx_mainversion 15.0.1.1
 %global awx_subversion %{nil}
 
 Summary: Ansible AWX
@@ -320,6 +320,8 @@ Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 
 %install
 # Setup build environment
+echo py3_install: %{py3_install}
+sleep 30
 %{py3_install}
 
 # Collect django static
