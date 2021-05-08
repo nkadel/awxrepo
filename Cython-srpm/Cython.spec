@@ -9,7 +9,7 @@
 
 Name:           Cython
 Version:        0.28.1
-#Release:        7%{?dist}
+#Release:        7%%{?dist}
 Release:        0%{?dist}
 Summary:        Language for writing Python extension modules
 
