@@ -1,0 +1,15 @@
+[awxrepo]
+name=awx repo - $basearch
+baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/$basearch
+enabled=0
+# Expire very quickly for locally updated repo
+metadata_expire=1
+gpgcheck=0
+
+[awxrepo-source]
+name=awx repo - Source
+baseurl=file://@REPOBASEDIR@/awxrepo/@RELEASEDIR@/$releasever/SRPMS/
+enabled=0
+# Expire very quickly for locally updated repo
+metadata_expire=1
+gpgcheck=0
