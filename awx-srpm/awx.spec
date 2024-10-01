@@ -19,12 +19,9 @@ BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(xarray)
 
 %description
- python reader for satellite product format data (.AWX)This package provide a
-user-friendly interface to AWX data, it can read 3 type AWX, that is- Product
-Type 1, geostationary satellite image product - Product Type 2, polar orbiting
-satellite image product - Product Type 3, Grid product README- en
-[English](README.md) - zh_CN [简体中文](README.zh-CN.md) Installinstall from
-pypishell pip install...
+AWX provides a web-based user interface, REST API, and task engine
+built on top of Ansible. It is one of the upstream projects for Red
+Hat Ansible Automation Platform.
 
 %package -n     python%{python3_pkgversion}-%{pypi_name}
 Summary:        %{summary}
@@ -36,13 +33,9 @@ Requires:       python3dist(setuptools)
 Requires:       python3dist(xarray)
 
 %description -n python%{python3_pkgversion}-%{pypi_name}
- python reader for satellite product format data (.AWX)This package provide a
-user-friendly interface to AWX data, it can read 3 type AWX, that is- Product
-Type 1, geostationary satellite image product - Product Type 2, polar orbiting
-satellite image product - Product Type 3, Grid product README- en
-[English](README.md) - zh_CN [简体中文](README.zh-CN.md) Installinstall from
-pypishell pip install...
-
+AWX provides a web-based user interface, REST API, and task engine
+built on top of Ansible. It is one of the upstream projects for Red
+Hat Ansible Automation Platform.
 
 %prep
 %autosetup -n %{pypi_name}-%{pypi_version}
