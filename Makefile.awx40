@@ -1,24 +1,19 @@
 #
-# Build mock and local RPM versions of tools for ansible
+# Build mock and local RPM versions of tools for Awx
 #
 
 # Assure that sorting is case sensitive
 LANG=C
+##MOCKS+=awxrepo-8-x86_64
+#MOCKS+=awxrepo-9-x86_64
+#MOCKS+=awxrepo-10-x86_64
+MOCKS+=awxrepo-f40-x86_64
+#MOCKS+=awxrepo-amz2023-x86_64
 
-#MOCKS+=centos-stream+epel-8-x86_64
-#MOCKS+=centos-stream+epel-9-x86_64
-##MOCKS+=centos-stream+epel-10-x86_64
-MOCKS+=fedora-40-x86_64
-#MOCKS+=amazonlinux-2023-x86_64
+MOCKCFGS+=$(MOCKS)
 
-#MOCKCFGS+=ansiblerepo-8-x86_64
-#MOCKCFGS+=ansiblerepo-9-x86_64
-##MOCKCFGS+=ansiblerepo-10-x86_64
-MOCKCFGS+=ansiblerepo-f40-x86_64
-#MOCKCFGS+=ansiblerepo-amz2023-x86_64
-
-#REPOBASEDIR=/var/www/linux/ansiblerepo
-REPOBASEDIR:=`/bin/pwd`/../ansiblerepo
+#REPOBASEDIR=/var/www/linux/awxrepo
+REPOBASEDIR:=`/bin/pwd`/../awxrepo
 
 SPEC := `ls *.spec`
 
@@ -77,10 +72,10 @@ install:: $(MOCKS)
 	    srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
 	    echo "Pushing SRPMS to $$srpmdir"; \
 	    rsync -av $$repo/*.src.rpm --no-owner --no-group $$repo/*.src.rpm $$srpmdir/. || exit 1; \
-	    createrepo_c -q $$srpmdir/.; \
+	    createrepo -q $$srpmdir/.; \
 	    echo "Pushing RPMS to $$rpmdir"; \
 	    rsync -av $$repo/*.rpm --exclude=*.src.rpm --exclude=*debuginfo*.rpm --no-owner --no-group $$repo/*.rpm $$rpmdir/. || exit 1; \
-	    createrepo_c -q $$rpmdir/.; \
+	    createrepo -q $$rpmdir/.; \
 	done
 	@for repo in $(MOCKCFGS); do \
 	    echo "Touching $(PWD)/../$$repo.cfg"; \
